@@ -665,18 +665,20 @@ main {
 
   /* more BTN*/
   .more_BTN a{
-    align-items: center;
     position: relative;
-    left: 100px;
-    top: 20px;
+     top: 0px;
+     left: 50%;
+     transform: translate(-50%,50%);
+    text-align: center;
 }
 
 
 .more_BTN_portfolio a {
-    align-items: center;
-    position: relative;
-    left: 100px;
-    top: 0px;
+   position: relative;
+     top: 0px;
+     left: 50%;
+     transform: translate(-50%,50%);
+    text-align: center;
 }
   .nav__list {
     flex-direction: column;
@@ -773,7 +775,24 @@ main {
 
 }
 
+@media (max-width: 1000px){
+  .more_BTN a{
+    position: relative;
+     top: 0px;
+     left: 50%;
+     transform: translate(-50%,50%);
+    text-align: center;
+}
 
+
+.more_BTN_portfolio a {
+   position: relative;
+     top: 0px;
+     left: 50%;
+     transform: translate(-50%,50%);
+    text-align: center;
+}
+}
 
 /* Second Page*/
 *{
