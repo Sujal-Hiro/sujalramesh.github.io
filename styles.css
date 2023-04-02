@@ -775,24 +775,7 @@ main {
 
 }
 
-@media (max-width: 1000px){
-  .more_BTN a{
-    position: relative;
-     top: 0px;
-     left: 50%;
-     transform: translate(-50%,50%);
-    text-align: center;
-}
 
-
-.more_BTN_portfolio a {
-   position: relative;
-     top: 0px;
-     left: 50%;
-     transform: translate(-50%,50%);
-    text-align: center;
-}
-}
 
 /* Second Page*/
 *{
