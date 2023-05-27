@@ -63,21 +63,40 @@
       <!-- About -->
       <div class="about center">
         <h1>Hi, I am <span class="about__name">Sujal Ramesh.</span></h1>
-        <h2 class="about__role">A Game Developer </h2>
+        <div class="about-container">
+          <span class="text first-text"></span>
+          <span class="text second-text"></span>
+        </div>
+        <script>
+         const text=document.querySelector(".second-text");
+
+         const textLoad = () => {
+          setTimeout(()=> {
+            text.textContent="Game Developer";
+          },0);
+          setTimeout(()=> {
+            text.textContent="Game Designer";
+          },4000);
+          setTimeout(()=> {
+            text.textContent="Photoshop Artist";
+          },8000);
+         }
+         textLoad();
+         setInterval(textLoad,12000);
+        </script>
+        <!-- <h2 class="about__role">A Game Developer </h2> -->
         <h3 class="about__role__more"> Enthusiastic,Innovative & Passionate about Games <br>
         </h3>
         <p class="about__desc">
-          I'm an Indian game designer and programmer, and I've been making games since I finished my 12th grade education. When I was little, 
-          I used to play a lot of games, and my brother helped me to promote game development as a profession. I became quite passionate about creating games over time. Right now,
-           I'm working towards a B.Sc. in game development.
-           Also, in India, it can be challenging for parents to sponsor these kinds of programmes. Thankfully, I convinced my parents and told them about the growth of the industry.
+          I'm an Indian game designer and programmer who has been creating games since graduating from high school. I used to play a lot of games when I was younger, and through time, I developed a passion for making games. I'm currently pursuing a B.Sc. in Game Development. Additionally, it's difficult for all parents to support these kinds of courses in India.
+Fortunately, I persuaded my parents and informed them of the industry's development.
     
 
         </p>
         <h3 class="about_line">I adore creating games for entertainment and giving fantasy a realistic feel.</h3>
 
         <div class="about__contact center">
-          <a href="https://drive.google.com/file/d/19-pnsY_qCjy9DaXL53tBihv3SxeD-uzL/view?usp=sharing">
+          <a href="https://drive.google.com/file/d/1rBnITU3TRVSHUIevYFTD7MwuRd3K4n60/view?usp=sharing">
             <span class="btn btn--outline">Resume</span>
           </a>
 
@@ -197,21 +216,13 @@
 
 
         </div>
-        
-        <!-- <div class="projects__more__BTN">
+        <a href="projects.html">
+        <div class="projects__more__BTN">
           
-          <a href="projects.html"><button class="btn1 more_btn">more</button></a>
-          
-          
-        </div> -->
-        <section class="more_BTN">
-       
-          <a href="projects.html">
-            <span class="btn btn--outline">check more</span>
+          <button class="btn1 more_btn"> more</a></button>
           </a>
-        
-        </section>
-        
+        </div>
+        </a>
        
       </section>
       
@@ -238,17 +249,11 @@
              
                 </a>
     
-            <!-- <a href="portfolio.html">
+            <a href="portfolio.html">
               <div class="projects__more__BTN1">             
                 <button class="btn1 more_btn"> more</a></button>
                 </a>
-              </div> -->
-              <section class="more_BTN_portfolio">
-                <a href="portfolio.html">
-                  <span class="btn btn--outline">check more</span>
-                </a>
-              </section>
-              
+              </div>
 
 
           </section>
@@ -269,6 +274,7 @@
           <li class="skills__list-item btn btn--plain">Visual Studio</li>
           <li class="skills__list-item btn btn--plain">Figma</li>
           <li class="skills__list-item btn btn--plain">Unreal Engine</li>
+          <li class="skills__list-item btn btn--plain">Autodesk Maya</li>
           <li class="skills__list-item btn btn--plain">Adobe XD</li>
         </ul>
       </section>

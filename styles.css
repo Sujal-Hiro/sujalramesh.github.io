@@ -138,36 +138,7 @@ button {
   color: var(--clr-fg);
   font-size: 1.2rem;
 }
-/*more BTN*/
-.more_BTN{
-    position: relative;
-    top: 20px;
-    display: flex;
-    width: 100%;
-    text-align: center;
-    justify-content: flex-start;
-}
-.more_BTN a{
-    align-items: center;
-    position: relative;
-    left: 485px;
-    top: 20px;
-}
-.more_BTN_portfolio{
-   position: relative;
-    top: 35px;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    text-align: center;
-    justify-content: flex-start;
-}
-.more_BTN_portfolio a{
-    align-items: center;
-    position: relative;
-    left: 485px;
-    top: 0px;
-}
+
 .btn {
   display: block;
   padding: 0.8em 1.4em;
@@ -321,14 +292,45 @@ main {
   color: var(--clr-primary);
 }
 
-.about__role {
+/* .about__role {
   margin-top: 1.2em;
-}
+} */
 .about__role__more{
-  
-  
   margin-top:1em;
   font-weight: 600;
+}
+.about-container{
+
+  overflow: hidden;
+}
+.about-container .text{
+  position: relative;
+  top: 10px;
+  color: #ff185d;
+  font-size: 40px;
+  font-weight: 600;
+}
+.about-container .text.first-text{
+  color: var(--clr-fg-alt);
+}
+.text.second-text:before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--clr-bg);
+  border-left: 2px solid #00DBB4;
+  animation: animate 4s steps(12) infinite;
+}
+@keyframes animate {
+  40%,60%{
+    left: calc(100% + 4px);
+  }
+  100%{
+    left: 0%;
+  }
 }
 
 .about__desc {
@@ -453,6 +455,8 @@ main {
 }
 
 .portfolio_background{
+  position: relative;
+  top: 50px;
   background: linear-gradient(180deg, #ff0e56 0%, rgba(20, 20, 20, 0.795) 100%);
   filter: drop-shadow(0 0 0.75rem crimson);
   
@@ -570,7 +574,42 @@ main {
 }
 
 
+/* ------------------VIDEO-GALLERY------------------- */
 
+/* .video-grid{
+  position: relative;
+  top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #00DBB4;
+  
+
+}
+.video-grid .video{
+justify-content: center;
+display: block;
+}
+.video-grid .video video{
+  width: auto;
+  height: 50%;
+}
+.video-grid .video2{
+  justify-content: center;
+}
+.video2 video{
+  width: 100%;
+height: auto;
+}
+
+@media (max-width: 600px){
+  .video-grid{
+    flex-direction: column;
+  }
+  .video-grid .video video{
+    width:100%
+   
+  }
+} */
 
 
 
@@ -663,23 +702,6 @@ main {
     margin-top: 6em;
   }
 
-  /* more BTN*/
-  .more_BTN a{
-    position: relative;
-     top: 0px;
-     left: 50%;
-     transform: translate(-50%,50%);
-    text-align: center;
-}
-
-
-.more_BTN_portfolio a {
-   position: relative;
-     top: 0px;
-     left: 50%;
-     transform: translate(-50%,50%);
-    text-align: center;
-}
   .nav__list {
     flex-direction: column;
     padding: 4em 0;
@@ -709,6 +731,13 @@ main {
   .about {
     align-items: flex-start;
     margin-top: 2em;
+  }
+  .about-container .text{
+    position: relative;
+    top: 10px;
+    color: #ff185d;
+    font-size: 30px;
+    font-weight: 600;
   }
   .about__contact center{
     align-items: center;
