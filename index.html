@@ -119,7 +119,7 @@ Fortunately, I persuaded my parents and informed them of the industry's developm
       </div>
 
       <!-- Projects -->
-      <section id="projects" class="section projects">
+      <section id="projects" class="section projects reveal">
         <h2 class="section__title">Projects</h2>
 
         <div class="projects__grid">
@@ -227,7 +227,7 @@ Fortunately, I persuaded my parents and informed them of the industry's developm
       </section>
       
       <!--Portfolio-->
-      <section id="portfolio" class="section portfolio">
+      <section id="portfolio" class="section portfolio reveal">
         <h2 class="section__title">Portfolio</h2>
          
               <div class="portfolio_background">
@@ -260,7 +260,7 @@ Fortunately, I persuaded my parents and informed them of the industry's developm
           
 
       <!-- Skills -->
-      <section class="section skills" id="skills">
+      <section class="section skills reveal" id="skills">
         <h2 class="section__title">Skills</h2>
         <ul class="skills__list">
           <li class="skills__list-item btn btn--plain">C#</li>
@@ -284,7 +284,7 @@ Fortunately, I persuaded my parents and informed them of the industry's developm
 
 
       <!-- Contact -->
-      <section class="section contact center" id="contact">
+      <section class="section contact center reveal" id="contact">
         <h2 class="section__title">Contact</h2>
         <a href="mailto:sujalkrish007@gmail.com">
           <span class="btn btn--outline">Email me</span>
@@ -310,6 +310,29 @@ Fortunately, I persuaded my parents and informed them of the industry's developm
     </div>
 
     <script src="./script.js"></script>
+
+    <script type="text/javascript">
+      window.addEventListener('scroll',reveal);
+
+      function reveal(){
+        var reveals=document.querySelectorAll('.reveal');
+
+        for(var i=0;i<reveals.length;i++)
+        {
+          var windowheight=window.innerHeight;
+          var revealtop=reveals[i].getBoundingClientRect().top;
+          var revealpoint=150;
+
+          if(revealtop<windowheight-revealpoint){
+            reveals[i].classList.add('active');
+          }
+          else{
+            reveals[i].classList.remove('active');
+          }
+        }
+
+      }
+    </script>
   </body>
 </html>
 
