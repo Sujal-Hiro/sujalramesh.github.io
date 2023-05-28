@@ -260,7 +260,7 @@ main {
 }
 
 .section {
-  margin-top: 6em;
+  margin-top: 8em;
 }
 
 .section__title {
@@ -442,6 +442,39 @@ main {
 .btn1:hover::before{
   transform: scaleX(1);
 }
+
+/*More BTNs*/
+.more_BTN{
+  position: relative;
+  top: 20px;
+  display: flex;
+  width: 100%;
+  text-align: center;
+  justify-content: flex-start;
+}
+.more_BTN a{
+  align-items: center;
+  position: relative;
+  left: 485px;
+  top: 0px;
+}
+.more_BTN_portfolio{
+ position: relative;
+  top: 90px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  justify-content: flex-start;
+}
+.more_BTN_portfolio a{
+  align-items: center;
+  position: relative;
+  left: 485px;
+  top: 0px;
+}
+
+
 /*-----------Portfolio------*/
 .section__photoshop{
   text-align: center;
@@ -699,7 +732,7 @@ height: auto;
   }
 
   .section {
-    margin-top: 6em;
+    margin-top: 8em;
   }
 
   .nav__list {
@@ -796,7 +829,27 @@ height: auto;
     max-width: 400px;
 }
 
+/*moreBTNs*/
 
+.more_BTN{
+  left: 5px;
+}
+.more_BTN a{
+  align-items: center;
+  position: relative;
+  left: 100px;
+  top: 20px;
+}
+.more_BTN_portfolio{
+  left: 5px;
+}
+
+.more_BTN_portfolio a {
+  align-items: center;
+  position: relative;
+  left: 100px;
+  top: 0px;
+}
 
 
 
