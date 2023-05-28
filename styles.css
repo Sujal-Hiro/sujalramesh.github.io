@@ -699,7 +699,7 @@ height: auto;
 
 .footer {
   padding: 3em 0;
-  margin-top: 7em;
+  margin-top: 9em;
   text-align: center;
 }
 
@@ -975,6 +975,11 @@ height: auto;
   height: 100%;
   object-fit: cover;
 }
+.img-grid .video-landscape{
+  width: 330px;
+  height: 300px;
+  object-fit: cover;
+}
 .p1 {
   margin: 0;
   padding: 0;
@@ -1060,7 +1065,18 @@ height: auto;
   padding-left: 40px;
   max-width: 1000px;
 }
-
+.p8{
+  margin: 0;
+  padding: 0;
+  position:relative;
+  top: 50px;
+  text-align: center;
+}
+.p8 li{
+  text-align: start;
+  padding-left: 40px;
+  max-width: 1000px;
+}
 
 
 .scroll-top{
@@ -1103,7 +1119,7 @@ height: auto;
 
 .footer {
   padding: 3em 0;
-  margin-top: 7em;
+  margin-top: 9em;
   text-align: center;
 }
 }
