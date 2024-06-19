@@ -15,11 +15,13 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="styles.css" />
-    <title>Sujal R</title>
+    <title>Sujal Ramesh</title>
     <link rel="shortcut icon" type="image" href="Images/Icon-Website.png">
 
   </head>
   <body class="light" id="top">
+    <!-- backgroundCircle -->
+   
     <header class="header center">
       <h3>
         <a href="#" class="link"
@@ -61,6 +63,8 @@
 
     <main>
       <!-- About -->
+      <div class="circlePosition"></div>
+      <div class="content">
       <div class="about center">
         <h1>Hi, I am <span class="about__name">Sujal Ramesh.</span></h1>
         <div class="about-container">
@@ -78,8 +82,11 @@
             text.textContent="Game Designer";
           },4000);
           setTimeout(()=> {
-            text.textContent="Photoshop Artist";
+            text.textContent="Programmer";
           },8000);
+          setTimeout(()=> {
+            text.textContent="Photoshop Artist";
+          },1200);
          }
          textLoad();
          setInterval(textLoad,12000);
@@ -88,8 +95,9 @@
         <h3 class="about__role__more"> Enthusiastic,Innovative & Passionate about Games <br>
         </h3>
         <p class="about__desc">
-          I'm an Indian game designer and programmer who has been creating games since graduating from high school. I used to play a lot of games when I was younger, and through time, I developed a passion for making games. I'm currently pursuing a B.Sc. in Game Development. Additionally, it's difficult for all parents to support these kinds of courses in India.
-Fortunately, I persuaded my parents and informed them of the industry's development.
+          I'm an Indian programmer and game designer that has been making games since I finished high school. When I was younger, I used to play a lot of video games, and over time, I became passionate about creating my own. I'm working toward a B.Sc. in game development right now. Furthermore, not all Indian parents can afford to support these kinds of courses.
+          Luckily, I convinced my parents and told them about the advancements in the industry.
+          
     
 
         </p>
@@ -117,9 +125,11 @@ Fortunately, I persuaded my parents and informed them of the industry's developm
           </a>
         </div>
       </div>
+      </div>
 
       <!-- Projects -->
-      <section id="projects" class="section projects reveal">
+      <div class="circlePosition2"></div>
+      <section id="projects" class="section projects">
         <h2 class="section__title">Projects</h2>
 
         <div class="projects__grid">
@@ -200,24 +210,17 @@ Fortunately, I persuaded my parents and informed them of the industry's developm
 
 
         </div>
-        <a href="projects.html">
-          <div class="projects__more__BTN">
+        <!-- <a href="projects.html">
+        <div class="projects__more__BTN">
           
-          <!-- <div class="projects__more__BTN">
-            
-            <a href="projects.html"><button class="btn1 more_btn">more</button></a>
-            
-            
-            <button class="btn1 more_btn"> more</a></button>
-          </div> -->
-          <section class="more_BTN">
-            <a href="projects.html">
-              <span class="btn btn--outline">check more</span>
-            </a>
-          </div>
+          <button class="btn1 more_btn"> more</a></button>
           </a>
-          </section>
-       
+        </div>
+        </a> -->
+        <a href="projects.html" class="projects__more__BTN">
+          <button class="btn1 more_btn">more</button>
+      </a>
+      
       </section>
       
       <!--Portfolio-->

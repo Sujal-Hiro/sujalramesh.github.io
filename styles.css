@@ -25,6 +25,18 @@ body {
   color: var(--clr-fg);
   background-color: var(--clr-bg);
 }
+.circlePosition {
+  width: 400px;
+  height: 450px;
+  background: #ff0e56;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 4%;
+  transform: translate(-50%, -150%);
+  filter: blur(250px);
+}
 
 .light {
   --clr-bg: #fcfcfc;
@@ -33,6 +45,7 @@ body {
   --clr-fg-alt: #444;
   --clr-primary: #DB0042;
   --shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  --clr-secondary:#346112;
 }
 
 .dark {
@@ -41,6 +54,7 @@ body {
   --clr-fg: rgba(233, 233, 233, 0.808) ;
   --clr-fg-alt: #ffffff;
   --clr-primary: #ff185d;
+  --clr-secondary:#89FF31;
   --shadow: rgb(255 24 93) 0px 0px 10px 0px, rgb(186 38 43 / 3%) 0px 0px 0px 1px;
 }
 
@@ -85,6 +99,7 @@ ul {
 
 a {
   text-decoration: none;
+  display: inline-block;
 }
 
 button {
@@ -260,7 +275,7 @@ main {
 }
 
 .section {
-  margin-top: 8em;
+  margin-top: 6em;
 }
 
 .section__title {
@@ -286,6 +301,8 @@ main {
 .about {
   flex-direction: column;
   margin-top: 3em;
+  /* position: relative; */
+  z-index: 1;
 }
 
 .about__name {
@@ -298,6 +315,9 @@ main {
 .about__role__more{
   margin-top:1em;
   font-weight: 600;
+  background-image: linear-gradient(43deg,#ff185d 0%, #189EFF 40%, #18FF9E 100%);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 .about-container{
 
@@ -341,8 +361,12 @@ main {
   font-size: 1rem;
   margin-top: 2.5em;
   max-width: 630px;
-  color: #DB0042;
-  
+  color: var(--clr-fg-alt);
+  /* background-image: linear-gradient(43deg,#18FF9E 0%,#189EFF 46%,#FF185D 100%);
+  -webkit-background-clip: text;
+  color: transparent; */
+
+;
 }
 .about__desc,
 .about__contact {
@@ -730,9 +754,20 @@ height: auto;
   .header {
     height: 6em;
   }
-
+  .circlePosition{
+    width: 10px;
+    height: 10px;
+    background: rgb(255, 14, 86);
+    border-radius: 50%;
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    left: 4%;
+    transform: translate(-50%, -150%);
+    filter: blur(250px);
+  }
   .section {
-    margin-top: 8em;
+    margin-top: 6em;
   }
 
   .nav__list {
