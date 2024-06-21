@@ -924,6 +924,7 @@ height: auto;
     right: 0;
     left: 0;
     top: 5em;
+    z-index: 1;
     background-color: var(--clr-bg);
     width: 0;
     overflow: hidden;
