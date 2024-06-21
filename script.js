@@ -45,6 +45,10 @@ const displayList = () => {
 	}
 }
 
+//circle-bg-animations
+
+  
+
 btnHamburger.addEventListener('click', displayList)
 
 const scrollUp = () => {

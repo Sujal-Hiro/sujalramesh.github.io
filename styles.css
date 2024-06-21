@@ -25,6 +25,82 @@ body {
   color: var(--clr-fg);
   background-color: var(--clr-bg);
 }
+
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1; /* Ensure the animation stays in the background */
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: float 25s infinite;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(100vh);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-10vh);
+    opacity: 0.7;
+  }
+}
+
+/* Generate multiple circles with different sizes and positions */
+.circle:nth-child(1) {
+  width: 50px;
+  height: 50px;
+  left: 20%;
+  animation-duration: 20s;
+}
+
+.circle:nth-child(2) {
+  width: 80px;
+  height: 80px;
+  left: 50%;
+  animation-duration: 22s;
+}
+
+.circle:nth-child(3) {
+  width: 40px;
+  height: 40px;
+  left: 80%;
+  animation-duration: 24s;
+}
+
+.circle:nth-child(4) {
+  width: 70px;
+  height: 70px;
+  left: 30%;
+  animation-duration: 26s;
+}
+
+.circle:nth-child(5) {
+  width: 60px;
+  height: 60px;
+  left: 70%;
+  animation-duration: 28s;
+}
+
+.circle:nth-child(6) {
+  width: 90px;
+  height: 90px;
+  left: 40%;
+  animation-duration: 30s;
+}
 .circlePosition {
   width: 400px;
   height: 450px;
@@ -265,13 +341,16 @@ right:0;
   max-width: 1100px;
   width: 95%;
   margin: 0 auto;
+  background:transparent;
   justify-content: space-between;
+  
 }
 
 main {
   max-width: 1100px;
   width: 95%;
   margin: 0 auto;
+  background: transparent;
 }
 
 .section {
@@ -820,6 +899,7 @@ height: auto;
 @media (max-width: 600px) {
   .header {
     height: 6em;
+    background: transparent;
   }
   .circlePosition{
     width: 10px;
