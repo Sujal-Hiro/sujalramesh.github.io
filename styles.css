@@ -616,11 +616,12 @@ main {
 }
 .more_BTN_projects {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  width: 100%; /* Full width */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   position: relative;
-  top: 50px; /* Adjust as needed */
+  top: 50px;
+ 
 }
 /* .more_BTN_projects a{
   align-items: center;
@@ -630,11 +631,12 @@ main {
 } */
 .more_BTN_portfolio{
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  width: 100%; /* Full width */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   position: relative;
-  top: 100px; /* Adjust as needed */
+  top: 100px;
+  /* left: 46%; */
 }
 
 /* .more_BTN_portfolio a{
@@ -646,14 +648,132 @@ main {
 
 
 /*-----------Portfolio------*/
+.portfolio_background {
+  position: relative;
+  top: 50px;
+  background: linear-gradient(180deg, #ff0e56 0%, rgba(20, 20, 20, 0.795) 100%);
+  filter: drop-shadow(0 0 0.75rem crimson);
+  padding: 20px 0;
+}
+
+/* General styling for the carousel and its items */
+/* General styling for the carousel and its items */
+.image-carousel {
+  width: 100%;
+  margin: 0 auto;
+  position: relative; /* Ensures the titles can be positioned absolutely within the carousel */
+}
+
+.image-carousel img, .image-carousel video {
+  width: 100%; /* Full width for all slides */
+  height: 400px; /* Ensures consistent height for all items */
+  object-fit: cover;
+  transition: 0.5s all ease-in-out;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  transform-style: preserve-3d; /* Enable 3D transformations */
+  z-index: 1; /* Ensure all slides start at the same z-index level */
+}
+.slick-slide {
+  transform-style: preserve-3d; /* Preserve 3D transformations */
+  transition: transform 0.5s ease;
+  margin: 0 10px; /* Adjust margin to create equal spacing between slides */
+}
+
+.slick-center img, .slick-center video {
+  transform: scale(1); /* Larger scale for the centered slide */
+  z-index: 2; /* Higher z-index to bring it forward */
+}
+
+/* Adjust z-index for other slides to ensure they are behind the centered slide */
+.slick-slide:not(.slick-center) img, .slick-slide:not(.slick-center) video {
+  transform: scale(0.8); /* Smaller scale for non-centered slides */
+  z-index: 1; /* Ensure other slides are behind the centered slide */
+}
+
+/* Adjustments for hover effect */
+.image-carousel img:hover, .image-carousel video:hover {
+  transform: scale(1) rotateY(0deg); /* Apply rotation on hover */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); 
+  z-index: 2; /* Ensure the image is on top */
+}
+
+/* Additional styling for the carousel navigation arrows */
+.slick-prev, .slick-next {
+  font-size: 50px; /* Increase arrow button size */
+  color: #ff0e56; /* Arrow button color */
+  z-index: 3; /* Ensure arrows are above slides */
+  width: 50px !important;
+  height: 50px !important;
+  background: rgba(255, 255, 255, 0.5); /* Optional: Add a background */
+  padding: 20px; /* Adjust padding around the arrows */
+  margin-top: 0px; /* Adjust vertical alignment if needed */
+}
+.image-carousel .h3{
+  position: relative;
+}
+@media (max-width: 600px){
+  .slick-prev{
+    left: -10px !important; 
+  }
+  .slick-next{
+    right: -10px !important;
+  }
+}
+.slick-prev:hover, .slick-next:hover {
+  color: #fff; /* Arrow button hover color */
+}
+
+.slick-prev:before, .slick-next:before {
+  font-size: 40px !important; /* Arrow icon size */
+}
+
+/* Styling for the outline button */
+.btn--outline {
+  border: 2px solid #ff0e56;
+  color: #ff0e56;
+  background: none;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn--outline:hover {
+  background: #ff0e56;
+  color: #fff;
+}
+
+.image-title {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-align: center;
+  background: rgba(27, 27, 27, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  width: calc(100% - 150px);
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1; /* Ensure the title is visible by default */
+  z-index: 3; /* Ensure the title is above the image/video */
+}
+.slick-slide:not(.slick-center) img +.image-title, .slick-slide:not(.slick-center) video + .image-title{
+  position: absolute;
+  bottom: 55px;
+}
+.carousel-item:hover .image-title {
+  opacity: 0; /* Hide the title on hover */
+}
+
 .section__photoshop{
   text-align: center;
   color: #DB0042;
   font-weight: 500;
   
-
-
-
 
 }
 
@@ -1025,16 +1145,28 @@ height: auto;
     --num-cols:2;
     --row-height:300px;
   }
+
+  /******************** PROJECTS MOBILE RESOLUTION************ */
   .projects{
     margin-top: 2em;
   }
   .description {
-    display: block;
-    margin-top: 2em;
-    gap: 20px;
-    font-size: 1rem;
-    max-width: 400px;
-}
+      display: block;
+      margin-top: 2em;
+      gap: 20px;
+      font-size: 1rem;
+      max-width: 400px;
+    }
+    .more_BTN_projects{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      position: relative;
+      top: 50px;
+      
+    }
+
 
 /*moreBTNs*/
 
@@ -1048,17 +1180,23 @@ height: auto;
     transform: translate(-50%,50%);
     text-align: center;
 }
-.more_BTN_portfolio{
- top: 100px;
+.more_BTN_portfolio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  top: 100px;
+  /* left: 40%; */
 }
 
-.more_BTN_portfolio a {
+/* .more_BTN_portfolio a {
   position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%,50%);
     text-align: center;
-}
+} */
 
 .img-grid .video-landscape{
   width: 100%;
@@ -1433,6 +1571,10 @@ position: relative;
   transform: translateY(0px);
   opacity: 1;
 }
+
+/* MORE BUTTON */
+
+
 @media (max-width:600px) {
   
 
