@@ -31,6 +31,18 @@ const toggleTheme = () =>
 
 btnTheme.addEventListener('click', toggleTheme)
 
+
+document.addEventListener("DOMContentLoaded", function () {
+  const navHamburger = document.querySelector('.nav__hamburger');
+  const navList = document.querySelector('.nav__list');
+
+  navHamburger.addEventListener('click', function () {
+    navList.classList.toggle('display-nav-list');
+  });
+});
+
+
+
 const displayList = () => {
 	const navUl = document.querySelector('.nav__list')
 
