@@ -752,7 +752,9 @@ main {
   transform: translateX(-50%);
   color: white;
   text-align: center;
-  background: rgba(27, 27, 27, 0.5);
+  font-weight: 200;
+  font-size: 20px;
+  background: rgba(27, 27, 27, 0.334);
   padding: 10px;
   border-radius: 5px;
   box-sizing: border-box;
@@ -761,11 +763,29 @@ main {
   opacity: 1; /* Ensure the title is visible by default */
   z-index: 3; /* Ensure the title is above the image/video */
 }
+/* .image-paragraph{
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-align: center;
+  font-weight: 500;
+  font-size: 20px;
+  background: rgba(27, 27, 27, 0.334);
+  padding: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  width: calc(100% - 150px);
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+  z-index: 3; 
+} */
 .slick-slide:not(.slick-center) img +.image-title, .slick-slide:not(.slick-center) video + .image-title{
   position: absolute;
   bottom: 55px;
 }
-.carousel-item:hover .image-title {
+.carousel-item:hover .image-title  {
   opacity: 0; /* Hide the title on hover */
 }
 
