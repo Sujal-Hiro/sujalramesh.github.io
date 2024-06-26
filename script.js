@@ -107,4 +107,39 @@ video.forEach(play=>play.addEventListener('click',()=>{
 	play.classList.toggle('active');
 
 }))
+
+
+//pop up image
+function openModal(src, type) {
+	var modal = document.getElementById("myModal");
+	var modalImg = document.getElementById("modalImage");
+	var modalVideo = document.getElementById("modalVideo");
+	
+	if (type === 'image') {
+	  modalImg.style.display = 'block';
+	  modalVideo.style.display = 'none';
+	  modalImg.src = src;
+	} else if (type === 'video') {
+	  modalImg.style.display = 'none';
+	  modalVideo.style.display = 'block';
+	  modalVideo.src = src;
+	}
+	
+	modal.style.display = "block";
+  }
+  
+  function closeModal() {
+	var modal = document.getElementById("myModal");
+	var modalVideo = document.getElementById("modalVideo");
+	
+	modal.style.display = "none";
+	
+	// Stop the video when closing the modal
+	modalVideo.pause();
+	modalVideo.currentTime = 0;
+  }
+  
+  
+  
+  
  
