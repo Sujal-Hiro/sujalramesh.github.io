@@ -6,421 +6,421 @@
     <meta name="description" content="Portfolio" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <script
-      src="https://kit.fontawesome.com/fa62c117c7.js"
-      crossorigin="anonymous"
-    ></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://kit.fontawesome.com/fa62c117c7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css" />
     <title>Sujal Ramesh</title>
     <link rel="shortcut icon" type="image" href="Images/Icon-Website.png">
-
   </head>
   <body class="light" id="top">
-    <!-- backgroundCircle -->
-   <!-- background animations -->
-   <div class="background-animation"></div>
+    <div class="background-animation"></div>
     
     <header class="header center">
-      <h3>
-        <a href="#" class="link"
-          >SR.</a
-        >
-      </h3>
-
+      <h3><a href="#" class="link">SR.</a></h3>
       <nav class="nav center">
         <ul class="nav__list center">
-          <li class="nav__list-item">
-            <a class="link link--nav" href="#projects">Projects</a>
-          </li>
-          <li class="nav__list-item">
-            <a class="link link--nav" href="#portfolio">Portfolio</a>
-          </li>
-          <li class="nav__list-item">
-            <a class="link link--nav" href="#skills">Skills</a>
-          </li>
-          
-          <li class="nav__list-item">
-            <a class="link link--nav" href="#contact">Contact</a>
-          </li>
-        
+          <li class="nav__list-item"><a class="link link--nav" href="#projects">Projects</a></li>
+          <li class="nav__list-item"><a class="link link--nav" href="#portfolio">Portfolio</a></li>
+          <li class="nav__list-item"><a class="link link--nav" href="#skills">Skills</a></li>
+          <li class="nav__list-item"><a class="link link--nav" href="#contact">Contact</a></li>
         </ul>
-        
         <button type="button" aria-label="toggle theme" class="btn btn--icon">
           <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
         </button>
         <button type="button" aria-label="toggle navigation" class="btn btn--icon nav__hamburger">
           <i aria-hidden="true" class="fas fa-bars"></i>
         </button>
-        <!-- <button
-          type="button"
-          aria-label="toggle navigation"
-          class="btn btn--icon nav__hamburger"
-        >
-          <i aria-hidden="true" class="fas fa-bars"></i>
-        </button> -->
       </nav>
     </header>
 
     <main>
-      <!-- About -->
       <div class="circlePosition"></div>
       <div class="content">
-      <div class="about center">
-        <h1>Hi, I am <span class="about__name">Sujal Ramesh.</span></h1>
-        <div class="about-container">
-          <span class="text first-text"></span>
-          <span class="text second-text"></span>
-        </div>
-        <script>
-         const text=document.querySelector(".second-text");
-
-         const textLoad = () => {
-          setTimeout(()=> {
-            text.textContent="Game Developer";
-          },0);
-          setTimeout(()=> {
-            text.textContent="Game Designer";
-          },4000);
-          setTimeout(()=> {
-            text.textContent="Programmer";
-          },8000);
-          setTimeout(()=> {
-            text.textContent="Photoshop Artist";
-          },1200);
-         }
-         textLoad();
-         setInterval(textLoad,12000);
-        </script>
-        <!-- <h2 class="about__role">A Game Developer </h2> -->
-        <h3 class="about__role__more"> Enthusiastic,Innovative & Passionate about Games <br>
-        </h3>
-        <p class="about__desc">
-          I'm an Indian programmer and game designer that has been making games since I finished high school. When I was younger, I used to play a lot of video games, and over time, I became passionate about creating my own. I'm working toward a B.Sc. in game development right now. Furthermore, not all Indian parents can afford to support these kinds of courses.
-          Luckily, I convinced my parents and told them about the advancements in the industry.
-          
-    
-
-        </p>
-        <h3 class="about_line">I adore creating games for entertainment and giving fantasy a realistic feel.</h3>
-        
-        <div class="about__contact center">
-          <a href="https://drive.google.com/file/d/1rBnITU3TRVSHUIevYFTD7MwuRd3K4n60/view?usp=sharing">
-            <span class="btn btn--outline">Resume</span>
-          </a>
-        
-          <a href="https://github.com/Sujal-Hiro" aria-label="github" class="link link--icon">
-            <i aria-hidden="true" class="fab fa-github"></i>
-          </a>
-        
-          <a href="https://www.linkedin.com/in/sujalramesh/" aria-label="linkedin" class="link link--icon">
-            <i aria-hidden="true" class="fab fa-linkedin"></i>
-          </a>
-        </div>
-        </div>
-        </div>
-
-
-        <!-- BAR -->
-        <section>
-          <!-- <div class="image-bg">
-            <img src="Images/section-bg.jpg" alt="">
-          </div> -->
-          <div class="bar-container">
-            <text class="text-bar">IDEA | DESIGN | DEVELOP | DEPLOY | PLAY</text>
+        <div class="about center">
+          <h1>Hi, I am <span class="about__name">Sujal Ramesh.</span></h1>
+          <div class="about-container">
+            <span class="text first-text"></span>
+            <span class="text second-text"></span>
           </div>
-        </section>
-        <!-- Projects -->
-        <div class="circlePosition2"></div>
-        <section id="projects" class="section projects">
-          <h2 class="section__title">Projects</h2>
-        
-          <div class="projects__grid">
-            <div class="project">
-              <h3>Square Madness</h3>
-              <p class="project__description">
-                A game employing the Unity Engine has been released on the Play Store. The game's gameplay is straightforward;
-                the player must avoid opposing bombs and spikes while gathering points like coins and diamonds.
-                I was primarily involved in the UI Design and programming of the UI part's sprites and animations.
-              </p>
-              <ul class="project__stack">
-                <li class="project__stack-item">Unity</li>
-                <li class="project__stack-item">C-Sharp</li>
-                <li class="project__stack-item">Photoshop</li>
-        
-              </ul>
-        
-        
-              <a href="https://play.google.com/store/apps/details?id=com.IdeekayStudios.SqaureMadness" aria-label="live preview"
-                class="link link--icon">
-                <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-              </a>
-            </div>
-        
-            <div class="project">
-              <h3>Its All About Us!</h3>
-              <p class="project__description">
-                It's a cooperative multiplayer game with a duality theme in which players cooperate to overcome obstacles
-                and advance through levels. As a programmer and team leader, this project taught me a lot of new skills. It
-                aided in my learning more about team leadership and finishing a game in a short amount of time. </p>
-              <ul class="project__stack">
-                <li class="project__stack-item">Unity</li>
-                <li class="project__stack-item">C-Sharp</li>
-                <li class="project__stack-item">Photoshop</li>
-        
-              </ul>
-        
-        
-        
-              </a>
-              <a href="https://youtu.be/8jC3e6yOQYM" aria-label="live preview" class="link link--icon">
-                <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-              </a>
-            </div>
-        
-            <div class="project">
-              <h3>Spin - Android Game</h3>
-              <p class="project__description">
-                Playable adversaries, easy player dynamics, and collectible items are all featured in this 2D hyper-casual game.
-                I also did UI programming, UI design, and player movement. additional post-processing features like bloom,
-                distortion, and many others. </p>
-              <ul class="project__stack">
-                <li class="project__stack-item">Unity</li>
-                <li class="project__stack-item">C-Sharp</li>
-                <li class="project__stack-item">Photoshop</li>
-                <li class="project__stack-item">Figma</li>
-        
-              </ul>
-        
-        
-              <a href="https://play.google.com/store/apps/details?id=com.Steadfaststudios.Spin" aria-label="live preview"
-                class="link link--icon">
-                <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-              </a>
-            </div>
-
-
-        </div>
-        <!-- <a href="projects.html">
-        <div class="projects__more__BTN">
-          
-          <button class="btn1 more_btn"> more</a></button>
-          </a>
-        </div>
-        </a> -->
-        <!-- <a href="projects.html" class="projects__more__BTN">
-          <button class="btn1 more_btn">more</button>
-      </a> -->
-      <div class="more_BTN_projects">
-        <a href="projects.html">
-          <button class="btn btn--outline">more</button>
-        </a>  
-      </div>
-          
-      
-      </section>
-      
-      <!--Portfolio-->
-      <!-- Add Slick Carousel CSS -->
-      <!-- Add Slick Carousel CSS -->
-              <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-              <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-              
-              <!-- Add jQuery and Slick Carousel JS -->
-              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-              <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
-              <!-- Initialize Slick Carousel -->
-              <script type="text/javascript">
-                $(document).ready(function () {
-                  $('.image-carousel').slick({
-                    infinite: true,
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                    autoplay: true,
-                    autoplaySpeed: 2000,
-                    centerMode: true, // Enable center mode for 3D effect
-                    centerPadding: '0', // No padding for center mode
-                    responsive: [
-                      {
-                        breakpoint: 1024,
-                        settings: {
-                          slidesToShow: 2,
-                          slidesToScroll: 1,
-                          infinite: true,
-                          dots: true
-                        }
-                      },
-                      {
-                        breakpoint: 600,
-                        settings: {
-                          slidesToShow: 1,
-                          slidesToScroll: 1
-                        }
-                      }
-                    ]
-                  });
-                });
-
-                const image = document.getElementById('zoom-image');
-
-                  image.addEventListener('click', () => {
-                    image.classList.toggle('zoomed');
-                  });
-
-
-              </script>
-
-
-
-
-        <section id="portfolio" class="section portfolio reveal">
-          <h2 class="section__title">Portfolio</h2>
-          <div class="portfolio_background">
-            <div class="image-carousel">
-              <div class="carousel-item" onclick="openModal('Images/image_35.png', 'image')">
-                <img src="Images/image_35.png" alt="">
-                <h3 class="image-title">Portals (Ps)</h3>
-                <!-- <p class="image-paragraph">this is the portals image Manipulation</p> -->
-              </div>
-              <div class="carousel-item" onclick="openModal('Images/video_9.mp4', 'video')">
-                <video src="Images/video_9.mp4" autoplay muted loop></video>
-                <h3 class="image-title">Spin</h3>
-              </div>
-              <div class="carousel-item" onclick="openModal('Images/image_28.png', 'image')">
-                <img src="Images/image_28.png" alt="">
-                <h3 class="image-title">Mars Survivor</h3>
-              </div>
-              <div class="carousel-item" onclick="openModal('Images/video_1.mp4','video')">
-                <video src="Images/video_1.mp4" autoplay muted loop></video>
-                <h3 class="image-title">TreasureHunt</h3>
-              </div>
-              <div class="carousel-item" onclick="openModal('Images/image_21.png', 'image')">
-                <img src="Images/image_21.png" alt="">
-                <h3 class="image-title">Portal 2.0 (Ps)</h3>
-              </div>
-              <div class="carousel-item" onclick="openModal('Images/image_7.png', 'image')">
-                <img src="Images/image_7.png" alt="">
-                <h3 class="image-title">YT Banner (Ps)</h3>
-              </div>
-              <div class="carousel-item" onclick="openModal('Images/image_69.png', 'image')">
-                <img src="Images/image_69.png" alt="">
-                <h3 class="image-title">Car Manipulation (Ps)</h3>
-              </div>
-              <div class="carousel-item" onclick="openModal('Images/video_2.mp4','video')">
-                <video src="Images/video_2.mp4" autoplay muted loop></video>
-                <h3 class="image-title">Saloon Shooter</h3>
-              </div>
-              <div class="carousel-item" onclick="openModal('Images/image_36.jpg', 'image')">
-                <img src="Images/image_36.jpg" alt="">
-                <h3 class="image-title">TopG Car Madness</h3>
-              </div>
-              <div class="carousel-item" onclick="openModal('Images/image_22.png', 'image')">
-                <img src="Images/image_22.png" alt="">
-                <h3 class="image-title">InfiniteRunner</h3>
-              </div>
-              <div class="carousel-item" onclick="openModal('Images/image_17.png', 'image')">
-                <img src="Images/image_17.png" alt="">
-                <h3 class="image-title">Its all about us</h3>
-              </div>
-              <div class="carousel-item" onclick="openModal('Images/image_54.png', 'image')">
-                <img src="Images/image_54.png" alt="">
-                <h3 class="image-title">Shang Chi (Ps)</h3>
-              </div>
-              <div class="carousel-item" onclick="openModal('Images/video_10.mp4','video')">
-                <!-- <img src="Images/image_48.png" alt=""> -->
-                <video src="Images/video_10.mp4" autoplay muted loop></video>
-                <h3 class="image-title">Isometric Game</h3>
-              </div>
-              
-            </div>
-          </div>
-          <div class="more_BTN_portfolio">
-            <a href="portfolio.html">
-              <button class="btn btn--outline">more</button>
+          <script>
+            const text = document.querySelector(".second-text");
+            const textLoad = () => {
+              setTimeout(() => { text.textContent = "Game Developer"; }, 0);
+              setTimeout(() => { text.textContent = "Game Designer"; }, 4000);
+              setTimeout(() => { text.textContent = "Programmer"; }, 8000);
+              setTimeout(() => { text.textContent = "Photoshop Artist"; }, 12000);
+            }
+            textLoad();
+            setInterval(textLoad, 16000);
+          </script>
+          <h3 class="about__role__more">Enthusiastic, Innovative & Passionate about Games</h3>
+          <p class="about__desc">
+            I'm an Indian programmer and game designer who has been creating games since completing 12th grade. My passion for video games, which I played extensively in my youth, evolved into a desire to create my own. Currently, I'm pursuing a B.Sc. in game development. In India, where support for such specialized courses can be challenging to obtain from parents, I'm fortunate to have convinced mine by highlighting the industry's advancements and potential. This journey reflects my commitment to turning my passion into a professional career in game development.
+          </p>
+          <h3 class="about_line">I adore creating games for entertainment and giving fantasy a realistic feel.</h3>
+          <div class="about__contact center">
+            <a href="https://drive.google.com/file/d/1rBnITU3TRVSHUIevYFTD7MwuRd3K4n60/view?usp=sharing">
+              <span class="btn btn--outline">Resume</span>
+            </a>
+            <a href="https://github.com/Sujal-Hiro" aria-label="github" class="link link--icon">
+              <i aria-hidden="true" class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/sujalramesh/" aria-label="linkedin" class="link link--icon">
+              <i aria-hidden="true" class="fab fa-linkedin"></i>
             </a>
           </div>
-            <!-- <div class="modal-bg">
-              <div id="myModal" class="modal">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <div class="modal-content">
-                  <img id="modalImage" style="display: none;">
-                  <video id="modalVideo" controls style="display: none;"></video>
-                </div>
-              </div>
-            </div> -->
-         
-          
-          
-        </section>
+        </div>
+      </div>
 
-     
-          <div id="myModal" class="modal">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <div class="modal-content">
-              <img id="modalImage" style="display: none;">
-              <video id="modalVideo" controls style="display: none;"></video>
+      <section>
+        <div class="bar-container">
+          <text class="text-bar">IDEA | DESIGN | DEVELOP | DEPLOY | PLAY</text>
+        </div>
+      </section>
+
+      <div class="circlePosition2"></div>
+      <section id="projects" class="section projects">
+        <h2 class="section__title">Projects</h2>
+        <div class="projects__grid">
+          <div class="project">
+            <h3>Square Madness</h3>
+            <p class="project__description">
+              A game employing the Unity Engine has been released on the Play Store. The game's gameplay is straightforward; the player must avoid opposing bombs and spikes while gathering points like coins and diamonds. I was primarily involved in the UI Design and programming of the UI part's sprites and animations.
+            </p>
+            <ul class="project__stack">
+              <li class="project__stack-item">Unity</li>
+              <li class="project__stack-item">C-Sharp</li>
+              <li class="project__stack-item">Photoshop</li>
+            </ul>
+            <a href="https://play.google.com/store/apps/details?id=com.IdeekayStudios.SqaureMadness" aria-label="live preview" class="link link--icon">
+              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+          <div class="project">
+            <h3>Its All About Us!</h3>
+            <p class="project__description">
+              It's a cooperative multiplayer game with a duality theme in which players cooperate to overcome obstacles and advance through levels. As a programmer and team leader, this project taught me a lot of new skills. It aided in my learning more about team leadership and finishing a game in a short amount of time.
+            </p>
+            <ul class="project__stack">
+              <li class="project__stack-item">Unity</li>
+              <li class="project__stack-item">C-Sharp</li>
+              <li class="project__stack-item">Photoshop</li>
+            </ul>
+            <a href="https://youtu.be/8jC3e6yOQYM" aria-label="live preview" class="link link--icon">
+              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+          <div class="project">
+            <h3>Spin - Android Game</h3>
+            <p class="project__description">
+              Playable adversaries, easy player dynamics, and collectible items are all featured in this 2D hyper-casual game. I also did UI programming, UI design, and player movement. Additional post-processing features like bloom, distortion, and many others.
+            </p>
+            <ul class="project__stack">
+              <li class="project__stack-item">Unity</li>
+              <li class="project__stack-item">C-Sharp</li>
+              <li class="project__stack-item">Photoshop</li>
+              <li class="project__stack-item">Figma</li>
+            </ul>
+            <a href="https://play.google.com/store/apps/details?id=com.Steadfaststudios.Spin" aria-label="live preview" class="link link--icon">
+              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+        </div>
+        <div class="more_BTN_projects">
+          <a href="projects.html">
+            <button class="btn btn--outline">more</button>
+          </a>  
+        </div>
+      </section>
+
+      <!-- BENTO BOX -->
+      
+      <!-- <section class="bento-box">
+        <div class="bento-container">
+          <div class="bento-item large">
+            <h2 class="projects-completed-title">10+ Projects Completed</h2>
+            
+          </div>
+          <div class="bento-item">
+            <h2 class="projects-completed-title">15+</h2>
+          </div>
+          <div class="bento-item">
+            <h3 class="resume-cv-title">Resume/CV</h3>
+           
+            
+          </div>
+          <div class="bento-item wide">
+            <h2 class="projects-completed-title">10+ Skills</h2>
+            <div class="skills-icons">
+              <img src="Images/Adobe_Photoshop.png" alt="Photoshop Icon">
+          
+              <svg width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M35.5 28V9.3325L19.525 0V7.1675L25.7825 10.8325C26.03 11 26.03 11.3325 25.7825 11.4175L18.37 15.75C18.1225 15.9175 17.8775 15.8325 17.7125 15.75L10.3 11.4175C10.0525 11.3325 10.0525 10.9175 10.3 10.8325L16.56 7.1675V0L0.5 9.3325V28L6.595 24.4175V17.0825C6.595 16.8325 6.9225 16.6675 7.0875 16.75L14.5 21.0825C14.7475 21.25 14.83 21.4175 14.83 21.6675V30.3325C14.83 30.5825 14.5 30.75 14.335 30.6675L8.0775 27L1.9825 30.5825L17.9575 40L33.935 30.6675L27.84 27.0825L21.585 30.75C21.3375 30.9175 21.09 30.75 21.09 30.4175V21.75C21.09 21.5 21.255 21.25 21.42 21.1675L28.8325 16.8325C29.08 16.6675 29.325 16.8325 29.325 17.1675V24.5L35.5 28Z" fill="#008CDB"></path>
+              </svg>
+              <img src="Images/figma-icon.svg" alt="Figma Icon">
+              <svg
+  width="40"
+  height="40"
+  viewBox="0 0 40 40"
+  fill="transparent"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <g clip-path="url(#clip0_1282_49)">
+    <path
+      d="M4.49688 8.21712C4.34459 8.23528 4.19556 8.27451 4.05406 8.33368L1.02469 9.58368C0.722527 9.70965 0.464187 9.92186 0.281943 10.1938C0.0996997 10.4658 0.00163443 10.7854 0 11.1127L0 28.8877C0.00166026 29.2151 0.0997717 29.5348 0.282073 29.8067C0.464375 30.0787 0.722781 30.2909 1.025 30.4168L4.05406 31.6874C4.33848 31.8065 4.65037 31.8442 4.95499 31.7965C5.2596 31.7488 5.54499 31.6175 5.77937 31.4171L6.45813 30.8337C6.32039 30.9326 6.15801 30.9916 5.9889 31.0041C5.81978 31.0166 5.6505 30.9822 5.4997 30.9046C5.3489 30.827 5.22245 30.7093 5.13427 30.5645C5.0461 30.4196 4.99964 30.2533 5 30.0837V9.91681C4.99964 9.74723 5.0461 9.58085 5.13427 9.43599C5.22245 9.29114 5.3489 9.17345 5.4997 9.09588C5.6505 9.01832 5.81978 8.9839 5.9889 8.99641C6.15801 9.00893 6.32039 9.06789 6.45813 9.16681L5.77937 8.60462C5.60411 8.4548 5.39966 8.343 5.17895 8.2763C4.95824 8.2096 4.72578 8.18945 4.49688 8.21712Z"
+      fill="#52218A"
+    ></path>
+    <path
+      d="M29.6094 0.129533C29.2273 0.0761364 28.8381 0.111882 28.4721 0.233972C28.1062 0.356062 27.7735 0.561184 27.5 0.833283L1.66688 29.3958C1.53576 29.5366 1.36544 29.6349 1.17791 29.678C0.990373 29.721 0.794236 29.7069 0.614809 29.6374C0.435383 29.5679 0.280904 29.4462 0.171314 29.2881C0.0617231 29.1299 0.00205109 28.9426 0 28.7502L0 28.8877C0.00172154 29.215 0.0998615 29.5346 0.282159 29.8065C0.464457 30.0784 0.72283 30.2905 1.025 30.4164L4.05406 31.687C4.33848 31.8061 4.65037 31.8438 4.95499 31.7961C5.2596 31.7484 5.54499 31.6171 5.77937 31.4167L6.45813 30.8333L37.4206 5.44578C37.6519 5.25646 37.9321 5.13665 38.2287 5.10027C38.5254 5.06389 38.8262 5.11244 39.0964 5.24028C39.3665 5.36811 39.5948 5.56999 39.7548 5.82244C39.9147 6.07489 39.9998 6.36755 40 6.66641V6.57047C40.0002 6.09947 39.8673 5.63799 39.6167 5.2392C39.3661 4.84041 39.0079 4.52053 38.5834 4.31641L30.3419 0.349846C30.1105 0.239269 29.8634 0.164962 29.6094 0.129533Z"
+      fill="#6C33AF"
+    ></path>
+    <path
+      d="M4.64719 8.20023C4.44288 8.20803 4.24178 8.25359 4.05406 8.3346L1.02469 9.5846C0.722527 9.71057 0.464187 9.92279 0.281943 10.1947C0.0996997 10.4667 0.00163443 10.7863 0 11.1137L0 11.2515C0.00205109 11.0591 0.0617231 10.8717 0.171314 10.7135C0.280904 10.5554 0.435383 10.4337 0.614809 10.3642C0.794236 10.2947 0.990373 10.2806 1.17791 10.3237C1.36544 10.3667 1.53576 10.465 1.66688 10.6059L27.5 39.1677C27.8658 39.5318 28.3354 39.7737 28.8442 39.8603C29.3531 39.9469 29.8762 39.8738 30.3419 39.6512L38.5834 35.6843C39.0079 35.4802 39.366 35.1604 39.6166 34.7616C39.8672 34.3629 40.0001 33.9015 40 33.4305V33.3346C39.9998 33.6335 39.9147 33.9261 39.7548 34.1786C39.5948 34.431 39.3665 34.6329 39.0964 34.7607C38.8262 34.8886 38.5254 34.9371 38.2287 34.9007C37.9321 34.8644 37.6519 34.7446 37.4206 34.5552L6.45813 9.16773L5.77937 8.58492C5.46256 8.32108 5.05915 8.18381 4.64719 8.20023Z"
+      fill="#854CC7"
+    ></path>
+    <path
+      d="M29.6094 0.129829C28.9815 0.0530359 28.3479 0.217076 27.8362 0.588892C28.0597 0.468161 28.3106 0.407519 28.5645 0.412905C28.8184 0.418291 29.0666 0.48952 29.2847 0.619617C29.5028 0.749715 29.6834 0.934221 29.8088 1.15507C29.9342 1.37593 30.0001 1.62555 30 1.87952V38.1295C29.9993 38.4189 29.9131 38.7015 29.7521 38.942C29.5912 39.1824 29.3627 39.3699 29.0954 39.4807C28.8282 39.5916 28.5341 39.621 28.2502 39.5651C27.9663 39.5092 27.7053 39.3706 27.5 39.1667C27.8658 39.5308 28.3354 39.7727 28.8442 39.8593C29.3531 39.9458 29.8762 39.8728 30.3419 39.6501L38.5834 35.6876C39.0079 35.4835 39.3661 35.1636 39.6167 34.7649C39.8673 34.3661 40.0002 33.9046 40 33.4336V6.56733C40.0003 6.09622 39.8675 5.63461 39.6169 5.2357C39.3662 4.83679 39.008 4.51681 38.5834 4.31264L30.3419 0.349829C30.1104 0.23936 29.8634 0.165159 29.6094 0.129829ZM27.8362 0.588892C27.7131 0.654094 27.5999 0.736482 27.5 0.833579C27.6051 0.74282 27.7176 0.660975 27.8362 0.588892Z"
+      fill="#B179F1"
+    ></path>
+  </g>
+  <defs>
+    <clipPath id="clip0_1282_49">
+      <rect width="80" height="40" ></rect>
+    </clipPath>
+  </defs>
+</svg>
             </div>
           </div>
-      
+          <div class="bento-item">
+            <h3>Software Skills</h3>
+          </div>
+          <div class="bento-item">
+            <h3>Skills</h3>
+          </div>
+          
+          <div class="bento-item">
+            <h3>About ME</h3>
+          </div>
+          <div class="bento-item">
+            <h2>500+</h2>
+          </div>
+        </div>
+      </section> -->
 
-      
 
+
+
+
+      <!--Portfolio-->
+      <!-- Add Slick Carousel CSS -->
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+      
+      <!-- Add jQuery and Slick Carousel JS -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+      <!-- Initialize Slick Carousel -->
+      <script type="text/javascript">
+        $(document).ready(function () {
+          $('.image-carousel').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            centerMode: true, 
+            centerPadding: '0', 
+            responsive: [
+              {
+                breakpoint: 1024,
+                settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 1,
+                  infinite: true,
+                  dots: true
+                }
+              },
+              {
+                breakpoint: 600,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1
+                }
+              }
+            ]
+          });
+        });
+
+        const image = document.getElementById('zoom-image');
+
+        image.addEventListener('click', () => {
+          image.classList.toggle('zoomed');
+        });
+      </script>
+
+      <section id="portfolio" class="section__portfolio reveal">
+        <h2 class="section__title Portfolio">Portfolio</h2>
+        <div class="portfolio_background">
+          <div class="image-carousel">
+            <div class="carousel-item" onclick="openModal('Images/image_35.png', 'image')">
+              <img src="Images/image_35.png" alt="">
+              <h3 class="image-title">Portals (Ps)</h3>
+            </div>
+            <div class="carousel-item" onclick="openModal('Images/video_9.mp4', 'video')">
+              <video src="Images/video_9.mp4" autoplay muted loop></video>
+              <h3 class="image-title">Spin</h3>
+            </div>
+            <div class="carousel-item" onclick="openModal('Images/image_28.png', 'image')">
+              <img src="Images/image_28.png" alt="">
+              <h3 class="image-title">Mars Survivor</h3>
+            </div>
+            <div class="carousel-item" onclick="openModal('Images/video_1.mp4','video')">
+              <video src="Images/video_1.mp4" autoplay muted loop></video>
+              <h3 class="image-title">TreasureHunt</h3>
+            </div>
+            <div class="carousel-item" onclick="openModal('Images/image_21.png', 'image')">
+              <img src="Images/image_21.png" alt="">
+              <h3 class="image-title">Portal 2.0 (Ps)</h3>
+            </div>
+            <div class="carousel-item" onclick="openModal('Images/image_7.png', 'image')">
+              <img src="Images/image_7.png" alt="">
+              <h3 class="image-title">YT Banner (Ps)</h3>
+            </div>
+            <div class="carousel-item" onclick="openModal('Images/image_69.png', 'image')">
+              <img src="Images/image_69.png" alt="">
+              <h3 class="image-title">Car Manipulation (Ps)</h3>
+            </div>
+            <div class="carousel-item" onclick="openModal('Images/video_2.mp4','video')">
+              <video src="Images/video_2.mp4" autoplay muted loop></video>
+              <h3 class="image-title">Saloon Shooter</h3>
+            </div>
+            <div class="carousel-item" onclick="openModal('Images/image_36.jpg', 'image')">
+              <img src="Images/image_36.jpg" alt="">
+              <h3 class="image-title">TopG Car Madness</h3>
+            </div>
+            <div class="carousel-item" onclick="openModal('Images/image_22.png', 'image')">
+              <img src="Images/image_22.png" alt="">
+              <h3 class="image-title">InfiniteRunner</h3>
+            </div>
+            <div class="carousel-item" onclick="openModal('Images/image_17.png', 'image')">
+              <img src="Images/image_17.png" alt="">
+              <h3 class="image-title">Its all about us</h3>
+            </div>
+            <div class="carousel-item" onclick="openModal('Images/image_54.png', 'image')">
+              <img src="Images/image_54.png" alt="">
+              <h3 class="image-title">Shang Chi (Ps)</h3>
+            </div>
+            <div class="carousel-item" onclick="openModal('Images/video_10.mp4','video')">
+              <video src="Images/video_10.mp4" autoplay muted loop></video>
+              <h3 class="image-title">Isometric Game</h3>
+            </div>
+          </div>
+        </div>
+        <div class="more_BTN_portfolio">
+          <a href="portfolio.html">
+            <button class="btn btn--outline">more</button>
+          </a>
+        </div>
+      </section>
+
+      <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+          <img id="modalImage" style="display: none;">
+          <video id="modalVideo" controls style="display: none;"></video>
+        </div>
+      </div>
+
+        <!-- -----------------------------
+             PORTFOLIO
+        ----------------------------- -->
       <!-- <section id="portfolio" class="section portfolio reveal">
-        <h2 class="section__title">Portfolio</h2>
-         
-              <div class="portfolio_background">
-                <div class="image-grid">
-                  <img class="image-grid-col1 image-grid-row1"src="Images/portals.png"   alt="">                 
-                  <video src="Images/Our First Game, “Spin”_ A Fun and Addictive Game.mp4" autoplay muted loop></video>
-                  <img src="Images/Mars Survivor 2.png" alt="">
-                  <video src="Images/TreasureHunt.mp4" autoplay muted loop></video>
-                  
-                  <img class="portfolio_img"src="Images/Portal.png"   alt="">
-                  <video src="Images/It`s  all about Us! _ 2D Platformer _ Chennai 2022 -Global Game Jam.mp4 " autoplay muted loop></video>
-                  
-                  <img class="portfolio_img"src="Images/TUT2.png"   alt="">
-                  
-                  <video src="Images/Saloon Shooter.mp4" autoplay muted loop></video>
-                  <img src="Images/TopG car.jpg" alt="">
-                </div>
-              </div>
-             
-                </a>
-               -->
-                <!-- <a href="portfolio.html" class="more_BTN_portfolio">
-                  <button class="btn btn--outline">more</button>
-                </a> -->
+              <h2 class="section__title">Portfolio</h2>
                
-                <!-- <section class="more_BTN_portfolio">
-                  <a href="portfolio.html">
-                    <span class="btn btn--outline">check more</span>
-                  </a>
-                </section> -->
-
-
-          </section>
+                    <div class="portfolio_background">
+                      <div class="image-grid">
+                        <img class="image-grid-col1 image-grid-row1"src="Images/portals.png"   alt="">                 
+                        <video src="Images/Our First Game, “Spin”_ A Fun and Addictive Game.mp4" autoplay muted loop></video>
+                        <img src="Images/Mars Survivor 2.png" alt="">
+                        <video src="Images/TreasureHunt.mp4" autoplay muted loop></video>
+                        
+                        <img class="portfolio_img"src="Images/Portal.png"   alt="">
+                        <video src="Images/It`s  all about Us! _ 2D Platformer _ Chennai 2022 -Global Game Jam.mp4 " autoplay muted loop></video>
+                        
+                        <img class="portfolio_img"src="Images/TUT2.png"   alt="">
+                        
+                        <video src="Images/Saloon Shooter.mp4" autoplay muted loop></video>
+                        <img src="Images/TopG car.jpg" alt="">
+                      </div>
+                    </div>
+                   
+                      </a>
+                     -->
+      <!-- <a href="portfolio.html" class="more_BTN_portfolio">
+                        <button class="btn btn--outline">more</button>
+                      </a> -->
+      
+      <!-- <section class="more_BTN_portfolio">
+                        <a href="portfolio.html">
+                          <span class="btn btn--outline">check more</span>
+                        </a>
+                      </section> -->
+     
+                      
+      
+      <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+          <img id="modalImage" style="display: none;">
+          <video id="modalVideo" controls style="display: none;"></video>
+        </div>
+      </div>
+      
+      </section>
           
 
       <!-- Skills -->
       <section class="section_skills reveal" id="skills">
         <h2 class="section__title">Skills</h2>
         <ul class="skills__list">
-          <li class="skills__list-item btn btn--plain">C#</li>
-          <li class="skills__list-item btn btn--plain">Unity Engine</li>
-          <li class="skills__list-item btn btn--plain">C++</li>
-          <li class="skills__list-item btn btn--plain">HTML5</li>
-          <li class="skills__list-item btn btn--plain">CSS3</li>
-          <li class="skills__list-item btn btn--plain">Photoshop</li>
-          <li class="skills__list-item btn btn--plain">Video Editing</li>
-          <li class="skills__list-item btn btn--plain">UI/UX</li>
-          <li class="skills__list-item btn btn--plain">Shader Programming</li>
-          <li class="skills__list-item btn btn--plain">Debugging</li>
-          <li class="skills__list-item btn btn--plain">Web Development</li>
-          <li class="skills__list-item btn btn--plain">API</li>
+          <li class="skills__list-item btn btn--plain">
+            <i class="fas fa-code skill-icon" aria-hidden="true"></i> C#
+          </li>
+          <li class="skills__list-item btn btn--plain">
+            <i class="fas fa-gamepad skill-icon"></i> Unity Engine
+          </li>
+          <li class="skills__list-item btn btn--plain">
+            <i class="fas fa-cogs skill-icon"></i> C++
+          </li>
+          <li class="skills__list-item btn btn--plain">
+            <i class="fab fa-html5 skill-icon"></i> HTML5
+          </li>
+          <li class="skills__list-item btn btn--plain">
+            <i class="fab fa-css3-alt skill-icon"></i> CSS3
+          </li>
+          <li class="skills__list-item btn btn--plain">
+            <i class="fas fa-paint-brush skill-icon"></i> Photoshop
+          </li>
+          <li class="skills__list-item btn btn--plain">
+            <i class="fas fa-video skill-icon"></i> Video Editing
+          </li>
+          <li class="skills__list-item btn btn--plain">
+            <i class="fas fa-pencil-ruler skill-icon"></i> UI/UX
+          </li>
+          <li class="skills__list-item btn btn--plain">
+            <i class="fas fa-microchip skill-icon"></i> Shader Programming
+          </li>
+          <li class="skills__list-item btn btn--plain">
+            <i class="fas fa-bug skill-icon"></i> Debugging
+          </li>
+          <li class="skills__list-item btn btn--plain">
+            <i class="fas fa-globe skill-icon"></i> Web Development
+          </li>
+          <li class="skills__list-item btn btn--plain">
+            <i class="fas fa-plug skill-icon"></i> API
+          </li>
         </ul>
       </section>
 
@@ -437,7 +437,7 @@
       </section> -->
       <section class="section_contact center reveal" id="contact">
         <h2 class="section__title_Contact">Contact</h2>
-        <a href="mailto:sujalkrish007@gmail.com" class="contactBTN">
+        <a href="mailto:iam.sujalramesh@gmail.com" class="contactBTN">
           <span class="btn btn--outline">Email me</span>
         </a>
       </section>
