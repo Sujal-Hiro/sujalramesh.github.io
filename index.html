@@ -1,142 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Portfolio" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <script src="https://kit.fontawesome.com/fa62c117c7.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="styles.css" />
-    <title>Sujal Ramesh</title>
-    <link rel="shortcut icon" type="image" href="Images/Icon-Website.png">
-  </head>
-  <body class="light" id="top">
-    <div class="background-animation"></div>
-    
-    <header class="header center">
-      <h3><a href="#" class="link">SR.</a></h3>
-      <nav class="nav center">
-        <ul class="nav__list center">
-          <li class="nav__list-item"><a class="link link--nav" href="#projects">Projects</a></li>
-          <li class="nav__list-item"><a class="link link--nav" href="#portfolio">Portfolio</a></li>
-          <li class="nav__list-item"><a class="link link--nav" href="#skills">Skills</a></li>
-          <li class="nav__list-item"><a class="link link--nav" href="#contact">Contact</a></li>
-        </ul>
-        <button type="button" aria-label="toggle theme" class="btn btn--icon">
-          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
-        </button>
-        <button type="button" aria-label="toggle navigation" class="btn btn--icon nav__hamburger">
-          <i aria-hidden="true" class="fas fa-bars"></i>
-        </button>
-      </nav>
-    </header>
 
-    <main>
-      <div class="circlePosition"></div>
-      <div class="content">
-        <div class="about center">
-          <h1>Hi, I am <span class="about__name">Sujal Ramesh.</span></h1>
-          <div class="about-container">
-            <span class="text first-text"></span>
-            <span class="text second-text"></span>
-          </div>
-          <script>
-            const text = document.querySelector(".second-text");
-            const textLoad = () => {
-              setTimeout(() => { text.textContent = "Game Developer"; }, 0);
-              setTimeout(() => { text.textContent = "Game Designer"; }, 4000);
-              setTimeout(() => { text.textContent = "Programmer"; }, 8000);
-              setTimeout(() => { text.textContent = "Photoshop Artist"; }, 12000);
-            }
-            textLoad();
-            setInterval(textLoad, 16000);
-          </script>
-          <h3 class="about__role__more">Enthusiastic, Innovative & Passionate about Games</h3>
-          <p class="about__desc">
-            I'm an Indian programmer and game designer who has been creating games since completing 12th grade. My passion for video games, which I played extensively in my youth, evolved into a desire to create my own. Currently, I'm pursuing a B.Sc. in game development. In India, where support for such specialized courses can be challenging to obtain from parents, I'm fortunate to have convinced mine by highlighting the industry's advancements and potential. This journey reflects my commitment to turning my passion into a professional career in game development.
-          </p>
-          <h3 class="about_line">I adore creating games for entertainment and giving fantasy a realistic feel.</h3>
-          <div class="about__contact center">
-            <a href="https://drive.google.com/file/d/1MkevrUhK9BrIV1J8NdFftmxfhc38uF57/view?usp=sharing">
-              <span class="btn btn--outline">Resume</span>
-            </a>
-            <!-- <a href="https://github.com/Sujal-Hiro" aria-label="github" class="link link--icon">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfolio" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <script src="https://kit.fontawesome.com/fa62c117c7.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <title>Sujal Ramesh</title>
+  <link rel="shortcut icon" type="image" href="Images/Icon-Website.png">
+</head>
+
+<body class="light" id="top">
+  <div class="background-animation"></div>
+
+  <header class="header center">
+    <h3><a href="#" class="link">SR.</a></h3>
+    <nav class="nav center">
+      <ul class="nav__list center">
+        <li class="nav__list-item"><a class="link link--nav" href="#projects">Projects</a></li>
+        <li class="nav__list-item"><a class="link link--nav" href="#portfolio">Portfolio</a></li>
+        <li class="nav__list-item"><a class="link link--nav" href="#skills">Skills</a></li>
+        <li class="nav__list-item"><a class="link link--nav" href="#contact">Contact</a></li>
+      </ul>
+      <button type="button" aria-label="toggle theme" class="btn btn--icon">
+        <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+      </button>
+      <button type="button" aria-label="toggle navigation" class="btn btn--icon nav__hamburger">
+        <i aria-hidden="true" class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="circlePosition"></div>
+    <div class="content">
+      <div class="about center">
+        <h1>Hi, I am <span class="about__name">Sujal Ramesh.</span></h1>
+        <div class="about-container">
+          <span class="text first-text"></span>
+          <span class="text second-text"></span>
+        </div>
+        <script>
+          const text = document.querySelector(".second-text");
+          const textLoad = () => {
+            setTimeout(() => { text.textContent = "Game Developer"; }, 0);
+            setTimeout(() => { text.textContent = "Game Designer"; }, 4000);
+            setTimeout(() => { text.textContent = "Programmer"; }, 8000);
+            setTimeout(() => { text.textContent = "Photoshop Artist"; }, 12000);
+          }
+          textLoad();
+          setInterval(textLoad, 16000);
+        </script>
+        <h3 class="about__role__more">Enthusiastic, Innovative & Passionate about Games</h3>
+        <p class="about__desc">
+          I'm an Indian programmer and game designer who has been creating games since completing 12th grade. My passion
+          for video games, which I played extensively in my youth, evolved into a desire to create my own. Currently,
+          I'm pursuing a B.Sc. in game development. In India, where support for such specialized courses can be
+          challenging to obtain from parents, I'm fortunate to have convinced mine by highlighting the industry's
+          advancements and potential. This journey reflects my commitment to turning my passion into a professional
+          career in game development.
+        </p>
+        <h3 class="about_line">I adore creating games for entertainment and giving fantasy a realistic feel.</h3>
+        <div class="about__contact center">
+          <a href="https://drive.google.com/file/d/1MkevrUhK9BrIV1J8NdFftmxfhc38uF57/view?usp=sharing">
+            <span class="btn btn--outline">Resume</span>
+          </a>
+          <!-- <a href="https://github.com/Sujal-Hiro" aria-label="github" class="link link--icon">
               <i aria-hidden="true" class="fab fa-github"></i>
             </a> -->
-            <a href="https://www.linkedin.com/in/sujalramesh/" aria-label="linkedin" class="link link--icon">
-              <i aria-hidden="true" class="fab fa-linkedin"></i>
-            </a>
-          </div>
+          <a href="https://www.linkedin.com/in/sujalramesh/" aria-label="linkedin" class="link link--icon">
+            <i aria-hidden="true" class="fab fa-linkedin"></i>
+          </a>
         </div>
       </div>
+    </div>
 
-      <section>
-        <div class="bar-container">
-          <text class="text-bar">IDEA | DESIGN | DEVELOP | DEPLOY | PLAY</text>
-        </div>
-      </section>
+    <section>
+      <div class="bar-container">
+        <text class="text-bar">IDEA | DESIGN | DEVELOP | DEPLOY | PLAY</text>
+      </div>
+    </section>
 
-      <div class="circlePosition2"></div>
-      <section id="projects" class="section projects">
-        <h2 class="section__title">Projects</h2>
-        <div class="projects__grid">
-          <div class="project">
-            <h3>Square Madness</h3>
-            <p class="project__description">
-              A game employing the Unity Engine has been released on the Play Store. The game's gameplay is straightforward; the player must avoid opposing bombs and spikes while gathering points like coins and diamonds. I was primarily involved in the UI Design and programming of the UI part's sprites and animations.
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">Unity</li>
-              <li class="project__stack-item">C-Sharp</li>
-              <li class="project__stack-item">Photoshop</li>
-            </ul>
-            <a href="https://play.google.com/store/apps/details?id=com.IdeekayStudios.SqaureMadness" aria-label="live preview" class="link link--icon">
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-          <div class="project">
-            <h3>Its All About Us!</h3>
-            <p class="project__description">
-              It's a cooperative multiplayer game with a duality theme in which players cooperate to overcome obstacles and advance through levels. As a programmer and team leader, this project taught me a lot of new skills. It aided in my learning more about team leadership and finishing a game in a short amount of time.
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">Unity</li>
-              <li class="project__stack-item">C-Sharp</li>
-              <li class="project__stack-item">Photoshop</li>
-            </ul>
-            <a href="https://youtu.be/8jC3e6yOQYM" aria-label="live preview" class="link link--icon">
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-          <div class="project">
-            <h3>Spin - Android Game</h3>
-            <p class="project__description">
-              Playable adversaries, easy player dynamics, and collectible items are all featured in this 2D hyper-casual game. I also did UI programming, UI design, and player movement. Additional post-processing features like bloom, distortion, and many others.
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">Unity</li>
-              <li class="project__stack-item">C-Sharp</li>
-              <li class="project__stack-item">Photoshop</li>
-              <li class="project__stack-item">Figma</li>
-            </ul>
-            <a href="https://play.google.com/store/apps/details?id=com.Steadfaststudios.Spin" aria-label="live preview" class="link link--icon">
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
+    <div class="circlePosition2"></div>
+    <section id="projects" class="section projects">
+      <h2 class="section__title">Projects</h2>
+      <div class="projects__grid">
+        <div class="project">
+          <h3>Square Madness</h3>
+          <p class="project__description">
+            A game employing the Unity Engine has been released on the Play Store. The game's gameplay is
+            straightforward; the player must avoid opposing bombs and spikes while gathering points like coins and
+            diamonds. I was primarily involved in the UI Design and programming of the UI part's sprites and animations.
+          </p>
+          <ul class="project__stack">
+            <li class="project__stack-item">Unity</li>
+            <li class="project__stack-item">C-Sharp</li>
+            <li class="project__stack-item">Photoshop</li>
+          </ul>
+          <a href="https://play.google.com/store/apps/details?id=com.IdeekayStudios.SqaureMadness"
+            aria-label="live preview" class="link link--icon">
+            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
+          </a>
         </div>
-        <div class="more_BTN_projects">
-          <a href="projects.html">
-            <button class="btn btn--outline">more</button>
-          </a>  
+        <div class="project">
+          <h3>Its All About Us!</h3>
+          <p class="project__description">
+            It's a cooperative multiplayer game with a duality theme in which players cooperate to overcome obstacles
+            and advance through levels. As a programmer and team leader, this project taught me a lot of new skills. It
+            aided in my learning more about team leadership and finishing a game in a short amount of time.
+          </p>
+          <ul class="project__stack">
+            <li class="project__stack-item">Unity</li>
+            <li class="project__stack-item">C-Sharp</li>
+            <li class="project__stack-item">Photoshop</li>
+          </ul>
+          <a href="https://youtu.be/8jC3e6yOQYM" aria-label="live preview" class="link link--icon">
+            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
+          </a>
         </div>
-      </section>
+        <div class="project">
+          <h3>Spin - Android Game</h3>
+          <p class="project__description">
+            Playable adversaries, easy player dynamics, and collectible items are all featured in this 2D hyper-casual
+            game. I also did UI programming, UI design, and player movement. Additional post-processing features like
+            bloom, distortion, and many others.
+          </p>
+          <ul class="project__stack">
+            <li class="project__stack-item">Unity</li>
+            <li class="project__stack-item">C-Sharp</li>
+            <li class="project__stack-item">Photoshop</li>
+            <li class="project__stack-item">Figma</li>
+          </ul>
+          <a href="https://play.google.com/store/apps/details?id=com.Steadfaststudios.Spin" aria-label="live preview"
+            class="link link--icon">
+            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+      </div>
+      <div class="more_BTN_projects">
+        <a href="projects.html">
+          <button class="btn btn--outline">more</button>
+        </a>
+      </div>
+    </section>
 
-      <!-- BENTO BOX -->
-      
-      <!-- <section class="bento-box">
+    <!-- BENTO BOX -->
+
+    <!-- <section class="bento-box">
         <div class="bento-container">
           <div class="bento-item large">
             <h2 class="projects-completed-title">10+ Projects Completed</h2>
@@ -212,131 +227,132 @@
 
 
 
-      <!--Portfolio-->
-      <!-- Add Slick Carousel CSS -->
-      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-      
-      <!-- Add jQuery and Slick Carousel JS -->
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <!--Portfolio-->
+    <!-- Add Slick Carousel CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
-      <!-- Initialize Slick Carousel -->
-      <script type="text/javascript">
-        $(document).ready(function () {
-          $('.image-carousel').slick({
-            infinite: true,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            centerMode: true, 
-            centerPadding: '0', 
-            responsive: [
-              {
-                breakpoint: 1024,
-                settings: {
-                  slidesToShow: 2,
-                  slidesToScroll: 1,
-                  infinite: true,
-                  dots: true
-                }
-              },
-              {
-                breakpoint: 600,
-                settings: {
-                  slidesToShow: 1,
-                  slidesToScroll: 1
-                }
+    <!-- Add jQuery and Slick Carousel JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <!-- Initialize Slick Carousel -->
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('.image-carousel').slick({
+          infinite: true,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 2000,
+          centerMode: true,
+          centerPadding: '0',
+          responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                infinite: true,
+                dots: true
               }
-            ]
-          });
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }
+          ]
         });
+      });
 
-        const image = document.getElementById('zoom-image');
+      const image = document.getElementById('zoom-image');
 
-        image.addEventListener('click', () => {
-          image.classList.toggle('zoomed');
-        });
-      </script>
+      image.addEventListener('click', () => {
+        image.classList.toggle('zoomed');
+      });
+    </script>
 
-      <section id="portfolio" class="section__portfolio reveal">
-        <h2 class="section__title Portfolio">Portfolio</h2>
-        <div class="portfolio_background">
-          <div class="image-carousel">
-            <div class="carousel-item" onclick="openModal('Images/image_35.png', 'image')">
-              <img src="Images/image_35.png" alt="">
-              <h3 class="image-title">Portals (Ps)</h3>
-            </div>
-            <div class="carousel-item" onclick="openModal('Images/video_9.mp4', 'video')">
-              <video src="Images/video_9.mp4" autoplay muted loop></video>
-              <h3 class="image-title">Spin</h3>
-            </div>
-            <div class="carousel-item" onclick="openModal('Images/image_28.png', 'image')">
-              <img src="Images/image_28.png" alt="">
-              <h3 class="image-title">Mars Survivor</h3>
-            </div>
-            <div class="carousel-item" onclick="openModal('Images/video_1.mp4','video')">
-              <video src="Images/video_1.mp4" autoplay muted loop></video>
-              <h3 class="image-title">TreasureHunt</h3>
-            </div>
-            <div class="carousel-item" onclick="openModal('Images/image_21.png', 'image')">
-              <img src="Images/image_21.png" alt="">
-              <h3 class="image-title">Portal 2.0 (Ps)</h3>
-            </div>
-            <div class="carousel-item" onclick="openModal('Images/image_7.png', 'image')">
-              <img src="Images/image_7.png" alt="">
-              <h3 class="image-title">YT Banner (Ps)</h3>
-            </div>
-            <div class="carousel-item" onclick="openModal('Images/image_69.png', 'image')">
-              <img src="Images/image_69.png" alt="">
-              <h3 class="image-title">Car Manipulation (Ps)</h3>
-            </div>
-            <div class="carousel-item" onclick="openModal('Images/video_2.mp4','video')">
-              <video src="Images/video_2.mp4" autoplay muted loop></video>
-              <h3 class="image-title">Saloon Shooter</h3>
-            </div>
-            <div class="carousel-item" onclick="openModal('Images/image_36.jpg', 'image')">
-              <img src="Images/image_36.jpg" alt="">
-              <h3 class="image-title">TopG Car Madness</h3>
-            </div>
-            <div class="carousel-item" onclick="openModal('Images/image_22.png', 'image')">
-              <img src="Images/image_22.png" alt="">
-              <h3 class="image-title">InfiniteRunner</h3>
-            </div>
-            <div class="carousel-item" onclick="openModal('Images/image_17.png', 'image')">
-              <img src="Images/image_17.png" alt="">
-              <h3 class="image-title">Its all about us</h3>
-            </div>
-            <div class="carousel-item" onclick="openModal('Images/image_54.png', 'image')">
-              <img src="Images/image_54.png" alt="">
-              <h3 class="image-title">Shang Chi (Ps)</h3>
-            </div>
-            <div class="carousel-item" onclick="openModal('Images/video_10.mp4','video')">
-              <video src="Images/video_10.mp4" autoplay muted loop></video>
-              <h3 class="image-title">Isometric Game</h3>
-            </div>
+    <section id="portfolio" class="section__portfolio reveal">
+      <h2 class="section__title Portfolio">Portfolio</h2>
+      <div class="portfolio_background">
+        <div class="image-carousel">
+          <div class="carousel-item" onclick="openModal('Images/image_35.png', 'image')">
+            <img src="Images/image_35.png" alt="Artwork: Portals created in Photoshop" loading="lazy">
+            <h3 class="image-title">Portals (Ps)</h3>
+          </div>
+          <div class="carousel-item" onclick="openModal('Images/video_9.mp4', 'video')">
+            <video src="Images/video_9.mp4" autoplay muted loop preload="metadata"></video>
+            <h3 class="image-title">Spin</h3>
+          </div>
+          <div class="carousel-item" onclick="openModal('Images/image_28.png', 'image')">
+            <img src="Images/image_28.png" alt="Game screenshot: Mars Survivor" loading="lazy">
+            <h3 class="image-title">Mars Survivor</h3>
+          </div>
+          <div class="carousel-item" onclick="openModal('Images/video_1.mp4','video')">
+            <video src="Images/video_1.mp4" autoplay muted loop></video>
+            <h3 class="image-title">TreasureHunt</h3>
+          </div>
+          <div class="carousel-item" onclick="openModal('Images/image_21.png', 'image')">
+            <img src="Images/image_21.png" alt="Artwork: Portal 2.0 created in Photoshop" loading="lazy">
+            <h3 class="image-title">Portal 2.0 (Ps)</h3>
+          </div>
+          <div class="carousel-item" onclick="openModal('Images/image_7.png', 'image')">
+            <img src="Images/image_7.png" alt="Artwork: YouTube Banner created in Photoshop" loading="lazy">
+            <h3 class="image-title">YT Banner (Ps)</h3>
+          </div>
+          <div class="carousel-item" onclick="openModal('Images/image_69.png', 'image')">
+            <img src="Images/image_69.png" alt="Artwork: Car Manipulation created in Photoshop" loading="lazy">
+            <h3 class="image-title">Car Manipulation (Ps)</h3>
+          </div>
+          <div class="carousel-item" onclick="openModal('Images/video_2.mp4','video')">
+            <video src="Images/video_2.mp4" autoplay muted loop></video>
+            <h3 class="image-title">Saloon Shooter</h3>
+          </div>
+          <div class="carousel-item" onclick="openModal('Images/image_36.jpg', 'image')">
+            <img src="Images/image_36.jpg" alt="Game screenshot: TopG Car Madness" loading="lazy">
+            <h3 class="image-title">TopG Car Madness</h3>
+          </div>
+          <div class="carousel-item" onclick="openModal('Images/image_22.png', 'image')">
+            <img src="Images/image_22.png" alt="Game screenshot: Infinite Runner" loading="lazy">
+            <h3 class="image-title">InfiniteRunner</h3>
+          </div>
+          <div class="carousel-item" onclick="openModal('Images/image_17.png', 'image')">
+            <img src="Images/image_17.png" alt="Game screenshot: Its All About Us" loading="lazy">
+            <h3 class="image-title">Its all about us</h3>
+          </div>
+          <div class="carousel-item" onclick="openModal('Images/image_54.png', 'image')">
+            <img src="Images/image_54.png" alt="Artwork: Shang Chi created in Photoshop" loading="lazy">
+            <h3 class="image-title">Shang Chi (Ps)</h3>
+          </div>
+          <div class="carousel-item" onclick="openModal('Images/video_10.mp4','video')">
+            <video src="Images/video_10.mp4" autoplay muted loop></video>
+            <h3 class="image-title">Isometric Game</h3>
           </div>
         </div>
-        <div class="more_BTN_portfolio">
-          <a href="portfolio.html">
-            <button class="btn btn--outline">more</button>
-          </a>
-        </div>
-      </section>
-
-      <div id="myModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <div class="modal-content">
-          <img id="modalImage" style="display: none;">
-          <video id="modalVideo" controls style="display: none;"></video>
-        </div>
       </div>
+      <div class="more_BTN_portfolio">
+        <a href="portfolio.html">
+          <button class="btn btn--outline">more</button>
+        </a>
+      </div>
+    </section>
 
-        <!-- -----------------------------
+    <div id="myModal" class="modal">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-content">
+        <img id="modalImage" style="display: none;">
+        <video id="modalVideo" controls style="display: none;"></video>
+      </div>
+    </div>
+
+    <!-- -----------------------------
              PORTFOLIO
         ----------------------------- -->
-      <!-- <section id="portfolio" class="section portfolio reveal">
+    <!-- <section id="portfolio" class="section portfolio reveal">
               <h2 class="section__title">Portfolio</h2>
                
                     <div class="portfolio_background">
@@ -358,135 +374,129 @@
                    
                       </a>
                      -->
-      <!-- <a href="portfolio.html" class="more_BTN_portfolio">
+    <!-- <a href="portfolio.html" class="more_BTN_portfolio">
                         <button class="btn btn--outline">more</button>
                       </a> -->
-      
-      <!-- <section class="more_BTN_portfolio">
+
+    <!-- <section class="more_BTN_portfolio">
                         <a href="portfolio.html">
                           <span class="btn btn--outline">check more</span>
                         </a>
                       </section> -->
-     
-                      
-      
-      <div id="myModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <div class="modal-content">
-          <img id="modalImage" style="display: none;">
-          <video id="modalVideo" controls style="display: none;"></video>
-        </div>
+
+
+
+    <div id="myModal" class="modal">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-content">
+        <img id="modalImage" style="display: none;">
+        <video id="modalVideo" controls style="display: none;"></video>
       </div>
-      
-      </section>
-          
+    </div>
 
-      <!-- Skills -->
-      <section class="section_skills reveal" id="skills">
-        <h2 class="section__title">Skills</h2>
-        <ul class="skills__list">
-          <li class="skills__list-item btn btn--plain">
-            <i class="fas fa-code skill-icon" aria-hidden="true"></i> C#
-          </li>
-          <li class="skills__list-item btn btn--plain">
-            <i class="fas fa-gamepad skill-icon"></i> Unity Engine
-          </li>
-          <li class="skills__list-item btn btn--plain">
-            <i class="fas fa-cogs skill-icon"></i> C++
-          </li>
-          <li class="skills__list-item btn btn--plain">
-            <i class="fab fa-html5 skill-icon"></i> HTML5
-          </li>
-          <li class="skills__list-item btn btn--plain">
-            <i class="fab fa-css3-alt skill-icon"></i> CSS3
-          </li>
-          <li class="skills__list-item btn btn--plain">
-            <i class="fas fa-paint-brush skill-icon"></i> Photoshop
-          </li>
-          <li class="skills__list-item btn btn--plain">
-            <i class="fas fa-video skill-icon"></i> Video Editing
-          </li>
-          <li class="skills__list-item btn btn--plain">
-            <i class="fas fa-pencil-ruler skill-icon"></i> UI/UX
-          </li>
-          <li class="skills__list-item btn btn--plain">
-            <i class="fas fa-microchip skill-icon"></i> Shader Programming
-          </li>
-          <li class="skills__list-item btn btn--plain">
-            <i class="fas fa-bug skill-icon"></i> Debugging
-          </li>
-          <li class="skills__list-item btn btn--plain">
-            <i class="fas fa-globe skill-icon"></i> Web Development
-          </li>
-          <li class="skills__list-item btn btn--plain">
-            <i class="fas fa-plug skill-icon"></i> API
-          </li>
-        </ul>
-      </section>
+    </section>
 
 
- 
+    <!-- Skills -->
+    <section class="section_skills reveal" id="skills">
+      <h2 class="section__title">Skills</h2>
+      <ul class="skills__list">
+        <li class="skills__list-item btn btn--plain">
+          <i class="fas fa-code skill-icon" aria-hidden="true"></i> C#
+        </li>
+        <li class="skills__list-item btn btn--plain">
+          <i class="fas fa-gamepad skill-icon"></i> Unity Engine
+        </li>
+        <li class="skills__list-item btn btn--plain">
+          <i class="fas fa-cogs skill-icon"></i> C++
+        </li>
+        <li class="skills__list-item btn btn--plain">
+          <i class="fab fa-html5 skill-icon"></i> HTML5
+        </li>
+        <li class="skills__list-item btn btn--plain">
+          <i class="fab fa-css3-alt skill-icon"></i> CSS3
+        </li>
+        <li class="skills__list-item btn btn--plain">
+          <i class="fas fa-paint-brush skill-icon"></i> Photoshop
+        </li>
+        <li class="skills__list-item btn btn--plain">
+          <i class="fas fa-video skill-icon"></i> Video Editing
+        </li>
+        <li class="skills__list-item btn btn--plain">
+          <i class="fas fa-pencil-ruler skill-icon"></i> UI/UX
+        </li>
+        <li class="skills__list-item btn btn--plain">
+          <i class="fas fa-microchip skill-icon"></i> Shader Programming
+        </li>
+        <li class="skills__list-item btn btn--plain">
+          <i class="fas fa-bug skill-icon"></i> Debugging
+        </li>
+        <li class="skills__list-item btn btn--plain">
+          <i class="fas fa-globe skill-icon"></i> Web Development
+        </li>
+        <li class="skills__list-item btn btn--plain">
+          <i class="fas fa-plug skill-icon"></i> API
+        </li>
+      </ul>
+    </section>
 
 
-      <!-- Contact -->
-      <!-- <section class="section_contact center reveal" id="contact">
+
+
+
+    <!-- Contact -->
+    <!-- <section class="section_contact center reveal" id="contact">
         <h2 class="section__title_Contact">Contact</h2>
         <a href="mailto:sujalkrish007@gmail.com" class="contactBTN">
           <span class="btn btn--outline">Email me</span>
         </a>
       </section> -->
-      <section class="section_contact center reveal" id="contact">
-        <h2 class="section__title_Contact">Contact</h2>
-        <a href="mailto:iam.sujalramesh@gmail.com" class="contactBTN">
-          <span class="btn btn--outline">Email me</span>
-        </a>
-      </section>
-      
-    </main>
-
-    <footer class="footer">
-      <a
-        
-        class="link footer__link"
-      >
-        Created By Sujal Ramesh
+    <section class="section_contact center reveal" id="contact">
+      <h2 class="section__title_Contact">Contact</h2>
+      <a href="mailto:iam.sujalramesh@gmail.com" class="contactBTN">
+        <span class="btn btn--outline">Email me</span>
       </a>
-    </footer>
+    </section>
 
-    <div class="scroll-container">
+  </main>
+
+  <footer class="footer">
+    <a class="link footer__link">
+      Created By Sujal Ramesh
+    </a>
+  </footer>
+
+  <div class="scroll-container">
     <div class="scroll-top">
       <a aria-label="Scroll up" href="#top">
         <i aria-hidden="true" class="fas fa-arrow-up"></i>
       </a>
     </div>
-    </div>
+  </div>
 
-    <script src="./script.js"></script>
+  <script src="./script.js"></script>
 
-    <script type="text/javascript">
-      window.addEventListener('scroll',reveal);
+  <script type="text/javascript">
+    window.addEventListener('scroll', reveal);
 
-      function reveal(){
-        var reveals=document.querySelectorAll('.reveal');
+    function reveal() {
+      var reveals = document.querySelectorAll('.reveal');
 
-        for(var i=0;i<reveals.length;i++)
-        {
-          var windowheight=window.innerHeight;
-          var revealtop=reveals[i].getBoundingClientRect().top;
-          var revealpoint=150;
+      for (var i = 0; i < reveals.length; i++) {
+        var windowheight = window.innerHeight;
+        var revealtop = reveals[i].getBoundingClientRect().top;
+        var revealpoint = 150;
 
-          if(revealtop<windowheight-revealpoint){
-            reveals[i].classList.add('active');
-          }
-          else{
-            reveals[i].classList.remove('active');
-          }
+        if (revealtop < windowheight - revealpoint) {
+          reveals[i].classList.add('active');
         }
-
+        else {
+          reveals[i].classList.remove('active');
+        }
       }
-    </script>
-  </body>
+
+    }
+  </script>
+</body>
+
 </html>
-
-
-
