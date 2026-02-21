@@ -3163,6 +3163,20 @@ height: auto;
     height: 300px;
     object-fit: cover;
   }
+
+  /* Portfolio Item Mobile Styles */
+  .overlay-title {
+    font-size: 0.95rem;
+  }
+
+  .overlay-summary {
+    font-size: 0.75rem;
+  }
+
+  .portfolio-overlay {
+    padding: 15px;
+    pointer-events: none;
+  }
 }
 
 
@@ -3214,6 +3228,77 @@ height: auto;
   gap: 10px;
   background: var(--clr-bg);
 
+}
+
+/* Portfolio Item Styling */
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 5px;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.portfolio-item img,
+.portfolio-item video {
+  width: 100%;
+  display: block;
+  transition: all 0.5s ease-in-out;
+}
+
+.portfolio-item:hover img,
+.portfolio-item:hover video {
+  transform: scale(1.04);
+  transition: 0.5s all ease-in-out;
+  z-index: 1;
+}
+
+/* Gradient Overlay */
+.portfolio-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 40%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+  opacity: 1;
+}
+
+.overlay-content {
+  width: 100%;
+  transform: translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.portfolio-item:hover .overlay-content {
+  transform: translateY(0);
+}
+
+.overlay-title {
+  color: #ff185d;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+.overlay-summary {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  margin: 0;
+  line-height: 1.4;
+  font-weight: 400;
 }
 
 .container .image-container img {
@@ -3290,6 +3375,46 @@ height: auto;
 
 
 /* test */
+
+/* Portfolio Items - Tablet/Medium Screens */
+@media (max-width: 1024px) {
+  .container .image-container {
+    columns: 3 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container .image-container {
+    columns: 2 150px;
+  }
+
+  .overlay-title {
+    font-size: 1rem;
+  }
+
+  .overlay-summary {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container .image-container {
+    columns: 1;
+  }
+
+  .overlay-title {
+    font-size: 0.9rem;
+  }
+
+  .overlay-summary {
+    font-size: 0.7rem;
+  }
+
+  .portfolio-overlay {
+    padding: 12px;
+    pointer-events: none;
+  }
+}
 
 /* Accessibility: Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
