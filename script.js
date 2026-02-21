@@ -4,8 +4,8 @@ const btnTheme = document.querySelector('.fa-moon')
 const btnHamburger = document.querySelector('.fa-bars')
 
 const addThemeClass = (bodyClass, btnClass) => {
-  body.classList.add(bodyClass)
-  btnTheme.classList.add(btnClass)
+	body.classList.add(bodyClass)
+	btnTheme.classList.add(btnClass)
 }
 
 const getBodyTheme = localStorage.getItem('portfolio-theme')
@@ -20,7 +20,7 @@ const setTheme = (bodyClass, btnClass) => {
 	body.classList.remove(localStorage.getItem('portfolio-theme'))
 	btnTheme.classList.remove(localStorage.getItem('portfolio-btn-theme'))
 
-  addThemeClass(bodyClass, btnClass)
+	addThemeClass(bodyClass, btnClass)
 
 	localStorage.setItem('portfolio-theme', bodyClass)
 	localStorage.setItem('portfolio-btn-theme', btnClass)
@@ -33,12 +33,12 @@ btnTheme.addEventListener('click', toggleTheme)
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  const navHamburger = document.querySelector('.nav__hamburger');
-  const navList = document.querySelector('.nav__list');
+	const navHamburger = document.querySelector('.nav__hamburger');
+	const navList = document.querySelector('.nav__list');
 
-  navHamburger.addEventListener('click', function () {
-    navList.classList.toggle('display-nav-list');
-  });
+	navHamburger.addEventListener('click', function () {
+		navList.classList.toggle('display-nav-list');
+	});
 });
 
 
@@ -63,23 +63,23 @@ var slideIndex = 1;
 showSlides(slideIndex);
 
 function currentSlide(n) {
-  showSlides(slideIndex = n);
+	showSlides(slideIndex = n);
 }
 
 function showSlides(n) {
-  var i;
-  var slides = document.querySelectorAll(".mySlides");
-  var dots = document.querySelectorAll(".dot");
-  if (n > slides.length) {slideIndex = 1} 
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
+	var i;
+	var slides = document.querySelectorAll(".mySlides");
+	var dots = document.querySelectorAll(".dot");
+	if (n > slides.length) { slideIndex = 1 }
+	if (n < 1) { slideIndex = slides.length }
+	for (i = 0; i < slides.length; i++) {
+		slides[i].style.display = "none";
+	}
+	for (i = 0; i < dots.length; i++) {
+		dots[i].className = dots[i].className.replace(" active", "");
+	}
+	slides[slideIndex - 1].style.display = "block";
+	dots[slideIndex - 1].className += " active";
 }
 
 btnHamburger.addEventListener('click', displayList)
@@ -97,13 +97,13 @@ const scrollUp = () => {
 	}
 }
 
-document.addEventListener('scroll', scrollUp) 
+document.addEventListener('scroll', scrollUp)
 
 
 //video
-var video=document.querySelectorAll('video')
+var video = document.querySelectorAll('video')
 
-video.forEach(play=>play.addEventListener('click',()=>{
+video.forEach(play => play.addEventListener('click', () => {
 	play.classList.toggle('active');
 
 }))
@@ -114,32 +114,52 @@ function openModal(src, type) {
 	var modal = document.getElementById("myModal");
 	var modalImg = document.getElementById("modalImage");
 	var modalVideo = document.getElementById("modalVideo");
-	
+
 	if (type === 'image') {
-	  modalImg.style.display = 'block';
-	  modalVideo.style.display = 'none';
-	  modalImg.src = src;
+		modalImg.style.display = 'block';
+		modalVideo.style.display = 'none';
+		modalImg.src = src;
 	} else if (type === 'video') {
-	  modalImg.style.display = 'none';
-	  modalVideo.style.display = 'block';
-	  modalVideo.src = src;
+		modalImg.style.display = 'none';
+		modalVideo.style.display = 'block';
+		modalVideo.src = src;
 	}
-	
+
 	modal.style.display = "block";
-  }
-  
-  function closeModal() {
+}
+
+function closeModal() {
 	var modal = document.getElementById("myModal");
 	var modalVideo = document.getElementById("modalVideo");
-	
+
 	modal.style.display = "none";
-	
+
 	// Stop the video when closing the modal
 	modalVideo.pause();
 	modalVideo.currentTime = 0;
-  }
-  
-  
-  
-  
- 
+}
+
+// Enhanced video loading with preload optimization
+document.querySelectorAll('.portfolio-image').forEach(image => {
+	image.addEventListener('click', function (e) {
+		const videoSrc = this.dataset.video;
+		const modalVideo = document.getElementById('modalVideo');
+
+		// Start loading video immediately on click
+		modalVideo.src = videoSrc;
+		modalVideo.preload = 'auto'; // Force full preload
+		modalVideo.load(); // Trigger loading
+
+		// Open modal
+		document.getElementById('videoModal').style.display = 'block';
+
+		// Play when ready (buffered enough)
+		modalVideo.oncanplay = function () {
+			this.play().catch(err => console.log('Autoplay prevented:', err));
+		};
+	});
+});
+
+
+
+

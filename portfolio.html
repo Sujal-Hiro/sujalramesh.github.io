@@ -125,7 +125,10 @@
     <span class="close" onclick="closeModal()">&times;</span>
     <div class="modal-content">
       <img id="modalImage" style="display: none;">
-      <video id="modalVideo" controls style="display: none;"></video>
+      <video id="modalVideo" width="100%" height="auto" controls preload="auto">
+        <source src="" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </div>
   </div>
 
