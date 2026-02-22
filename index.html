@@ -70,7 +70,7 @@
         </p>
         <h3 class="about_line" id="dailyTagline"></h3>
         <script>
-          // Daily rotating taglines
+          // Rotating taglines with dramatic animations
           const taglines = [
             "Turning the 'what if' moments into games you can actually play.",
             "Making games that I'd lose sleep playing.",
@@ -79,23 +79,36 @@
             "From playing games all night to making them all day."
           ];
 
-          // Get day of year (1-365) to determine which tagline to show
-          const getDayOfYear = () => {
-            const now = new Date();
-            const start = new Date(now.getFullYear(), 0, 0);
-            const diff = now - start;
-            const oneDay = 1000 * 60 * 60 * 24;
-            return Math.floor(diff / oneDay);
+          let currentTaglineIndex = 0;
+          const taglineElement = document.getElementById('dailyTagline');
+
+          const rotateTagline = () => {
+            // Add dramatic exit animation - text flies up
+            taglineElement.classList.add('tagline-fly-out');
+
+            setTimeout(() => {
+              // Change text while invisible
+              currentTaglineIndex = (currentTaglineIndex + 1) % taglines.length;
+              taglineElement.textContent = taglines[currentTaglineIndex];
+
+              // Remove exit, add dramatic drop-in animation
+              taglineElement.classList.remove('tagline-fly-out');
+              taglineElement.classList.add('tagline-drop-in');
+
+              // Remove animation class after completion
+              setTimeout(() => {
+                taglineElement.classList.remove('tagline-drop-in');
+              }, 1000);
+            }, 500);
           };
 
-          // Set tagline based on day of year
-          const setDailyTagline = () => {
-            const dayOfYear = getDayOfYear();
-            const taglineIndex = dayOfYear % taglines.length;
-            document.getElementById('dailyTagline').textContent = taglines[taglineIndex];
-          };
+          // Set initial tagline with drop animation
+          taglineElement.textContent = taglines[0];
+          taglineElement.classList.add('tagline-drop-in');
+          setTimeout(() => taglineElement.classList.remove('tagline-drop-in'), 1000);
 
-          setDailyTagline();
+          // Rotate every 10 seconds (change to 5000 for 5 seconds)
+          setInterval(rotateTagline, 10000);
         </script>
         <div class="about__contact center">
           <a href="https://drive.google.com/file/d/1MkevrUhK9BrIV1J8NdFftmxfhc38uF57/view?usp=sharing">
