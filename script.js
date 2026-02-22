@@ -24,6 +24,9 @@ const setTheme = (bodyClass, btnClass) => {
 
 	localStorage.setItem('portfolio-theme', bodyClass)
 	localStorage.setItem('portfolio-btn-theme', btnClass)
+
+	// Trigger custom event for particle system to update colors
+	window.dispatchEvent(new Event('themeChanged'))
 }
 
 const toggleTheme = () =>
