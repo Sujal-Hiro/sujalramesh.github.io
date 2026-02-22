@@ -16,7 +16,9 @@
 </head>
 
 <body class="light" id="top">
-  <div class="background-animation"></div>
+  <div class="background-animation">
+    <canvas id="particleCanvas"></canvas>
+  </div>
 
   <header class="header center">
     <h3><a href="#" class="link">SR.</a></h3>
@@ -37,7 +39,6 @@
   </header>
 
   <main>
-    <div class="circlePosition"></div>
     <div class="content">
       <div class="about center">
         <h1>Hi, I am <span class="about__name">Sujal Ramesh.</span></h1>
@@ -86,7 +87,6 @@
       </div>
     </section>
 
-    <div class="circlePosition2"></div>
     <section id="projects" class="section projects">
       <h2 class="section__title">Projects</h2>
       <div class="projects__grid">
@@ -474,6 +474,7 @@
     </div>
   </div>
 
+  <script src="./particles.js"></script>
   <script src="./script.js"></script>
 
   <script type="text/javascript">
