@@ -11,18 +11,100 @@ class Particle {
         this.y = this.baseY;
         this.size = config.size || (Math.random() * 2 + 1);
         this.baseSize = this.size;
-        this.speedX = (Math.random() - 0.5) * 0.15; // Reduced speed for minimal motion
+        this.speedX = (Math.random() - 0.5) * 0.15;
         this.speedY = (Math.random() - 0.5) * 0.15;
-        this.opacity = config.opacity !== undefined ? config.opacity : Math.random() * 0.3 + 0.15; // Lower opacity
+        this.opacity = config.opacity !== undefined ? config.opacity : Math.random() * 0.3 + 0.15;
         this.color = config.color || '#ffffff';
-        this.vx = 0; // Velocity for mouse interaction
+        this.vx = 0;
         this.vy = 0;
+
+        // Random shape type
+        const shapes = ['triangle'];
+        this.shape = shapes[Math.floor(Math.random() * shapes.length)];
+
+        // Slow rotation for non-circle shapes
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.005;
+    }
+
+    drawCircle(ctx, x, y, size) {
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    drawDiamond(ctx, x, y, size) {
+        ctx.beginPath();
+        ctx.moveTo(x, y - size);
+        ctx.lineTo(x + size, y);
+        ctx.lineTo(x, y + size);
+        ctx.lineTo(x - size, y);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    drawCross(ctx, x, y, size) {
+        const arm = size * 0.35;
+        const len = size;
+        ctx.beginPath();
+        ctx.moveTo(x - arm, y - len);
+        ctx.lineTo(x + arm, y - len);
+        ctx.lineTo(x + arm, y - arm);
+        ctx.lineTo(x + len, y - arm);
+        ctx.lineTo(x + len, y + arm);
+        ctx.lineTo(x + arm, y + arm);
+        ctx.lineTo(x + arm, y + len);
+        ctx.lineTo(x - arm, y + len);
+        ctx.lineTo(x - arm, y + arm);
+        ctx.lineTo(x - len, y + arm);
+        ctx.lineTo(x - len, y - arm);
+        ctx.lineTo(x - arm, y - arm);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    drawTriangle(ctx, x, y, size) {
+        ctx.beginPath();
+        ctx.moveTo(x, y - size);
+        ctx.lineTo(x + size, y + size);
+        ctx.lineTo(x - size, y + size);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    drawStar(ctx, x, y, size) {
+        const spikes = 4;
+        const outerRadius = size;
+        const innerRadius = size * 0.45;
+        let rot = (Math.PI / 2) * 3;
+        const step = Math.PI / spikes;
+
+        ctx.beginPath();
+        ctx.moveTo(x, y - outerRadius);
+        for (let i = 0; i < spikes; i++) {
+            ctx.lineTo(
+                x + Math.cos(rot) * outerRadius,
+                y + Math.sin(rot) * outerRadius
+            );
+            rot += step;
+            ctx.lineTo(
+                x + Math.cos(rot) * innerRadius,
+                y + Math.sin(rot) * innerRadius
+            );
+            rot += step;
+        }
+        ctx.lineTo(x, y - outerRadius);
+        ctx.closePath();
+        ctx.fill();
     }
 
     update(mouse) {
         // Minimal floating motion
         this.baseX += this.speedX;
         this.baseY += this.speedY;
+
+        // Slow rotation
+        this.rotation += this.rotationSpeed;
 
         // Wrap around edges
         if (this.baseX < 0) this.baseX = this.canvas.width;
@@ -35,13 +117,12 @@ class Particle {
             const dx = this.baseX - mouse.x;
             const dy = this.baseY - mouse.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            const maxDistance = 120; // Interaction radius
+            const maxDistance = 120;
 
             if (distance < maxDistance) {
                 const force = (maxDistance - distance) / maxDistance;
                 const pushStrength = force * 2;
 
-                // Push particles away
                 this.vx = (dx / distance) * pushStrength;
                 this.vy = (dy / distance) * pushStrength;
 
@@ -49,7 +130,7 @@ class Particle {
                 this.size = this.baseSize * (1 + force * 0.8);
             } else {
                 this.size = this.baseSize;
-                this.vx *= 0.9; // Damping
+                this.vx *= 0.9;
                 this.vy *= 0.9;
             }
         } else {
@@ -67,14 +148,33 @@ class Particle {
         ctx.save();
         ctx.globalAlpha = this.opacity;
         ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
 
-        // Subtle glow effect
-        ctx.shadowBlur = 5;
+        // Apply rotation transform for non-circle shapes
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+
+        // Subtle glow
+        ctx.shadowBlur = 4;
         ctx.shadowColor = this.color;
-        ctx.fill();
+
+        switch (this.shape) {
+            case 'circle':
+                this.drawCircle(ctx, 0, 0, this.size);
+                break;
+            case 'diamond':
+                this.drawDiamond(ctx, 0, 0, this.size);
+                break;
+            case 'cross':
+                this.drawCross(ctx, 0, 0, this.size * 0.9);
+                break;
+            case 'triangle':
+                this.drawTriangle(ctx, 0, 0, this.size);
+                break;
+            case 'star':
+                this.drawStar(ctx, 0, 0, this.size * 1.2);
+                break;
+        }
+
         ctx.restore();
     }
 }
@@ -96,13 +196,12 @@ class ParticleSystem {
         this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-        // Configuration - reduced particle count
+        // Configuration
         this.config = {
-            ambientCount: this.isMobile || this.isTouchDevice ? 80 : 150 // Reduced from 50/150
+            ambientCount: this.isMobile || this.isTouchDevice ? 80 : 150
         };
 
         this.colors = this.getThemeColors();
-
         this.init();
     }
 
@@ -112,17 +211,17 @@ class ParticleSystem {
         if (isDark) {
             return {
                 ambient: [
-                    '#ff185d',    // Primary pink - reduced opacity
-                    '#ffffff6e',   // Secondary green - reduced opacity
-                    '#ff185d27',  // White for subtle effect
+                    '#ff185d',
+                    '#ffffff6e',
+                    '#ff185d27',
                 ]
             };
         } else {
             return {
                 ambient: [
-                    '#ff185d',     // Primary pink - very subtle
-                    '#00000086',      // Secondary green - very subtle
-                    '#ff185d50',  // Gray for subtle effect
+                    '#ff185d',
+                    '#00000086',
+                    '#ff185d50',
                 ]
             };
         }
@@ -130,7 +229,6 @@ class ParticleSystem {
 
     updateColors() {
         this.colors = this.getThemeColors();
-        // Update existing particles with new colors
         this.particles.forEach(p => {
             p.color = this.colors.ambient[Math.floor(Math.random() * this.colors.ambient.length)];
         });
@@ -144,6 +242,7 @@ class ParticleSystem {
     }
 
     resizeCanvas() {
+        // Use window dimensions for fixed canvas
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
     }
@@ -154,26 +253,23 @@ class ParticleSystem {
             const color = this.colors.ambient[Math.floor(Math.random() * this.colors.ambient.length)];
             this.particles.push(new Particle(this.canvas, {
                 color: color,
-                size: Math.random() * 1.5 + 0.8, // Smaller particles
-                opacity: Math.random() * 0.25 + 0.5 // Lower opacity
+                size: Math.random() * 1.5 + 1.8,
+                opacity: Math.random() * 0.2 + 0.5
             }));
         }
     }
 
     setupEventListeners() {
-        // Mouse move
         window.addEventListener('mousemove', (e) => {
             this.mouse.x = e.clientX;
             this.mouse.y = e.clientY;
         });
 
-        // Resize
         window.addEventListener('resize', () => {
             this.resizeCanvas();
             this.createAmbientParticles();
         });
 
-        // Theme change listener
         window.addEventListener('themeChanged', () => {
             this.updateColors();
         });
@@ -182,7 +278,6 @@ class ParticleSystem {
     animate() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Update and draw particles
         for (let i = 0; i < this.particles.length; i++) {
             this.particles[i].update(this.mouse);
             this.particles[i].draw(this.ctx);
@@ -207,6 +302,5 @@ if (document.readyState === 'loading') {
         window.particleSystem = new ParticleSystem('particleCanvas');
     });
 } else {
-    // DOM already loaded
     window.particleSystem = new ParticleSystem('particleCanvas');
 }
