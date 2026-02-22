@@ -57,14 +57,59 @@
         </script>
         <h3 class="about__role__more">Enthusiastic, Innovative & Passionate about Games</h3>
         <p class="about__desc">
-          I'm an Indian programmer and game designer who has been creating games since completing 12th grade. My passion
-          for video games, which I played extensively in my youth, evolved into a desire to create my own. Currently,
-          I'm pursuing a B.Sc. in game development. In India, where support for such specialized courses can be
-          challenging to obtain from parents, I'm fortunate to have convinced mine by highlighting the industry's
-          advancements and potential. This journey reflects my commitment to turning my passion into a professional
-          career in game development.
+          I'm an Indian game developer and programmer who transformed a childhood passion for gaming into a professional
+          career.
+          After completing my B.Sc. in Game Development, I now work in the industry creating immersive gaming
+          experiences.
+          My journey from playing games extensively in my youth to developing them professionally reflects my dedication
+          to turning creative visions into playable realities.
+          Having navigated the challenges of pursuing game development in India, where such specialized careers are
+          still emerging, I'm committed to pushing the boundaries of interactive entertainment and bringing innovative
+          gameplay to life.
+
         </p>
-        <h3 class="about_line">I adore creating games for entertainment and giving fantasy a realistic feel.</h3>
+        <h3 class="about_line" id="dailyTagline"></h3>
+        <script>
+          // Rotating taglines with dramatic animations
+          const taglines = [
+            "Turning the 'what if' moments into games you can actually play.",
+            "Making games that I'd lose sleep playing.",
+            "Creating the experiences I dreamed about as a kid.",
+            "Crafting digital chaos and calling it entertainment.",
+            "From playing games all night to making them all day."
+          ];
+
+          let currentTaglineIndex = 0;
+          const taglineElement = document.getElementById('dailyTagline');
+
+          const rotateTagline = () => {
+            // Add dramatic exit animation - text flies up
+            taglineElement.classList.add('tagline-fly-out');
+
+            setTimeout(() => {
+              // Change text while invisible
+              currentTaglineIndex = (currentTaglineIndex + 1) % taglines.length;
+              taglineElement.textContent = taglines[currentTaglineIndex];
+
+              // Remove exit, add dramatic drop-in animation
+              taglineElement.classList.remove('tagline-fly-out');
+              taglineElement.classList.add('tagline-drop-in');
+
+              // Remove animation class after completion
+              setTimeout(() => {
+                taglineElement.classList.remove('tagline-drop-in');
+              }, 1000);
+            }, 500);
+          };
+
+          // Set initial tagline with drop animation
+          taglineElement.textContent = taglines[0];
+          taglineElement.classList.add('tagline-drop-in');
+          setTimeout(() => taglineElement.classList.remove('tagline-drop-in'), 1000);
+
+          // Rotate every 10 seconds (change to 5000 for 5 seconds)
+          setInterval(rotateTagline, 10000);
+        </script>
         <div class="about__contact center">
           <a href="https://drive.google.com/file/d/1MkevrUhK9BrIV1J8NdFftmxfhc38uF57/view?usp=sharing">
             <span class="btn btn--outline">Resume</span>
@@ -81,63 +126,70 @@
 
     <section>
       <div class="bar-container">
-        <text class="text-bar">IDEA | DESIGN | DEVELOP | DEPLOY | PLAY</text>
+        <text class="text-bar">IDEA | DESIGN | DEVELOP | TEST | PLAY</text>
       </div>
     </section>
 
     <section id="projects" class="section projects">
       <h2 class="section__title">Projects</h2>
-      <div class="projects__grid">
-        <div class="project">
-          <h3>Square Madness</h3>
-          <p class="project__description">
-            A game employing the Unity Engine has been released on the Play Store. The game's gameplay is
-            straightforward; the player must avoid opposing bombs and spikes while gathering points like coins and
-            diamonds. I was primarily involved in the UI Design and programming of the UI part's sprites and animations.
-          </p>
-          <ul class="project__stack">
-            <li class="project__stack-item">Unity</li>
-            <li class="project__stack-item">C-Sharp</li>
-            <li class="project__stack-item">Photoshop</li>
-          </ul>
-          <a href="https://play.google.com/store/apps/details?id=com.IdeekayStudios.SqaureMadness"
-            aria-label="live preview" class="link link--icon">
-            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-          </a>
-        </div>
-        <div class="project">
-          <h3>Its All About Us!</h3>
-          <p class="project__description">
-            It's a cooperative multiplayer game with a duality theme in which players cooperate to overcome obstacles
-            and advance through levels. As a programmer and team leader, this project taught me a lot of new skills. It
-            aided in my learning more about team leadership and finishing a game in a short amount of time.
-          </p>
-          <ul class="project__stack">
-            <li class="project__stack-item">Unity</li>
-            <li class="project__stack-item">C-Sharp</li>
-            <li class="project__stack-item">Photoshop</li>
-          </ul>
-          <a href="https://youtu.be/8jC3e6yOQYM" aria-label="live preview" class="link link--icon">
-            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-          </a>
-        </div>
-        <div class="project">
-          <h3>Spin - Android Game</h3>
-          <p class="project__description">
-            Playable adversaries, easy player dynamics, and collectible items are all featured in this 2D hyper-casual
-            game. I also did UI programming, UI design, and player movement. Additional post-processing features like
-            bloom, distortion, and many others.
-          </p>
-          <ul class="project__stack">
-            <li class="project__stack-item">Unity</li>
-            <li class="project__stack-item">C-Sharp</li>
-            <li class="project__stack-item">Photoshop</li>
-            <li class="project__stack-item">Figma</li>
-          </ul>
-          <a href="https://play.google.com/store/apps/details?id=com.Steadfaststudios.Spin" aria-label="live preview"
-            class="link link--icon">
-            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-          </a>
+      <div class="projects_background">
+        <div class="project-carousel">
+          <div class="carousel-item">
+            <h3>Spin - Android Game</h3>
+            <p class="project__description">
+              2D Hyper Casual game with simple player mechanics, dodgeable enemies and collectable assets. Published on
+              PlayStore under Steadfaststudios.
+            </p>
+          </div>
+          <div class="carousel-item">
+            <h3>Square Madness</h3>
+            <p class="project__description">
+              Straightforward gameplay avoiding enemy bombs and spikes while collecting points. Released on Play Store
+              with focus on UI Design and sprites.
+            </p>
+          </div>
+          <div class="carousel-item">
+            <h3>Its All About Us!</h3>
+            <p class="project__description">
+              Cooperative local multiplayer game with duality theme. Chennai Global Game Jam Winners - 2022. Team
+              leadership experience.
+            </p>
+          </div>
+          <div class="carousel-item">
+            <h3>Try Dodging</h3>
+            <p class="project__description">
+              Hyper-casual endless runner created using BuildBox engine. Fast-paced gameplay with point collection
+              mechanics.
+            </p>
+          </div>
+          <div class="carousel-item">
+            <h3>AR Applications</h3>
+            <p class="project__description">
+              AR-based projects using Unity and Vuforia SDK. Includes piano, solar system, and multiple image target
+              implementations.
+            </p>
+          </div>
+          <div class="carousel-item">
+            <h3>Saloon Shooter</h3>
+            <p class="project__description">
+              FPS game where players compete as gunslingers to shoot bottles within time limits at saloons.
+              Western-themed shooter.
+            </p>
+          </div>
+          <div class="carousel-item">
+            <h3>Treasure Hunt</h3>
+            <p class="project__description">
+              First-person open-world game where players explore maps to discover hidden treasures scattered throughout
+              the environment.
+            </p>
+          </div>
+          <div class="carousel-item">
+            <h3>Mars Survivor</h3>
+            <p class="project__description">
+              Sci-fi adventure set in 2050. Survive on Mars by managing oxygen, finding water, and mining resources in
+              dangerous underground caves.
+            </p>
+          </div>
         </div>
       </div>
       <div class="more_BTN_projects">
@@ -239,6 +291,34 @@
     <script type="text/javascript">
       $(document).ready(function () {
         $('.image-carousel').slick({
+          infinite: true,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 2000,
+          centerMode: true,
+          centerPadding: '0',
+          responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                infinite: true,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }
+          ]
+        });
+
+        $('.project-carousel').slick({
           infinite: true,
           slidesToShow: 3,
           slidesToScroll: 1,

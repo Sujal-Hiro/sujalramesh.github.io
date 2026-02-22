@@ -1427,14 +1427,14 @@ main {
 .slick-next {
   font-size: 50px;
   /* Increase arrow button size */
-  color: #ff0e56;
+  color: var(--clr-primary);
   /* Arrow button color */
   z-index: 3;
   /* Ensure arrows are above slides */
   width: 50px !important;
   height: 50px !important;
-  background: rgba(255, 255, 255, 0.5);
-  /* Optional: Add a background */
+  background: var(--clr-bg-alt);
+  /* Theme-aware background */
   padding: 20px;
   /* Adjust padding around the arrows */
   margin-top: 0px;
@@ -1466,14 +1466,93 @@ main {
 
 .slick-prev:hover,
 .slick-next:hover {
-  color: #fff;
-  /* Arrow button hover color */
+  color: var(--clr-fg);
+  /* Theme-aware arrow button hover color */
+  background: var(--clr-primary);
+  /* Primary color background on hover */
 }
 
 .slick-prev:before,
 .slick-next:before {
   font-size: 40px !important;
   /* Arrow icon size */
+}
+
+/* Project Carousel Styles */
+.projects_background {
+  width: 100%;
+  padding: 2em 0;
+}
+
+.project-carousel {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.project-carousel .carousel-item {
+  background-color: var(--clr-bg-alt);
+  border-radius: 15px;
+  padding: 2em;
+  margin: 0 10px;
+  min-height: 200px;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.project-carousel .carousel-item h3 {
+  color: var(--clr-primary);
+  font-size: 1.5rem;
+  margin-bottom: 1em;
+  font-weight: 700;
+}
+
+.project-carousel .carousel-item .project__description {
+  color: var(--clr-fg-alt);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.project-carousel .slick-slide {
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+  opacity: 0.7;
+}
+
+.project-carousel .slick-center {
+  transform: scale(1);
+  opacity: 1;
+  z-index: 2;
+}
+
+.project-carousel .slick-slide:not(.slick-center) {
+  transform: scale(0.85);
+}
+
+.project-carousel .carousel-item:hover {
+  box-shadow: 0 5px 10px rgba(255, 24, 93, 0.3);
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .project-carousel .carousel-item {
+    padding: 1.5em;
+    min-height: 180px;
+  }
+
+  .project-carousel .carousel-item h3 {
+    font-size: 1.3rem;
+  }
+
+  .project-carousel .carousel-item .project__description {
+    font-size: 0.95rem;
+  }
 }
 
 /* Styling for the outline button */
