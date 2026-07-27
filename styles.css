@@ -17,6 +17,15 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 9em;
+}
+
+/* Anchor offset for nav links - accounts for header height */
+#projects,
+#portfolio,
+#skills,
+#contact {
+  scroll-margin-top: 5em;
 }
 
 body {
@@ -329,6 +338,7 @@ main {
 
 .section {
   margin-top: 6em;
+  scroll-margin-top: 5em;
 }
 
 .section__title {
@@ -347,6 +357,7 @@ main {
   margin-bottom: 2em;
   top: 150px;
   text-transform: uppercase;
+  scroll-margin-top: 5em;
 }
 
 /* .section_contact{
@@ -386,6 +397,7 @@ main {
   text-transform: uppercase;
   height: 10vh;
   /* Full viewport height for demonstration, adjust as needed */
+  scroll-margin-top: 5em;
 }
 
 .section__title_Contact {
