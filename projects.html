@@ -4,24 +4,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portfolio" />
+  <meta name="description"
+    content="Detailed write-ups of Sujal Ramesh's game projects: Spin, Square Madness, It's All About Us!, Try Dodging, AR applications, Saloon Shooter, Treasure Hunt and Mars Survivor." />
+  <meta name="author" content="Sujal Ramesh" />
+  <link rel="canonical" href="https://sujalramesh.github.io/projects.html" />
+  <meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sujalramesh.github.io/projects.html" />
+  <meta property="og:title" content="Projects — Sujal Ramesh" />
+  <meta property="og:description" content="Game projects by Sujal Ramesh, with build notes and tech stacks." />
+  <meta property="og:image" content="https://sujalramesh.github.io/Images/og-cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/fa62c117c7.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha384-nRgPTkuX86pH8yjPJUAFuASXQSSl2/bBUiNV47vSYpKFxHJhbcrGnmlYpYJMeD7a"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="styles.css" />
-  <title>SR-Projects</title>
-  <link rel="shortcut icon" type="image" href="Images/Icon-Website.png">
+  <title>Projects — Sujal Ramesh</title>
+  <link rel="shortcut icon" type="image/png" href="Images/Icon-Website.png">
 </head>
 
-<body class="light" id="top">
-  <!-- Move canvas OUTSIDE background-animation, directly in body -->
-  <canvas id="particleCanvas"></canvas>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
   <header class="header center">
-    <h3>
-      <a href="index.html" class="link">SR.</a>
-    </h3>
+    <a href="index.html" class="link logo">SR.</a>
 
     <nav class="nav center">
       <ul class="nav__list center">
@@ -29,31 +40,17 @@
           <a class="link link--nav" href="index.html">Home</a>
         </li>
 
-        <!-- <li class="nav__list-item">
-            <a class="link link--nav" href="index.html">Home</a>
-          </li> -->
-
-
       </ul>
 
-      <button type="button" aria-label="toggle theme" class="btn btn--icon">
+      <button type="button" aria-label="toggle theme" aria-pressed="false" class="btn btn--icon">
         <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
-      </button>
-
-      <!-- <button
-          type="button"
-          aria-label="toggle navigation"
-          class="btn btn--icon nav__hamburger"
-        >
-          <i aria-hidden="true" class="fas fa-bars"></i> -->
       </button>
     </nav>
   </header>
 
   <!--Projects-->
 
-
-
+  <main id="main">
   <section id="Projects" class="projects_section">
     <div class="projects__heading">
       <span>
@@ -63,39 +60,40 @@
         <div class="p1">
           <h2 id="project1">Spin-Android game</h2>
           <p class="description">
-            <b style="color: var(--clr-fg-alt);">2D Hyper Casual</b> game where it includes simple player mechanics,
+            <b class="hl">2D Hyper Casual</b> game where it includes simple player mechanics,
             dodgeable enemies and collectable assets. We tried implementing AI enemy to our game but unfortunately it
             didn't turn out well.
           </p>
           <ul class="description">
-            <li>Utilised a variety of plugins, including <b style="color: var(--clr-fg-alt);">LeanTween and Camera
+            <li>Utilised a variety of plugins, including <b class="hl">LeanTween and Camera
                 shake</b> effects.</li>
             <li>Particle effects were employed to enhance the game's clarity and appearance.</li>
             <li>There are basic gameplay elements, animations, post-processing effects, and sound effects in this game.
             </li>
-            <li>My friend and I under the name <b style="color: var(--clr-fg-alt);">Steadfaststudios</b> published the
+            <li>My friend and I under the name <b class="hl">Steadfaststudios</b> published the
               game on the PlayStore.</li>
           </ul>
-          <a href="https://play.google.com/store/apps/details?id=com.Steadfaststudios.Spin" aria-label="live preview"
+          <a href="https://play.google.com/store/apps/details?id=com.Steadfaststudios.Spin" aria-label="live preview" target="_blank" rel="noopener noreferrer"
             class="link link--icon">
             <i aria-hidden="true" class="fas fa-external-link-alt"></i>
           </a>
           <div class="projects_img">
             <div class="img-grid">
-              <img src="Images/image_50.png" alt="">
-              <video src="Images/video_9.mp4" autoplay muted loop preload="metadata"></video>
-              <img src="Images/image_52.png" alt="">
+              <img src="Images/image_50.webp" alt="Screenshot from Spin-Android game" loading="lazy" decoding="async">
+              <video src="Images/preview_video_9.mp4" poster="Images/poster_video_9.jpg" muted loop
+                playsinline preload="none" aria-hidden="true"></video>
+              <img src="Images/image_52.webp" alt="Screenshot from Spin-Android game" loading="lazy" decoding="async">
             </div>
             <div class="project_use_items">
               <span>Hyper Casual</span>
               <span>Playstore Project</span>
               <span>Android</span>
-              <span>Collabration</span>
+              <span>Collaboration</span>
             </div>
           </div>
         </div>
         <div class="p2">
-          <h2 id="project1">Square Madness</h2>
+          <h2 id="project2">Square Madness</h2>
           <p class="description">
             The game's mechanics are straightforward; the player must avoid enemy bombs and spikes while collecting
             points
@@ -108,36 +106,37 @@
           <ul class="description">
             <li>Starting with this game and uploading it to the play store was done completely without any prior game
               development knowledge.</li>
-            <li>As a <b style="color: var(--clr-fg-alt);">UI and game designer</b>, I gained a lot of experience and
+            <li>As a <b class="hl">UI and game designer</b>, I gained a lot of experience and
               knowledge about tools that are utilised in Unity.</li>
             <li>While developing this game, I learnt how to use prefabs effectively and learned about different sprites,
               sprite sheets, the UI canvas, scene management, build settings, and player preferences. In-game Unity
               advertisements.</li>
           </ul>
           <a href="https://play.google.com/store/apps/details?id=com.IdeekayStudios.SqaureMadness"
-            aria-label="live preview" class="link link--icon">
+            aria-label="live preview" target="_blank" rel="noopener noreferrer" class="link link--icon">
             <i aria-hidden="true" class="fas fa-external-link-alt"></i>
           </a>
           <div class="projects_img">
             <div class="img-grid">
-              <img src="Images/image_9.png" alt="">
-              <video src="Images/video_4.mp4" autoplay muted loop></video>
-              <img src="Images/image_56.png" alt="">
+              <img src="Images/image_9.webp" alt="Screenshot from Square Madness" loading="lazy" decoding="async">
+              <video src="Images/preview_video_4.mp4" poster="Images/poster_video_4.jpg" muted loop
+                playsinline preload="none" aria-hidden="true"></video>
+              <img src="Images/image_56.webp" alt="Screenshot from Square Madness" loading="lazy" decoding="async">
             </div>
             <div class="project_use_items">
               <span>First Game</span>
-              <span>Collabration</span>
+              <span>Collaboration</span>
               <span>2D Casual Game</span>
               <span>Android</span>
             </div>
           </div>
         </div>
         <div class="p3">
-          <h2 id="project1">Its All About Us!</h2>
+          <h2 id="project3">It's All About Us!</h2>
           <p class="description">
-            It's a cooperative <b style="color: var(--clr-fg-alt);">local multiplayer</b> game with a dualistic premise.
+            It's a cooperative <b class="hl">local multiplayer</b> game with a dualistic premise.
             As
-            a <b style="color: var(--clr-fg-alt);">programmer and team leader</b>, I gained a lot of knowledge via this
+            a <b class="hl">programmer and team leader</b>, I gained a lot of knowledge via this
             project. It aided in my learning more about team leadership and finishing a game within a set amount of
             time.
           </p>
@@ -153,14 +152,15 @@
               Game Jam.</li>
             <li>For desktop platforms like Windows 10/10.1/11, Mac OS, etc.</li>
           </ul>
-          <a href="https://youtu.be/8jC3e6yOQYM" aria-label="live preview" class="link link--icon">
+          <a href="https://youtu.be/8jC3e6yOQYM" aria-label="live preview" target="_blank" rel="noopener noreferrer" class="link link--icon">
             <i aria-hidden="true" class="fas fa-external-link-alt"></i>
           </a>
           <div class="projects_img">
             <div class="img-grid">
-              <img src="Images/image_5.png" alt="">
-              <video class="video-landscape" src="Images/video_8.mp4" autoplay muted loop></video>
-              <img src="Images/image_19.png" alt="">
+              <img src="Images/image_5.webp" alt="Screenshot from It's All About Us!" loading="lazy" decoding="async">
+              <video class="video-landscape" src="Images/preview_video_8.mp4" poster="Images/poster_video_8.jpg"
+                muted loop playsinline preload="none" aria-hidden="true"></video>
+              <img src="Images/image_19.webp" alt="Screenshot from It's All About Us!" loading="lazy" decoding="async">
             </div>
             <div class="project_use_items">
               <span>Chennai Global Game Jam Winners - 2022</span>
@@ -172,21 +172,22 @@
           </div>
         </div>
         <div class="p4">
-          <h2 id="project1">Try Dodging</h2>
+          <h2 id="project4">Try Dodging</h2>
           <p class="description">
-            A <b style="color: var(--clr-fg-alt);">hyper-casual</b> game with an endless run that was created using the
-            <b style="color: var(--clr-fg-alt);">Build Box</b> game engine. It requires the player to gather points.
+            A <b class="hl">hyper-casual</b> game with an endless run that was created using the
+            <b class="hl">Build Box</b> game engine. It requires the player to gather points.
             While
             creating this game, I gained a lot of knowledge and experiences with how nodes can be implemented in games.
           </p>
-          <a href="https://youtu.be/I-VNEEGx-AY" aria-label="live preview" class="link link--icon">
+          <a href="https://youtu.be/I-VNEEGx-AY" aria-label="live preview" target="_blank" rel="noopener noreferrer" class="link link--icon">
             <i aria-hidden="true" class="fas fa-external-link-alt"></i>
           </a>
           <div class="projects_img">
             <div class="img-grid">
-              <img src="Images/image_44.jpg" alt="">
-              <video src="Images/video_3.mp4" autoplay muted loop></video>
-              <img src="Images/image_67.png" alt="">
+              <img src="Images/image_44.webp" alt="Screenshot from Try Dodging" loading="lazy" decoding="async">
+              <video src="Images/preview_video_3.mp4" poster="Images/poster_video_3.jpg" muted loop
+                playsinline preload="none" aria-hidden="true"></video>
+              <img src="Images/image_67.png" alt="Screenshot from Try Dodging" loading="lazy" decoding="async">
             </div>
             <div class="project_use_items">
               <span>BuildBox Engine</span>
@@ -197,7 +198,7 @@
           </div>
         </div>
         <div class="p5">
-          <h2 id="project1">AR Applications</h2>
+          <h2 id="project5">AR Applications</h2>
           <p class="description">
             The first AR project was completed utilising the Unity Engine and its AR, XR, and <b
               style="color: var(--clr-fg-alt);">Vuforia SDK</b> plugins. It's an AR-based game that makes use of the
@@ -214,14 +215,15 @@
               target,
               and multiple image target.</li>
           </ul>
-          <a href="https://youtu.be/H-EhHDOIrtw" aria-label="live preview" class="link link--icon">
+          <a href="https://youtu.be/H-EhHDOIrtw" aria-label="live preview" target="_blank" rel="noopener noreferrer" class="link link--icon">
             <i aria-hidden="true" class="fas fa-external-link-alt"></i>
           </a>
           <div class="projects_img">
             <div class="img-grid">
-              <img src="Images/image_10.png" alt="">
-              <video class="video-landscape" src="Images/video_5.mp4" autoplay muted loop></video>
-              <img src="Images/image_2.png" alt="">
+              <img src="Images/image_10.webp" alt="Screenshot from AR Applications" loading="lazy" decoding="async">
+              <video class="video-landscape" src="Images/preview_video_5.mp4" poster="Images/poster_video_5.jpg"
+                muted loop playsinline preload="none" aria-hidden="true"></video>
+              <img src="Images/image_2.webp" alt="Screenshot from AR Applications" loading="lazy" decoding="async">
             </div>
             <div class="project_use_items">
               <span>AR</span>
@@ -232,57 +234,59 @@
           </div>
         </div>
         <div class="p6">
-          <h2 id="project1">Saloon-Shooter</h2>
+          <h2 id="project6">Saloon-Shooter</h2>
           <p class="description">
-            A <b style="color: var(--clr-fg-alt);">FPS</b> game where the player is a gunslinger who is on a quest to
+            A <b class="hl">FPS</b> game where the player is a gunslinger who is on a quest to
             prove
             his talents and challenge people. These challenges take place at bars where all the gunslingers participated
             to
             win, and the player has to beat the other gunslingers' top score. The task is straightforward: within the
             allotted time, the player must fire at the bottles they have set.
           </p>
-          <a href="https://youtu.be/8Zizvq3a8FE" aria-label="live preview" class="link link--icon">
+          <a href="https://youtu.be/8Zizvq3a8FE" aria-label="live preview" target="_blank" rel="noopener noreferrer" class="link link--icon">
             <i aria-hidden="true" class="fas fa-external-link-alt"></i>
           </a>
           <div class="projects_img">
             <div class="img-grid">
-              <img src="Images/image_41.png" alt="">
-              <video class="video-landscape" src="Images/video_2.mp4" autoplay muted loop></video>
-              <img src="Images/image_45.png" alt="">
+              <img src="Images/image_41.webp" alt="Screenshot from Saloon-Shooter" loading="lazy" decoding="async">
+              <video class="video-landscape" src="Images/preview_video_2.mp4" poster="Images/poster_video_2.jpg"
+                muted loop playsinline preload="none" aria-hidden="true"></video>
+              <img src="Images/image_45.webp" alt="Screenshot from Saloon-Shooter" loading="lazy" decoding="async">
             </div>
             <div class="project_use_items">
               <span>3D Shooter</span>
               <span>Game Designer</span>
-              <span>Collabration</span>
+              <span>Collaboration</span>
               <span>PC</span>
             </div>
           </div>
         </div>
         <div class="p7">
-          <h2 id="project1">Treasure Hunt</h2>
+          <h2 id="project7">Treasure Hunt</h2>
           <p class="description">
-            In this <b style="color: var(--clr-fg-alt);">first-person open-world game</b>, the player
+            In this <b class="hl">first-person open-world game</b>, the player
             takes on the role of a treasure hunter who must search the map for all of the treasures
             scattered throughout it. The game is completed once the player has discovered all of
             the treasures hidden throughout the map.
           </p>
 
-          <a href="https://youtu.be/BYWT3ecsvRQ" aria-label="live preview" class="link link--icon">
+          <a href="https://youtu.be/BYWT3ecsvRQ" aria-label="live preview" target="_blank" rel="noopener noreferrer" class="link link--icon">
             <i aria-hidden="true" class="fas fa-external-link-alt"></i>
           </a>
 
           <div class="projects_img">
             <div class="img-grid">
-              <img src="Images/image_59.png" alt="">
-              <video class="video-landscape" src="Images/video_1.mp4" autoplay muted loop></video>
+              <img src="Images/image_59.webp" alt="Screenshot from Treasure Hunt" loading="lazy" decoding="async">
+              <video class="video-landscape" src="Images/preview_video_1.mp4" poster="Images/poster_video_1.jpg"
+                muted loop playsinline preload="none" aria-hidden="true"></video>
 
-              <img src="Images/image_61.png" alt="">
+              <img src="Images/image_61.webp" alt="Screenshot from Treasure Hunt" loading="lazy" decoding="async">
 
             </div>
             <div class="project_use_items">
               <span>Adventure</span>
               <span>Gameplay Programmer</span>
-              <span>Collabration</span>
+              <span>Collaboration</span>
               <span>PC</span>
             </div>
 
@@ -290,9 +294,9 @@
         </div>
 
         <div class="p8">
-          <h2 id="project1">Mars Survivor</h2>
+          <h2 id="project8">Mars Survivor</h2>
           <p class="description">
-            <b style="color: var(--clr-fg-alt);">First-person open-world game</b>,
+            <b class="hl">First-person open-world game</b>,
             this game set in 2050, the player character is an astronaut on a mission to
             mine valuable resources on Mars. After a crash landing, they must survive the
             harsh environment by managing oxygen, finding water, and scavenging for
@@ -302,45 +306,37 @@
             resources to make the effort worthwhile.
           </p>
 
-          <a href="https://youtu.be/c-n0HC73Js4" aria-label="live preview" class="link link--icon">
+          <a href="https://youtu.be/c-n0HC73Js4" aria-label="live preview" target="_blank" rel="noopener noreferrer" class="link link--icon">
             <i aria-hidden="true" class="fas fa-external-link-alt"></i>
           </a>
 
           <div class="projects_img">
             <div class="img-grid">
-              <img src="Images/image_26.png" alt="">
-              <video class="video-landscape" src="Images/video_7.mp4" autoplay muted loop></video>
+              <img src="Images/image_26.png" alt="Screenshot from Mars Survivor" loading="lazy" decoding="async">
+              <video class="video-landscape" src="Images/preview_video_7.mp4" poster="Images/poster_video_7.jpg"
+                muted loop playsinline preload="none" aria-hidden="true"></video>
 
-              <img src="Images/image_29.png" alt="">
+              <img src="Images/image_29.webp" alt="Screenshot from Mars Survivor" loading="lazy" decoding="async">
 
             </div>
             <div class="project_use_items">
               <span>Sci-fi Adventure</span>
               <span>Game Design & Programmer</span>
-              <span>Collabration</span>
+              <span>Collaboration</span>
               <span>PC</span>
             </div>
 
           </div>
         </div>
       </div>
-      </span>
     </div>
   </section>
 
-
-
-  </div>
-
-
-
-
-
-
-
+  </main>
 
   <footer class="footer">
-    <a class="link footer__link">
+    <a class="link footer__link" href="https://www.linkedin.com/in/sujalramesh/" target="_blank"
+      rel="noopener noreferrer">
       Created By Sujal Ramesh
     </a>
   </footer>

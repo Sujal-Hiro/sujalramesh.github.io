@@ -5,8 +5,8 @@
 class Particle {
     constructor(canvas, config = {}) {
         this.canvas = canvas;
-        this.baseX = config.x !== undefined ? config.x : Math.random() * canvas.width;
-        this.baseY = config.y !== undefined ? config.y : Math.random() * canvas.height;
+        this.baseX = config.x !== undefined ? config.x : Math.random() * canvas.logicalWidth;
+        this.baseY = config.y !== undefined ? config.y : Math.random() * canvas.logicalHeight;
         this.x = this.baseX;
         this.y = this.baseY;
         this.size = config.size || (Math.random() * 2 + 1);
@@ -18,49 +18,9 @@ class Particle {
         this.vx = 0;
         this.vy = 0;
 
-        // Random shape type
-        const shapes = ['triangle'];
-        this.shape = shapes[Math.floor(Math.random() * shapes.length)];
-
-        // Slow rotation for non-circle shapes
+        // Slow rotation
         this.rotation = Math.random() * Math.PI * 2;
         this.rotationSpeed = (Math.random() - 0.5) * 0.005;
-    }
-
-    drawCircle(ctx, x, y, size) {
-        ctx.beginPath();
-        ctx.arc(x, y, size, 0, Math.PI * 2);
-        ctx.fill();
-    }
-
-    drawDiamond(ctx, x, y, size) {
-        ctx.beginPath();
-        ctx.moveTo(x, y - size);
-        ctx.lineTo(x + size, y);
-        ctx.lineTo(x, y + size);
-        ctx.lineTo(x - size, y);
-        ctx.closePath();
-        ctx.fill();
-    }
-
-    drawCross(ctx, x, y, size) {
-        const arm = size * 0.35;
-        const len = size;
-        ctx.beginPath();
-        ctx.moveTo(x - arm, y - len);
-        ctx.lineTo(x + arm, y - len);
-        ctx.lineTo(x + arm, y - arm);
-        ctx.lineTo(x + len, y - arm);
-        ctx.lineTo(x + len, y + arm);
-        ctx.lineTo(x + arm, y + arm);
-        ctx.lineTo(x + arm, y + len);
-        ctx.lineTo(x - arm, y + len);
-        ctx.lineTo(x - arm, y + arm);
-        ctx.lineTo(x - len, y + arm);
-        ctx.lineTo(x - len, y - arm);
-        ctx.lineTo(x - arm, y - arm);
-        ctx.closePath();
-        ctx.fill();
     }
 
     drawTriangle(ctx, x, y, size) {
@@ -72,33 +32,7 @@ class Particle {
         ctx.fill();
     }
 
-    drawStar(ctx, x, y, size) {
-        const spikes = 4;
-        const outerRadius = size;
-        const innerRadius = size * 0.45;
-        let rot = (Math.PI / 2) * 3;
-        const step = Math.PI / spikes;
-
-        ctx.beginPath();
-        ctx.moveTo(x, y - outerRadius);
-        for (let i = 0; i < spikes; i++) {
-            ctx.lineTo(
-                x + Math.cos(rot) * outerRadius,
-                y + Math.sin(rot) * outerRadius
-            );
-            rot += step;
-            ctx.lineTo(
-                x + Math.cos(rot) * innerRadius,
-                y + Math.sin(rot) * innerRadius
-            );
-            rot += step;
-        }
-        ctx.lineTo(x, y - outerRadius);
-        ctx.closePath();
-        ctx.fill();
-    }
-
-    update(mouse) {
+    update(mouse, width, height) {
         // Minimal floating motion
         this.baseX += this.speedX;
         this.baseY += this.speedY;
@@ -107,10 +41,10 @@ class Particle {
         this.rotation += this.rotationSpeed;
 
         // Wrap around edges
-        if (this.baseX < 0) this.baseX = this.canvas.width;
-        if (this.baseX > this.canvas.width) this.baseX = 0;
-        if (this.baseY < 0) this.baseY = this.canvas.height;
-        if (this.baseY > this.canvas.height) this.baseY = 0;
+        if (this.baseX < 0) this.baseX = width;
+        if (this.baseX > width) this.baseX = 0;
+        if (this.baseY < 0) this.baseY = height;
+        if (this.baseY > height) this.baseY = 0;
 
         // Mouse interaction - magnify/push effect
         if (mouse.x !== null && mouse.y !== null) {
@@ -119,7 +53,7 @@ class Particle {
             const distance = Math.sqrt(dx * dx + dy * dy);
             const maxDistance = 120;
 
-            if (distance < maxDistance) {
+            if (distance < maxDistance && distance > 0) {
                 const force = (maxDistance - distance) / maxDistance;
                 const pushStrength = force * 2;
 
@@ -149,7 +83,6 @@ class Particle {
         ctx.globalAlpha = this.opacity;
         ctx.fillStyle = this.color;
 
-        // Apply rotation transform for non-circle shapes
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rotation);
 
@@ -157,23 +90,7 @@ class Particle {
         ctx.shadowBlur = 4;
         ctx.shadowColor = this.color;
 
-        switch (this.shape) {
-            case 'circle':
-                this.drawCircle(ctx, 0, 0, this.size);
-                break;
-            case 'diamond':
-                this.drawDiamond(ctx, 0, 0, this.size);
-                break;
-            case 'cross':
-                this.drawCross(ctx, 0, 0, this.size * 0.9);
-                break;
-            case 'triangle':
-                this.drawTriangle(ctx, 0, 0, this.size);
-                break;
-            case 'star':
-                this.drawStar(ctx, 0, 0, this.size * 1.2);
-                break;
-        }
+        this.drawTriangle(ctx, 0, 0, this.size);
 
         ctx.restore();
     }
@@ -182,24 +99,34 @@ class Particle {
 class ParticleSystem {
     constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
-        if (!this.canvas) {
-            console.error(`Canvas element with id "${canvasId}" not found`);
-            return;
-        }
+        if (!this.canvas) return;
 
         this.ctx = this.canvas.getContext('2d');
         this.particles = [];
         this.mouse = { x: null, y: null };
         this.animationId = null;
+        this.resizeTimer = null;
+
+        // Logical (CSS pixel) size, kept separate from the DPR-scaled backing store.
+        this.width = 0;
+        this.height = 0;
 
         // Device detection
         this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        this.prefersReducedMotion = window.matchMedia
+            && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         // Configuration
         this.config = {
             ambientCount: this.isMobile || this.isTouchDevice ? 80 : 150
         };
+
+        // Bound handlers so they can actually be removed again.
+        this.handleMouseMove = this.handleMouseMove.bind(this);
+        this.handleResize = this.handleResize.bind(this);
+        this.handleThemeChange = this.handleThemeChange.bind(this);
+        this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
 
         this.colors = this.getThemeColors();
         this.init();
@@ -238,13 +165,29 @@ class ParticleSystem {
         this.resizeCanvas();
         this.createAmbientParticles();
         this.setupEventListeners();
-        this.animate();
+
+        // Reduced motion: render one static frame instead of animating.
+        if (this.prefersReducedMotion) {
+            this.renderFrame();
+        } else {
+            this.animate();
+        }
     }
 
     resizeCanvas() {
-        // Use window dimensions for fixed canvas
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        // Scale the backing store by devicePixelRatio so particles stay crisp on HiDPI screens,
+        // while all drawing stays in CSS pixels.
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+
+        this.canvas.width = Math.round(this.width * dpr);
+        this.canvas.height = Math.round(this.height * dpr);
+        this.canvas.logicalWidth = this.width;
+        this.canvas.logicalHeight = this.height;
+
+        this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
     createAmbientParticles() {
@@ -259,40 +202,71 @@ class ParticleSystem {
         }
     }
 
-    setupEventListeners() {
-        window.addEventListener('mousemove', (e) => {
-            this.mouse.x = e.clientX;
-            this.mouse.y = e.clientY;
-        });
+    handleMouseMove(e) {
+        this.mouse.x = e.clientX;
+        this.mouse.y = e.clientY;
+    }
 
-        window.addEventListener('resize', () => {
+    handleResize() {
+        // Debounced: dragging a window edge would otherwise rebuild 150 particles per event.
+        clearTimeout(this.resizeTimer);
+        this.resizeTimer = setTimeout(() => {
             this.resizeCanvas();
             this.createAmbientParticles();
-        });
+            if (this.prefersReducedMotion) this.renderFrame();
+        }, 150);
+    }
 
-        window.addEventListener('themeChanged', () => {
-            this.updateColors();
-        });
+    handleThemeChange() {
+        this.updateColors();
+        if (this.prefersReducedMotion) this.renderFrame();
+    }
+
+    handleVisibilityChange() {
+        if (this.prefersReducedMotion) return;
+
+        if (document.hidden) {
+            this.stop();
+        } else if (!this.animationId) {
+            this.animate();
+        }
+    }
+
+    setupEventListeners() {
+        window.addEventListener('mousemove', this.handleMouseMove, { passive: true });
+        window.addEventListener('resize', this.handleResize);
+        window.addEventListener('themeChanged', this.handleThemeChange);
+        document.addEventListener('visibilitychange', this.handleVisibilityChange);
+    }
+
+    renderFrame() {
+        this.ctx.clearRect(0, 0, this.width, this.height);
+
+        for (let i = 0; i < this.particles.length; i++) {
+            this.particles[i].update(this.mouse, this.width, this.height);
+            this.particles[i].draw(this.ctx);
+        }
     }
 
     animate() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        for (let i = 0; i < this.particles.length; i++) {
-            this.particles[i].update(this.mouse);
-            this.particles[i].draw(this.ctx);
-        }
-
+        this.renderFrame();
         this.animationId = requestAnimationFrame(() => this.animate());
     }
 
-    destroy() {
+    stop() {
         if (this.animationId) {
             cancelAnimationFrame(this.animationId);
+            this.animationId = null;
         }
+    }
+
+    destroy() {
+        this.stop();
+        clearTimeout(this.resizeTimer);
         window.removeEventListener('mousemove', this.handleMouseMove);
         window.removeEventListener('resize', this.handleResize);
         window.removeEventListener('themeChanged', this.handleThemeChange);
+        document.removeEventListener('visibilitychange', this.handleVisibilityChange);
     }
 }
 

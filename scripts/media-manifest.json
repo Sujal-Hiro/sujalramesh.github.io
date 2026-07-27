@@ -1,0 +1,49 @@
+{
+  "images": {
+    "Images/image_30.jpg": "Images/image_30.webp",
+    "Images/image_32.png": "Images/image_32.webp",
+    "Images/image_35.png": "Images/image_35.webp",
+    "Images/image_39.png": "Images/image_39.webp",
+    "Images/image_43.png": "Images/image_43.webp",
+    "Images/image_46.png": "Images/image_46.webp",
+    "Images/image_47.png": "Images/image_47.webp",
+    "Images/image_50.png": "Images/image_50.webp",
+    "Images/image_52.png": "Images/image_52.webp",
+    "Images/image_53.png": "Images/image_53.webp",
+    "Images/image_54.png": "Images/image_54.webp",
+    "Images/image_56.png": "Images/image_56.webp",
+    "Images/image_6.jpg": "Images/image_6.webp",
+    "Images/image_60.png": "Images/image_60.webp",
+    "Images/image_62.png": "Images/image_62.webp",
+    "Images/image_63.png": "Images/image_63.webp",
+    "Images/image_65.png": "Images/image_65.webp",
+    "Images/image_69.png": "Images/image_69.webp",
+    "Images/image_7.png": "Images/image_7.webp",
+    "Images/image_8.png": "Images/image_8.webp",
+    "Images/image_9.png": "Images/image_9.webp"
+  },
+  "previews": {
+    "Images/video_1.mp4": "Images/preview_video_1.mp4",
+    "Images/video_10.mp4": "Images/preview_video_10.mp4",
+    "Images/video_2.mp4": "Images/preview_video_2.mp4",
+    "Images/video_3.mp4": "Images/preview_video_3.mp4",
+    "Images/video_4.mp4": "Images/preview_video_4.mp4",
+    "Images/video_5.mp4": "Images/preview_video_5.mp4",
+    "Images/video_6.mp4": "Images/preview_video_6.mp4",
+    "Images/video_7.mp4": "Images/preview_video_7.mp4",
+    "Images/video_8.mp4": "Images/preview_video_8.mp4",
+    "Images/video_9.mp4": "Images/preview_video_9.mp4"
+  },
+  "posters": {
+    "Images/video_1.mp4": "Images/poster_video_1.jpg",
+    "Images/video_10.mp4": "Images/poster_video_10.jpg",
+    "Images/video_2.mp4": "Images/poster_video_2.jpg",
+    "Images/video_3.mp4": "Images/poster_video_3.jpg",
+    "Images/video_4.mp4": "Images/poster_video_4.jpg",
+    "Images/video_5.mp4": "Images/poster_video_5.jpg",
+    "Images/video_6.mp4": "Images/poster_video_6.jpg",
+    "Images/video_7.mp4": "Images/poster_video_7.jpg",
+    "Images/video_8.mp4": "Images/poster_video_8.jpg",
+    "Images/video_9.mp4": "Images/poster_video_9.jpg"
+  }
+}

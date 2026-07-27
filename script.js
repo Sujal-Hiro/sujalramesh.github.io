@@ -1,168 +1,317 @@
+'use strict'
+
+/*===============================================
+  Shared behaviour for index / portfolio / projects
+  Every lookup is guarded: the three pages have
+  different DOM and this file is loaded by all of them.
+===============================================*/
+
 const body = document.body
 
-const btnTheme = document.querySelector('.fa-moon')
-const btnHamburger = document.querySelector('.fa-bars')
+/*-----------------------------------------------
+  Theme
+-----------------------------------------------*/
 
-const addThemeClass = (bodyClass, btnClass) => {
-	body.classList.add(bodyClass)
-	btnTheme.classList.add(btnClass)
-}
+const btnThemeIcon = document.querySelector('#btn-theme')
+const btnThemeButton = btnThemeIcon ? btnThemeIcon.closest('button') : null
 
-const getBodyTheme = localStorage.getItem('portfolio-theme')
-const getBtnTheme = localStorage.getItem('portfolio-btn-theme')
+const prefersDark = () =>
+	window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 
-addThemeClass(getBodyTheme, getBtnTheme)
+const applyTheme = theme => {
+	const isDark = theme === 'dark'
 
-const isDark = () => body.classList.contains('dark')
+	body.classList.remove('light', 'dark')
+	body.classList.add(isDark ? 'dark' : 'light')
 
-const setTheme = (bodyClass, btnClass) => {
+	if (btnThemeIcon) {
+		btnThemeIcon.classList.remove('fa-moon', 'fa-sun')
+		btnThemeIcon.classList.add(isDark ? 'fa-sun' : 'fa-moon')
+	}
 
-	body.classList.remove(localStorage.getItem('portfolio-theme'))
-	btnTheme.classList.remove(localStorage.getItem('portfolio-btn-theme'))
+	if (btnThemeButton) {
+		btnThemeButton.setAttribute('aria-pressed', String(isDark))
+	}
 
-	addThemeClass(bodyClass, btnClass)
-
-	localStorage.setItem('portfolio-theme', bodyClass)
-	localStorage.setItem('portfolio-btn-theme', btnClass)
-
-	// Trigger custom event for particle system to update colors
 	window.dispatchEvent(new Event('themeChanged'))
 }
 
-const toggleTheme = () =>
-	isDark() ? setTheme('light', 'fa-moon') : setTheme('dark', 'fa-sun')
+// Stored preference wins; otherwise fall back to the OS setting.
+const storedTheme = localStorage.getItem('portfolio-theme')
+applyTheme(storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : prefersDark() ? 'dark' : 'light')
 
-btnTheme.addEventListener('click', toggleTheme)
+const toggleTheme = () => {
+	const next = body.classList.contains('dark') ? 'light' : 'dark'
+	applyTheme(next)
+	localStorage.setItem('portfolio-theme', next)
+}
 
+if (btnThemeButton) btnThemeButton.addEventListener('click', toggleTheme)
 
-document.addEventListener("DOMContentLoaded", function () {
-	const navHamburger = document.querySelector('.nav__hamburger');
-	const navList = document.querySelector('.nav__list');
+// Follow the OS if the visitor has never made an explicit choice.
+if (window.matchMedia) {
+	window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+		if (!localStorage.getItem('portfolio-theme')) applyTheme(e.matches ? 'dark' : 'light')
+	})
+}
 
-	navHamburger.addEventListener('click', function () {
-		navList.classList.toggle('display-nav-list');
-	});
-});
+/*-----------------------------------------------
+  Mobile navigation
+-----------------------------------------------*/
 
+const navHamburger = document.querySelector('.nav__hamburger')
+const navList = document.querySelector('.nav__list')
+const navHamburgerIcon = navHamburger ? navHamburger.querySelector('i') : null
 
+const setNavOpen = open => {
+	if (!navList) return
 
-const displayList = () => {
-	const navUl = document.querySelector('.nav__list')
+	navList.classList.toggle('display-nav-list', open)
 
-	if (btnHamburger.classList.contains('fa-bars')) {
-		btnHamburger.classList.remove('fa-bars')
-		btnHamburger.classList.add('fa-times')
-		navUl.classList.add('display-nav-list')
-	} else {
-		btnHamburger.classList.remove('fa-times')
-		btnHamburger.classList.add('fa-bars')
-		navUl.classList.remove('display-nav-list')
+	if (navHamburger) navHamburger.setAttribute('aria-expanded', String(open))
+
+	if (navHamburgerIcon) {
+		navHamburgerIcon.classList.remove('fa-bars', 'fa-times')
+		navHamburgerIcon.classList.add(open ? 'fa-times' : 'fa-bars')
 	}
 }
 
-//circle-bg-animations
+if (navHamburger && navList) {
+	setNavOpen(false)
 
-var slideIndex = 1;
-showSlides(slideIndex);
+	navHamburger.addEventListener('click', () =>
+		setNavOpen(!navList.classList.contains('display-nav-list'))
+	)
 
-function currentSlide(n) {
-	showSlides(slideIndex = n);
+	// Close after following an in-page link, and on Escape.
+	navList.addEventListener('click', e => {
+		if (e.target.closest('a')) setNavOpen(false)
+	})
+
+	document.addEventListener('keydown', e => {
+		if (e.key === 'Escape' && navList.classList.contains('display-nav-list')) {
+			setNavOpen(false)
+			navHamburger.focus()
+		}
+	})
 }
 
-function showSlides(n) {
-	var i;
-	var slides = document.querySelectorAll(".mySlides");
-	var dots = document.querySelectorAll(".dot");
-	if (n > slides.length) { slideIndex = 1 }
-	if (n < 1) { slideIndex = slides.length }
-	for (i = 0; i < slides.length; i++) {
-		slides[i].style.display = "none";
+/*-----------------------------------------------
+  Scroll to top
+-----------------------------------------------*/
+
+const btnScrollTop = document.querySelector('.scroll-top')
+
+if (btnScrollTop) {
+	const scrollUp = () => {
+		const scrolled = window.scrollY || document.documentElement.scrollTop
+		btnScrollTop.style.display = scrolled > 500 ? 'block' : 'none'
 	}
-	for (i = 0; i < dots.length; i++) {
-		dots[i].className = dots[i].className.replace(" active", "");
-	}
-	slides[slideIndex - 1].style.display = "block";
-	dots[slideIndex - 1].className += " active";
+
+	scrollUp()
+	document.addEventListener('scroll', scrollUp, { passive: true })
 }
 
-btnHamburger.addEventListener('click', displayList)
+/*-----------------------------------------------
+  Lightbox modal (images + video)
+-----------------------------------------------*/
 
-const scrollUp = () => {
-	const btnScrollTop = document.querySelector('.scroll-top')
+const modal = document.getElementById('myModal')
+const modalImg = document.getElementById('modalImage')
+const modalVideo = document.getElementById('modalVideo')
+let modalOpener = null
 
-	if (
-		body.scrollTop > 500 ||
-		document.documentElement.scrollTop > 500
-	) {
-		btnScrollTop.style.display = 'block'
-	} else {
-		btnScrollTop.style.display = 'none'
-	}
-}
+function openModal(src, type, label) {
+	if (!modal) return
 
-document.addEventListener('scroll', scrollUp)
+	modalOpener = document.activeElement
 
-
-//video
-var video = document.querySelectorAll('video')
-
-video.forEach(play => play.addEventListener('click', () => {
-	play.classList.toggle('active');
-
-}))
-
-
-//pop up image
-function openModal(src, type) {
-	var modal = document.getElementById("myModal");
-	var modalImg = document.getElementById("modalImage");
-	var modalVideo = document.getElementById("modalVideo");
-
-	if (type === 'image') {
-		modalImg.style.display = 'block';
-		modalVideo.style.display = 'none';
-		modalImg.src = src;
-	} else if (type === 'video') {
-		modalImg.style.display = 'none';
-		modalVideo.style.display = 'block';
-		modalVideo.src = src;
+	if (type === 'image' && modalImg) {
+		modalImg.style.display = 'block'
+		modalImg.src = src
+		modalImg.alt = label || ''
+		if (modalVideo) modalVideo.style.display = 'none'
+	} else if (type === 'video' && modalVideo) {
+		if (modalImg) modalImg.style.display = 'none'
+		modalVideo.style.display = 'block'
+		modalVideo.src = src
+		if (label) modalVideo.setAttribute('aria-label', label)
+		modalVideo.preload = 'auto'
+		modalVideo.load()
+		modalVideo.play().catch(() => {
+			/* autoplay may be blocked; controls are visible either way */
+		})
 	}
 
-	modal.style.display = "block";
+	modal.style.display = 'block'
+	body.style.overflow = 'hidden'
+
+	const closeBtn = modal.querySelector('.close')
+	if (closeBtn) closeBtn.focus()
 }
 
 function closeModal() {
-	var modal = document.getElementById("myModal");
-	var modalVideo = document.getElementById("modalVideo");
+	if (!modal) return
 
-	modal.style.display = "none";
+	modal.style.display = 'none'
+	body.style.overflow = ''
 
-	// Stop the video when closing the modal
-	modalVideo.pause();
-	modalVideo.currentTime = 0;
+	if (modalVideo) {
+		modalVideo.pause()
+		modalVideo.currentTime = 0
+		// Drop the source so the browser stops buffering a closed video.
+		modalVideo.removeAttribute('src')
+		modalVideo.load()
+	}
+
+	if (modalImg) modalImg.removeAttribute('src')
+
+	if (modalOpener && typeof modalOpener.focus === 'function') modalOpener.focus()
+	modalOpener = null
 }
 
-// Enhanced video loading with preload optimization
-document.querySelectorAll('.portfolio-image').forEach(image => {
-	image.addEventListener('click', function (e) {
-		const videoSrc = this.dataset.video;
-		const modalVideo = document.getElementById('modalVideo');
+if (modal) {
+	// Delegated: every gallery tile carries data-src / data-type.
+	document.addEventListener('click', e => {
+		const trigger = e.target.closest('[data-src]')
+		if (!trigger) return
 
-		// Start loading video immediately on click
-		modalVideo.src = videoSrc;
-		modalVideo.preload = 'auto'; // Force full preload
-		modalVideo.load(); // Trigger loading
+		e.preventDefault()
 
-		// Open modal
-		document.getElementById('videoModal').style.display = 'block';
+		// Reuse the tile's own label so the lightbox content isn't unnamed.
+		const label = (trigger.getAttribute('aria-label') || trigger.textContent || '')
+			.replace(/^View\s+/i, '')
+			.trim()
 
-		// Play when ready (buffered enough)
-		modalVideo.oncanplay = function () {
-			this.play().catch(err => console.log('Autoplay prevented:', err));
-		};
-	});
-});
+		openModal(trigger.dataset.src, trigger.dataset.type || 'image', label)
+	})
 
+	const closeBtn = modal.querySelector('.close')
+	if (closeBtn) closeBtn.addEventListener('click', closeModal)
 
+	// Click the backdrop (but not the media itself) to dismiss.
+	modal.addEventListener('click', e => {
+		if (e.target === modal) closeModal()
+	})
 
+	document.addEventListener('keydown', e => {
+		if (e.key === 'Escape' && modal.style.display === 'block') closeModal()
+	})
 
+	// Keep focus inside the dialog while it is open.
+	modal.addEventListener('keydown', e => {
+		if (e.key !== 'Tab') return
+
+		const focusable = modal.querySelectorAll('button, [href], video[controls], [tabindex]:not([tabindex="-1"])')
+		if (!focusable.length) return
+
+		const first = focusable[0]
+		const last = focusable[focusable.length - 1]
+
+		if (e.shiftKey && document.activeElement === first) {
+			e.preventDefault()
+			last.focus()
+		} else if (!e.shiftKey && document.activeElement === last) {
+			e.preventDefault()
+			first.focus()
+		}
+	})
+}
+
+/*-----------------------------------------------
+  Hero: rotating role + tagline (index only)
+-----------------------------------------------*/
+
+const roleText = document.querySelector('.second-text')
+
+if (roleText) {
+	const roles = ['Game Developer', 'Game Designer', 'Sports Enthusiast', 'Gamer']
+	let roleIndex = 0
+
+	roleText.textContent = roles[0]
+	setInterval(() => {
+		roleIndex = (roleIndex + 1) % roles.length
+		roleText.textContent = roles[roleIndex]
+	}, 4000)
+}
+
+const taglineElement = document.getElementById('dailyTagline')
+
+if (taglineElement) {
+	const taglines = [
+		"Turning the 'what if' moments into games you can actually play.",
+		"Making games that I'd lose sleep playing.",
+		'Creating the experiences I dreamed about as a kid.',
+		'Crafting digital chaos and calling it entertainment.',
+		'From playing games all night to making them all day.',
+	]
+
+	let taglineIndex = 0
+
+	const dropIn = () => {
+		taglineElement.classList.add('tagline-drop-in')
+		setTimeout(() => taglineElement.classList.remove('tagline-drop-in'), 1000)
+	}
+
+	taglineElement.textContent = taglines[0]
+	dropIn()
+
+	setInterval(() => {
+		taglineElement.classList.add('tagline-fly-out')
+
+		setTimeout(() => {
+			taglineIndex = (taglineIndex + 1) % taglines.length
+			taglineElement.textContent = taglines[taglineIndex]
+			taglineElement.classList.remove('tagline-fly-out')
+			dropIn()
+		}, 500)
+	}, 10000)
+}
+
+/*-----------------------------------------------
+  Scroll reveal
+-----------------------------------------------*/
+
+const revealTargets = document.querySelectorAll('.reveal')
+
+if (revealTargets.length) {
+	if ('IntersectionObserver' in window) {
+		const revealObserver = new IntersectionObserver(
+			entries => entries.forEach(entry => entry.target.classList.toggle('active', entry.isIntersecting)),
+			{ rootMargin: '0px 0px -150px 0px' }
+		)
+		revealTargets.forEach(el => revealObserver.observe(el))
+	} else {
+		revealTargets.forEach(el => el.classList.add('active'))
+	}
+}
+
+/*-----------------------------------------------
+  Play inline videos only while they are on screen.
+  Every <video> ships with preload="none" + a poster,
+  so nothing is fetched until it actually scrolls in.
+-----------------------------------------------*/
+
+const inlineVideos = document.querySelectorAll('video:not(#modalVideo)')
+
+if (inlineVideos.length && 'IntersectionObserver' in window) {
+	const videoObserver = new IntersectionObserver(
+		entries => {
+			entries.forEach(entry => {
+				const video = entry.target
+
+				if (entry.isIntersecting) {
+					if (video.preload === 'none') video.preload = 'metadata'
+					video.play().catch(() => {
+						/* ignore autoplay rejection */
+					})
+				} else {
+					video.pause()
+				}
+			})
+		},
+		{ threshold: 0.25 }
+	)
+
+	inlineVideos.forEach(video => videoObserver.observe(video))
+}
