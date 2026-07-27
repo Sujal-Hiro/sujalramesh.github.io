@@ -381,6 +381,8 @@ button {
   margin: 0 auto;
   background: transparent;
   justify-content: space-between;
+  /* Above main/section, which the global rule also puts at z-index 1 */
+  z-index: 10;
 }
 
 main {
@@ -903,20 +905,6 @@ main {
   max-height: 100%;
 }
 
-.close {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover {
-  color: #bbb;
-}
-
 .projects__grid {
   max-width: 1100px;
   margin: 0 auto;
@@ -1181,24 +1169,25 @@ main {
   /* Ensure the image is on top */
 }
 
-/* Additional styling for the carousel navigation arrows */
+/* Additional styling for the carousel navigation arrows.
+   font-size MUST stay 0: slick puts the literal words "Previous"/"Next"
+   inside these buttons and hides them by zeroing the font size. Size the
+   ::before glyph instead. */
 .slick-prev,
 .slick-next {
-  font-size: 50px;
-  /* Increase arrow button size */
+  font-size: 0;
+  line-height: 0;
   color: var(--clr-primary);
-  /* Arrow button color */
   z-index: 3;
-  /* Ensure arrows are above slides */
   width: 50px !important;
   height: 50px !important;
   background: var(--clr-bg-alt);
-  /* Theme-aware background */
-  padding: 20px;
-  /* Adjust padding around the arrows */
-  margin-top: 0px;
-  /* Adjust vertical alignment if needed */
-
+  padding: 0;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
 }
 
 .slick-next {
@@ -1223,8 +1212,10 @@ main {
 
 .slick-prev:before,
 .slick-next:before {
-  font-size: 40px !important;
-  /* Arrow icon size */
+  font-size: 34px;
+  line-height: 1;
+  color: var(--clr-primary);
+  opacity: 1;
 }
 
 /* Project Carousel Styles */
@@ -1390,17 +1381,6 @@ main {
   overflow: hidden;
 }
 
-.close {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
-  background: none;
-}
-
 .modal-content {
   display: flex;
   justify-content: center;
@@ -1426,14 +1406,19 @@ main {
 /* The Close Button */
 .close {
   position: absolute;
-  top: 15px;
-  right: 35px;
-  z-index: 2;
+  top: 10px;
+  right: 20px;
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  line-height: 1;
   color: #f1f1f1;
   font-size: 40px;
   font-weight: bold;
   transition: 0.3s;
   background: none;
+  border: 0;
+  cursor: pointer;
 }
 
 .close:hover,
@@ -1697,35 +1682,49 @@ height: auto;
 }
 
 @media (max-width: 640px) {
-  .header {
-    height: 6em;
-    background: transparent;
-  }
-
   .section {
-    margin-top: 6em;
+    margin-top: var(--section-gap);
   }
 
+  /* Slide a full-width panel down from under the header.
+     The old version animated width 0 -> 100% with overflow:hidden, which
+     clipped the links mid-word instead of revealing a panel. */
   .nav__list {
     flex-direction: column;
-    padding: 4em 0;
-    position: absolute;
-    right: 0;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    margin: 0;
+    padding: 1.5em 1em;
+    position: fixed;
     left: 0;
-    top: 5em;
-    z-index: 1;
-    background-color: var(--clr-bg);
-    width: 0;
-    overflow: hidden;
-    transition: width 0.2s ease-in-out;
+    right: 0;
+    top: var(--header-h);
+    width: 100%;
+    z-index: 20;
+    background-color: var(--clr-bg-alt);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+    transform: translateY(-120%);
+    visibility: hidden;
+    transition: transform 0.25s ease-in-out, visibility 0s linear 0.25s;
   }
 
   .display-nav-list {
-    width: 100%;
+    transform: translateY(0);
+    visibility: visible;
+    transition: transform 0.25s ease-in-out, visibility 0s linear 0s;
   }
 
   .nav__list-item {
-    margin: 0.5em 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav__list-item .link--nav {
+    display: block;
+    padding: 0.6em 0;
+    font-size: 1.1rem;
   }
 
   .nav__hamburger {
@@ -2337,6 +2336,7 @@ height: auto;
 }
 
 .overlay-content {
+  display: block;
   width: 100%;
   transform: translateY(20px);
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -2347,6 +2347,7 @@ height: auto;
 }
 
 .overlay-title {
+  display: block;
   color: #ff185d;
   font-size: 1.1rem;
   font-weight: 600;
@@ -2355,6 +2356,7 @@ height: auto;
 }
 
 .overlay-summary {
+  display: block;
   color: rgba(255, 255, 255, 0.9);
   font-size: 0.85rem;
   margin: 0;
@@ -2533,6 +2535,14 @@ button.portfolio-item {
   color: inherit;
   text-align: inherit;
   appearance: none;
+  /* Containing block for the absolutely positioned title / hover overlay */
+  position: relative;
+}
+
+/* Multi-column layout treats each tile as a column item; keep them intact. */
+.container .image-container button.portfolio-item {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
 }
 
 .logo {
@@ -2664,4 +2674,9 @@ button.portfolio-item {
     break-inside: avoid;
     margin-top: 1.5em;
   }
+}
+
+/* Emphasis inside project copy. Replaces ~12 inline style attributes. */
+.hl {
+  color: var(--clr-fg-alt);
 }

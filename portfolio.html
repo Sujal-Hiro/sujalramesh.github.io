@@ -4,23 +4,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portfolio" />
+  <meta name="description"
+    content="Full gallery of Sujal Ramesh's work: game screenshots, gameplay footage, AR applications and Photoshop artwork." />
+  <meta name="author" content="Sujal Ramesh" />
+  <link rel="canonical" href="https://sujalramesh.github.io/portfolio.html" />
+  <meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sujalramesh.github.io/portfolio.html" />
+  <meta property="og:title" content="Portfolio — Sujal Ramesh" />
+  <meta property="og:description" content="Games, artwork and AR applications by Sujal Ramesh." />
+  <meta property="og:image" content="https://sujalramesh.github.io/Images/og-cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/fa62c117c7.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha384-nRgPTkuX86pH8yjPJUAFuASXQSSl2/bBUiNV47vSYpKFxHJhbcrGnmlYpYJMeD7a"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="styles.css" />
-  <title>SR-Portfolio</title>
-  <link rel="shortcut icon" type="image" href="Images/Icon-Website.png">
+  <title>Portfolio — Sujal Ramesh</title>
+  <link rel="shortcut icon" type="image/png" href="Images/Icon-Website.png">
 </head>
 
 <body id="top">
-  <canvas id="particleCanvas"></canvas>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
   <header class="header center">
-    <h3>
-      <a href="index.html" class="link">SR.</a>
-    </h3>
+    <a href="index.html" class="link logo">SR.</a>
 
     <nav class="nav center">
       <ul class="nav__list center">
@@ -32,23 +44,15 @@
 
       </ul>
 
-      <button type="button" aria-label="toggle theme" class="btn btn--icon">
+      <button type="button" aria-label="toggle theme" aria-pressed="false" class="btn btn--icon">
         <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
-      </button>
-
-      <!-- <button
-            type="button"
-            aria-label="toggle navigation"
-            class="btn btn--icon nav__hamburger"
-          >
-            <i aria-hidden="true" class="fas fa-bars"></i> -->
       </button>
     </nav>
   </header>
 
   <!-- Portfolio -->
 
-  <div class="container">
+  <main id="main" class="container">
     <div class="Portfolio_heading">
       <h1>Portfolio</h1>
       <h6>Games, Artworks & AR Applications</h6>
@@ -56,471 +60,479 @@
     <div class="image-container">
 
 
-      <div class="portfolio-item" data-title="Game Footage" data-summary="Dynamic gameplay video showcasing mechanics">
-        <video src="Images/video_7.mp4" autoplay muted loop onclick="openModal('Images/video_7.mp4', 'video')"></video>
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Mars Survivor</h3>
-            <p class="overlay-summary">Dynamic gameplay video showcasing mechanics</p>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="portfolio-item" data-src="Images/video_7.mp4" data-type="video" aria-label="View Mars Survivor — Dynamic gameplay video showcasing mechanics">
+        <video src="Images/preview_video_7.mp4" poster="Images/poster_video_7.jpg" muted loop
+          playsinline preload="none" aria-hidden="true"></video>
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Mars Survivor</span>
+            <span class="overlay-summary">Dynamic gameplay video showcasing mechanics</span>
+          </span>
+        </span>
+      </button>
 
-      <div class="portfolio-item" data-title="Game" data-summary="Screenshot of game scene">
-        <img src="Images/image_39.webp" onclick="openModal('Images/image_39.webp', 'image')" alt="Portfolio artwork"
-          loading="lazy">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Mars Survivor</h3>
-            <p class="overlay-summary">Shooting scene</p>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="portfolio-item" data-src="Images/image_39.webp" data-type="image" aria-label="View Mars Survivor — Shooting scene">
+        <img src="Images/image_39.webp" alt=""
+          loading="lazy" decoding="async">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Mars Survivor</span>
+            <span class="overlay-summary">Shooting scene</span>
+          </span>
+        </span>
+      </button>
 
-      <div class="portfolio-item" data-title="Game" data-summary="Screenshot of game scene">
-        <img src="Images/image_43.webp" onclick="openModal('Images/image_43.webp', 'image')" alt="Portfolio artwork"
-          loading="lazy">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Mars Survivor</h3>
-            <p class="overlay-summary">Screenshot</p>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="portfolio-item" data-src="Images/image_43.webp" data-type="image" aria-label="View Mars Survivor — Screenshot">
+        <img src="Images/image_43.webp" alt=""
+          loading="lazy" decoding="async">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Mars Survivor</span>
+            <span class="overlay-summary">Screenshot</span>
+          </span>
+        </span>
+      </button>
 
-      <div class="portfolio-item" data-title="Project" data-summary="Game development project">
-        <img src="Images/image_46.webp" onclick="openModal('Images/image_46.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Mars Survivor</h3>
-            <p class="overlay-summary">Game development project</p>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="portfolio-item" data-src="Images/image_46.webp" data-type="image" aria-label="View Mars Survivor — Game development project">
+        <img loading="lazy" decoding="async" alt="" src="Images/image_46.webp">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Mars Survivor</span>
+            <span class="overlay-summary">Game development project</span>
+          </span>
+        </span>
+      </button>
 
-      <div class="portfolio-item" data-title="Artwork" data-summary="Digital art creation">
-        <img src="Images/image_69.webp" alt="" onclick="openModal('Images/image_69.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Artwork</h3>
-            <p class="overlay-summary">Digital art creation</p>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="portfolio-item" data-src="Images/image_69.webp" data-type="image" aria-label="View Artwork — Digital art creation">
+        <img loading="lazy" decoding="async" src="Images/image_69.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Artwork</span>
+            <span class="overlay-summary">Digital art creation</span>
+          </span>
+        </span>
+      </button>
 
-      <div class="portfolio-item" data-title="Concept" data-summary="Game concept and design">
-        <img src="Images/image_67.png" alt="" onclick="openModal('Images/image_67.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Concept</h3>
-            <p class="overlay-summary">Game concept and design</p>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="portfolio-item" data-title="Game Demo" data-summary="Interactive game demonstration">
-        <video src="Images/video_1.mp4" autoplay muted loop onclick="openModal('Images/video_1.mp4', 'video')"></video>
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Game Demo</h3>
-            <p class="overlay-summary">Interactive game demonstration</p>
-          </div>
-        </div>
-      </div>
-      <div class="portfolio-item" data-title="Game Scene" data-summary="In-game character and environment">
-        <img src="Images/image_17.webp" alt="" onclick="openModal('Images/image_17.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Game Scene</h3>
-            <p class="overlay-summary">In-game character and environment</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="UI Design" data-summary="User interface and UX">
-        <img src="Images/image_62.webp" alt="" onclick="openModal('Images/image_62.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">UI Design</h3>
-            <p class="overlay-summary">User interface and UX</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Environment" data-summary="Game environment design">
-        <img src="Images/image_47.webp" alt="" onclick="openModal('Images/image_47.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Environment</h3>
-            <p class="overlay-summary">Game environment design</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Gameplay" data-summary="Core gameplay mechanics">
-        <img src="Images/image_22.webp" alt="" onclick="openModal('Images/image_22.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Gameplay</h3>
-            <p class="overlay-summary">Core gameplay mechanics</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Screenshot" data-summary="Game screenshot">
-        <img src="Images/image_38.jpg" alt="" onclick="openModal('Images/image_38.jpg', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Screenshot</h3>
-            <p class="overlay-summary">Game screenshot</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Art" data-summary="Character and asset artwork">
-        <img src="Images/image_12.webp" alt="" onclick="openModal('Images/image_12.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Art</h3>
-            <p class="overlay-summary">Character and asset artwork</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Design" data-summary="Visual design composition">
-        <img src="Images/image_53.webp" alt="" onclick="openModal('Images/image_53.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Design</h3>
-            <p class="overlay-summary">Visual design composition</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Level Design" data-summary="Game level and layout">
-        <img src="Images/image_28.webp" alt="" onclick="openModal('Images/image_28.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Level Design</h3>
-            <p class="overlay-summary">Game level and layout</p>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="portfolio-item" data-src="Images/image_67.png" data-type="image" aria-label="View Concept — Game concept and design">
+        <img loading="lazy" decoding="async" src="Images/image_67.png" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Concept</span>
+            <span class="overlay-summary">Game concept and design</span>
+          </span>
+        </span>
+      </button>
 
 
+      <button type="button" class="portfolio-item" data-src="Images/video_1.mp4" data-type="video" aria-label="View Game Demo — Interactive game demonstration">
+        <video src="Images/preview_video_1.mp4" poster="Images/poster_video_1.jpg" muted loop
+          playsinline preload="none" aria-hidden="true"></video>
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Game Demo</span>
+            <span class="overlay-summary">Interactive game demonstration</span>
+          </span>
+        </span>
+      </button>
+      <button type="button" class="portfolio-item" data-src="Images/image_17.webp" data-type="image" aria-label="View Game Scene — In-game character and environment">
+        <img loading="lazy" decoding="async" src="Images/image_17.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Game Scene</span>
+            <span class="overlay-summary">In-game character and environment</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_62.webp" data-type="image" aria-label="View UI Design — User interface and UX">
+        <img loading="lazy" decoding="async" src="Images/image_62.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">UI Design</span>
+            <span class="overlay-summary">User interface and UX</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_47.webp" data-type="image" aria-label="View Environment — Game environment design">
+        <img loading="lazy" decoding="async" src="Images/image_47.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Environment</span>
+            <span class="overlay-summary">Game environment design</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_22.webp" data-type="image" aria-label="View Gameplay — Core gameplay mechanics">
+        <img loading="lazy" decoding="async" src="Images/image_22.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Gameplay</span>
+            <span class="overlay-summary">Core gameplay mechanics</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_38.webp" data-type="image" aria-label="View Screenshot — Game screenshot">
+        <img loading="lazy" decoding="async" src="Images/image_38.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Screenshot</span>
+            <span class="overlay-summary">Game screenshot</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_12.webp" data-type="image" aria-label="View Art — Character and asset artwork">
+        <img loading="lazy" decoding="async" src="Images/image_12.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Art</span>
+            <span class="overlay-summary">Character and asset artwork</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_53.webp" data-type="image" aria-label="View Design — Visual design composition">
+        <img loading="lazy" decoding="async" src="Images/image_53.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Design</span>
+            <span class="overlay-summary">Visual design composition</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_28.webp" data-type="image" aria-label="View Level Design — Game level and layout">
+        <img loading="lazy" decoding="async" src="Images/image_28.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Level Design</span>
+            <span class="overlay-summary">Game level and layout</span>
+          </span>
+        </span>
+      </button>
 
 
-      <div class="portfolio-item" data-title="Game" data-summary="Character portrait">
-        <img src="Images/image_63.webp" alt="" onclick="openModal('Images/image_63.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Treasure Hunt</h3>
-            <p class="overlay-summary">Game</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Gameplay" data-summary="Game demonstration">
-        <video src="Images/video_10.mp4" autoplay muted loop
-          onclick="openModal('Images/video_10.mp4', 'video')"></video>
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Gameplay</h3>
-            <p class="overlay-summary">Game demonstration</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Environment" data-summary="Game world design">
-        <img src="Images/image_28.webp" alt="" onclick="openModal('Images/image_28.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Environment</h3>
-            <p class="overlay-summary">Game world design</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Concept Art" data-summary="Initial concept design">
-        <img src="Images/image_27.webp" alt="" onclick="openModal('Images/image_27.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Concept Art</h3>
-            <p class="overlay-summary">Initial concept design</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Artwork" data-summary="Digital creation">
-        <img src="Images/image_25.webp" alt="" onclick="openModal('Images/image_25.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Artwork</h3>
-            <p class="overlay-summary">Digital creation</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Game Trailer" data-summary="Game preview footage">
-        <video src="Images/video_8.mp4" autoplay muted loop onclick="openModal('Images/video_8.mp4', 'video')"></video>
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Game Trailer</h3>
-            <p class="overlay-summary">Game preview footage</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Scene" data-summary="In-game scene">
-        <img src="Images/image_17.webp" alt="" onclick="openModal('Images/image_17.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Scene</h3>
-            <p class="overlay-summary">In-game scene</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Asset" data-summary="Game asset artwork">
-        <img src="Images/image_16.webp" alt="" onclick="openModal('Images/image_16.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Asset</h3>
-            <p class="overlay-summary">Game asset artwork</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Game" data-summary="Screenshot of game scene">
-        <img src="Images/image_15.webp" alt="" onclick="openModal('Images/image_15.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">2d Game</h3>
-            <p class="overlay-summary">Game Screenshot</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Artwork" data-summary="Creative visual">
-        <img src="Images/image_35.webp" alt="" onclick="openModal('Images/image_35.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Artwork</h3>
-            <p class="overlay-summary">Creative visual</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Game Art" data-summary="Game artwork">
-        <img src="Images/image_50.webp" alt="" onclick="openModal('Images/image_50.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Game Art</h3>
-            <p class="overlay-summary">Game artwork</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="AR App Demo" data-summary="Augmented reality demonstration">
-        <video src="Images/video_5.mp4" autoplay muted loop onclick="openModal('Images/video_5.mp4', 'video')"></video>
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">AR App Demo</h3>
-            <p class="overlay-summary">Augmented reality demonstration</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Game Footage" data-summary="Gameplay video">
-        <video src="Images/video_9.mp4" autoplay muted loop onclick="openModal('Images/video_9.mp4', 'video')"></video>
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Game Footage</h3>
-            <p class="overlay-summary">Gameplay video</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Design" data-summary="Visual composition">
-        <img src="Images/image_58.png" alt="" onclick="openModal('Images/image_58.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Design</h3>
-            <p class="overlay-summary">Visual composition</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Character" data-summary="Character design">
-        <img src="Images/image_65.webp" alt="" onclick="openModal('Images/image_65.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Character</h3>
-            <p class="overlay-summary">Character design</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Artwork" data-summary="Creative piece">
-        <img src="Images/image_6.webp" alt="" onclick="openModal('Images/image_6.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Artwork</h3>
-            <p class="overlay-summary">Creative piece</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Game Demo" data-summary="Interactive demo">
-        <video src="Images/video_6.mp4" autoplay muted loop onclick="openModal('Images/video_6.mp4', 'video')"></video>
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Game Demo</h3>
-            <p class="overlay-summary">Interactive demo</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Screenshot" data-summary="Game screenshot">
-        <img src="Images/image_38.jpg" alt="" onclick="openModal('Images/image_38.jpg', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Screenshot</h3>
-            <p class="overlay-summary">Game screenshot</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Design" data-summary="UI Design">
-        <img src="Images/image_32.webp" alt="" onclick="openModal('Images/image_32.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Design</h3>
-            <p class="overlay-summary">UI Design</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Game Asset" data-summary="Asset design">
-        <img src="Images/image_22.webp" alt="" onclick="openModal('Images/image_22.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Game Asset</h3>
-            <p class="overlay-summary">Asset design</p>
-          </div>
-        </div>
-      </div>
 
 
-      <div class="portfolio-item" data-title="Concept" data-summary="Game concept">
-        <img src="Images/image_30.webp" alt="" onclick="openModal('Images/image_30.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Pencil Art</h3>
-            <p class="overlay-summary">Naruto - Dattebayo</p>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="portfolio-item" data-src="Images/image_63.webp" data-type="image" aria-label="View Treasure Hunt — Game">
+        <img loading="lazy" decoding="async" src="Images/image_63.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Treasure Hunt</span>
+            <span class="overlay-summary">Game</span>
+          </span>
+        </span>
+      </button>
 
-      <div class="portfolio-item" data-title="Art" data-summary="Artwork creation">
-        <img src="Images/image_21.webp" alt="" onclick="openModal('Images/image_21.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Art</h3>
-            <p class="overlay-summary">Artwork creation</p>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="portfolio-item" data-src="Images/video_10.mp4" data-type="video" aria-label="View Gameplay — Game demonstration">
+        <video src="Images/preview_video_10.mp4" poster="Images/poster_video_10.jpg" muted loop
+          playsinline preload="none" aria-hidden="true"></video>
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Gameplay</span>
+            <span class="overlay-summary">Game demonstration</span>
+          </span>
+        </span>
+      </button>
 
-      <div class="portfolio-item" data-title="Design" data-summary="Graphic design">
-        <img src="Images/image_24.webp" alt="" onclick="openModal('Images/image_24.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Design</h3>
-            <p class="overlay-summary">Graphic design</p>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="portfolio-item" data-src="Images/image_28.webp" data-type="image" aria-label="View Environment — Game world design">
+        <img loading="lazy" decoding="async" src="Images/image_28.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Environment</span>
+            <span class="overlay-summary">Game world design</span>
+          </span>
+        </span>
+      </button>
 
-      <div class="portfolio-item" data-title="AR Experience" data-summary="Augmented reality app">
-        <img src="Images/image_10.png" alt="" onclick="openModal('Images/image_10.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">AR Experience</h3>
-            <p class="overlay-summary">Augmented reality app</p>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="portfolio-item" data-src="Images/image_27.webp" data-type="image" aria-label="View Concept Art — Initial concept design">
+        <img loading="lazy" decoding="async" src="Images/image_27.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Concept Art</span>
+            <span class="overlay-summary">Initial concept design</span>
+          </span>
+        </span>
+      </button>
 
-      <div class="portfolio-item" data-title="Banner" data-summary="Web banner design">
-        <img src="Images/image_7.webp" alt="" onclick="openModal('Images/image_7.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Banner</h3>
-            <p class="overlay-summary">Web banner design</p>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="portfolio-item" data-src="Images/image_25.webp" data-type="image" aria-label="View Artwork — Digital creation">
+        <img loading="lazy" decoding="async" src="Images/image_25.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Artwork</span>
+            <span class="overlay-summary">Digital creation</span>
+          </span>
+        </span>
+      </button>
 
-      <div class="portfolio-item" data-title="Artwork" data-summary="Digital art">
-        <img src="Images/image_8.webp" alt="" onclick="openModal('Images/image_8.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Artwork</h3>
-            <p class="overlay-summary">Digital art</p>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="portfolio-item" data-src="Images/video_8.mp4" data-type="video" aria-label="View Game Trailer — Game preview footage">
+        <video src="Images/preview_video_8.mp4" poster="Images/poster_video_8.jpg" muted loop
+          playsinline preload="none" aria-hidden="true"></video>
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Game Trailer</span>
+            <span class="overlay-summary">Game preview footage</span>
+          </span>
+        </span>
+      </button>
 
-      <div class="portfolio-item" data-title="Poster" data-summary="Game poster">
-        <img src="Images/image_54.webp" alt="" onclick="openModal('Images/image_54.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Poster</h3>
-            <p class="overlay-summary">Game poster</p>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="portfolio-item" data-src="Images/image_17.webp" data-type="image" aria-label="View Scene — In-game scene">
+        <img loading="lazy" decoding="async" src="Images/image_17.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Scene</span>
+            <span class="overlay-summary">In-game scene</span>
+          </span>
+        </span>
+      </button>
 
-      <div class="portfolio-item" data-title="Design" data-summary="Creative design">
-        <img src="Images/image_60.webp" alt="" onclick="openModal('Images/image_60.webp', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Design</h3>
-            <p class="overlay-summary">Creative design</p>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="portfolio-item" data-src="Images/image_16.webp" data-type="image" aria-label="View Asset — Game asset artwork">
+        <img loading="lazy" decoding="async" src="Images/image_16.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Asset</span>
+            <span class="overlay-summary">Game asset artwork</span>
+          </span>
+        </span>
+      </button>
 
-      <div class="portfolio-item" data-title="Final" data-summary="Project showcase">
-        <img src="Images/image_70.png" alt="" onclick="openModal('Images/image_70.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Final</h3>
-            <p class="overlay-summary">Project showcase</p>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="portfolio-item" data-src="Images/image_15.webp" data-type="image" aria-label="View 2d Game — Game Screenshot">
+        <img loading="lazy" decoding="async" src="Images/image_15.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">2d Game</span>
+            <span class="overlay-summary">Game Screenshot</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_35.webp" data-type="image" aria-label="View Artwork — Creative visual">
+        <img loading="lazy" decoding="async" src="Images/image_35.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Artwork</span>
+            <span class="overlay-summary">Creative visual</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_50.webp" data-type="image" aria-label="View Game Art — Game artwork">
+        <img loading="lazy" decoding="async" src="Images/image_50.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Game Art</span>
+            <span class="overlay-summary">Game artwork</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/video_5.mp4" data-type="video" aria-label="View AR App Demo — Augmented reality demonstration">
+        <video src="Images/preview_video_5.mp4" poster="Images/poster_video_5.jpg" muted loop
+          playsinline preload="none" aria-hidden="true"></video>
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">AR App Demo</span>
+            <span class="overlay-summary">Augmented reality demonstration</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/video_9.mp4" data-type="video" aria-label="View Game Footage — Gameplay video">
+        <video src="Images/preview_video_9.mp4" poster="Images/poster_video_9.jpg" muted loop
+          playsinline preload="none" aria-hidden="true"></video>
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Game Footage</span>
+            <span class="overlay-summary">Gameplay video</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_58.webp" data-type="image" aria-label="View Design — Visual composition">
+        <img loading="lazy" decoding="async" src="Images/image_58.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Design</span>
+            <span class="overlay-summary">Visual composition</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_65.webp" data-type="image" aria-label="View Character — Character design">
+        <img loading="lazy" decoding="async" src="Images/image_65.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Character</span>
+            <span class="overlay-summary">Character design</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_6.webp" data-type="image" aria-label="View Artwork — Creative piece">
+        <img loading="lazy" decoding="async" src="Images/image_6.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Artwork</span>
+            <span class="overlay-summary">Creative piece</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/video_6.mp4" data-type="video" aria-label="View Game Demo — Interactive demo">
+        <video src="Images/preview_video_6.mp4" poster="Images/poster_video_6.jpg" muted loop
+          playsinline preload="none" aria-hidden="true"></video>
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Game Demo</span>
+            <span class="overlay-summary">Interactive demo</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_38.webp" data-type="image" aria-label="View Screenshot — Game screenshot">
+        <img loading="lazy" decoding="async" src="Images/image_38.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Screenshot</span>
+            <span class="overlay-summary">Game screenshot</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_32.webp" data-type="image" aria-label="View Design — UI Design">
+        <img loading="lazy" decoding="async" src="Images/image_32.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Design</span>
+            <span class="overlay-summary">UI Design</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_22.webp" data-type="image" aria-label="View Game Asset — Asset design">
+        <img loading="lazy" decoding="async" src="Images/image_22.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Game Asset</span>
+            <span class="overlay-summary">Asset design</span>
+          </span>
+        </span>
+      </button>
+
+
+      <button type="button" class="portfolio-item" data-src="Images/image_30.webp" data-type="image" aria-label="View Pencil Art — Naruto - Dattebayo">
+        <img loading="lazy" decoding="async" src="Images/image_30.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Pencil Art</span>
+            <span class="overlay-summary">Naruto - Dattebayo</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_21.webp" data-type="image" aria-label="View Art — Artwork creation">
+        <img loading="lazy" decoding="async" src="Images/image_21.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Art</span>
+            <span class="overlay-summary">Artwork creation</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_24.webp" data-type="image" aria-label="View Design — Graphic design">
+        <img loading="lazy" decoding="async" src="Images/image_24.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Design</span>
+            <span class="overlay-summary">Graphic design</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_10.webp" data-type="image" aria-label="View AR Experience — Augmented reality app">
+        <img loading="lazy" decoding="async" src="Images/image_10.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">AR Experience</span>
+            <span class="overlay-summary">Augmented reality app</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_7.webp" data-type="image" aria-label="View Banner — Web banner design">
+        <img loading="lazy" decoding="async" src="Images/image_7.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Banner</span>
+            <span class="overlay-summary">Web banner design</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_8.webp" data-type="image" aria-label="View Artwork — Digital art">
+        <img loading="lazy" decoding="async" src="Images/image_8.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Artwork</span>
+            <span class="overlay-summary">Digital art</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_54.webp" data-type="image" aria-label="View Poster — Game poster">
+        <img loading="lazy" decoding="async" src="Images/image_54.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Poster</span>
+            <span class="overlay-summary">Game poster</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_60.webp" data-type="image" aria-label="View Design — Creative design">
+        <img loading="lazy" decoding="async" src="Images/image_60.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Design</span>
+            <span class="overlay-summary">Creative design</span>
+          </span>
+        </span>
+      </button>
+
+      <button type="button" class="portfolio-item" data-src="Images/image_70.webp" data-type="image" aria-label="View Final — Project showcase">
+        <img loading="lazy" decoding="async" src="Images/image_70.webp" alt="">
+        <span class="portfolio-overlay">
+          <span class="overlay-content">
+            <span class="overlay-title">Final</span>
+            <span class="overlay-summary">Project showcase</span>
+          </span>
+        </span>
+      </button>
 
     </div>
-    <!-- <div class="vid-container">
-            <video src="Images/It`s  all about Us! _ 2D Platformer _ Chennai 2022 -Global Game Jam.mp4"></video>
-          </div> -->
-  </div>
+  </main>
 
-  <div id="myModal" class="portfolio_popup">
-    <span class="close" onclick="closeModal()">&times;</span>
+  <div id="myModal" class="portfolio_popup modal" role="dialog" aria-modal="true" aria-label="Media viewer">
+    <button type="button" class="close" aria-label="Close viewer">&times;</button>
     <div class="modal-content">
-      <img id="modalImage" style="display: none;">
-      <video id="modalVideo" width="100%" height="auto" controls preload="auto">
-        <source src="" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <img id="modalImage" alt="">
+      <video id="modalVideo" controls playsinline></video>
     </div>
   </div>
 
 
+
+  <div class="scroll-container">
+    <div class="scroll-top">
+      <a aria-label="Scroll up" href="#top">
+        <i aria-hidden="true" class="fas fa-arrow-up"></i>
+      </a>
+    </div>
+  </div>
 
   <script src="./particles.js"></script>
   <script src="./script.js"></script>

@@ -121,7 +121,7 @@ const modalImg = document.getElementById('modalImage')
 const modalVideo = document.getElementById('modalVideo')
 let modalOpener = null
 
-function openModal(src, type) {
+function openModal(src, type, label) {
 	if (!modal) return
 
 	modalOpener = document.activeElement
@@ -129,12 +129,13 @@ function openModal(src, type) {
 	if (type === 'image' && modalImg) {
 		modalImg.style.display = 'block'
 		modalImg.src = src
-		modalImg.alt = ''
+		modalImg.alt = label || ''
 		if (modalVideo) modalVideo.style.display = 'none'
 	} else if (type === 'video' && modalVideo) {
 		if (modalImg) modalImg.style.display = 'none'
 		modalVideo.style.display = 'block'
 		modalVideo.src = src
+		if (label) modalVideo.setAttribute('aria-label', label)
 		modalVideo.preload = 'auto'
 		modalVideo.load()
 		modalVideo.play().catch(() => {
@@ -176,7 +177,13 @@ if (modal) {
 		if (!trigger) return
 
 		e.preventDefault()
-		openModal(trigger.dataset.src, trigger.dataset.type || 'image')
+
+		// Reuse the tile's own label so the lightbox content isn't unnamed.
+		const label = (trigger.getAttribute('aria-label') || trigger.textContent || '')
+			.replace(/^View\s+/i, '')
+			.trim()
+
+		openModal(trigger.dataset.src, trigger.dataset.type || 'image', label)
 	})
 
 	const closeBtn = modal.querySelector('.close')
