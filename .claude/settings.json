@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(python -c ' *)",
-      "Bash(git add *)",
-      "Bash(git commit -q -m 'Fix JS crashes, optimize media pipeline, rebuild responsive CSS *)"
-    ]
-  }
-}
