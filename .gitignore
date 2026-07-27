@@ -1,0 +1,23 @@
+# Editor / IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Media backups (originals kept outside version control)
+Images_originals/
+Images_originals_backup/
+
+# OS cruft
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Logs & temp
+*.log
+npm-debug.log*
+*.tmp

@@ -17,18 +17,14 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 9em;
-}
-
-/* Anchor offset for nav links - accounts for header height */
-#projects,
-#portfolio,
-#skills,
-#contact {
-  scroll-margin-top: 5em;
+  /* Single source of truth for anchor offset. Header is 8em desktop / 6em phone;
+     --header-h is redefined in the phone breakpoint. */
+  scroll-padding-top: var(--header-h, 8em);
+  overflow-x: hidden;
 }
 
 body {
+  overflow-x: hidden;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Helvetica,
     Arial, sans-serif;
@@ -43,19 +39,14 @@ body {
   /* Fixed = always covers full viewport as you scroll */
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  /* 100% not 100vw: 100vw includes the scrollbar width and overflows by ~15px */
+  width: 100%;
+  height: 100%;
   z-index: 0;
   /* Base layer */
   pointer-events: none;
   /* Won't block any clicks */
   display: block;
-}
-
-/* Remove old background-animation styles if present */
-.background-animation {
-  display: none;
-  /* No longer needed */
 }
 
 /* Ensure ALL content sits above the canvas */
@@ -80,6 +71,29 @@ nav,
   z-index: 1;
 }
 
+/*===============================================
+  Responsive scale
+  ----------------------------------------------
+  Three tiers, used consistently throughout:
+    phone   @media (max-width: 640px)
+    tablet  @media (max-width: 1024px)
+    wide    @media (min-width: 1440px)
+  --header-h feeds scroll-padding-top so anchor
+  links land correctly at every size.
+===============================================*/
+
+:root {
+  --header-h: 8em;
+  --section-gap: 4em;
+  --content-max: 1100px;
+}
+
+/* Theme palettes.
+   Declared on :root as well as on the .light/.dark body classes so the first
+   paint already matches the visitor's OS preference. The classes still win
+   once script.js applies a stored or toggled choice. */
+
+:root,
 .light {
   --clr-bg: #fcfcfc;
   --clr-bg-alt: #fff;
@@ -106,15 +120,56 @@ nav,
   --clr-bg-container: rgba(255, 255, 255, 0.1);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --clr-bg: #131313;
+    --clr-bg-alt: #252525;
+    --clr-fg: rgba(233, 233, 233, 0.808);
+    --clr-fg-alt: #ffffff;
+    --clr-primary: #ff185d;
+    --clr-secondary: #89FF31;
+    --shadow: rgb(255 24 93) 0px 0px 10px 0px, rgb(186 38 43 / 3%) 0px 0px 0px 1px;
+    --clr--bar: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    --clr-header-text: #fff;
+    --clr-bg-container: rgba(255, 255, 255, 0.1);
+  }
+}
+
 ::-moz-selection {
   background: var(--clr-primary);
   color: var(--clr-bg);
 }
 
-::-webkit-selection,
+/* ::-webkit-selection is not a real pseudo-element; including it in the list
+   invalidated the whole rule, so ::selection never applied anywhere. */
 ::selection {
   background: var(--clr-primary);
   color: var(--clr-bg);
+}
+
+/* Visible keyboard focus. There was none anywhere before. */
+:focus-visible {
+  outline: 3px solid var(--clr-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Skip link — first tab stop, hidden until focused. */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 0.75em 1.25em;
+  background: var(--clr-bg-alt);
+  color: var(--clr-primary);
+  font-weight: 500;
+  transform: translateY(-150%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
 }
 
 h1,
@@ -158,7 +213,7 @@ button {
   cursor: pointer;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   h1 {
     font-size: 2.6rem;
   }
@@ -320,25 +375,23 @@ button {
 }
 
 .header {
-  height: 8em;
-  max-width: 1100px;
+  height: var(--header-h);
+  max-width: var(--content-max);
   width: 95%;
   margin: 0 auto;
   background: transparent;
   justify-content: space-between;
-
 }
 
 main {
-  max-width: 1100px;
+  max-width: var(--content-max);
   width: 95%;
   margin: 0 auto;
   background: transparent;
 }
 
 .section {
-  margin-top: 6em;
-  scroll-margin-top: 5em;
+  margin-top: var(--section-gap);
 }
 
 .section__title {
@@ -347,57 +400,31 @@ main {
   text-transform: uppercase;
 }
 
+/* Flow-based spacing. This used to be padding-top:100px + margin-top:200px,
+   which the old override layer had to undo. */
 .section__title.Portfolio {
-  padding-top: 100px;
-  margin-top: 200px;
+  padding-top: 0;
+  padding-bottom: 1rem;
+  margin-top: var(--section-gap);
 }
 
 .section_skills {
   text-align: center;
   margin-bottom: 2em;
-  top: 150px;
-  text-transform: uppercase;
-  scroll-margin-top: 5em;
-}
-
-/* .section_contact{
-  text-align: center;
-  margin-bottom: 1em;
-  text-transform: uppercase;
-  top: 200px;
-  left: 5%;
-  display: flex;
-  justify-content: center;
-}
-.section__title_Contact{
-  text-align: center;
-  margin-bottom: 5em;
+  margin-top: var(--section-gap);
   text-transform: uppercase;
 }
-.contactBTN{
-  position: relative;
-  top: 50%;
-  left: -75px;
-  transform: translate(-50%, 50%);
-  text-align: center;
-} */
 
 .section_contact {
   display: flex;
   flex-direction: column;
-  /* Align children vertically */
   justify-content: center;
-  /* Center children vertically */
   align-items: center;
-  /* Center children horizontally */
   text-align: center;
-  position: relative;
-  top: 200px;
-  margin-bottom: 2em;
+  margin-top: var(--section-gap);
+  margin-bottom: 3em;
+  padding: 2em 0;
   text-transform: uppercase;
-  height: 10vh;
-  /* Full viewport height for demonstration, adjust as needed */
-  scroll-margin-top: 5em;
 }
 
 .section__title_Contact {
@@ -687,11 +714,12 @@ main {
 
 .bar-container {
   width: 100%;
-  height: 100px;
+  min-height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 100px auto;
+  margin: 3em auto;
+  padding: 1.5em;
   background: var(--clr-bg-container);
   border-radius: 25px;
   position: relative;
@@ -739,8 +767,10 @@ main {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-size: 40px;
+  font-size: clamp(1rem, 4.5vw, 2.5rem);
   font-weight: 500;
+  text-align: center;
+  white-space: normal;
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 0.5s ease forwards;
@@ -822,30 +852,13 @@ main {
   transform: scaleX(1);
 }
 
-.image-bg {
-  position: absolute;
-  height: 600px;
-  width: 1200px;
-  top: 500px;
-  display: flex;
-  justify-content: center;
-  z-index: 0;
-  opacity: 1;
-
-
-}
-
-@media (max-width: 700px) {
+@media (max-width: 640px) {
   .text-bar {
     font-size: 18px;
   }
 }
 
-
 /************** PROJECTS***************** */
-
-
-
 
 .btn--outline {
   border: 2px solid #ff0e56;
@@ -964,7 +977,7 @@ main {
   border: 2px solid var(--clr-primary);
   text-transform: lowercase;
   padding: 12px 20px;
-  min-width: 200px;
+  min-width: min(200px, 100%);
   margin: 10px;
   cursor: pointer;
   transition: color 0.4s linear;
@@ -989,29 +1002,23 @@ main {
   transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
 }
 
-.more_btn::before {
-  transform: scaleX(0);
-}
-
 .btn1:hover::before {
   transform: scaleX(1);
 }
 
 /*More BTNs*/
+/* Centred with flexbox instead of the old `left: 485px` magic offset, which
+   was only ever correct at one viewport width. */
 .more_BTN {
-  position: relative;
-  top: 20px;
   display: flex;
   width: 100%;
   text-align: center;
-  justify-content: flex-start;
+  justify-content: center;
+  margin-top: 2em;
 }
 
 .more_BTN a {
   align-items: center;
-  position: relative;
-  left: 485px;
-  top: 0px;
 }
 
 .more_BTN_projects {
@@ -1019,9 +1026,8 @@ main {
   justify-content: center;
   align-items: center;
   width: 100%;
-  position: relative;
-  top: 50px;
-
+  margin-top: 3em;
+  margin-bottom: 2em;
 }
 
 /* .more_BTN_projects a{
@@ -1035,9 +1041,8 @@ main {
   justify-content: center;
   align-items: center;
   width: 100%;
-  position: relative;
-  top: 100px;
-  /* left: 46%; */
+  margin-top: 3em;
+  margin-bottom: 2em;
 }
 
 /* .more_BTN_portfolio a{
@@ -1047,74 +1052,9 @@ main {
   top: 0px;
 } */
 
-
-
-
-
 /* -----------------------------BENTO BOX----------------------------- */
 
-
 /* Bento Box Styles */
-.bento-box {
-  padding: 20px;
-  position: relative;
-  top: 200px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.bento-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 20px;
-  padding: 50px;
-  max-width: 1200px;
-  margin: 0 auto;
-  aspect-ratio: 16 / 9;
-}
-
-.bento-item {
-  background-color: #1e1e1e;
-  border-radius: 12px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  min-height: 200px;
-  position: relative;
-  overflow: hidden;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.bento-item::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle,
-      rgba(255, 255, 255, 0.1) 0%,
-      transparent 70%);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.bento-item:hover {
-  transform: scale(1.05) translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3),
-    0 0 20px rgba(255, 255, 255, 0.1);
-}
-
-.bento-item:hover::before {
-  opacity: 1;
-  animation: glow 2s infinite alternate;
-}
 
 @keyframes glow {
   0% {
@@ -1124,49 +1064,6 @@ main {
   100% {
     opacity: 1;
   }
-}
-
-.bento-item.wide {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  background: #1e1e1e;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.bento-item.wide:hover {
-  transform: scale(1.05);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.1);
-}
-
-.bento-item.wide h2 {
-  font-size: 3rem;
-  color: #00f5a0;
-  margin-bottom: 10px;
-  font-family: 'Inter', sans-serif;
-  text-align: left;
-}
-
-.bento-item.wide .skills-icons {
-  display: flex;
-  gap: 20px;
-  background: #73ceff3f;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 0 75px rgba(0, 140, 219, 0.2);
-}
-
-.bento-item.wide .skills-icons img,
-.bento-item.wide .skills-icons svg {
-  width: 40px;
-  height: 40px;
-  background: transparent;
-  transition: filter 0.3s ease, transform 0.5s ease;
-  animation: scroll-left-right 5s linear infinite;
 }
 
 @keyframes scroll-left-right {
@@ -1183,82 +1080,6 @@ main {
   }
 }
 
-.container--0- {
-  position: absolute;
-  left: 1046px;
-  top: 560px;
-  width: 40px;
-  height: 40px;
-  background-color: transparent;
-  justify-content: start;
-  align-items: start;
-}
-
-.bento-item.wide .skills-icons img {
-  width: 40px;
-  height: 40px;
-  background: transparent;
-  transition: filter 0.3s ease;
-}
-
-.bento-item.wide .skills-icons img:hover {
-  filter: brightness(1) invert(0);
-}
-
-.bento-item.large {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-
-.bento-item.wide {
-  grid-column: span 2;
-}
-
-.bento-item h2 {
-  font-weight: 700;
-  color: #dbc4e9;
-  font-size: 3.25rem;
-  font-family: 'Inter', sans-serif;
-  margin-bottom: 10px;
-}
-
-.bento-item h3 {
-  font-weight: 700;
-
-  background: linear-gradient(to right, #00F5A0, #00D9F5);
-
-  transition: background 0.5s ease;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-size: 2rem;
-  font-family: 'Inter', sans-serif;
-  margin-bottom: 10px;
-}
-
-.bento-item p {
-  font-size: 1rem;
-  color: #b0bec5;
-}
-
-.bento-item img {
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-  margin-top: 0px;
-  object-fit: contain;
-}
-
-.bento-item:hover h2 {
-  background: linear-gradient(45deg, #ff79c6, #bd93f9, #8be9fd, #50fa7b);
-  background-size: 300% 300%;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: gradientFlow 5s ease infinite;
-}
-
 @keyframes gradientFlow {
   0% {
     background-position: 0% 50%;
@@ -1273,18 +1094,13 @@ main {
   }
 }
 
-.bento-item:hover h3 {
-  color: #ff79c6;
-}
-
 .projects-completed-title {
   background-color: transparent;
   font-size: 5rem;
 }
 
 .resume-cv-title {
-  font-size: 2rem !important;
-  /* Use !important to override the .bento-item h3 rule */
+  font-size: 2rem;
   color: #ff79c6;
   font-weight: 600;
   text-transform: uppercase;
@@ -1293,85 +1109,15 @@ main {
   text-shadow: 0 0 10px rgba(255, 121, 197, 0.1);
 }
 
-/* Add a more specific selector to override .bento-item h3 */
-.bento-item h3.resume-cv-title {
-  font-size: 2rem;
-}
-
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-  .bento-container {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    padding: 30px;
-  }
-
-  .bento-item h2,
-  .bento-item h3 {
-    font-size: 2.5rem;
-  }
-
-  .projects-completed-title {
-    font-size: 4rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .bento-container {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    padding: 20px;
-  }
-
-  .bento-item.large,
-  .bento-item.wide {
-    grid-column: span 1;
-    grid-row: span 1;
-  }
-
-  .bento-item h2,
-  .bento-item h3 {
-    font-size: 2rem;
-  }
-
-  .projects-completed-title {
-    font-size: 3.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .bento-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(8, 1fr);
-    padding: 10px;
-  }
-
-  .bento-item {
-    min-height: 150px;
-  }
-
-  .bento-item h2,
-  .bento-item h3 {
-    font-size: 1.75rem;
-  }
-
-  .projects-completed-title {
-    font-size: 3rem;
-  }
-}
-
-
-
 /*-----------Portfolio------*/
 .portfolio_background {
   position: relative;
-  top: 50px;
+  margin-top: 2em;
   background: linear-gradient(180deg, #ff0e56 0%, rgba(20, 20, 20, 0.795) 100%);
   filter: drop-shadow(0 0 0.75rem crimson);
-  padding: 20px 0;
+  padding: 2em 0;
 }
 
-/* General styling for the carousel and its items */
 /* General styling for the carousel and its items */
 .image-carousel {
   width: 100%;
@@ -1384,8 +1130,9 @@ main {
 .image-carousel video {
   width: 100%;
   /* Full width for all slides */
-  height: 400px;
-  /* Ensures consistent height for all items */
+  height: clamp(200px, 45vw, 400px);
+  /* Fluid but capped, so the carousel shrinks on phones instead of
+     staying locked at 400px */
   object-fit: cover;
   transition: 0.5s all ease-in-out;
   border-radius: 10px;
@@ -1466,16 +1213,6 @@ main {
   position: relative;
 }
 
-@media (max-width: 600px) {
-  .slick-prev {
-    left: -10px !important;
-  }
-
-  .slick-next {
-    right: -10px !important;
-  }
-}
-
 .slick-prev:hover,
 .slick-next:hover {
   color: var(--clr-fg);
@@ -1552,7 +1289,7 @@ main {
   cursor: pointer;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .project-carousel .carousel-item {
     padding: 1.5em;
     min-height: 180px;
@@ -1600,7 +1337,9 @@ main {
   padding: 10px;
   border-radius: 5px;
   box-sizing: border-box;
-  width: calc(100% - 150px);
+  /* Was calc(100% - 150px): on a 320px viewport that left 170px and the text
+     wrapped out of its own box. */
+  max-width: calc(100% - 2rem);
   transition: opacity 0.3s ease-in-out;
   opacity: 1;
   /* Ensure the title is visible by default */
@@ -1676,7 +1415,6 @@ main {
   max-height: 100%;
 }
 
-
 /* Modal Content (image and video) */
 .modal-content img,
 .modal-content video {
@@ -1706,7 +1444,7 @@ main {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .close {
     top: 10px;
     right: 20px;
@@ -1720,48 +1458,6 @@ main {
   }
 }
 
-s
-
-/* .zoomed {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-  background: rgba(255, 255, 255, 0.9);
-}
-.zoom-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 999;
-  display: none;
-} */
-/* .image-paragraph{
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  text-align: center;
-  font-weight: 500;
-  font-size: 20px;
-  background: rgba(27, 27, 27, 0.334);
-  padding: 10px;
-  border-radius: 5px;
-  box-sizing: border-box;
-  width: calc(100% - 150px);
-  transition: opacity 0.3s ease-in-out;
-  opacity: 1;
-  z-index: 3; 
-} */
 .slick-slide:not(.slick-center) img+.image-title,
 .slick-slide:not(.slick-center) video+.image-title {
   position: absolute;
@@ -1778,24 +1474,12 @@ s
   color: #DB0042;
   font-weight: 500;
 
-
-}
-
-
-.portfolio_background {
-  position: relative;
-  top: 50px;
-  background: linear-gradient(180deg, #ff0e56 0%, rgba(20, 20, 20, 0.795) 100%);
-  filter: drop-shadow(0 0 0.75rem crimson);
-
-
 }
 
 .image-grid {
   --gap: 16px;
   --num-cols: 3;
   --row-height: 300px;
-
 
   box-sizing: border-box;
   padding: var(--gap);
@@ -1805,9 +1489,7 @@ s
   grid-auto-rows: var(--row-height);
   gap: var(--gap);
 
-
 }
-
 
 .image-grid>img {
   height: 100%;
@@ -1855,8 +1537,6 @@ s
 
 }
 
-
-
 /* hover */
 
 .portfolio_background .image-grid img {
@@ -1888,30 +1568,9 @@ s
   z-index: 1;
 }
 
-.games__background .Images {
-  display: flex;
-  gap: 15px;
-
-  height: 300px;
-  width: 300px;
-  object-fit: cover;
-  transition: .2s linear;
-}
-
-.games__background .Images img {
-  display: inline-block;
-  object-fit: cover;
-  transition: .2s linear;
-}
-
-.games__background .Images img:hover {
-  transform: scale(1.1);
-}
-
 .games-grid iframe {
   filter: drop-shadow(0 0 0.75rem rgba(255, 55, 5, 0.192));
 }
-
 
 /* ------------------VIDEO-GALLERY------------------- */
 
@@ -1940,7 +1599,7 @@ display: block;
 height: auto;
 }
 
-@media (max-width: 600px){
+@media (max-width: 640px){
   .video-grid{
     flex-direction: column;
   }
@@ -1950,34 +1609,28 @@ height: auto;
   }
 } */
 
-
-
-
-
-@media screen and(max-width:1024px) {
-  .about__contact center {
+/* Was `and(max-width:1024px)` — the missing space made browsers discard this
+   entire block, so the tablet column count never applied. */
+@media screen and (max-width: 1024px) {
+  .about__contact.center {
     align-items: center;
     text-align: center;
   }
 
   .image-grid {
     --num-cols: 2;
-    --row-height: 300px
+    --row-height: 300px;
   }
 
   .games-grid {
     --num-cols: 2;
-    --row-height: 300px
+    --row-height: 300px;
   }
-
 }
-
 
 .portfolio_img {
 
   transition: 1s;
-
-
 
 }
 
@@ -2043,7 +1696,7 @@ height: auto;
   text-align: center;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .header {
     height: 6em;
     background: transparent;
@@ -2172,18 +1825,7 @@ height: auto;
 
   }
 
-  .games__background .Images {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-
-    height: 300px;
-    width: 300px;
-    object-fit: cover;
-    transition: .2s linear;
-  }
-
-  .vid-grid-col2 {
+    .vid-grid-col2 {
     grid-column: span 2;
   }
 
@@ -2200,31 +1842,9 @@ height: auto;
     --row-height: 300px;
   }
 
-  /* Tablet styles for projects */
-  @media (max-width: 1024px) {
-
-    .p1 li,
-    .p2 li,
-    .p3 li,
-    .p4 li,
-    .p5 li,
-    .p6 li,
-    .p7 li,
-    .p8 li {
-      padding-left: 1.5em;
-    }
-
-    .project_use_items {
-      gap: 0.7em;
-      padding: 1.2em;
-    }
-
-    .project_use_items>*,
-    .project_use_items span {
-      font-size: 0.85rem;
-      padding: 0.55em 1.1em;
-    }
-  }
+  /* A `max-width: 1024px` block used to be nested here. Nested inside a 600px
+     query its effective condition was <=600px, so the "tablet" styles never
+     fired on a tablet. Lifted out to the real tablet tier at the end of file. */
 
   /******************** PROJECTS MOBILE RESOLUTION************ */
   .projects {
@@ -2287,7 +1907,6 @@ height: auto;
 
   }
 
-
   /*moreBTNs*/
 
   .more_BTN {
@@ -2326,11 +1945,7 @@ height: auto;
     object-fit: cover;
   }
 
-
-
 }
-
-
 
 /* Second Page*/
 * {
@@ -2357,7 +1972,6 @@ height: auto;
   padding: 0.7em;
   position: relative;
 
-
 }
 
 #project1 {
@@ -2381,7 +1995,6 @@ height: auto;
   flex-direction: column;
   margin-top: 1em;
 
-
 }
 
 .description {
@@ -2390,7 +2003,7 @@ height: auto;
   gap: 20px;
   font-size: 1rem;
   max-width: 1000px;
-  text-align: -webkit-auto;
+  text-align: start;
   padding-left: 10px;
 
 }
@@ -2458,7 +2071,6 @@ height: auto;
   background: linear-gradient(rgb(255, 15, 35), rgb(27, 27, 27));
   box-shadow: #DB0042;
 
-
 }
 
 .img-grid1 img {
@@ -2475,8 +2087,11 @@ height: auto;
 }
 
 .img-grid .video-landscape {
-  width: 330px;
-  height: 300px;
+  /* 330px alone overflowed a 320px viewport */
+  width: 100%;
+  max-width: 330px;
+  aspect-ratio: 11 / 10;
+  height: auto;
   object-fit: cover;
 }
 
@@ -2519,7 +2134,6 @@ height: auto;
   padding-left: 2em;
 }
 
-
 .scroll-top {
   display: none;
   position: fixed;
@@ -2547,7 +2161,7 @@ height: auto;
   border-radius: 20px;
   font-weight: 600;
   font-size: 0.9rem;
-  white-space: nowrap;
+  overflow-wrap: break-word;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   box-shadow: 0 4px 15px rgba(255, 24, 93, 0.2);
   display: inline-block;
@@ -2566,7 +2180,7 @@ height: auto;
   border-radius: 20px;
   font-weight: 600;
   font-size: 0.9rem;
-  white-space: nowrap;
+  overflow-wrap: break-word;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   box-shadow: 0 4px 15px rgba(59, 0, 13, 0.2);
   display: inline-block;
@@ -2579,8 +2193,7 @@ height: auto;
   cursor: pointer;
 }
 
-
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .img-grid {
     --num-cols: 1;
   }
@@ -2635,15 +2248,6 @@ height: auto;
     pointer-events: none;
   }
 }
-
-
-
-
-
-
-
-
-
 
 /* Portfolio Page */
 
@@ -2808,9 +2412,7 @@ height: auto;
 
 /* MORE BUTTON */
 
-
-@media (max-width:600px) {
-
+@media (max-width: 640px) {
 
   .Portfolio_heading h6 {
     text-align: center;
@@ -2823,24 +2425,10 @@ height: auto;
 
 }
 
-
-
-
-
-
-
-
-
 /* test */
 
 /* Portfolio Items - Tablet/Medium Screens */
 @media (max-width: 1024px) {
-  .container .image-container {
-    columns: 3 200px;
-  }
-}
-
-@media (max-width: 768px) {
   .container .image-container {
     columns: 2 150px;
   }
@@ -2854,7 +2442,7 @@ height: auto;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .container .image-container {
     columns: 1;
   }
@@ -2876,171 +2464,204 @@ height: auto;
 /* Accessibility: Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
 
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    transform: none;
+    opacity: 1;
   }
 }
 
 /*========================================
-  RESPONSIVE ALIGNMENT FIXES - OVERRIDE HARDCODED POSITIONS
+  Tagline animations
+  The markup has always added these two classes; the rules were never
+  written, so the "dramatic" rotation was a silent 500ms pause.
 ========================================*/
 
-/* Fix Portfolio Section Title */
-.section__title.Portfolio {
-  padding-top: 0 !important;
-  margin-top: 4em !important;
-  padding-bottom: 1rem !important;
+@keyframes taglineFlyOut {
+  to {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
 }
 
-/* Fix Skills Section */
-.section_skills {
-  top: auto !important;
-  margin-top: 4em !important;
-}
-
-/* Fix Contact Section */
-.section_contact {
-  position: static !important;
-  top: auto !important;
-  margin-top: 4em !important;
-  margin-bottom: 3em !important;
-  height: auto !important;
-  padding: 2em 0 !important;
-}
-
-/* Fix Bar Container */
-.bar-container {
-  margin: 3em auto 3em auto !important;
-  height: auto !important;
-  min-height: 80px;
-  padding: 1.5em !important;
-}
-
-/* Fix Text Bar Responsiveness */
-.text-bar {
-  font-size: clamp(1.2rem, 5vw, 2.5rem) !important;
-  text-align: center !important;
-  white-space: normal !important;
-}
-
-/* Fix More Project Button */
-.more_BTN {
-  top: auto !important;
-  justify-content: center !important;
-  margin-top: 2em !important;
-}
-
-.more_BTN a {
-  left: auto !important;
-  top: auto !important;
-  position: relative !important;
-}
-
-/* Fix More Projects Section Button */
-.more_BTN_projects {
-  position: static !important;
-  top: auto !important;
-  margin-top: 3em !important;
-  margin-bottom: 2em !important;
-}
-
-/* Fix More Portfolio Section Button */
-.more_BTN_portfolio {
-  position: static !important;
-  top: auto !important;
-  margin-top: 3em !important;
-  margin-bottom: 2em !important;
-}
-
-/* Fix Portfolio Background */
-.portfolio_background {
-  position: static !important;
-  top: auto !important;
-  margin-top: 2em !important;
-  padding: 2em !important;
-}
-
-/* Improve Projects Grid */
-.projects__grid {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
-  gap: 2em !important;
-  padding: 0 1em !important;
-  box-sizing: border-box !important;
-  margin: 2em auto !important;
-}
-
-/* Fix Bento Box Position */
-.bento-box {
-  position: static !important;
-  top: auto !important;
-}
-
-/* Mobile Responsive Overrides */
-@media (max-width: 768px) {
-  .section__title.Portfolio {
-    margin-top: 3em !important;
+@keyframes taglineDropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
   }
 
-  .text-bar {
-    font-size: clamp(1rem, 4vw, 1.8rem) !important;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tagline-fly-out {
+  animation: taglineFlyOut 0.5s ease forwards;
+}
+
+.tagline-drop-in {
+  animation: taglineDropIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/*========================================
+  Gallery tiles are <button>, not <div>.
+  Reset the UA button chrome so they look exactly as before while staying
+  focusable and operable by keyboard.
+========================================*/
+
+button.carousel-item,
+button.portfolio-item {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  appearance: none;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--clr-fg-alt);
+}
+
+/*========================================
+  Responsive tiers
+  phone <=640 | tablet <=1024 | wide >=1440
+========================================*/
+
+/* ---------- tablet ---------- */
+@media (max-width: 1024px) {
+  :root {
+    --header-h: 7em;
+    --section-gap: 3em;
   }
 
-  .bar-container {
-    margin: 2em auto !important;
-    padding: 1em !important;
+  h1 {
+    font-size: 2.6rem;
   }
 
-  .section_contact {
-    margin-top: 2em !important;
-    margin-bottom: 2em !important;
-    padding: 1em 0 !important;
+  .p1 li,
+  .p2 li,
+  .p3 li,
+  .p4 li,
+  .p5 li,
+  .p6 li,
+  .p7 li,
+  .p8 li {
+    padding-left: 1.5em;
+  }
+
+  .project_use_items {
+    gap: 0.7em;
+    padding: 1.2em;
+  }
+
+  .project_use_items>*,
+  .project_use_items span {
+    font-size: 0.85rem;
+    padding: 0.55em 1.1em;
   }
 
   .projects__grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
-    gap: 1.5em !important;
-    padding: 0 0.5em !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5em;
   }
 }
 
-@media (max-width: 600px) {
-  .section {
-    margin-top: 3em !important;
-  }
-
-  .text-bar {
-    font-size: 1rem !important;
-  }
-
-  .bar-container {
-    margin: 1.5em auto !important;
-    padding: 1em !important;
-  }
-
-  .section_contact {
-    margin-top: 1.5em !important;
-    margin-bottom: 1.5em !important;
+/* ---------- phone ---------- */
+@media (max-width: 640px) {
+  :root {
+    --header-h: 6em;
+    --section-gap: 2em;
   }
 
   .projects__grid {
-    grid-template-columns: 1fr !important;
-    gap: 1em !important;
-    padding: 0 !important;
-  }
-
-  .more_BTN_projects,
-  .more_BTN_portfolio {
-    margin-top: 2em !important;
-    margin-bottom: 1.5em !important;
+    grid-template-columns: 1fr;
+    gap: 1em;
   }
 
   .image-grid {
-    --num-cols: 1 !important;
-    --row-height: 200px !important;
+    --num-cols: 1;
+    --row-height: 200px;
+  }
+
+  /* Two buttons at min-width 200px + margins overflow below ~460px */
+  .about__contact {
+    flex-wrap: wrap;
+  }
+}
+
+/* ---------- wide ---------- */
+@media (min-width: 1440px) {
+  :root {
+    --content-max: 1280px;
+    --section-gap: 5em;
+  }
+
+  h1 {
+    font-size: 4.5rem;
+  }
+}
+
+/*========================================
+  backdrop-filter fallback
+========================================*/
+@supports not ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+
+  .bar-container,
+  .modal,
+  .modal-content {
+    background-color: var(--clr-bg-alt);
+  }
+}
+
+/*========================================
+  Print
+========================================*/
+@media print {
+
+  #particleCanvas,
+  .nav,
+  .scroll-container,
+  .skip-link,
+  .modal,
+  video {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    word-break: break-all;
+  }
+
+  .section,
+  .section_skills,
+  .section_contact {
+    break-inside: avoid;
+    margin-top: 1.5em;
   }
 }
