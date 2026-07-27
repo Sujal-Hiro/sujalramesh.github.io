@@ -1178,6 +1178,7 @@ main {
   font-size: 0;
   line-height: 0;
   color: var(--clr-primary);
+  transition: color 0.2s ease, background-color 0.2s ease;
   z-index: 3;
   width: 50px !important;
   height: 50px !important;
@@ -1203,18 +1204,21 @@ main {
 }
 
 .slick-prev:hover,
-.slick-next:hover {
-  color: var(--clr-fg);
-  /* Theme-aware arrow button hover color */
+.slick-next:hover,
+.slick-prev:focus,
+.slick-next:focus {
+  color: var(--clr-bg-alt);
   background: var(--clr-primary);
-  /* Primary color background on hover */
 }
 
 .slick-prev:before,
 .slick-next:before {
   font-size: 34px;
   line-height: 1;
-  color: var(--clr-primary);
+  /* inherit, not a fixed colour: the button swaps fg/bg on hover and focus,
+     and a hardcoded primary made the glyph invisible against the primary
+     background that persists after a click. */
+  color: inherit;
   opacity: 1;
 }
 
@@ -1686,52 +1690,6 @@ height: auto;
     margin-top: var(--section-gap);
   }
 
-  /* Slide a full-width panel down from under the header.
-     The old version animated width 0 -> 100% with overflow:hidden, which
-     clipped the links mid-word instead of revealing a panel. */
-  .nav__list {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5em;
-    margin: 0;
-    padding: 1.5em 1em;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: var(--header-h);
-    width: 100%;
-    z-index: 20;
-    background-color: var(--clr-bg-alt);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
-    transform: translateY(-120%);
-    visibility: hidden;
-    transition: transform 0.25s ease-in-out, visibility 0s linear 0.25s;
-  }
-
-  .display-nav-list {
-    transform: translateY(0);
-    visibility: visible;
-    transition: transform 0.25s ease-in-out, visibility 0s linear 0s;
-  }
-
-  .nav__list-item {
-    margin: 0;
-    width: 100%;
-    text-align: center;
-  }
-
-  .nav__list-item .link--nav {
-    display: block;
-    padding: 0.6em 0;
-    font-size: 1.1rem;
-  }
-
-  .nav__hamburger {
-    display: flex;
-    margin-left: 0.8em;
-  }
-
   .about {
     align-items: center;
     text-align: center;
@@ -1901,22 +1859,17 @@ height: auto;
     justify-content: center;
     align-items: center;
     width: 100%;
-    position: relative;
-    top: 50px;
-
+    margin-top: 2em;
+    margin-bottom: 1.5em;
   }
 
   /*moreBTNs*/
 
   .more_BTN {
-    top: 25px;
+    margin-top: 1.5em;
   }
 
   .more_BTN a {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 50%);
     text-align: center;
   }
 
@@ -1925,9 +1878,8 @@ height: auto;
     justify-content: center;
     align-items: center;
     width: 100%;
-    position: relative;
-    top: 100px;
-    /* left: 40%; */
+    margin-top: 2em;
+    margin-bottom: 1.5em;
   }
 
   /* .more_BTN_portfolio a {
@@ -2552,6 +2504,66 @@ button.portfolio-item {
 }
 
 /*========================================
+  Mobile / tablet navigation
+  The hamburger and the panel it opens must share one breakpoint — they were
+  split across 640px and 1024px, so at tablet widths the button appeared but
+  the dropdown styles never applied.
+========================================*/
+@media (max-width: 1024px) {
+  .nav__hamburger {
+    display: flex;
+    margin-left: 0.8em;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    margin: 0;
+    padding: 1.5em 1em;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--header-h);
+    width: 100%;
+    z-index: 20;
+    background-color: var(--clr-bg-alt);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+    /* Shift up by the panel's own height PLUS the header offset, so the
+       bottom edge lands exactly on y=0. A plain -120% left the last link
+       peeking below the top of the viewport. */
+    transform: translateY(calc(-100% - var(--header-h)));
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out,
+      visibility 0s linear 0.25s;
+  }
+
+  .display-nav-list {
+    transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out,
+      visibility 0s linear 0s;
+  }
+
+  .nav__list-item {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav__list-item .link--nav {
+    display: block;
+    padding: 0.6em 0;
+    font-size: 1.1rem;
+  }
+}
+
+/*========================================
   Responsive tiers
   phone <=640 | tablet <=1024 | wide >=1440
 ========================================*/
@@ -2600,6 +2612,27 @@ button.portfolio-item {
   :root {
     --header-h: 6em;
     --section-gap: 2em;
+  }
+
+  /* Smaller arrows, and inset the slides so the arrows sit in a gutter
+     instead of on top of the card text. */
+  .slick-prev,
+  .slick-next {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 24px;
+  }
+
+  .project-carousel .carousel-item {
+    margin: 0 2.6em;
+  }
+
+  .image-carousel .carousel-item {
+    padding: 0 2.6em;
   }
 
   .projects__grid {
