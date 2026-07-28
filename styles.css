@@ -104,6 +104,12 @@ video {
   max-width: 100%;
 }
 
+/* Must come after the rule above: an author `display` on img/video beats the
+   UA stylesheet's [hidden] rule, which silently breaks the hidden attribute. */
+[hidden] {
+  display: none !important;
+}
+
 ul {
   list-style: none;
 }
@@ -553,6 +559,11 @@ h3 {
 .tile video {
   width: 100%;
   height: auto;
+  /* Portrait phone captures are 9:16; uncapped they tower over the 200px
+     stills beside them. Cap the box and crop rather than let one tile own
+     the column. */
+  max-height: 460px;
+  object-fit: cover;
   transition: opacity 0.25s var(--ease);
 }
 
@@ -653,17 +664,24 @@ h3 {
 
 .lightbox img,
 .lightbox video {
+  width: auto;
+  height: auto;
   max-width: min(100%, 1100px);
-  max-height: 85vh;
+  max-height: min(78vh, 720px);
+  object-fit: contain;
   border-radius: var(--radius);
+  background: #000;
 }
 
 .lightbox .close {
   position: absolute;
-  top: var(--gutter);
-  right: var(--gutter);
-  width: 42px;
-  height: 42px;
+  top: max(var(--gutter), 1rem);
+  right: max(var(--gutter), 1rem);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.25);
   background: rgba(0, 0, 0, 0.4);
