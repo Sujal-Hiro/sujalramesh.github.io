@@ -15,18 +15,20 @@
 /*---------------------------- tokens ----------------------------*/
 
 :root {
-  /* Neutrals do the work; accent appears maybe six times per screen. */
-  --bg: #fafafa;
-  --surface: #ffffff;
-  --surface-2: #f2f2f3;
-  --border: rgba(0, 0, 0, 0.09);
-  --border-strong: rgba(0, 0, 0, 0.16);
-  --fg: #18181b;
-  --fg-muted: #6b6b72;
-  --accent: #d10a46;
-  --accent-soft: rgba(209, 10, 70, 0.08);
-  --ok: #15803d;
-  --ok-soft: rgba(21, 128, 61, 0.1);
+  /* Dark-only by design: one palette, no theme class, no
+     prefers-color-scheme branch, nothing to toggle.
+     Neutrals do the work; accent appears maybe six times per screen. */
+  --bg: #0b0b0c;
+  --surface: #131315;
+  --surface-2: #1a1a1d;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --fg: #ededf0;
+  --fg-muted: #9a9aa2;
+  --accent: #ff3366;
+  --accent-soft: rgba(255, 51, 102, 0.12);
+  --ok: #4ade80;
+  --ok-soft: rgba(74, 222, 128, 0.12);
 
   --radius: 14px;
   --radius-sm: 8px;
@@ -45,36 +47,6 @@
   --header-h: 68px;
 
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
-.dark {
-  --bg: #0b0b0c;
-  --surface: #131315;
-  --surface-2: #1a1a1d;
-  --border: rgba(255, 255, 255, 0.09);
-  --border-strong: rgba(255, 255, 255, 0.18);
-  --fg: #ededf0;
-  --fg-muted: #9a9aa2;
-  --accent: #ff3366;
-  --accent-soft: rgba(255, 51, 102, 0.12);
-  --ok: #4ade80;
-  --ok-soft: rgba(74, 222, 128, 0.12);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) {
-    --bg: #0b0b0c;
-    --surface: #131315;
-    --surface-2: #1a1a1d;
-    --border: rgba(255, 255, 255, 0.09);
-    --border-strong: rgba(255, 255, 255, 0.18);
-    --fg: #ededf0;
-    --fg-muted: #9a9aa2;
-    --accent: #ff3366;
-    --accent-soft: rgba(255, 51, 102, 0.12);
-    --ok: #4ade80;
-    --ok-soft: rgba(74, 222, 128, 0.12);
-  }
 }
 
 /*---------------------------- base ----------------------------*/

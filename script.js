@@ -6,44 +6,7 @@
   lookup is guarded and every block is optional.
 ===============================================*/
 
-const root = document.documentElement
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
-
-/*-----------------------------------------------
-  Theme
------------------------------------------------*/
-
-const themeBtn = document.getElementById('themeBtn')
-const themeIcon = document.getElementById('themeIcon')
-
-const MOON = '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>'
-const SUN =
-	'<circle cx="12" cy="12" r="4"/>' +
-	'<path d="M12 3v2m0 14v2M5.6 5.6 7 7m10 10 1.4 1.4M3 12h2m14 0h2M5.6 18.4 7 17m10-10 1.4-1.4"/>'
-
-const applyTheme = dark => {
-	root.classList.toggle('dark', dark)
-	root.classList.toggle('light', !dark)
-
-	if (themeIcon) themeIcon.innerHTML = dark ? SUN : MOON
-	if (themeBtn) themeBtn.setAttribute('aria-pressed', String(dark))
-}
-
-// Stored choice wins; otherwise follow the OS.
-const storedTheme = localStorage.getItem('sr-theme')
-applyTheme(storedTheme ? storedTheme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches)
-
-if (themeBtn) {
-	themeBtn.addEventListener('click', () => {
-		const dark = !root.classList.contains('dark')
-		applyTheme(dark)
-		localStorage.setItem('sr-theme', dark ? 'dark' : 'light')
-	})
-}
-
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-	if (!localStorage.getItem('sr-theme')) applyTheme(e.matches)
-})
 
 /*-----------------------------------------------
   Header: border on scroll + reading-progress rule

@@ -37,9 +37,9 @@ holds to:
    marquee, which pauses on hover. Scroll reveals fire once and then unobserve.
 4. **One fluid type scale** (`--step--1` … `--step-3`), no magic pixel sizes.
 
-Theme is class-based on `<html>` (`.light` / `.dark`) with a
-`prefers-color-scheme` fallback on `:root`, so the first paint already matches
-the visitor's OS before `script.js` runs.
+The site is **dark-only**. There is one palette on `:root` — no theme class,
+no `prefers-color-scheme` branch, and no toggle — so first paint is always
+correct and there is no flash to guard against.
 
 ### Breakpoints
 
