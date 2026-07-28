@@ -4,539 +4,364 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description"
-    content="Full gallery of Sujal Ramesh's work: game screenshots, gameplay footage, AR applications and Photoshop artwork." />
+  <title>Gallery — Sujal Ramesh</title>
+  <meta name="description" content="Full gallery of game screenshots, gameplay footage, AR applications and Photoshop artwork." />
   <meta name="author" content="Sujal Ramesh" />
   <link rel="canonical" href="https://sujalramesh.github.io/portfolio.html" />
-  <meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sujalramesh.github.io/portfolio.html" />
-  <meta property="og:title" content="Portfolio — Sujal Ramesh" />
-  <meta property="og:description" content="Games, artwork and AR applications by Sujal Ramesh." />
+  <meta property="og:title" content="Gallery — Sujal Ramesh" />
+  <meta property="og:description" content="Full gallery of game screenshots, gameplay footage, AR applications and Photoshop artwork." />
   <meta property="og:image" content="https://sujalramesh.github.io/Images/og-cover.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Gallery — Sujal Ramesh" />
+  <meta name="twitter:description" content="Full gallery of game screenshots, gameplay footage, AR applications and Photoshop artwork." />
+  <meta name="twitter:image" content="https://sujalramesh.github.io/Images/og-cover.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha384-nRgPTkuX86pH8yjPJUAFuASXQSSl2/bBUiNV47vSYpKFxHJhbcrGnmlYpYJMeD7a"
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <title>Portfolio — Sujal Ramesh</title>
   <link rel="shortcut icon" type="image/png" href="Images/Icon-Website.png">
 </head>
 
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
-  <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
-  <header class="header center">
-    <a href="index.html" class="link logo">SR.</a>
+  <header class="site-header" id="siteHeader">
+    <div class="wrap">
+      <a href="index.html" class="brand">SR<span>.</span></a>
 
-    <nav class="nav center">
-      <ul class="nav__list center">
+      <nav class="nav" id="nav">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+      </nav>
 
-        <li class="nav__list-item">
-          <a class="link link--nav" href="index.html">Home</a>
-        </li>
-
-
-      </ul>
-
-      <button type="button" aria-label="toggle theme" aria-pressed="false" class="btn btn--icon">
-        <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
-      </button>
-    </nav>
+      <div class="header-actions">
+        <button type="button" class="icon-btn" id="themeBtn" aria-label="Toggle colour theme" aria-pressed="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" aria-hidden="true" id="themeIcon">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button type="button" class="icon-btn nav-toggle" id="navBtn" aria-label="Toggle menu"
+          aria-expanded="false" aria-controls="nav">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" />
+          </svg>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <!-- Portfolio -->
+  <main id="main">
+    <div class="wrap">
+      <div class="page-head">
+        <h1>Gallery</h1>
+        <p>Games, artwork and AR applications. Click any tile to open it full size.</p>
+      </div>
 
-  <main id="main" class="container">
-    <div class="Portfolio_heading">
-      <h1>Portfolio</h1>
-      <h6>Games, Artworks & AR Applications</h6>
-    </div>
-    <div class="image-container">
+      <section class="section">
+        <div class="gallery-filters reveal">
+          <button type="button" class="filter" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="filter" data-filter="image" aria-pressed="false">Stills</button>
+          <button type="button" class="filter" data-filter="video" aria-pressed="false">Footage</button>
+        </div>
 
+        <div class="masonry">
+          <button type="button" class="tile reveal" data-src="Images/video_7.mp4" data-type="video"
+            aria-label="View Mars Survivor — Dynamic gameplay video showcasing mechanics">
+            <video src="Images/preview_video_7.mp4" poster="Images/poster_video_7.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <figcaption>Mars Survivor <span>Dynamic gameplay video showcasing mechanics</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/video_7.mp4" data-type="video" aria-label="View Mars Survivor — Dynamic gameplay video showcasing mechanics">
-        <video src="Images/preview_video_7.mp4" poster="Images/poster_video_7.jpg" muted loop
-          playsinline preload="none" aria-hidden="true"></video>
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Mars Survivor</span>
-            <span class="overlay-summary">Dynamic gameplay video showcasing mechanics</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_39.webp" data-type="image"
+            aria-label="View Mars Survivor — Shooting scene">
+            <img src="Images/image_39.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Mars Survivor <span>Shooting scene</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_39.webp" data-type="image" aria-label="View Mars Survivor — Shooting scene">
-        <img src="Images/image_39.webp" alt=""
-          loading="lazy" decoding="async">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Mars Survivor</span>
-            <span class="overlay-summary">Shooting scene</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_43.webp" data-type="image"
+            aria-label="View Mars Survivor — Screenshot">
+            <img src="Images/image_43.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Mars Survivor <span>Screenshot</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_43.webp" data-type="image" aria-label="View Mars Survivor — Screenshot">
-        <img src="Images/image_43.webp" alt=""
-          loading="lazy" decoding="async">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Mars Survivor</span>
-            <span class="overlay-summary">Screenshot</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_46.webp" data-type="image"
+            aria-label="View Mars Survivor — Game development project">
+            <img src="Images/image_46.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Mars Survivor <span>Game development project</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_46.webp" data-type="image" aria-label="View Mars Survivor — Game development project">
-        <img loading="lazy" decoding="async" alt="" src="Images/image_46.webp">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Mars Survivor</span>
-            <span class="overlay-summary">Game development project</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_69.webp" data-type="image"
+            aria-label="View Artwork — Digital art creation">
+            <img src="Images/image_69.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Artwork <span>Digital art creation</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_69.webp" data-type="image" aria-label="View Artwork — Digital art creation">
-        <img loading="lazy" decoding="async" src="Images/image_69.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Artwork</span>
-            <span class="overlay-summary">Digital art creation</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_67.png" data-type="image"
+            aria-label="View Concept — Game concept and design">
+            <img src="Images/image_67.png" alt="" loading="lazy" decoding="async">
+            <figcaption>Concept <span>Game concept and design</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_67.png" data-type="image" aria-label="View Concept — Game concept and design">
-        <img loading="lazy" decoding="async" src="Images/image_67.png" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Concept</span>
-            <span class="overlay-summary">Game concept and design</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/video_1.mp4" data-type="video"
+            aria-label="View Game Demo — Interactive game demonstration">
+            <video src="Images/preview_video_1.mp4" poster="Images/poster_video_1.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <figcaption>Game Demo <span>Interactive game demonstration</span></figcaption>
+          </button>
 
+          <button type="button" class="tile reveal" data-src="Images/image_17.webp" data-type="image"
+            aria-label="View Game Scene — In-game character and environment">
+            <img src="Images/image_17.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Game Scene <span>In-game character and environment</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/video_1.mp4" data-type="video" aria-label="View Game Demo — Interactive game demonstration">
-        <video src="Images/preview_video_1.mp4" poster="Images/poster_video_1.jpg" muted loop
-          playsinline preload="none" aria-hidden="true"></video>
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Game Demo</span>
-            <span class="overlay-summary">Interactive game demonstration</span>
-          </span>
-        </span>
-      </button>
-      <button type="button" class="portfolio-item" data-src="Images/image_17.webp" data-type="image" aria-label="View Game Scene — In-game character and environment">
-        <img loading="lazy" decoding="async" src="Images/image_17.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Game Scene</span>
-            <span class="overlay-summary">In-game character and environment</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_62.webp" data-type="image"
+            aria-label="View UI Design — User interface and UX">
+            <img src="Images/image_62.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>UI Design <span>User interface and UX</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_62.webp" data-type="image" aria-label="View UI Design — User interface and UX">
-        <img loading="lazy" decoding="async" src="Images/image_62.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">UI Design</span>
-            <span class="overlay-summary">User interface and UX</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_47.webp" data-type="image"
+            aria-label="View Environment — Game environment design">
+            <img src="Images/image_47.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Environment <span>Game environment design</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_47.webp" data-type="image" aria-label="View Environment — Game environment design">
-        <img loading="lazy" decoding="async" src="Images/image_47.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Environment</span>
-            <span class="overlay-summary">Game environment design</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_22.webp" data-type="image"
+            aria-label="View Gameplay — Core gameplay mechanics">
+            <img src="Images/image_22.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Gameplay <span>Core gameplay mechanics</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_22.webp" data-type="image" aria-label="View Gameplay — Core gameplay mechanics">
-        <img loading="lazy" decoding="async" src="Images/image_22.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Gameplay</span>
-            <span class="overlay-summary">Core gameplay mechanics</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_38.webp" data-type="image"
+            aria-label="View Screenshot — Game screenshot">
+            <img src="Images/image_38.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Screenshot <span>Game screenshot</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_38.webp" data-type="image" aria-label="View Screenshot — Game screenshot">
-        <img loading="lazy" decoding="async" src="Images/image_38.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Screenshot</span>
-            <span class="overlay-summary">Game screenshot</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_12.webp" data-type="image"
+            aria-label="View Art — Character and asset artwork">
+            <img src="Images/image_12.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Art <span>Character and asset artwork</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_12.webp" data-type="image" aria-label="View Art — Character and asset artwork">
-        <img loading="lazy" decoding="async" src="Images/image_12.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Art</span>
-            <span class="overlay-summary">Character and asset artwork</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_53.webp" data-type="image"
+            aria-label="View Design — Visual design composition">
+            <img src="Images/image_53.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Design <span>Visual design composition</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_53.webp" data-type="image" aria-label="View Design — Visual design composition">
-        <img loading="lazy" decoding="async" src="Images/image_53.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Design</span>
-            <span class="overlay-summary">Visual design composition</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_28.webp" data-type="image"
+            aria-label="View Level Design — Game level and layout">
+            <img src="Images/image_28.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Level Design <span>Game level and layout</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_28.webp" data-type="image" aria-label="View Level Design — Game level and layout">
-        <img loading="lazy" decoding="async" src="Images/image_28.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Level Design</span>
-            <span class="overlay-summary">Game level and layout</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_63.webp" data-type="image"
+            aria-label="View Treasure Hunt — Game">
+            <img src="Images/image_63.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Treasure Hunt <span>Game</span></figcaption>
+          </button>
 
+          <button type="button" class="tile reveal" data-src="Images/video_10.mp4" data-type="video"
+            aria-label="View Gameplay — Game demonstration">
+            <video src="Images/preview_video_10.mp4" poster="Images/poster_video_10.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <figcaption>Gameplay <span>Game demonstration</span></figcaption>
+          </button>
 
+          <button type="button" class="tile reveal" data-src="Images/image_28.webp" data-type="image"
+            aria-label="View Environment — Game world design">
+            <img src="Images/image_28.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Environment <span>Game world design</span></figcaption>
+          </button>
 
+          <button type="button" class="tile reveal" data-src="Images/image_27.webp" data-type="image"
+            aria-label="View Concept Art — Initial concept design">
+            <img src="Images/image_27.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Concept Art <span>Initial concept design</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_63.webp" data-type="image" aria-label="View Treasure Hunt — Game">
-        <img loading="lazy" decoding="async" src="Images/image_63.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Treasure Hunt</span>
-            <span class="overlay-summary">Game</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_25.webp" data-type="image"
+            aria-label="View Artwork — Digital creation">
+            <img src="Images/image_25.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Artwork <span>Digital creation</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/video_10.mp4" data-type="video" aria-label="View Gameplay — Game demonstration">
-        <video src="Images/preview_video_10.mp4" poster="Images/poster_video_10.jpg" muted loop
-          playsinline preload="none" aria-hidden="true"></video>
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Gameplay</span>
-            <span class="overlay-summary">Game demonstration</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/video_8.mp4" data-type="video"
+            aria-label="View Game Trailer — Game preview footage">
+            <video src="Images/preview_video_8.mp4" poster="Images/poster_video_8.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <figcaption>Game Trailer <span>Game preview footage</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_28.webp" data-type="image" aria-label="View Environment — Game world design">
-        <img loading="lazy" decoding="async" src="Images/image_28.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Environment</span>
-            <span class="overlay-summary">Game world design</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_17.webp" data-type="image"
+            aria-label="View Scene — In-game scene">
+            <img src="Images/image_17.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Scene <span>In-game scene</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_27.webp" data-type="image" aria-label="View Concept Art — Initial concept design">
-        <img loading="lazy" decoding="async" src="Images/image_27.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Concept Art</span>
-            <span class="overlay-summary">Initial concept design</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_16.webp" data-type="image"
+            aria-label="View Asset — Game asset artwork">
+            <img src="Images/image_16.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Asset <span>Game asset artwork</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_25.webp" data-type="image" aria-label="View Artwork — Digital creation">
-        <img loading="lazy" decoding="async" src="Images/image_25.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Artwork</span>
-            <span class="overlay-summary">Digital creation</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_15.webp" data-type="image"
+            aria-label="View 2d Game — Game Screenshot">
+            <img src="Images/image_15.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>2d Game <span>Game Screenshot</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/video_8.mp4" data-type="video" aria-label="View Game Trailer — Game preview footage">
-        <video src="Images/preview_video_8.mp4" poster="Images/poster_video_8.jpg" muted loop
-          playsinline preload="none" aria-hidden="true"></video>
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Game Trailer</span>
-            <span class="overlay-summary">Game preview footage</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_35.webp" data-type="image"
+            aria-label="View Artwork — Creative visual">
+            <img src="Images/image_35.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Artwork <span>Creative visual</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_17.webp" data-type="image" aria-label="View Scene — In-game scene">
-        <img loading="lazy" decoding="async" src="Images/image_17.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Scene</span>
-            <span class="overlay-summary">In-game scene</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_50.webp" data-type="image"
+            aria-label="View Game Art — Game artwork">
+            <img src="Images/image_50.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Game Art <span>Game artwork</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_16.webp" data-type="image" aria-label="View Asset — Game asset artwork">
-        <img loading="lazy" decoding="async" src="Images/image_16.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Asset</span>
-            <span class="overlay-summary">Game asset artwork</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/video_5.mp4" data-type="video"
+            aria-label="View AR App Demo — Augmented reality demonstration">
+            <video src="Images/preview_video_5.mp4" poster="Images/poster_video_5.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <figcaption>AR App Demo <span>Augmented reality demonstration</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_15.webp" data-type="image" aria-label="View 2d Game — Game Screenshot">
-        <img loading="lazy" decoding="async" src="Images/image_15.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">2d Game</span>
-            <span class="overlay-summary">Game Screenshot</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/video_9.mp4" data-type="video"
+            aria-label="View Game Footage — Gameplay video">
+            <video src="Images/preview_video_9.mp4" poster="Images/poster_video_9.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <figcaption>Game Footage <span>Gameplay video</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_35.webp" data-type="image" aria-label="View Artwork — Creative visual">
-        <img loading="lazy" decoding="async" src="Images/image_35.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Artwork</span>
-            <span class="overlay-summary">Creative visual</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_58.webp" data-type="image"
+            aria-label="View Design — Visual composition">
+            <img src="Images/image_58.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Design <span>Visual composition</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_50.webp" data-type="image" aria-label="View Game Art — Game artwork">
-        <img loading="lazy" decoding="async" src="Images/image_50.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Game Art</span>
-            <span class="overlay-summary">Game artwork</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_65.webp" data-type="image"
+            aria-label="View Character — Character design">
+            <img src="Images/image_65.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Character <span>Character design</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/video_5.mp4" data-type="video" aria-label="View AR App Demo — Augmented reality demonstration">
-        <video src="Images/preview_video_5.mp4" poster="Images/poster_video_5.jpg" muted loop
-          playsinline preload="none" aria-hidden="true"></video>
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">AR App Demo</span>
-            <span class="overlay-summary">Augmented reality demonstration</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_6.webp" data-type="image"
+            aria-label="View Artwork — Creative piece">
+            <img src="Images/image_6.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Artwork <span>Creative piece</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/video_9.mp4" data-type="video" aria-label="View Game Footage — Gameplay video">
-        <video src="Images/preview_video_9.mp4" poster="Images/poster_video_9.jpg" muted loop
-          playsinline preload="none" aria-hidden="true"></video>
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Game Footage</span>
-            <span class="overlay-summary">Gameplay video</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/video_6.mp4" data-type="video"
+            aria-label="View Game Demo — Interactive demo">
+            <video src="Images/preview_video_6.mp4" poster="Images/poster_video_6.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <figcaption>Game Demo <span>Interactive demo</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_58.webp" data-type="image" aria-label="View Design — Visual composition">
-        <img loading="lazy" decoding="async" src="Images/image_58.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Design</span>
-            <span class="overlay-summary">Visual composition</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_38.webp" data-type="image"
+            aria-label="View Screenshot — Game screenshot">
+            <img src="Images/image_38.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Screenshot <span>Game screenshot</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_65.webp" data-type="image" aria-label="View Character — Character design">
-        <img loading="lazy" decoding="async" src="Images/image_65.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Character</span>
-            <span class="overlay-summary">Character design</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_32.webp" data-type="image"
+            aria-label="View Design — UI Design">
+            <img src="Images/image_32.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Design <span>UI Design</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_6.webp" data-type="image" aria-label="View Artwork — Creative piece">
-        <img loading="lazy" decoding="async" src="Images/image_6.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Artwork</span>
-            <span class="overlay-summary">Creative piece</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_22.webp" data-type="image"
+            aria-label="View Game Asset — Asset design">
+            <img src="Images/image_22.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Game Asset <span>Asset design</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/video_6.mp4" data-type="video" aria-label="View Game Demo — Interactive demo">
-        <video src="Images/preview_video_6.mp4" poster="Images/poster_video_6.jpg" muted loop
-          playsinline preload="none" aria-hidden="true"></video>
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Game Demo</span>
-            <span class="overlay-summary">Interactive demo</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_30.webp" data-type="image"
+            aria-label="View Pencil Art — Naruto - Dattebayo">
+            <img src="Images/image_30.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Pencil Art <span>Naruto - Dattebayo</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_38.webp" data-type="image" aria-label="View Screenshot — Game screenshot">
-        <img loading="lazy" decoding="async" src="Images/image_38.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Screenshot</span>
-            <span class="overlay-summary">Game screenshot</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_21.webp" data-type="image"
+            aria-label="View Art — Artwork creation">
+            <img src="Images/image_21.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Art <span>Artwork creation</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_32.webp" data-type="image" aria-label="View Design — UI Design">
-        <img loading="lazy" decoding="async" src="Images/image_32.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Design</span>
-            <span class="overlay-summary">UI Design</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_24.webp" data-type="image"
+            aria-label="View Design — Graphic design">
+            <img src="Images/image_24.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Design <span>Graphic design</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_22.webp" data-type="image" aria-label="View Game Asset — Asset design">
-        <img loading="lazy" decoding="async" src="Images/image_22.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Game Asset</span>
-            <span class="overlay-summary">Asset design</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_10.webp" data-type="image"
+            aria-label="View AR Experience — Augmented reality app">
+            <img src="Images/image_10.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>AR Experience <span>Augmented reality app</span></figcaption>
+          </button>
 
+          <button type="button" class="tile reveal" data-src="Images/image_7.webp" data-type="image"
+            aria-label="View Banner — Web banner design">
+            <img src="Images/image_7.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Banner <span>Web banner design</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_30.webp" data-type="image" aria-label="View Pencil Art — Naruto - Dattebayo">
-        <img loading="lazy" decoding="async" src="Images/image_30.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Pencil Art</span>
-            <span class="overlay-summary">Naruto - Dattebayo</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_8.webp" data-type="image"
+            aria-label="View Artwork — Digital art">
+            <img src="Images/image_8.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Artwork <span>Digital art</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_21.webp" data-type="image" aria-label="View Art — Artwork creation">
-        <img loading="lazy" decoding="async" src="Images/image_21.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Art</span>
-            <span class="overlay-summary">Artwork creation</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_54.webp" data-type="image"
+            aria-label="View Poster — Game poster">
+            <img src="Images/image_54.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Poster <span>Game poster</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_24.webp" data-type="image" aria-label="View Design — Graphic design">
-        <img loading="lazy" decoding="async" src="Images/image_24.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Design</span>
-            <span class="overlay-summary">Graphic design</span>
-          </span>
-        </span>
-      </button>
+          <button type="button" class="tile reveal" data-src="Images/image_60.webp" data-type="image"
+            aria-label="View Design — Creative design">
+            <img src="Images/image_60.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Design <span>Creative design</span></figcaption>
+          </button>
 
-      <button type="button" class="portfolio-item" data-src="Images/image_10.webp" data-type="image" aria-label="View AR Experience — Augmented reality app">
-        <img loading="lazy" decoding="async" src="Images/image_10.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">AR Experience</span>
-            <span class="overlay-summary">Augmented reality app</span>
-          </span>
-        </span>
-      </button>
-
-      <button type="button" class="portfolio-item" data-src="Images/image_7.webp" data-type="image" aria-label="View Banner — Web banner design">
-        <img loading="lazy" decoding="async" src="Images/image_7.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Banner</span>
-            <span class="overlay-summary">Web banner design</span>
-          </span>
-        </span>
-      </button>
-
-      <button type="button" class="portfolio-item" data-src="Images/image_8.webp" data-type="image" aria-label="View Artwork — Digital art">
-        <img loading="lazy" decoding="async" src="Images/image_8.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Artwork</span>
-            <span class="overlay-summary">Digital art</span>
-          </span>
-        </span>
-      </button>
-
-      <button type="button" class="portfolio-item" data-src="Images/image_54.webp" data-type="image" aria-label="View Poster — Game poster">
-        <img loading="lazy" decoding="async" src="Images/image_54.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Poster</span>
-            <span class="overlay-summary">Game poster</span>
-          </span>
-        </span>
-      </button>
-
-      <button type="button" class="portfolio-item" data-src="Images/image_60.webp" data-type="image" aria-label="View Design — Creative design">
-        <img loading="lazy" decoding="async" src="Images/image_60.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Design</span>
-            <span class="overlay-summary">Creative design</span>
-          </span>
-        </span>
-      </button>
-
-      <button type="button" class="portfolio-item" data-src="Images/image_70.webp" data-type="image" aria-label="View Final — Project showcase">
-        <img loading="lazy" decoding="async" src="Images/image_70.webp" alt="">
-        <span class="portfolio-overlay">
-          <span class="overlay-content">
-            <span class="overlay-title">Final</span>
-            <span class="overlay-summary">Project showcase</span>
-          </span>
-        </span>
-      </button>
-
+          <button type="button" class="tile reveal" data-src="Images/image_70.webp" data-type="image"
+            aria-label="View Final — Project showcase">
+            <img src="Images/image_70.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Final <span>Project showcase</span></figcaption>
+          </button>
+        </div>
+      </section>
     </div>
   </main>
 
-  <div id="myModal" class="portfolio_popup modal" role="dialog" aria-modal="true" aria-label="Media viewer">
-    <button type="button" class="close" aria-label="Close viewer">&times;</button>
-    <div class="modal-content">
-      <img id="modalImage" alt="">
-      <video id="modalVideo" controls playsinline></video>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; <span id="year">2026</span> Sujal Ramesh</span>
+      <span>Built in Chennai, India</span>
     </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Media viewer">
+    <button type="button" class="close" id="lightboxClose" aria-label="Close viewer">&times;</button>
+    <img id="lightboxImg" alt="" hidden>
+    <video id="lightboxVideo" controls playsinline hidden></video>
   </div>
 
-
-
-  <div class="scroll-container">
-    <div class="scroll-top">
-      <a aria-label="Scroll up" href="#top">
-        <i aria-hidden="true" class="fas fa-arrow-up"></i>
-      </a>
-    </div>
-  </div>
-
-  <script src="./particles.js"></script>
   <script src="./script.js"></script>
-
 </body>
 
 </html>

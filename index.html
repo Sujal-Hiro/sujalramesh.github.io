@@ -5,389 +5,250 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sujal Ramesh — Game Developer &amp; Designer</title>
-  <meta name="description"
-    content="Sujal Ramesh is an Indian game developer and designer building immersive gameplay in Unity and Unreal. Browse shipped games, prototypes and design work." />
+  <meta name="description" content="Indian game developer and designer building immersive gameplay in Unity. Shipped games, prototypes and design work." />
   <meta name="author" content="Sujal Ramesh" />
   <link rel="canonical" href="https://sujalramesh.github.io/" />
-
-  <meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
-
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sujalramesh.github.io/" />
   <meta property="og:title" content="Sujal Ramesh — Game Developer &amp; Designer" />
-  <meta property="og:description"
-    content="Indian game developer and designer building immersive gameplay in Unity and Unreal. Browse shipped games, prototypes and design work." />
+  <meta property="og:description" content="Indian game developer and designer building immersive gameplay in Unity. Shipped games, prototypes and design work." />
   <meta property="og:image" content="https://sujalramesh.github.io/Images/og-cover.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Sujal Ramesh — Game Developer &amp; Designer" />
-  <meta name="twitter:description"
-    content="Indian game developer and designer building immersive gameplay in Unity and Unreal." />
+  <meta name="twitter:description" content="Indian game developer and designer building immersive gameplay in Unity. Shipped games, prototypes and design work." />
   <meta name="twitter:image" content="https://sujalramesh.github.io/Images/og-cover.jpg" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha384-nRgPTkuX86pH8yjPJUAFuASXQSSl2/bBUiNV47vSYpKFxHJhbcrGnmlYpYJMeD7a"
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
-    integrity="sha384-MUdXdzn1OB/0zkr4yGLnCqZ/n9ut5N7Ifes9RP2d5xKsTtcPiuiwthWczWuiqFOn" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"
-    integrity="sha384-3wRRg17hVCopINZVYCqnfbgXE7aFPSvawmLWNPSiUPVx+HxY+yxb5Cwp5mT7RXPD" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="shortcut icon" type="image/png" href="Images/Icon-Website.png">
 </head>
 
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
-  <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
-  <header class="header center">
-    <a href="#top" class="link logo">SR.</a>
-    <nav class="nav center">
-      <ul class="nav__list center">
-        <li class="nav__list-item"><a class="link link--nav" href="#projects">Projects</a></li>
-        <li class="nav__list-item"><a class="link link--nav" href="#portfolio">Portfolio</a></li>
-        <li class="nav__list-item"><a class="link link--nav" href="#skills">Skills</a></li>
-        <li class="nav__list-item"><a class="link link--nav" href="#contact">Contact</a></li>
-      </ul>
-      <button type="button" aria-label="toggle theme" aria-pressed="false" class="btn btn--icon">
-        <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
-      </button>
-      <button type="button" aria-label="toggle navigation" aria-expanded="false"
-        class="btn btn--icon nav__hamburger">
-        <i aria-hidden="true" class="fas fa-bars"></i>
-      </button>
-    </nav>
+  <header class="site-header" id="siteHeader">
+    <div class="wrap">
+      <a href="#top" class="brand">SR<span>.</span></a>
+
+      <nav class="nav" id="nav">
+        <a href="#work">Work</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="icon-btn" id="themeBtn" aria-label="Toggle colour theme" aria-pressed="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" aria-hidden="true" id="themeIcon">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button type="button" class="icon-btn nav-toggle" id="navBtn" aria-label="Toggle menu"
+          aria-expanded="false" aria-controls="nav">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" />
+          </svg>
+        </button>
+      </div>
+    </div>
   </header>
 
   <main id="main">
-    <div class="content">
-      <div class="about center">
-        <h1>Hi, I am <span class="about__name">Sujal Ramesh.</span></h1>
-        <div class="about-container">
-          <span class="text first-text"></span>
-          <span class="text second-text"></span>
-        </div>
-        <h3 class="about__role__more">Enthusiastic, Innovative & Passionate about Games</h3>
-        <p class="about__desc">
-          I'm an Indian game developer and programmer who transformed a childhood passion for gaming into a professional
-          career.
-          After completing my B.Sc. in Game Development, I now work in the industry creating immersive gaming
-          experiences.
-          My journey from playing games extensively in my youth to developing them professionally reflects my dedication
-          to turning creative visions into playable realities.
-          Having navigated the challenges of pursuing game development in India, where such specialized careers are
-          still emerging, I'm committed to pushing the boundaries of interactive entertainment and bringing innovative
-          gameplay to life.
 
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow reveal">Available for work</p>
+        <h1 class="reveal">Hi, I'm <em>Sujal Ramesh</em></h1>
+        <p class="role reveal"><span class="word" id="role">Game Developer</span></p>
+        <p class="reveal">
+          Indian game developer and programmer who turned a childhood spent playing games into a career making
+          them. B.Sc. in Game Development, now shipping in the industry &mdash; building the kind of interactive
+          experiences I grew up obsessing over.
         </p>
-        <h3 class="about_line" id="dailyTagline"></h3>
-        <div class="about__contact center">
-          <a href="https://drive.google.com/file/d/1MkevrUhK9BrIV1J8NdFftmxfhc38uF57/view?usp=sharing"
-            target="_blank" rel="noopener noreferrer">
-            <span class="btn btn--outline">Resume</span>
-          </a>
-          <!-- <a href="https://github.com/Sujal-Hiro" aria-label="github" class="link link--icon">
-              <i aria-hidden="true" class="fab fa-github"></i>
-            </a> -->
-          <a href="https://www.linkedin.com/in/sujalramesh/" aria-label="linkedin" class="link link--icon">
-            <i aria-hidden="true" class="fab fa-linkedin"></i>
-          </a>
+        <div class="actions reveal">
+          <a class="btn btn-primary" href="https://drive.google.com/file/d/1MkevrUhK9BrIV1J8NdFftmxfhc38uF57/view?usp=sharing" target="_blank" rel="noopener noreferrer">R&eacute;sum&eacute; <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/sujalramesh/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="btn btn-ghost" href="mailto:iam.sujalramesh@gmail.com">Email</a>
         </div>
-      </div>
-    </div>
-
-    <section>
-      <div class="bar-container">
-        <span class="text-bar">IDEA | DESIGN | DEVELOP | TEST | PLAY</span>
       </div>
     </section>
 
-    <section id="projects" class="section projects">
-      <h2 class="section__title">Projects</h2>
-      <div class="projects_background">
-        <div class="project-carousel">
-          <div class="carousel-item">
-            <h3>Spin - Android Game</h3>
-            <p class="project__description">
-              2D Hyper Casual game with simple player mechanics, dodgeable enemies and collectable assets. Published on
-              PlayStore under Steadfaststudios.
-            </p>
-          </div>
-          <div class="carousel-item">
-            <h3>Square Madness</h3>
-            <p class="project__description">
-              Straightforward gameplay avoiding enemy bombs and spikes while collecting points. Released on Play Store
-              with focus on UI Design and sprites.
-            </p>
-          </div>
-          <div class="carousel-item">
-            <h3>It's All About Us!</h3>
-            <p class="project__description">
-              Cooperative local multiplayer game with duality theme. Chennai Global Game Jam Winners - 2022. Team
-              leadership experience.
-            </p>
-          </div>
-          <div class="carousel-item">
-            <h3>Try Dodging</h3>
-            <p class="project__description">
-              Hyper-casual endless runner created using BuildBox engine. Fast-paced gameplay with point collection
-              mechanics.
-            </p>
-          </div>
-          <div class="carousel-item">
-            <h3>AR Applications</h3>
-            <p class="project__description">
-              AR-based projects using Unity and Vuforia SDK. Includes piano, solar system, and multiple image target
-              implementations.
-            </p>
-          </div>
-          <div class="carousel-item">
-            <h3>Saloon Shooter</h3>
-            <p class="project__description">
-              FPS game where players compete as gunslingers to shoot bottles within time limits at saloons.
-              Western-themed shooter.
-            </p>
-          </div>
-          <div class="carousel-item">
-            <h3>Treasure Hunt</h3>
-            <p class="project__description">
-              First-person open-world game where players explore maps to discover hidden treasures scattered throughout
-              the environment.
-            </p>
-          </div>
-          <div class="carousel-item">
-            <h3>Mars Survivor</h3>
-            <p class="project__description">
-              Sci-fi adventure set in 2050. Survive on Mars by managing oxygen, finding water, and mining resources in
-              dangerous underground caves.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="more_BTN_projects">
-        <a href="projects.html" class="btn btn--outline">more</a>
-      </div>
-    </section>
-
-    <!--Portfolio-->
-
-    <section id="portfolio" class="section__portfolio reveal">
-      <h2 class="section__title Portfolio">Portfolio</h2>
-      <div class="portfolio_background">
-        <div class="image-carousel">
-          <button type="button" class="carousel-item" data-src="Images/image_35.webp" data-type="image">
-            <img src="Images/image_35.webp" alt="Artwork: Portals created in Photoshop" loading="lazy" decoding="async">
-            <span class="image-title">Portals (Ps)</span>
-          </button>
-          <button type="button" class="carousel-item" data-src="Images/video_9.mp4" data-type="video">
-            <video src="Images/preview_video_9.mp4" poster="Images/poster_video_9.jpg" muted loop playsinline
-              preload="none" aria-label="Gameplay preview: Spin"></video>
-            <span class="image-title">Spin</span>
-          </button>
-          <button type="button" class="carousel-item" data-src="Images/image_28.webp" data-type="image">
-            <img src="Images/image_28.webp" alt="Game screenshot: Mars Survivor" loading="lazy" decoding="async">
-            <span class="image-title">Mars Survivor</span>
-          </button>
-          <button type="button" class="carousel-item" data-src="Images/video_1.mp4" data-type="video">
-            <video src="Images/preview_video_1.mp4" poster="Images/poster_video_1.jpg" muted loop playsinline
-              preload="none" aria-label="Gameplay preview: Treasure Hunt"></video>
-            <span class="image-title">TreasureHunt</span>
-          </button>
-          <button type="button" class="carousel-item" data-src="Images/image_21.webp" data-type="image">
-            <img src="Images/image_21.webp" alt="Artwork: Portal 2.0 created in Photoshop" loading="lazy" decoding="async">
-            <span class="image-title">Portal 2.0 (Ps)</span>
-          </button>
-          <button type="button" class="carousel-item" data-src="Images/image_7.webp" data-type="image">
-            <img src="Images/image_7.webp" alt="Artwork: YouTube banner created in Photoshop" loading="lazy" decoding="async">
-            <span class="image-title">YT Banner (Ps)</span>
-          </button>
-          <button type="button" class="carousel-item" data-src="Images/image_69.webp" data-type="image">
-            <img src="Images/image_69.webp" alt="Artwork: car photo manipulation created in Photoshop" loading="lazy" decoding="async">
-            <span class="image-title">Car Manipulation (Ps)</span>
-          </button>
-          <button type="button" class="carousel-item" data-src="Images/video_2.mp4" data-type="video">
-            <video src="Images/preview_video_2.mp4" poster="Images/poster_video_2.jpg" muted loop playsinline
-              preload="none" aria-label="Gameplay preview: Saloon Shooter"></video>
-            <span class="image-title">Saloon Shooter</span>
-          </button>
-          <button type="button" class="carousel-item" data-src="Images/image_36.webp" data-type="image">
-            <img src="Images/image_36.webp" alt="Game screenshot: TopG Car Madness" loading="lazy" decoding="async">
-            <span class="image-title">TopG Car Madness</span>
-          </button>
-          <button type="button" class="carousel-item" data-src="Images/image_22.webp" data-type="image">
-            <img src="Images/image_22.webp" alt="Game screenshot: Infinite Runner" loading="lazy" decoding="async">
-            <span class="image-title">InfiniteRunner</span>
-          </button>
-          <button type="button" class="carousel-item" data-src="Images/image_17.webp" data-type="image">
-            <img src="Images/image_17.webp" alt="Game screenshot: It's All About Us" loading="lazy" decoding="async">
-            <span class="image-title">It's all about us</span>
-          </button>
-          <button type="button" class="carousel-item" data-src="Images/image_54.webp" data-type="image">
-            <img src="Images/image_54.webp" alt="Artwork: Shang Chi created in Photoshop" loading="lazy" decoding="async">
-            <span class="image-title">Shang Chi (Ps)</span>
-          </button>
-          <button type="button" class="carousel-item" data-src="Images/video_10.mp4" data-type="video">
-            <video src="Images/preview_video_10.mp4" poster="Images/poster_video_10.jpg" muted loop playsinline
-              preload="none" aria-label="Gameplay preview: Isometric Game"></video>
-            <span class="image-title">Isometric Game</span>
-          </button>
-        </div>
-      </div>
-      <div class="more_BTN_portfolio">
-        <a href="portfolio.html" class="btn btn--outline">more</a>
-      </div>
-    </section>
-
-    <div id="myModal" class="modal" role="dialog" aria-modal="true" aria-label="Media viewer">
-      <button type="button" class="close" aria-label="Close viewer">&times;</button>
-      <div class="modal-content">
-        <img id="modalImage" alt="">
-        <video id="modalVideo" controls playsinline></video>
-      </div>
-    </div>
-
-    <!-- Skills -->
-    <section class="section_skills reveal" id="skills">
-      <h2 class="section__title">Skills</h2>
-      <ul class="skills__list">
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-code skill-icon" aria-hidden="true"></i> C#
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-gamepad skill-icon" aria-hidden="true"></i> Unity Engine
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-cogs skill-icon" aria-hidden="true"></i> C++
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fab fa-html5 skill-icon" aria-hidden="true"></i> HTML5
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fab fa-css3-alt skill-icon" aria-hidden="true"></i> CSS3
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-paint-brush skill-icon" aria-hidden="true"></i> Photoshop
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-video skill-icon" aria-hidden="true"></i> Video Editing
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-pencil-ruler skill-icon" aria-hidden="true"></i> UI/UX
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-microchip skill-icon" aria-hidden="true"></i> Shader Programming
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-bug skill-icon" aria-hidden="true"></i> Debugging
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-globe skill-icon" aria-hidden="true"></i> Web Development
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-plug skill-icon" aria-hidden="true"></i> API
-        </li>
+    <div class="marquee" aria-hidden="true">
+      <ul>
+        <li>Idea</li><li>Design</li><li>Develop</li><li>Test</li><li>Play</li><li>Idea</li><li>Design</li><li>Develop</li><li>Test</li><li>Play</li>
       </ul>
+    </div>
+
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Selected work</h2>
+            <p>Eight shipped games and prototypes</p>
+          </div>
+          <a class="link-more" href="projects.html">All projects <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <div class="grid">
+          <article class="card reveal" style="--i:0">
+            <p class="num">01</p>
+            <h3>Spin</h3>
+            <p>2D hyper-casual game with simple player mechanics, dodgeable enemies and collectables. Published on the Play Store under Steadfaststudios.</p>
+            <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span><span class="tag">Published</span></div>
+          </article>
+
+          <article class="card reveal" style="--i:1">
+            <p class="num">02</p>
+            <h3>Square Madness</h3>
+            <p>Avoid enemy bombs and spikes while collecting points. Released on the Play Store with a focus on UI design and sprite work.</p>
+            <div class="tags"><span class="tag">Unity</span><span class="tag">UI Design</span></div>
+          </article>
+
+          <article class="card reveal" style="--i:2">
+            <p class="num">03</p>
+            <h3>It&#x27;s All About Us!</h3>
+            <p>Co-operative local multiplayer built around a duality theme. Winner, Chennai Global Game Jam 2022, where I led the team.</p>
+            <div class="tags"><span class="tag">Game Jam</span><span class="tag">Winner</span><span class="tag">Team Lead</span></div>
+          </article>
+
+          <article class="card reveal" style="--i:3">
+            <p class="num">04</p>
+            <h3>Treasure Hunt</h3>
+            <p>First-person open-world game where players explore hand-built maps to uncover treasures hidden across the environment.</p>
+            <div class="tags"><span class="tag">Unity</span><span class="tag">Open World</span></div>
+          </article>
+
+          <article class="card reveal" style="--i:4">
+            <p class="num">05</p>
+            <h3>AR Applications</h3>
+            <p>A set of AR projects built with Unity and the Vuforia SDK — a playable piano, a solar system, and multi-image-target scenes.</p>
+            <div class="tags"><span class="tag">Vuforia</span><span class="tag">AR</span></div>
+          </article>
+
+          <article class="card reveal" style="--i:5">
+            <p class="num">06</p>
+            <h3>Mars Survivor</h3>
+            <p>Sci-fi survival shooter set on Mars. Handled game design and gameplay programming as part of a collaborating team.</p>
+            <div class="tags"><span class="tag">Unity</span><span class="tag">PC</span></div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- Contact -->
-    <section class="section_contact center reveal" id="contact">
-      <h2 class="section__title_Contact">Contact</h2>
-      <a href="mailto:iam.sujalramesh@gmail.com" class="contactBTN">
-        <span class="btn btn--outline">Email me</span>
-      </a>
+    <section class="section" id="gallery">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Gallery</h2>
+            <p>Screenshots, gameplay clips and Photoshop work</p>
+          </div>
+          <a class="link-more" href="portfolio.html">Full gallery <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <div class="masonry">
+          <button type="button" class="tile reveal" data-src="Images/image_35.webp" data-type="image"
+            aria-label="View Portals — Photoshop">
+            <img src="Images/image_35.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Portals <span>Photoshop</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_1.mp4" data-type="video"
+            aria-label="View Treasure Hunt — Gameplay">
+            <video src="Images/preview_video_1.mp4" poster="Images/poster_video_1.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <figcaption>Treasure Hunt <span>Gameplay</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_28.webp" data-type="image"
+            aria-label="View Mars Survivor — Screenshot">
+            <img src="Images/image_28.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Mars Survivor <span>Screenshot</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_69.webp" data-type="image"
+            aria-label="View Car Manipulation — Photoshop">
+            <img src="Images/image_69.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Car Manipulation <span>Photoshop</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_2.mp4" data-type="video"
+            aria-label="View Saloon Shooter — Gameplay">
+            <video src="Images/preview_video_2.mp4" poster="Images/poster_video_2.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <figcaption>Saloon Shooter <span>Gameplay</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_21.webp" data-type="image"
+            aria-label="View Portal 2.0 — Photoshop">
+            <img src="Images/image_21.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Portal 2.0 <span>Photoshop</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_36.webp" data-type="image"
+            aria-label="View TopG Car Madness — Screenshot">
+            <img src="Images/image_36.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>TopG Car Madness <span>Screenshot</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_10.mp4" data-type="video"
+            aria-label="View Isometric Game — Gameplay">
+            <video src="Images/preview_video_10.mp4" poster="Images/poster_video_10.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <figcaption>Isometric Game <span>Gameplay</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_54.webp" data-type="image"
+            aria-label="View Shang Chi — Photoshop">
+            <img src="Images/image_54.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Shang Chi <span>Photoshop</span></figcaption>
+          </button>
+        </div>
+      </div>
     </section>
 
+    <section class="section" id="skills">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Skills</h2>
+            <p>Engines, languages and tools I work in</p>
+          </div>
+        </div>
+        <ul class="skills reveal">
+          <li>C#</li><li>C++</li><li>Unity Engine</li><li>Shader Programming</li><li>Game Design</li><li>UI/UX</li><li>Photoshop</li><li>Video Editing</li><li>HTML5</li><li>CSS3</li><li>Web Development</li><li>Debugging</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap reveal">
+        <h2>Let's build something playable</h2>
+        <p>Open to game development roles, collaborations and jam teams.</p>
+        <a class="btn btn-primary" href="mailto:iam.sujalramesh@gmail.com">iam.sujalramesh@gmail.com</a>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer">
-    <a class="link footer__link" href="https://www.linkedin.com/in/sujalramesh/" target="_blank"
-      rel="noopener noreferrer">
-      Created By Sujal Ramesh
-    </a>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; <span id="year">2026</span> Sujal Ramesh</span>
+      <span>Built in Chennai, India</span>
+    </div>
   </footer>
 
-  <div class="scroll-container">
-    <div class="scroll-top">
-      <a aria-label="Scroll up" href="#top">
-        <i aria-hidden="true" class="fas fa-arrow-up"></i>
-      </a>
-    </div>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Media viewer">
+    <button type="button" class="close" id="lightboxClose" aria-label="Close viewer">&times;</button>
+    <img id="lightboxImg" alt="" hidden>
+    <video id="lightboxVideo" controls playsinline hidden></video>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-    integrity="sha384-YGnnOBKslPJVs35GG0TtAZ4uO7BHpHlqJhs0XK3k6cuVb6EBtl+8xcvIIOKV5wB+"
-    crossorigin="anonymous"></script>
-
-  <script>
-
-      $(document).ready(function () {
-        $('.image-carousel').slick({
-          infinite: true,
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 2000,
-          centerMode: true,
-          centerPadding: '0',
-          responsive: [
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                infinite: true,
-                dots: true
-              }
-            },
-            {
-              breakpoint: 600,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
-            }
-          ]
-        });
-
-        $('.project-carousel').slick({
-          infinite: true,
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 2000,
-          centerMode: true,
-          centerPadding: '0',
-          responsive: [
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                infinite: true,
-                dots: true
-              }
-            },
-            {
-              breakpoint: 600,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
-            }
-          ]
-        });
-      });
-      </script>
-
-  <script src="./particles.js"></script>
   <script src="./script.js"></script>
 </body>
 

@@ -1,208 +1,254 @@
 'use strict'
 
 /*===============================================
-  Shared behaviour for index / portfolio / projects
-  Every lookup is guarded: the three pages have
-  different DOM and this file is loaded by all of them.
+  Shared behaviour for every page.
+  Each page carries different markup, so every
+  lookup is guarded and every block is optional.
 ===============================================*/
 
-const body = document.body
+const root = document.documentElement
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
 
 /*-----------------------------------------------
   Theme
 -----------------------------------------------*/
 
-const btnThemeIcon = document.querySelector('#btn-theme')
-const btnThemeButton = btnThemeIcon ? btnThemeIcon.closest('button') : null
+const themeBtn = document.getElementById('themeBtn')
+const themeIcon = document.getElementById('themeIcon')
 
-const prefersDark = () =>
-	window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+const MOON = '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>'
+const SUN =
+	'<circle cx="12" cy="12" r="4"/>' +
+	'<path d="M12 3v2m0 14v2M5.6 5.6 7 7m10 10 1.4 1.4M3 12h2m14 0h2M5.6 18.4 7 17m10-10 1.4-1.4"/>'
 
-const applyTheme = theme => {
-	const isDark = theme === 'dark'
+const applyTheme = dark => {
+	root.classList.toggle('dark', dark)
+	root.classList.toggle('light', !dark)
 
-	body.classList.remove('light', 'dark')
-	body.classList.add(isDark ? 'dark' : 'light')
-
-	if (btnThemeIcon) {
-		btnThemeIcon.classList.remove('fa-moon', 'fa-sun')
-		btnThemeIcon.classList.add(isDark ? 'fa-sun' : 'fa-moon')
-	}
-
-	if (btnThemeButton) {
-		btnThemeButton.setAttribute('aria-pressed', String(isDark))
-	}
-
-	window.dispatchEvent(new Event('themeChanged'))
+	if (themeIcon) themeIcon.innerHTML = dark ? SUN : MOON
+	if (themeBtn) themeBtn.setAttribute('aria-pressed', String(dark))
 }
 
-// Stored preference wins; otherwise fall back to the OS setting.
-const storedTheme = localStorage.getItem('portfolio-theme')
-applyTheme(storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : prefersDark() ? 'dark' : 'light')
+// Stored choice wins; otherwise follow the OS.
+const storedTheme = localStorage.getItem('sr-theme')
+applyTheme(storedTheme ? storedTheme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches)
 
-const toggleTheme = () => {
-	const next = body.classList.contains('dark') ? 'light' : 'dark'
-	applyTheme(next)
-	localStorage.setItem('portfolio-theme', next)
-}
-
-if (btnThemeButton) btnThemeButton.addEventListener('click', toggleTheme)
-
-// Follow the OS if the visitor has never made an explicit choice.
-if (window.matchMedia) {
-	window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-		if (!localStorage.getItem('portfolio-theme')) applyTheme(e.matches ? 'dark' : 'light')
+if (themeBtn) {
+	themeBtn.addEventListener('click', () => {
+		const dark = !root.classList.contains('dark')
+		applyTheme(dark)
+		localStorage.setItem('sr-theme', dark ? 'dark' : 'light')
 	})
+}
+
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+	if (!localStorage.getItem('sr-theme')) applyTheme(e.matches)
+})
+
+/*-----------------------------------------------
+  Header: border appears only once scrolled
+-----------------------------------------------*/
+
+const header = document.getElementById('siteHeader')
+
+if (header) {
+	const onScroll = () => header.classList.toggle('is-stuck', window.scrollY > 8)
+	onScroll()
+	addEventListener('scroll', onScroll, { passive: true })
 }
 
 /*-----------------------------------------------
   Mobile navigation
 -----------------------------------------------*/
 
-const navHamburger = document.querySelector('.nav__hamburger')
-const navList = document.querySelector('.nav__list')
-const navHamburgerIcon = navHamburger ? navHamburger.querySelector('i') : null
+const nav = document.getElementById('nav')
+const navBtn = document.getElementById('navBtn')
 
-const setNavOpen = open => {
-	if (!navList) return
-
-	navList.classList.toggle('display-nav-list', open)
-
-	if (navHamburger) navHamburger.setAttribute('aria-expanded', String(open))
-
-	if (navHamburgerIcon) {
-		navHamburgerIcon.classList.remove('fa-bars', 'fa-times')
-		navHamburgerIcon.classList.add(open ? 'fa-times' : 'fa-bars')
+if (nav && navBtn) {
+	const setNav = open => {
+		nav.classList.toggle('is-open', open)
+		navBtn.setAttribute('aria-expanded', String(open))
 	}
-}
 
-if (navHamburger && navList) {
-	setNavOpen(false)
+	navBtn.addEventListener('click', () => setNav(!nav.classList.contains('is-open')))
 
-	navHamburger.addEventListener('click', () =>
-		setNavOpen(!navList.classList.contains('display-nav-list'))
-	)
-
-	// Close after following an in-page link, and on Escape.
-	navList.addEventListener('click', e => {
-		if (e.target.closest('a')) setNavOpen(false)
+	nav.addEventListener('click', e => {
+		if (e.target.closest('a')) setNav(false)
 	})
 
 	document.addEventListener('keydown', e => {
-		if (e.key === 'Escape' && navList.classList.contains('display-nav-list')) {
-			setNavOpen(false)
-			navHamburger.focus()
+		if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+			setNav(false)
+			navBtn.focus()
 		}
 	})
 }
 
 /*-----------------------------------------------
-  Scroll to top
+  Rotating role in the hero
 -----------------------------------------------*/
 
-const btnScrollTop = document.querySelector('.scroll-top')
+const roleWrap = document.getElementById('role')
 
-if (btnScrollTop) {
-	const scrollUp = () => {
-		const scrolled = window.scrollY || document.documentElement.scrollTop
-		btnScrollTop.style.display = scrolled > 500 ? 'block' : 'none'
-	}
+if (roleWrap && !reduceMotion) {
+	const roles = ['Game Developer', 'Game Designer', 'Gameplay Programmer', 'Gamer']
+	let index = 0
 
-	scrollUp()
-	document.addEventListener('scroll', scrollUp, { passive: true })
+	setInterval(() => {
+		index = (index + 1) % roles.length
+		roleWrap.textContent = roles[index]
+		// Restart the entrance animation on the same node.
+		roleWrap.style.animation = 'none'
+		void roleWrap.offsetWidth
+		roleWrap.style.animation = ''
+	}, 2800)
 }
 
 /*-----------------------------------------------
-  Lightbox modal (images + video)
+  Scroll reveal — fires once per element
 -----------------------------------------------*/
 
-const modal = document.getElementById('myModal')
-const modalImg = document.getElementById('modalImage')
-const modalVideo = document.getElementById('modalVideo')
-let modalOpener = null
+const reveals = document.querySelectorAll('.reveal')
 
-function openModal(src, type, label) {
-	if (!modal) return
+if (reveals.length) {
+	if ('IntersectionObserver' in window && !reduceMotion) {
+		const revealObserver = new IntersectionObserver(
+			(entries, obs) => {
+				entries.forEach(entry => {
+					if (!entry.isIntersecting) return
+					entry.target.classList.add('is-visible')
+					obs.unobserve(entry.target)
+				})
+			},
+			{ rootMargin: '0px 0px -10% 0px' }
+		)
+		reveals.forEach(el => revealObserver.observe(el))
+	} else {
+		reveals.forEach(el => el.classList.add('is-visible'))
+	}
+}
 
-	modalOpener = document.activeElement
+/*-----------------------------------------------
+  Inline video: play only while on screen.
+  Every clip ships preload="none" + a poster, so
+  nothing downloads until it scrolls into view.
+-----------------------------------------------*/
 
-	if (type === 'image' && modalImg) {
-		modalImg.style.display = 'block'
-		modalImg.src = src
-		modalImg.alt = label || ''
-		if (modalVideo) modalVideo.style.display = 'none'
-	} else if (type === 'video' && modalVideo) {
-		if (modalImg) modalImg.style.display = 'none'
-		modalVideo.style.display = 'block'
-		modalVideo.src = src
-		if (label) modalVideo.setAttribute('aria-label', label)
-		modalVideo.preload = 'auto'
-		modalVideo.load()
-		modalVideo.play().catch(() => {
-			/* autoplay may be blocked; controls are visible either way */
+const inlineVideos = document.querySelectorAll('video:not(#lightboxVideo)')
+
+if (inlineVideos.length && 'IntersectionObserver' in window) {
+	const videoObserver = new IntersectionObserver(
+		entries => {
+			entries.forEach(entry => {
+				const video = entry.target
+
+				if (entry.isIntersecting) {
+					if (video.preload === 'none') video.preload = 'metadata'
+					video.play().catch(() => {
+						/* autoplay can be refused; the poster still shows */
+					})
+				} else {
+					video.pause()
+				}
+			})
+		},
+		{ threshold: 0.3 }
+	)
+
+	inlineVideos.forEach(v => videoObserver.observe(v))
+}
+
+/*-----------------------------------------------
+  Gallery filters
+-----------------------------------------------*/
+
+const filters = document.querySelectorAll('.filter')
+
+if (filters.length) {
+	filters.forEach(btn => {
+		btn.addEventListener('click', () => {
+			const want = btn.dataset.filter
+
+			filters.forEach(b => b.setAttribute('aria-pressed', String(b === btn)))
+
+			document.querySelectorAll('.tile').forEach(tile => {
+				tile.classList.toggle('is-hidden', want !== 'all' && tile.dataset.type !== want)
+			})
 		})
-	}
-
-	modal.style.display = 'block'
-	body.style.overflow = 'hidden'
-
-	const closeBtn = modal.querySelector('.close')
-	if (closeBtn) closeBtn.focus()
+	})
 }
 
-function closeModal() {
-	if (!modal) return
+/*-----------------------------------------------
+  Lightbox
+-----------------------------------------------*/
 
-	modal.style.display = 'none'
-	body.style.overflow = ''
+const box = document.getElementById('lightbox')
+const boxImg = document.getElementById('lightboxImg')
+const boxVid = document.getElementById('lightboxVideo')
+const boxClose = document.getElementById('lightboxClose')
+let opener = null
 
-	if (modalVideo) {
-		modalVideo.pause()
-		modalVideo.currentTime = 0
-		// Drop the source so the browser stops buffering a closed video.
-		modalVideo.removeAttribute('src')
-		modalVideo.load()
+if (box) {
+	const openBox = (src, type, label) => {
+		opener = document.activeElement
+		const isVideo = type === 'video'
+
+		boxImg.hidden = isVideo
+		boxVid.hidden = !isVideo
+
+		if (isVideo) {
+			boxVid.src = src
+			boxVid.setAttribute('aria-label', label || 'Video')
+			boxVid.play().catch(() => {})
+		} else {
+			boxImg.src = src
+			boxImg.alt = label || ''
+		}
+
+		box.classList.add('is-open')
+		document.body.style.overflow = 'hidden'
+		boxClose.focus()
 	}
 
-	if (modalImg) modalImg.removeAttribute('src')
+	const closeBox = () => {
+		box.classList.remove('is-open')
+		document.body.style.overflow = ''
 
-	if (modalOpener && typeof modalOpener.focus === 'function') modalOpener.focus()
-	modalOpener = null
-}
+		boxVid.pause()
+		// Drop the source so a closed video stops buffering.
+		boxVid.removeAttribute('src')
+		boxVid.load()
+		boxImg.removeAttribute('src')
 
-if (modal) {
-	// Delegated: every gallery tile carries data-src / data-type.
+		if (opener && typeof opener.focus === 'function') opener.focus()
+		opener = null
+	}
+
+	// Delegated: every tile carries data-src / data-type.
 	document.addEventListener('click', e => {
 		const trigger = e.target.closest('[data-src]')
 		if (!trigger) return
 
 		e.preventDefault()
-
-		// Reuse the tile's own label so the lightbox content isn't unnamed.
-		const label = (trigger.getAttribute('aria-label') || trigger.textContent || '')
-			.replace(/^View\s+/i, '')
-			.trim()
-
-		openModal(trigger.dataset.src, trigger.dataset.type || 'image', label)
+		const label = (trigger.getAttribute('aria-label') || '').replace(/^View\s+/i, '').trim()
+		openBox(trigger.dataset.src, trigger.dataset.type, label)
 	})
 
-	const closeBtn = modal.querySelector('.close')
-	if (closeBtn) closeBtn.addEventListener('click', closeModal)
+	boxClose.addEventListener('click', closeBox)
 
-	// Click the backdrop (but not the media itself) to dismiss.
-	modal.addEventListener('click', e => {
-		if (e.target === modal) closeModal()
+	box.addEventListener('click', e => {
+		if (e.target === box) closeBox()
 	})
 
 	document.addEventListener('keydown', e => {
-		if (e.key === 'Escape' && modal.style.display === 'block') closeModal()
+		if (e.key === 'Escape' && box.classList.contains('is-open')) closeBox()
 	})
 
-	// Keep focus inside the dialog while it is open.
-	modal.addEventListener('keydown', e => {
+	// Keep focus inside the dialog.
+	box.addEventListener('keydown', e => {
 		if (e.key !== 'Tab') return
 
-		const focusable = modal.querySelectorAll('button, [href], video[controls], [tabindex]:not([tabindex="-1"])')
+		const focusable = [...box.querySelectorAll('button, video[controls]')].filter(el => !el.hidden)
 		if (!focusable.length) return
 
 		const first = focusable[0]
@@ -219,99 +265,8 @@ if (modal) {
 }
 
 /*-----------------------------------------------
-  Hero: rotating role + tagline (index only)
+  Footer year
 -----------------------------------------------*/
 
-const roleText = document.querySelector('.second-text')
-
-if (roleText) {
-	const roles = ['Game Developer', 'Game Designer', 'Sports Enthusiast', 'Gamer']
-	let roleIndex = 0
-
-	roleText.textContent = roles[0]
-	setInterval(() => {
-		roleIndex = (roleIndex + 1) % roles.length
-		roleText.textContent = roles[roleIndex]
-	}, 4000)
-}
-
-const taglineElement = document.getElementById('dailyTagline')
-
-if (taglineElement) {
-	const taglines = [
-		"Turning the 'what if' moments into games you can actually play.",
-		"Making games that I'd lose sleep playing.",
-		'Creating the experiences I dreamed about as a kid.',
-		'Crafting digital chaos and calling it entertainment.',
-		'From playing games all night to making them all day.',
-	]
-
-	let taglineIndex = 0
-
-	const dropIn = () => {
-		taglineElement.classList.add('tagline-drop-in')
-		setTimeout(() => taglineElement.classList.remove('tagline-drop-in'), 1000)
-	}
-
-	taglineElement.textContent = taglines[0]
-	dropIn()
-
-	setInterval(() => {
-		taglineElement.classList.add('tagline-fly-out')
-
-		setTimeout(() => {
-			taglineIndex = (taglineIndex + 1) % taglines.length
-			taglineElement.textContent = taglines[taglineIndex]
-			taglineElement.classList.remove('tagline-fly-out')
-			dropIn()
-		}, 500)
-	}, 10000)
-}
-
-/*-----------------------------------------------
-  Scroll reveal
------------------------------------------------*/
-
-const revealTargets = document.querySelectorAll('.reveal')
-
-if (revealTargets.length) {
-	if ('IntersectionObserver' in window) {
-		const revealObserver = new IntersectionObserver(
-			entries => entries.forEach(entry => entry.target.classList.toggle('active', entry.isIntersecting)),
-			{ rootMargin: '0px 0px -150px 0px' }
-		)
-		revealTargets.forEach(el => revealObserver.observe(el))
-	} else {
-		revealTargets.forEach(el => el.classList.add('active'))
-	}
-}
-
-/*-----------------------------------------------
-  Play inline videos only while they are on screen.
-  Every <video> ships with preload="none" + a poster,
-  so nothing is fetched until it actually scrolls in.
------------------------------------------------*/
-
-const inlineVideos = document.querySelectorAll('video:not(#modalVideo)')
-
-if (inlineVideos.length && 'IntersectionObserver' in window) {
-	const videoObserver = new IntersectionObserver(
-		entries => {
-			entries.forEach(entry => {
-				const video = entry.target
-
-				if (entry.isIntersecting) {
-					if (video.preload === 'none') video.preload = 'metadata'
-					video.play().catch(() => {
-						/* ignore autoplay rejection */
-					})
-				} else {
-					video.pause()
-				}
-			})
-		},
-		{ threshold: 0.25 }
-	)
-
-	inlineVideos.forEach(video => videoObserver.observe(video))
-}
+const year = document.getElementById('year')
+if (year) year.textContent = new Date().getFullYear()

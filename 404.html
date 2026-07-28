@@ -6,43 +6,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Page not found — Sujal Ramesh</title>
   <meta name="description" content="That page does not exist." />
+  <meta name="author" content="Sujal Ramesh" />
+  <link rel="canonical" href="https://sujalramesh.github.io/404.html" />
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sujalramesh.github.io/404.html" />
+  <meta property="og:title" content="Page not found — Sujal Ramesh" />
+  <meta property="og:description" content="That page does not exist." />
+  <meta property="og:image" content="https://sujalramesh.github.io/Images/og-cover.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Page not found — Sujal Ramesh" />
+  <meta name="twitter:description" content="That page does not exist." />
+  <meta name="twitter:image" content="https://sujalramesh.github.io/Images/og-cover.jpg" />
   <meta name="robots" content="noindex" />
-  <meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha384-nRgPTkuX86pH8yjPJUAFuASXQSSl2/bBUiNV47vSYpKFxHJhbcrGnmlYpYJMeD7a"
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="shortcut icon" type="image/png" href="Images/Icon-Website.png">
 </head>
 
 <body id="top">
-  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="header center">
-    <a href="index.html" class="link logo">SR.</a>
-    <nav class="nav center">
-      <ul class="nav__list center">
-        <li class="nav__list-item"><a class="link link--nav" href="index.html">Home</a></li>
-      </ul>
-      <button type="button" aria-label="toggle theme" aria-pressed="false" class="btn btn--icon">
-        <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
-      </button>
-    </nav>
+  <header class="site-header" id="siteHeader">
+    <div class="wrap">
+      <a href="index.html" class="brand">SR<span>.</span></a>
+
+      <nav class="nav" id="nav">
+        <a href="index.html">Home</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="icon-btn" id="themeBtn" aria-label="Toggle colour theme" aria-pressed="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" aria-hidden="true" id="themeIcon">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <main id="main" class="section_contact center">
+  <main id="main" class="notfound">
     <h1>404</h1>
-    <p class="about__desc">That page doesn't exist — it may have moved or never been here.</p>
-    <a href="index.html">
-      <span class="btn btn--outline">Back to home</span>
-    </a>
+    <p>That page doesn't exist &mdash; it may have moved, or never been here.</p>
+    <p><a class="btn btn-primary" href="index.html">Back to home</a></p>
   </main>
 
-  <script src="./particles.js"></script>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; <span id="year">2026</span> Sujal Ramesh</span>
+      <span>Built in Chennai, India</span>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Media viewer">
+    <button type="button" class="close" id="lightboxClose" aria-label="Close viewer">&times;</button>
+    <img id="lightboxImg" alt="" hidden>
+    <video id="lightboxVideo" controls playsinline hidden></video>
+  </div>
+
   <script src="./script.js"></script>
 </body>
 

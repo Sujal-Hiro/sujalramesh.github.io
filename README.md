@@ -13,26 +13,43 @@ python -m http.server 8000
 
 | File | Purpose |
 |---|---|
-| `index.html` | Home — intro, project carousel, portfolio carousel, skills, contact |
+| `index.html` | Home — intro, selected work, gallery, skills, contact |
 | `projects.html` | Long-form write-ups for the eight main projects |
 | `portfolio.html` | Full gallery of screenshots, gameplay clips and artwork |
 | `404.html` | Not-found page (GitHub Pages serves this automatically) |
 
-`styles.css`, `script.js` and `particles.js` are shared by all pages, so every
-DOM lookup in the scripts is guarded — the three pages have different markup.
+`styles.css` and `script.js` are shared by all four pages, so every DOM lookup
+in the script is guarded — each page carries different markup and any block
+whose elements are absent simply does not run.
 
-## Responsive tiers
+## Design system
 
-Defined once in `styles.css` and used consistently:
+All tokens live in `:root` at the top of `styles.css`. Four rules the design
+holds to:
 
-| Tier | Query |
-|---|---|
-| Phone | `max-width: 640px` |
-| Tablet | `max-width: 1024px` |
-| Wide | `min-width: 1440px` |
+1. **One accent colour.** It appears a handful of times per screen — the
+   primary button, the dot in the eyebrow pill, the nav underline, the period
+   in the logo. Neutrals carry everything else.
+2. **Hairlines, not shadows.** Surfaces separate with a 1px border. The card
+   grid uses a 1px `gap` over a border-coloured background, so dividers never
+   double up.
+3. **Motion is short (≤400ms), small (≤12px), and never loops** except the
+   marquee, which pauses on hover. Scroll reveals fire once and then unobserve.
+4. **One fluid type scale** (`--step--1` … `--step-3`), no magic pixel sizes.
 
-`--header-h` drives both the header height and `scroll-padding-top`, so nav
-anchors land correctly at every size.
+Theme is class-based on `<html>` (`.light` / `.dark`) with a
+`prefers-color-scheme` fallback on `:root`, so the first paint already matches
+the visitor's OS before `script.js` runs.
+
+### Breakpoints
+
+| Tier | Query | What changes |
+|---|---|---|
+| Phone | `max-width: 560px` | single-column masonry, stacked section heads |
+| Tablet | `max-width: 900px` | nav collapses to a slide-down panel, 2-column masonry, project rows stack |
+
+`--header-h` drives the sticky header height, `scroll-padding-top`, and the
+mobile nav panel offset, so anchors land correctly at every size.
 
 ## Media pipeline
 
