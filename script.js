@@ -109,7 +109,7 @@ if (nav && navBtn) {
 const roleWrap = document.getElementById('role')
 
 if (roleWrap && !reduceMotion) {
-	const roles = ['Game Developer', 'Game Designer', 'Gameplay Programmer', 'Gamer']
+	const roles = ['Unity Developer', 'Gameplay Programmer', 'Game Designer', 'Technical Artist']
 	let index = 0
 
 	setInterval(() => {
