@@ -175,52 +175,6 @@ if (spotlights.length && !reduceMotion && matchMedia('(hover: hover)').matches) 
 }
 
 /*-----------------------------------------------
-  Count-up stats, once, when scrolled into view
------------------------------------------------*/
-
-const stats = document.querySelectorAll('[data-count]')
-
-if (stats.length) {
-	const runCount = el => {
-		const target = Number(el.dataset.count)
-
-		if (reduceMotion) {
-			el.textContent = String(target)
-			return
-		}
-
-		const duration = 1100
-		const start = performance.now()
-
-		const step = now => {
-			const t = Math.min((now - start) / duration, 1)
-			// easeOutCubic — fast then settling, reads as deliberate
-			const eased = 1 - Math.pow(1 - t, 3)
-			el.textContent = String(Math.round(target * eased))
-			if (t < 1) requestAnimationFrame(step)
-		}
-
-		requestAnimationFrame(step)
-	}
-
-	if ('IntersectionObserver' in window) {
-		const countObserver = new IntersectionObserver(
-			(entries, obs) => {
-				entries.forEach(entry => {
-					if (!entry.isIntersecting) return
-					runCount(entry.target)
-					obs.unobserve(entry.target)
-				})
-			},
-			{ threshold: 0.6 }
-		)
-		stats.forEach(el => countObserver.observe(el))
-	} else {
-		stats.forEach(el => (el.textContent = el.dataset.count))
-	}
-}
-
-/*-----------------------------------------------
   Index children so CSS can stagger them
 -----------------------------------------------*/
 
