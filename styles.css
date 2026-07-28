@@ -25,6 +25,8 @@
   --fg-muted: #6b6b72;
   --accent: #d10a46;
   --accent-soft: rgba(209, 10, 70, 0.08);
+  --ok: #15803d;
+  --ok-soft: rgba(21, 128, 61, 0.1);
 
   --radius: 14px;
   --radius-sm: 8px;
@@ -55,6 +57,8 @@
   --fg-muted: #9a9aa2;
   --accent: #ff3366;
   --accent-soft: rgba(255, 51, 102, 0.12);
+  --ok: #4ade80;
+  --ok-soft: rgba(74, 222, 128, 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -68,6 +72,8 @@
     --fg-muted: #9a9aa2;
     --accent: #ff3366;
     --accent-soft: rgba(255, 51, 102, 0.12);
+    --ok: #4ade80;
+    --ok-soft: rgba(74, 222, 128, 0.12);
   }
 }
 
@@ -284,12 +290,36 @@ h3 {
   margin-bottom: 1.75rem;
 }
 
+.eyebrow {
+  color: var(--fg);
+  border-color: color-mix(in srgb, var(--ok) 35%, transparent);
+  background: var(--ok-soft);
+}
+
 .eyebrow::before {
   content: '';
-  width: 6px;
-  height: 6px;
+  position: relative;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--ok);
+  box-shadow: 0 0 0 0 var(--ok);
+  animation: livePulse 2.4s var(--ease) infinite;
+}
+
+/* One ring, expanding and fading — a status light, not a beacon. */
+@keyframes livePulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 60%, transparent);
+  }
+
+  70% {
+    box-shadow: 0 0 0 7px transparent;
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
 }
 
 .hero h1 {
@@ -1035,41 +1065,44 @@ h3 {
   opacity: 1;
 }
 
-/*------------------- hero meta strip -------------------*/
+/*------------------- hero status line -------------------*/
 
-/* A spec sheet, not vanity metrics: label/value rows separated by hairlines.
-   Two columns on wide screens, stacked labels on phones. */
-.meta {
-  margin-top: clamp(2.5rem, 6vw, 3.5rem);
-  border-top: 1px solid var(--border);
-}
-
-.meta > div {
-  display: grid;
-  grid-template-columns: 8.5rem 1fr;
-  gap: 1rem;
-  align-items: baseline;
-  padding-block: 0.9rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.meta dt {
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.status {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: clamp(2.25rem, 5vw, 3rem);
+  padding: 0.85rem 1.15rem;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  width: fit-content;
+  max-width: 100%;
+  font-size: var(--step--1);
   color: var(--fg-muted);
 }
 
-.meta dd {
-  margin: 0;
-  font-size: var(--step--1);
+.status b {
   color: var(--fg);
+  font-weight: 500;
+}
+
+.status .dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+  animation: livePulse 2.4s var(--ease) infinite;
 }
 
 @media (max-width: 560px) {
-  .meta > div {
-    grid-template-columns: 1fr;
-    gap: 0.25rem;
+  .status {
+    border-radius: var(--radius);
+    align-items: flex-start;
+  }
+
+  .status .dot {
+    margin-top: 0.45em;
   }
 }
 
@@ -1176,22 +1209,21 @@ h3 {
 
 .skill-groups {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 12px;
 }
 
 .skill-group {
-  background: var(--bg);
-  padding: clamp(1.5rem, 3vw, 2rem);
-  transition: background-color 0.25s var(--ease);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(1.35rem, 3vw, 1.75rem);
+  transition: background-color 0.25s var(--ease), border-color 0.25s var(--ease);
 }
 
 .skill-group:hover {
   background: var(--surface-2);
+  border-color: var(--border-strong);
 }
 
 .skill-group h3 {
@@ -1263,6 +1295,11 @@ h3 {
   .site-header::after {
     display: none;
   }
+
+  .eyebrow::before,
+  .status .dot {
+    animation: none;
+  }
 }
 
 /* A wrapper whose lines are masked must not fade or shift itself — the mask
@@ -1270,4 +1307,129 @@ h3 {
 .reveal:has(.line-mask) {
   opacity: 1;
   transform: none;
+}
+
+/*==============================================================
+  Mini game
+  A small playable break. Targets are real <button>s, so the
+  whole thing works with Tab + Enter as well as a mouse.
+==============================================================*/
+
+.game {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.game__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  padding: 0.9rem 1.15rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.game__stat {
+  font-size: var(--step--1);
+  color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.game__stat b {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.game__bar .btn {
+  margin-left: auto;
+  padding: 0.5em 1.1em;
+}
+
+.game__board {
+  position: relative;
+  height: clamp(260px, 42vw, 360px);
+  background:
+    radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0) 0 0 / 26px 26px;
+  touch-action: manipulation;
+}
+
+.game__hint {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 0.35rem;
+  text-align: center;
+  padding: 1rem;
+  color: var(--fg-muted);
+  font-size: var(--step--1);
+}
+
+.game__hint strong {
+  color: var(--fg);
+  font-size: var(--step-1);
+  font-weight: 500;
+}
+
+.target {
+  position: absolute;
+  width: var(--size, 44px);
+  height: var(--size, 44px);
+  margin: calc(var(--size, 44px) / -2) 0 0 calc(var(--size, 44px) / -2);
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  padding: 0;
+  animation: pop 0.18s var(--ease);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+  transition: transform 0.1s var(--ease);
+}
+
+.target:hover {
+  transform: scale(1.08);
+}
+
+.target.is-bonus {
+  background: var(--ok);
+  box-shadow: 0 0 0 4px var(--ok-soft);
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+}
+
+/* Score bump on a hit, drawn where the target was. */
+.floater {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--accent);
+  pointer-events: none;
+  animation: floatUp 0.6s var(--ease) forwards;
+}
+
+.floater.is-bonus {
+  color: var(--ok);
+}
+
+@keyframes floatUp {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -160%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .target,
+  .floater {
+    animation: none;
+  }
 }

@@ -40,6 +40,7 @@
         <a href="#gallery">Gallery</a>
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
+        <a href="#play">Play</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -65,7 +66,7 @@
 
     <section class="hero">
       <div class="wrap">
-        <p class="eyebrow reveal">Available for work</p>
+        <p class="eyebrow reveal">Open to collabs &amp; new roles</p>
         <h1 class="reveal">
           <span class="line-mask"><span style="--l:0">Hi, I'm</span></span>
           <span class="line-mask"><span style="--l:1"><em>Sujal Ramesh</em></span></span>
@@ -82,24 +83,10 @@
           <a class="btn btn-ghost" href="mailto:iam.sujalramesh@gmail.com">Email</a>
         </div>
 
-        <dl class="meta reveal">
-          <div>
-            <dt>Currently</dt>
-            <dd>Unity Developer at The Alter Office, Bengaluru</dd>
-          </div>
-          <div>
-            <dt>Focus</dt>
-            <dd>Gameplay systems, custom shaders &amp; VFX, editor tooling</dd>
-          </div>
-          <div>
-            <dt>Shipped</dt>
-            <dd>8+ games and prototypes, two live on Google Play</dd>
-          </div>
-          <div>
-            <dt>Recognition</dt>
-            <dd>1st place, Global Game Jam 2022 &mdash; Chennai</dd>
-          </div>
-        </dl>
+        <p class="status reveal">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Currently building games at <b>The Alter Office</b>, Bengaluru</span>
+        </p>
       </div>
     </section>
 
@@ -341,6 +328,32 @@
           <div class="skill-group reveal">
             <h3>Team</h3>
             <ul><li>Team Leadership</li><li>Collaboration</li><li>Technical Docs</li><li>QA &amp; Debugging</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="play">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Take a shot</h2>
+            <p>Twenty seconds. Small green ones are worth three.</p>
+          </div>
+        </div>
+
+        <div class="game reveal">
+          <div class="game__bar">
+            <p class="game__stat">Score <b id="gameScore">0</b></p>
+            <p class="game__stat">Time <b id="gameTime">20</b>s</p>
+            <p class="game__stat">Best <b id="gameBest">0</b></p>
+            <button type="button" class="btn btn-primary" id="gameStart">Start</button>
+          </div>
+          <div class="game__board" id="gameBoard">
+            <div class="game__hint" id="gameHint">
+              <strong>Hit the targets</strong>
+              <span>Click them, or Tab and hit Enter.</span>
+            </div>
           </div>
         </div>
       </div>
