@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minimal theme preview — Sujal Ramesh</title>
+  <meta name="description" content="Design preview. Not linked from the live site." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles-minimal.css" />
+  <link rel="shortcut icon" type="image/png" href="Images/Icon-Website.png">
+</head>
+
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="wrap">
+      <a href="#top" class="brand">SR<span>.</span></a>
+
+      <nav class="nav" id="nav">
+        <a href="#work">Work</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div style="display:flex; gap:.5rem; align-items:center;">
+        <button type="button" class="icon-btn" id="themeBtn" aria-label="Toggle colour theme" aria-pressed="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" aria-hidden="true" id="themeIcon">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button type="button" class="icon-btn nav-toggle" id="navBtn" aria-label="Toggle menu" aria-expanded="false"
+          aria-controls="nav">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================ hero ============================ -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow reveal">Available for work</p>
+        <h1 class="reveal">Hi, I'm <em>Sujal Ramesh</em></h1>
+        <p class="role reveal"><span class="word" id="role">Game Developer</span></p>
+        <p class="reveal">
+          Indian game developer and programmer who turned a childhood spent playing games into a career making
+          them. B.Sc. in Game Development, now shipping in the industry — building the kind of interactive
+          experiences I grew up obsessing over.
+        </p>
+        <div class="actions reveal">
+          <a class="btn btn-primary"
+            href="https://drive.google.com/file/d/1MkevrUhK9BrIV1J8NdFftmxfhc38uF57/view?usp=sharing"
+            target="_blank" rel="noopener noreferrer">
+            Résumé
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" aria-hidden="true">
+              <path d="M7 17 17 7M9 7h8v8" />
+            </svg>
+          </a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/sujalramesh/" target="_blank"
+            rel="noopener noreferrer">LinkedIn</a>
+          <a class="btn btn-ghost" href="mailto:iam.sujalramesh@gmail.com">Email</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== marquee =========================== -->
+    <div class="marquee" aria-hidden="true">
+      <ul>
+        <li>Idea</li>
+        <li>Design</li>
+        <li>Develop</li>
+        <li>Test</li>
+        <li>Play</li>
+        <li>Idea</li>
+        <li>Design</li>
+        <li>Develop</li>
+        <li>Test</li>
+        <li>Play</li>
+      </ul>
+    </div>
+
+    <!-- =========================== projects =========================== -->
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Selected work</h2>
+            <p>Eight shipped games and prototypes</p>
+          </div>
+          <a class="link-more" href="projects.html">
+            All projects
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="grid">
+          <article class="card reveal" style="--i:0">
+            <p class="num">01</p>
+            <h3>Spin</h3>
+            <p>2D hyper-casual game with simple player mechanics, dodgeable enemies and collectables. Published on
+              the Play Store under Steadfaststudios.</p>
+            <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span><span
+                class="tag">Published</span></div>
+          </article>
+
+          <article class="card reveal" style="--i:1">
+            <p class="num">02</p>
+            <h3>Square Madness</h3>
+            <p>Avoid enemy bombs and spikes while collecting points. Released on the Play Store with a focus on UI
+              design and sprite work.</p>
+            <div class="tags"><span class="tag">Unity</span><span class="tag">UI Design</span></div>
+          </article>
+
+          <article class="card reveal" style="--i:2">
+            <p class="num">03</p>
+            <h3>It's All About Us!</h3>
+            <p>Co-operative local multiplayer built around a duality theme. Winner, Chennai Global Game Jam 2022,
+              where I led the team.</p>
+            <div class="tags"><span class="tag">Game Jam</span><span class="tag">Winner</span><span
+                class="tag">Team Lead</span></div>
+          </article>
+
+          <article class="card reveal" style="--i:3">
+            <p class="num">04</p>
+            <h3>Treasure Hunt</h3>
+            <p>First-person open-world game where players explore hand-built maps to uncover treasures hidden across
+              the environment.</p>
+            <div class="tags"><span class="tag">Unity</span><span class="tag">Open World</span></div>
+          </article>
+
+          <article class="card reveal" style="--i:4">
+            <p class="num">05</p>
+            <h3>AR Applications</h3>
+            <p>A set of AR projects built with Unity and the Vuforia SDK — a playable piano, a solar system, and
+              multi-image-target scenes.</p>
+            <div class="tags"><span class="tag">Vuforia</span><span class="tag">AR</span></div>
+          </article>
+
+          <article class="card reveal" style="--i:5">
+            <p class="num">06</p>
+            <h3>Mars Survivor</h3>
+            <p>Sci-fi survival shooter set on Mars. Handled game design and gameplay programming as part of a
+              collaborating team.</p>
+            <div class="tags"><span class="tag">Unity</span><span class="tag">PC</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== gallery =========================== -->
+    <section class="section" id="gallery">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Gallery</h2>
+            <p>Screenshots, gameplay clips and Photoshop work</p>
+          </div>
+          <a class="link-more" href="portfolio.html">
+            Full gallery
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="masonry">
+          <button type="button" class="tile reveal" data-src="Images/image_35.webp" data-type="image"
+            aria-label="View Portals, Photoshop artwork">
+            <img src="Images/image_35.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Portals <span>Photoshop</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_1.mp4" data-type="video"
+            aria-label="View Treasure Hunt gameplay">
+            <video src="Images/preview_video_1.mp4" poster="Images/poster_video_1.jpg" muted loop playsinline
+              preload="none" aria-hidden="true"></video>
+            <figcaption>Treasure Hunt <span>Gameplay</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_28.webp" data-type="image"
+            aria-label="View Mars Survivor screenshot">
+            <img src="Images/image_28.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Mars Survivor <span>Screenshot</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_69.webp" data-type="image"
+            aria-label="View car photo manipulation">
+            <img src="Images/image_69.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Car Manipulation <span>Photoshop</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_2.mp4" data-type="video"
+            aria-label="View Saloon Shooter gameplay">
+            <video src="Images/preview_video_2.mp4" poster="Images/poster_video_2.jpg" muted loop playsinline
+              preload="none" aria-hidden="true"></video>
+            <figcaption>Saloon Shooter <span>Gameplay</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_21.webp" data-type="image"
+            aria-label="View Portal 2.0 artwork">
+            <img src="Images/image_21.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Portal 2.0 <span>Photoshop</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_36.webp" data-type="image"
+            aria-label="View TopG Car Madness screenshot">
+            <img src="Images/image_36.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>TopG Car Madness <span>Screenshot</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_10.mp4" data-type="video"
+            aria-label="View isometric game footage">
+            <video src="Images/preview_video_10.mp4" poster="Images/poster_video_10.jpg" muted loop playsinline
+              preload="none" aria-hidden="true"></video>
+            <figcaption>Isometric Game <span>Gameplay</span></figcaption>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_54.webp" data-type="image"
+            aria-label="View Shang Chi artwork">
+            <img src="Images/image_54.webp" alt="" loading="lazy" decoding="async">
+            <figcaption>Shang Chi <span>Photoshop</span></figcaption>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ skills ============================ -->
+    <section class="section" id="skills">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Skills</h2>
+            <p>Engines, languages and tools I work in</p>
+          </div>
+        </div>
+        <ul class="skills reveal">
+          <li>C#</li>
+          <li>C++</li>
+          <li>Unity Engine</li>
+          <li>Shader Programming</li>
+          <li>Game Design</li>
+          <li>UI/UX</li>
+          <li>Photoshop</li>
+          <li>Video Editing</li>
+          <li>HTML5</li>
+          <li>CSS3</li>
+          <li>Web Development</li>
+          <li>Debugging</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =========================== contact =========================== -->
+    <section class="contact" id="contact">
+      <div class="wrap reveal">
+        <h2>Let's build something playable</h2>
+        <p>Open to game development roles, collaborations and jam teams.</p>
+        <a class="btn btn-primary" href="mailto:iam.sujalramesh@gmail.com">iam.sujalramesh@gmail.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© <span id="year">2026</span> Sujal Ramesh</span>
+      <span>Built in Chennai, India</span>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Media viewer">
+    <button type="button" class="close" id="lightboxClose" aria-label="Close viewer">&times;</button>
+    <img id="lightboxImg" alt="" hidden>
+    <video id="lightboxVideo" controls playsinline hidden></video>
+  </div>
+
+  <script>
+    (() => {
+      'use strict'
+
+      /* ---------------- theme ---------------- */
+      const root = document.documentElement
+      const themeBtn = document.getElementById('themeBtn')
+      const themeIcon = document.getElementById('themeIcon')
+
+      const MOON = 'M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z'
+      const SUN = 'M12 3v2m0 14v2M5.6 5.6 7 7m10 10 1.4 1.4M3 12h2m14 0h2M5.6 18.4 7 17m10-10 1.4-1.4'
+
+      const applyTheme = dark => {
+        root.classList.toggle('dark', dark)
+        root.classList.toggle('light', !dark)
+        themeIcon.innerHTML = `<path d="${dark ? SUN : MOON}"/>` +
+          (dark ? '<circle cx="12" cy="12" r="4"/>' : '')
+        themeBtn.setAttribute('aria-pressed', String(dark))
+      }
+
+      const stored = localStorage.getItem('minimal-theme')
+      applyTheme(stored ? stored === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches)
+
+      themeBtn.addEventListener('click', () => {
+        const dark = !root.classList.contains('dark')
+        applyTheme(dark)
+        localStorage.setItem('minimal-theme', dark ? 'dark' : 'light')
+      })
+
+      /* ---------------- header shadow on scroll ---------------- */
+      const header = document.getElementById('siteHeader')
+      const onScroll = () => header.classList.toggle('is-stuck', window.scrollY > 8)
+      onScroll()
+      addEventListener('scroll', onScroll, { passive: true })
+
+      /* ---------------- mobile nav ---------------- */
+      const nav = document.getElementById('nav')
+      const navBtn = document.getElementById('navBtn')
+
+      const setNav = open => {
+        nav.classList.toggle('is-open', open)
+        navBtn.setAttribute('aria-expanded', String(open))
+      }
+
+      navBtn.addEventListener('click', () => setNav(!nav.classList.contains('is-open')))
+      nav.addEventListener('click', e => { if (e.target.closest('a')) setNav(false) })
+
+      /* ---------------- rotating role ---------------- */
+      const roleEl = document.getElementById('role')
+      const roles = ['Game Developer', 'Game Designer', 'Gameplay Programmer', 'Gamer']
+      let r = 0
+
+      setInterval(() => {
+        r = (r + 1) % roles.length
+        const next = roleEl.cloneNode()
+        next.textContent = roles[r]
+        roleEl.replaceWith(next)
+        next.id = 'role'
+        // re-trigger the entrance animation on the fresh node
+        next.style.animation = 'none'
+        void next.offsetWidth
+        next.style.animation = ''
+      }, 2800)
+
+      /* ---------------- scroll reveal ---------------- */
+      const reveals = document.querySelectorAll('.reveal')
+
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries, obs) => {
+          entries.forEach(en => {
+            if (!en.isIntersecting) return
+            en.target.classList.add('is-visible')
+            obs.unobserve(en.target)      // reveal once, don't flicker on scroll-up
+          })
+        }, { rootMargin: '0px 0px -10% 0px' })
+        reveals.forEach(el => io.observe(el))
+      } else {
+        reveals.forEach(el => el.classList.add('is-visible'))
+      }
+
+      /* ---------------- inline video: play only when visible ---------------- */
+      const vids = document.querySelectorAll('.tile video')
+
+      if ('IntersectionObserver' in window) {
+        const vo = new IntersectionObserver(entries => {
+          entries.forEach(en => {
+            const v = en.target
+            if (en.isIntersecting) {
+              if (v.preload === 'none') v.preload = 'metadata'
+              v.play().catch(() => { })
+            } else {
+              v.pause()
+            }
+          })
+        }, { threshold: 0.3 })
+        vids.forEach(v => vo.observe(v))
+      }
+
+      /* ---------------- lightbox ---------------- */
+      const box = document.getElementById('lightbox')
+      const boxImg = document.getElementById('lightboxImg')
+      const boxVid = document.getElementById('lightboxVideo')
+      const boxClose = document.getElementById('lightboxClose')
+      let opener = null
+
+      const open = (src, type, label) => {
+        opener = document.activeElement
+        const isVideo = type === 'video'
+
+        boxImg.hidden = isVideo
+        boxVid.hidden = !isVideo
+
+        if (isVideo) {
+          boxVid.src = src
+          boxVid.setAttribute('aria-label', label)
+          boxVid.play().catch(() => { })
+        } else {
+          boxImg.src = src
+          boxImg.alt = label
+        }
+
+        box.classList.add('is-open')
+        document.body.style.overflow = 'hidden'
+        boxClose.focus()
+      }
+
+      const close = () => {
+        box.classList.remove('is-open')
+        document.body.style.overflow = ''
+        boxVid.pause()
+        boxVid.removeAttribute('src')
+        boxVid.load()
+        boxImg.removeAttribute('src')
+        if (opener) opener.focus()
+        opener = null
+      }
+
+      document.addEventListener('click', e => {
+        const t = e.target.closest('[data-src]')
+        if (!t) return
+        e.preventDefault()
+        open(t.dataset.src, t.dataset.type, (t.getAttribute('aria-label') || '').replace(/^View\s+/i, ''))
+      })
+
+      boxClose.addEventListener('click', close)
+      box.addEventListener('click', e => { if (e.target === box) close() })
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && box.classList.contains('is-open')) close()
+      })
+
+      document.getElementById('year').textContent = new Date().getFullYear()
+    })()
+  </script>
+</body>
+
+</html>
