@@ -402,51 +402,120 @@ h3 {
   transform: translateY(-2px);
 }
 
-/*--------------------------- marquee ---------------------------*/
+/*--------------------------- process ---------------------------*/
 
-/* Replaces the rainbow gradient bar. Same idea, one colour,
-   and it actually moves instead of just sitting there. */
-.marquee {
+/* Idea -> Design -> Develop -> Test -> Play is a pipeline, so it reads as one
+   instead of scrolling past. A highlight walks the steps on an 8s cycle and a
+   short accent segment travels the rail in sync. Nothing loops by translating
+   a duplicate, so there is no seam to stutter on. */
+
+.process {
   border-block: 1px solid var(--border);
-  padding-block: 1.1rem;
+  padding-block: clamp(1.5rem, 4vw, 2.25rem);
   overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
 
-.marquee ul {
+.process ol {
   display: flex;
-  gap: 3rem;
-  width: max-content;
-  animation: slide 32s linear infinite;
+  justify-content: space-between;
+  gap: 0.5rem;
+  list-style: none;
+  position: relative;
+  counter-reset: step;
 }
 
-.marquee li {
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-  font-size: var(--step--1);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  white-space: nowrap;
-}
-
-.marquee li::after {
+/* The rail sits behind the pips, inset so it never pokes past the end steps. */
+.process ol::before {
   content: '';
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--accent);
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 5px;
+  height: 1px;
+  background: var(--border);
 }
 
-@keyframes slide {
+.process ol::after {
+  content: '';
+  position: absolute;
+  left: 6%;
+  top: 5px;
+  width: 14%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: railSweep 8s linear infinite;
+}
+
+@keyframes railSweep {
   to {
-    transform: translateX(-50%);
+    transform: translateX(600%);
   }
 }
 
-.marquee:hover ul {
-  animation-play-state: paused;
+.process li {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: var(--step--1);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  white-space: nowrap;
+  animation: stepText 8s linear infinite;
+  animation-delay: calc(var(--s) * 1.6s - 8s);
+}
+
+.process .pip {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  animation: stepPip 8s linear infinite;
+  animation-delay: calc(var(--s) * 1.6s - 8s);
+}
+
+/* Each step owns 20% of the cycle; the short hold plus quick handover keeps
+   the eye moving without anything flashing. */
+@keyframes stepText {
+
+  0%,
+  16% {
+    color: var(--fg);
+  }
+
+  22%,
+  100% {
+    color: var(--fg-muted);
+  }
+}
+
+@keyframes stepPip {
+
+  0%,
+  16% {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.35);
+  }
+
+  22%,
+  100% {
+    background: var(--bg);
+    border-color: var(--border-strong);
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 560px) {
+  .process li {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    gap: 0.7rem;
+  }
 }
 
 /*-------------------------- sections --------------------------*/
@@ -818,8 +887,14 @@ h3 {
     transform: none;
   }
 
-  .marquee ul {
+  .process li,
+  .process .pip,
+  .process ol::after {
     animation: none;
+  }
+
+  .process ol::after {
+    display: none;
   }
 }
 
