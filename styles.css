@@ -966,3 +966,299 @@ h3 {
 .notfound p {
   color: var(--fg-muted);
 }
+
+/*==============================================================
+  Animation layer
+  Everything here is opt-in via a class, short (<=700ms), and
+  switched off wholesale by the reduced-motion block at the end.
+==============================================================*/
+
+/*------------------- scroll progress -------------------*/
+
+/* 2px accent line across the top of the sticky header.
+   Width is driven by --progress, written from JS on rAF. */
+.site-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: var(--progress, 0%);
+  background: var(--accent);
+  transition: width 0.1s linear;
+}
+
+/*------------------- masked line reveal -------------------*/
+
+/* Each line sits in an overflow-hidden box and slides up into it,
+   so the text appears from behind a hard edge rather than fading. */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+
+.line-mask > span {
+  display: block;
+  transform: translateY(105%);
+  transition: transform 0.7s var(--ease);
+  transition-delay: calc(var(--l, 0) * 90ms);
+}
+
+.is-visible .line-mask > span,
+.line-mask.is-visible > span {
+  transform: none;
+}
+
+/*------------------- cursor spotlight -------------------*/
+
+/* A soft accent glow that tracks the pointer across the card grid.
+   Pure CSS paint; JS only writes --mx / --my. */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%),
+      var(--accent-soft), transparent 70%);
+}
+
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/*------------------- stat counters -------------------*/
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.75rem, 6vw, 4rem);
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  padding-top: clamp(1.75rem, 4vw, 2.5rem);
+  border-top: 1px solid var(--border);
+}
+
+.stat dt {
+  font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat dt span {
+  color: var(--accent);
+}
+
+.stat dd {
+  margin: 0.45rem 0 0;
+  font-size: var(--step--1);
+  color: var(--fg-muted);
+}
+
+/*------------------- section heading rule -------------------*/
+
+/* The divider under each section heading draws itself in. */
+.section-head {
+  position: relative;
+  border-bottom: 0;
+}
+
+.section-head::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 0;
+  background: var(--border-strong);
+  transition: width 0.8s var(--ease) 0.1s;
+}
+
+.section-head.is-visible::after {
+  width: 100%;
+}
+
+/*------------------- experience timeline -------------------*/
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 2.75rem);
+  padding-left: 1.75rem;
+}
+
+/* The rail grows downward as the section scrolls into view. */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: var(--border);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 1s var(--ease);
+}
+
+.timeline.is-visible::before {
+  transform: scaleY(1);
+}
+
+.tl-item {
+  position: relative;
+}
+
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -1.75rem;
+  top: 0.5em;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  transition: border-color 0.25s var(--ease), background-color 0.25s var(--ease);
+}
+
+.tl-item:hover::before {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.tl-when {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 0.35rem;
+}
+
+.tl-item h3 {
+  font-size: var(--step-1);
+  font-weight: 500;
+  margin-bottom: 0.15rem;
+}
+
+.tl-where {
+  font-size: var(--step--1);
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.tl-item p {
+  color: var(--fg-muted);
+  font-size: var(--step--1);
+  max-width: var(--measure);
+  margin: 0;
+}
+
+/*------------------- grouped skills -------------------*/
+
+.skill-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.skill-group {
+  background: var(--bg);
+  padding: clamp(1.5rem, 3vw, 2rem);
+  transition: background-color 0.25s var(--ease);
+}
+
+.skill-group:hover {
+  background: var(--surface-2);
+}
+
+.skill-group h3 {
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 1.1rem;
+}
+
+.skill-group ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+/* Pills fade up in sequence once the group is revealed. */
+.skill-group li {
+  font-size: var(--step--1);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.4em 0.95em;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease),
+    border-color 0.2s var(--ease), color 0.2s var(--ease);
+  transition-delay: calc(var(--i, 0) * 40ms);
+}
+
+.skill-group.is-visible li {
+  opacity: 1;
+  transform: none;
+}
+
+.skill-group li:hover {
+  color: var(--fg);
+  border-color: var(--border-strong);
+}
+
+/*------------------- tile stagger -------------------*/
+
+.masonry .tile {
+  transition-delay: calc(var(--i, 0) * 45ms);
+}
+
+/*------------------- reduced motion -------------------*/
+
+@media (prefers-reduced-motion: reduce) {
+
+  .line-mask > span {
+    transform: none;
+  }
+
+  .section-head::after {
+    width: 100%;
+  }
+
+  .timeline::before {
+    transform: scaleY(1);
+  }
+
+  .skill-group li {
+    opacity: 1;
+    transform: none;
+  }
+
+  .spotlight::before,
+  .site-header::after {
+    display: none;
+  }
+}
+
+/* A wrapper whose lines are masked must not fade or shift itself — the mask
+   IS the animation, and fading the parent hides it. */
+.reveal:has(.line-mask) {
+  opacity: 1;
+  transform: none;
+}

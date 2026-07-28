@@ -38,6 +38,7 @@
       <nav class="nav" id="nav">
         <a href="#work">Work</a>
         <a href="#gallery">Gallery</a>
+        <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -65,7 +66,10 @@
     <section class="hero">
       <div class="wrap">
         <p class="eyebrow reveal">Available for work</p>
-        <h1 class="reveal">Hi, I'm <em>Sujal Ramesh</em></h1>
+        <h1 class="reveal">
+          <span class="line-mask"><span style="--l:0">Hi, I'm</span></span>
+          <span class="line-mask"><span style="--l:1"><em>Sujal Ramesh</em></span></span>
+        </h1>
         <p class="role reveal"><span class="word" id="role">Game Developer</span></p>
         <p class="reveal">
           Indian game developer and programmer who turned a childhood spent playing games into a career making
@@ -77,6 +81,25 @@
           <a class="btn btn-ghost" href="https://www.linkedin.com/in/sujalramesh/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a class="btn btn-ghost" href="mailto:iam.sujalramesh@gmail.com">Email</a>
         </div>
+
+        <dl class="stats reveal">
+          <div class="stat">
+            <dt><span data-count="8">0</span>+</dt>
+            <dd>Games &amp; prototypes shipped</dd>
+          </div>
+          <div class="stat">
+            <dt><span data-count="2">0</span></dt>
+            <dd>Titles published on Play Store</dd>
+          </div>
+          <div class="stat">
+            <dt><span data-count="1">0</span></dt>
+            <dd>Game jam won</dd>
+          </div>
+          <div class="stat">
+            <dt><span data-count="40">0</span>+</dt>
+            <dd>Pieces of art &amp; footage</dd>
+          </div>
+        </dl>
       </div>
     </section>
 
@@ -96,7 +119,7 @@
           <a class="link-more" href="projects.html">All projects <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
 
-        <div class="grid">
+        <div class="grid spotlight">
           <article class="card reveal" style="--i:0">
             <p class="num">01</p>
             <h3>Spin</h3>
@@ -213,6 +236,51 @@
       </div>
     </section>
 
+    <section class="section" id="experience">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Experience</h2>
+            <p>Where I've built things, and what came out of it</p>
+          </div>
+        </div>
+
+        <div class="timeline reveal">
+          <article class="tl-item">
+            <p class="tl-when">Present</p>
+            <h3>Game Developer</h3>
+            <p class="tl-where">Games industry &mdash; India</p>
+            <p>Building immersive gameplay professionally, turning design concepts into playable systems and
+              shipping them to real players.</p>
+          </article>
+
+          <article class="tl-item">
+            <p class="tl-when">2022</p>
+            <h3>Team Lead &mdash; Global Game Jam</h3>
+            <p class="tl-where">Chennai, India &mdash; Winners</p>
+            <p>Led the team behind <em>It's All About Us!</em>, a co-operative local multiplayer game built around a
+              duality theme. Won the Chennai site of Global Game Jam 2022.</p>
+          </article>
+
+          <article class="tl-item">
+            <p class="tl-when">Independent</p>
+            <h3>Co-founder &amp; Developer</h3>
+            <p class="tl-where">Steadfaststudios</p>
+            <p>Published <em>Spin</em> and <em>Square Madness</em> to the Google Play Store with a friend &mdash;
+              handling gameplay programming, UI design, sprite work and release.</p>
+          </article>
+
+          <article class="tl-item">
+            <p class="tl-when">Education</p>
+            <h3>B.Sc. Game Development</h3>
+            <p class="tl-where">India</p>
+            <p>Formal grounding in engines, gameplay programming and design, pursued in a country where the
+              specialisation was still emerging.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="skills">
       <div class="wrap">
         <div class="section-head reveal">
@@ -221,9 +289,37 @@
             <p>Engines, languages and tools I work in</p>
           </div>
         </div>
-        <ul class="skills reveal">
-          <li>C#</li><li>C++</li><li>Unity Engine</li><li>Shader Programming</li><li>Game Design</li><li>UI/UX</li><li>Photoshop</li><li>Video Editing</li><li>HTML5</li><li>CSS3</li><li>Web Development</li><li>Debugging</li>
-        </ul>
+        <div class="skill-groups spotlight">
+          <div class="skill-group reveal">
+            <h3>Engines &amp; Languages</h3>
+            <ul><li>C#</li><li>C++</li><li>Unity Engine</li><li>Shader Programming</li></ul>
+          </div>
+
+          <div class="skill-group reveal">
+            <h3>Design</h3>
+            <ul><li>Game Design</li><li>Level Design</li><li>UI/UX</li><li>Prototyping</li></ul>
+          </div>
+
+          <div class="skill-group reveal">
+            <h3>Art &amp; Media</h3>
+            <ul><li>Photoshop</li><li>Sprite Work</li><li>Video Editing</li><li>VFX &amp; Particles</li></ul>
+          </div>
+
+          <div class="skill-group reveal">
+            <h3>Platforms</h3>
+            <ul><li>Android</li><li>PC</li><li>AR / Vuforia</li><li>Google Play Release</li></ul>
+          </div>
+
+          <div class="skill-group reveal">
+            <h3>Web</h3>
+            <ul><li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>Git</li></ul>
+          </div>
+
+          <div class="skill-group reveal">
+            <h3>Ways of working</h3>
+            <ul><li>Team Leadership</li><li>Collaboration</li><li>Debugging</li><li>Game Jams</li></ul>
+          </div>
+        </div>
       </div>
     </section>
 

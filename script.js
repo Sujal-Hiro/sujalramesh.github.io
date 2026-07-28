@@ -46,15 +46,33 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
 })
 
 /*-----------------------------------------------
-  Header: border appears only once scrolled
+  Header: border on scroll + reading-progress rule
 -----------------------------------------------*/
 
 const header = document.getElementById('siteHeader')
 
 if (header) {
-	const onScroll = () => header.classList.toggle('is-stuck', window.scrollY > 8)
-	onScroll()
+	let ticking = false
+
+	const paint = () => {
+		const max = document.documentElement.scrollHeight - innerHeight
+		const pct = max > 0 ? (scrollY / max) * 100 : 0
+
+		header.classList.toggle('is-stuck', scrollY > 8)
+		header.style.setProperty('--progress', `${pct.toFixed(2)}%`)
+		ticking = false
+	}
+
+	// Coalesce scroll events into one paint per frame.
+	const onScroll = () => {
+		if (ticking) return
+		ticking = true
+		requestAnimationFrame(paint)
+	}
+
+	paint()
 	addEventListener('scroll', onScroll, { passive: true })
+	addEventListener('resize', onScroll)
 }
 
 /*-----------------------------------------------
@@ -127,6 +145,92 @@ if (reveals.length) {
 		reveals.forEach(el => el.classList.add('is-visible'))
 	}
 }
+
+/*-----------------------------------------------
+  Cursor spotlight on the card / skill grids.
+  JS only writes two custom properties; the glow
+  itself is a CSS radial-gradient.
+-----------------------------------------------*/
+
+const spotlights = document.querySelectorAll('.spotlight')
+
+if (spotlights.length && !reduceMotion && matchMedia('(hover: hover)').matches) {
+	spotlights.forEach(el => {
+		let frame = 0
+
+		el.addEventListener(
+			'pointermove',
+			e => {
+				if (frame) return
+				frame = requestAnimationFrame(() => {
+					const r = el.getBoundingClientRect()
+					el.style.setProperty('--mx', `${e.clientX - r.left}px`)
+					el.style.setProperty('--my', `${e.clientY - r.top}px`)
+					frame = 0
+				})
+			},
+			{ passive: true }
+		)
+	})
+}
+
+/*-----------------------------------------------
+  Count-up stats, once, when scrolled into view
+-----------------------------------------------*/
+
+const stats = document.querySelectorAll('[data-count]')
+
+if (stats.length) {
+	const runCount = el => {
+		const target = Number(el.dataset.count)
+
+		if (reduceMotion) {
+			el.textContent = String(target)
+			return
+		}
+
+		const duration = 1100
+		const start = performance.now()
+
+		const step = now => {
+			const t = Math.min((now - start) / duration, 1)
+			// easeOutCubic — fast then settling, reads as deliberate
+			const eased = 1 - Math.pow(1 - t, 3)
+			el.textContent = String(Math.round(target * eased))
+			if (t < 1) requestAnimationFrame(step)
+		}
+
+		requestAnimationFrame(step)
+	}
+
+	if ('IntersectionObserver' in window) {
+		const countObserver = new IntersectionObserver(
+			(entries, obs) => {
+				entries.forEach(entry => {
+					if (!entry.isIntersecting) return
+					runCount(entry.target)
+					obs.unobserve(entry.target)
+				})
+			},
+			{ threshold: 0.6 }
+		)
+		stats.forEach(el => countObserver.observe(el))
+	} else {
+		stats.forEach(el => (el.textContent = el.dataset.count))
+	}
+}
+
+/*-----------------------------------------------
+  Index children so CSS can stagger them
+-----------------------------------------------*/
+
+document.querySelectorAll('.skill-group ul').forEach(list => {
+	[...list.children].forEach((li, i) => li.style.setProperty('--i', i))
+})
+
+document.querySelectorAll('.masonry').forEach(grid => {
+	[...grid.children].forEach((tile, i) => tile.style.setProperty('--i', i % 6))
+})
 
 /*-----------------------------------------------
   Inline video: play only while on screen.
