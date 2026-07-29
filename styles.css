@@ -1261,16 +1261,57 @@ h3 {
 }
 
 .skill-group {
+  position: relative;
+  overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: clamp(1.35rem, 3vw, 1.75rem);
-  transition: background-color 0.25s var(--ease), border-color 0.25s var(--ease);
+  transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease),
+    transform 0.3s var(--ease);
+}
+
+/* A hairline draws across the top edge on hover — the same "draw in"
+   gesture the section headings use, so the page has one vocabulary. */
+.skill-group::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.45s var(--ease);
 }
 
 .skill-group:hover {
   background: var(--surface-2);
   border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+.skill-group:hover::before {
+  width: 100%;
+}
+
+.skill-group__head {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.15rem;
+}
+
+.skill-icon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--fg-muted);
+  transition: color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.skill-group:hover .skill-icon {
+  color: var(--accent);
+  transform: scale(1.12);
 }
 
 .skill-group h3 {
@@ -1279,25 +1320,48 @@ h3 {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--fg-muted);
-  margin-bottom: 1.1rem;
+  margin: 0;
+  transition: color 0.3s var(--ease);
+}
+
+.skill-group:hover h3 {
+  color: var(--fg);
+}
+
+/* Index sits at the far edge, quiet until you engage with the card. */
+.skill-group__n {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+  color: var(--border-strong);
+  transition: color 0.3s var(--ease);
+}
+
+.skill-group:hover .skill-group__n {
+  color: var(--fg-muted);
 }
 
 .skill-group ul {
   display: flex;
   flex-wrap: wrap;
+  align-content: flex-start;
   gap: 0.45rem;
 }
 
 /* Pills fade up in sequence once the group is revealed. */
 .skill-group li {
   font-size: var(--step--1);
+  color: var(--fg-muted);
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 100px;
   padding: 0.4em 0.95em;
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease),
-    border-color 0.2s var(--ease), color 0.2s var(--ease);
+  transition: opacity 0.4s var(--ease), transform 0.2s var(--ease),
+    border-color 0.2s var(--ease), color 0.2s var(--ease),
+    background-color 0.2s var(--ease);
   transition-delay: calc(var(--i, 0) * 40ms);
 }
 
@@ -1306,9 +1370,13 @@ h3 {
   transform: none;
 }
 
+/* No delay on the way back out, or hover feels laggy. */
 .skill-group li:hover {
   color: var(--fg);
-  border-color: var(--border-strong);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+  transition-delay: 0s;
 }
 
 /*------------------- tile stagger -------------------*/
@@ -1333,7 +1401,9 @@ h3 {
     transform: scaleY(1);
   }
 
-  .skill-group li {
+  .skill-group li,
+  .skill-group:hover,
+  .skill-group:hover .skill-icon {
     opacity: 1;
     transform: none;
   }
