@@ -99,7 +99,7 @@
         <div class="section-head reveal">
           <div>
             <h2>Hold the line</h2>
-            <p>Hold the arrows or A / D to move. The gun fires itself.</p>
+            <p>Hold the arrows or A / D to move. The gun fires itself. P pauses.</p>
           </div>
         </div>
 
@@ -109,7 +109,10 @@
             <p class="game__stat">Wave <b id="siWave">1</b></p>
             <p class="game__stat">Lives <b id="siLives">3</b></p>
             <p class="game__stat">Best <b id="siBest">0</b></p>
-            <button type="button" class="btn btn-primary" id="siStart">Start</button>
+            <div class="game__actions">
+              <button type="button" class="btn btn-ghost" id="siPause" hidden>Pause</button>
+              <button type="button" class="btn btn-primary" id="siStart">Start</button>
+            </div>
           </div>
 
           <div class="game__screen">

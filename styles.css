@@ -1675,6 +1675,18 @@ h3 {
   padding: 0.5em 1.1em;
 }
 
+/* Two buttons: the group takes the auto margin, not each button, or the
+   pair would be pushed apart to opposite ends of the bar. */
+.game__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.game__bar .game__actions .btn {
+  margin-left: 0;
+}
+
 .game__board {
   position: relative;
   height: clamp(260px, 42vw, 360px);

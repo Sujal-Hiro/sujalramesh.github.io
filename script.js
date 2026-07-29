@@ -617,6 +617,7 @@ if (siCanvas && siCanvas.getContext) {
 	const livesEl = document.getElementById('siLives')
 	const bestEl = document.getElementById('siBest')
 	const startBtn = document.getElementById('siStart')
+	const pauseBtn = document.getElementById('siPause')
 	const hint = document.getElementById('siHint')
 	const pad = document.getElementById('siPad')
 
@@ -762,6 +763,7 @@ if (siCanvas && siCanvas.getContext) {
 
 		startBtn.textContent = 'Play again'
 		startBtn.disabled = false
+		pauseBtn.hidden = true
 		draw()
 	}
 
@@ -952,6 +954,8 @@ if (siCanvas && siCanvas.getContext) {
 		hint.hidden = true
 		startBtn.disabled = true
 		startBtn.textContent = 'Playing…'
+		pauseBtn.hidden = false
+		pauseBtn.textContent = 'Pause'
 		running = true
 		paused = false
 		runLoop()
@@ -974,11 +978,20 @@ if (siCanvas && siCanvas.getContext) {
 		if (!running) return
 
 		// Space does nothing now the gun is automatic, but it is still
-		// swallowed mid-round so the page does not jump out from under you.
+		// swallowed mid-round so the page does not jump out from under you
+		// — and so it cannot re-trigger a focused Pause button.
 		if (e.key === ' ') {
 			e.preventDefault()
 			return
 		}
+
+		if (e.key === 'p' || e.key === 'P') {
+			e.preventDefault()
+			setPaused(!paused)
+			return
+		}
+
+		if (paused) return
 
 		const action = MOVE[e.key]
 		if (!action) return
@@ -996,7 +1009,7 @@ if (siCanvas && siCanvas.getContext) {
 		let padPointer = null
 
 		const apply = el => {
-			const btn = el && el.closest ? el.closest('[data-si]') : null
+			const btn = paused || !el || !el.closest ? null : el.closest('[data-si]')
 			held.left = !!btn && btn.dataset.si === 'left'
 			held.right = !!btn && btn.dataset.si === 'right'
 		}
@@ -1036,14 +1049,14 @@ if (siCanvas && siCanvas.getContext) {
 	}
 
 	siCanvas.addEventListener('pointerdown', e => {
-		if (!running) return
+		if (!running || paused) return
 		steering = true
 		siCanvas.setPointerCapture(e.pointerId)
 		steer(e)
 	})
 
 	siCanvas.addEventListener('pointermove', e => {
-		if (steering && running) steer(e)
+		if (steering && running && !paused) steer(e)
 	})
 
 	const stopSteering = () => {
@@ -1053,19 +1066,42 @@ if (siCanvas && siCanvas.getContext) {
 	siCanvas.addEventListener('pointerup', stopSteering)
 	siCanvas.addEventListener('pointercancel', stopSteering)
 
-	/* Never burn frames on a game nobody is looking at. */
-	const setPaused = value => {
+	/* Never burn frames on a game nobody is looking at — and say so, or a
+	   round that silently froze reads as a bug. */
+	const setPaused = (value, reason) => {
+		if (!running || paused === value) return
+
 		paused = value
-		if (!running) return
-		if (paused) haltLoop()
-		else runLoop()
+		pauseBtn.textContent = value ? 'Resume' : 'Pause'
+
+		if (!value) {
+			hint.hidden = true
+			// runLoop restamps `last`, so the frozen time never lands as dt.
+			runLoop()
+			return
+		}
+
+		haltLoop()
+		held.left = held.right = false
+		hint.hidden = false
+		hint.innerHTML =
+			'<strong>Paused</strong><span>' + (reason || 'Resume when you are ready.') + '</span>'
 	}
 
-	document.addEventListener('visibilitychange', () => setPaused(document.hidden))
+	pauseBtn.addEventListener('click', () => setPaused(!paused))
+
+	document.addEventListener('visibilitychange', () => {
+		if (document.hidden) setPaused(true, 'You switched away from the tab.')
+	})
 
 	if ('IntersectionObserver' in window) {
+		// Auto-pause never auto-resumes. Scrolling back into view does not
+		// mean you are ready for the bomb that was already on its way.
 		new IntersectionObserver(
-			entries => entries.forEach(entry => setPaused(!entry.isIntersecting || document.hidden)),
+			entries =>
+				entries.forEach(entry => {
+					if (!entry.isIntersecting) setPaused(true, 'The board scrolled out of view.')
+				}),
 			{ threshold: 0.15 }
 		).observe(siCanvas)
 	}
