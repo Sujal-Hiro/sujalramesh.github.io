@@ -1454,13 +1454,22 @@ h3 {
 
 /*------------------- grouped skills -------------------*/
 
+/* Flex, not grid. Eight cards over a three-wide track leaves one dead cell
+   in the last row, and the pointer spotlight — which paints behind the
+   cards — glows straight through the hole. Wrapped flex items grow to fill
+   whatever row they land on, so the row closes itself at any column count
+   and there is nothing left for the glow to leak through. */
 .skill-groups {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
 }
 
 .skill-group {
+  flex: 1 1 250px;
+  /* Flex items floor at min-content; a long pill would push the card wider
+     than its share without this. */
+  min-width: 0;
   position: relative;
   overflow: hidden;
   background: var(--surface);
