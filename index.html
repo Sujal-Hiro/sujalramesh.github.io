@@ -94,6 +94,42 @@
       </ol>
     </div>
 
+    <section class="section" id="invaders">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Hold the line</h2>
+            <p>Arrows or A / D to move, space to fire. On a phone, use the pad.</p>
+          </div>
+        </div>
+
+        <div class="game reveal">
+          <div class="game__bar">
+            <p class="game__stat">Score <b id="siScore">0</b></p>
+            <p class="game__stat">Wave <b id="siWave">1</b></p>
+            <p class="game__stat">Lives <b id="siLives">3</b></p>
+            <p class="game__stat">Best <b id="siBest">0</b></p>
+            <button type="button" class="btn btn-primary" id="siStart">Start</button>
+          </div>
+
+          <div class="game__screen">
+            <canvas id="siCanvas" width="960" height="540" role="img"
+              aria-label="Space Invaders playfield"></canvas>
+            <div class="game__hint" id="siHint">
+              <strong>Space Invaders</strong>
+              <span>Clear the fleet before it reaches you.</span>
+            </div>
+          </div>
+
+          <div class="game__pad" id="siPad">
+            <button type="button" class="pad-btn" data-si="left" aria-label="Move left">&lsaquo;</button>
+            <button type="button" class="pad-btn pad-btn--fire" data-si="fire" aria-label="Fire">Fire</button>
+            <button type="button" class="pad-btn" data-si="right" aria-label="Move right">&rsaquo;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="work">
       <div class="wrap">
         <div class="section-head reveal">

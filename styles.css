@@ -1683,6 +1683,68 @@ h3 {
   touch-action: manipulation;
 }
 
+/* Invaders playfield. The canvas has a fixed 960x540 backing store and is
+   scaled by CSS, so the game logic never has to care about layout width. */
+.game__screen {
+  position: relative;
+  background:
+    radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0) 0 0 / 26px 26px;
+}
+
+.game__screen canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  /* Own the gestures: without this a drag to steer scrolls the page. */
+  touch-action: none;
+  /* Sprites are pixel matrices; smoothing would blur their edges. */
+  image-rendering: pixelated;
+}
+
+/* The pad is for coarse pointers only — with a keyboard it is dead weight. */
+.game__pad {
+  display: none;
+  gap: 8px;
+  padding: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .game__pad {
+    display: flex;
+  }
+}
+
+.pad-btn {
+  flex: 1;
+  min-height: 48px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--fg);
+  font: inherit;
+  font-size: var(--step-1);
+  line-height: 1;
+  cursor: pointer;
+  /* Stop the double-tap-to-zoom delay from eating rapid fire. */
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.pad-btn:active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.pad-btn--fire {
+  flex: 1.4;
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .game__hint {
   position: absolute;
   inset: 0;
@@ -1693,6 +1755,13 @@ h3 {
   padding: 1rem;
   color: var(--fg-muted);
   font-size: var(--step--1);
+}
+
+/* The invaders board paints a resting fleet behind the hint, so this one
+   needs a scrim the click-game's empty board does not. */
+.game__screen .game__hint {
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  backdrop-filter: blur(2px);
 }
 
 .game__hint strong {

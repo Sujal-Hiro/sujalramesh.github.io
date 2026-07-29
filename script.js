@@ -593,3 +593,429 @@ if (board) {
 		if (document.hidden && running) stop()
 	})
 }
+
+/*-----------------------------------------------
+  Space Invaders
+
+  Drawn in a fixed 960x540 space and scaled by CSS,
+  so there is one coordinate system regardless of
+  how wide the section renders. Sprites are pixel
+  matrices rather than images — no extra requests,
+  and the palette is read from the stylesheet so
+  the game follows --accent.
+-----------------------------------------------*/
+
+const siCanvas = document.getElementById('siCanvas')
+
+if (siCanvas && siCanvas.getContext) {
+	const ctx = siCanvas.getContext('2d')
+	const W = siCanvas.width
+	const H = siCanvas.height
+
+	const scoreEl = document.getElementById('siScore')
+	const waveEl = document.getElementById('siWave')
+	const livesEl = document.getElementById('siLives')
+	const bestEl = document.getElementById('siBest')
+	const startBtn = document.getElementById('siStart')
+	const hint = document.getElementById('siHint')
+	const pad = document.getElementById('siPad')
+
+	const BEST_KEY = 'sr-invaders-best'
+
+	const css = getComputedStyle(document.documentElement)
+	const read = (name, fallback) => css.getPropertyValue(name).trim() || fallback
+	const ACCENT = read('--accent', '#ff3366')
+	const FG = read('--fg', '#ededf0')
+	const MUTED = read('--fg-muted', '#9a9aa2')
+
+	// Two frames of the same 8x5 invader — the classic marching wobble.
+	const ALIEN = [
+		['..X..X..', '.XXXXXX.', 'XX.XX.XX', 'XXXXXXXX', 'X.X..X.X'],
+		['..X..X..', '.XXXXXX.', 'XX.XX.XX', 'XXXXXXXX', '.X.XX.X.'],
+	]
+	const SHIP = ['...XX...', '..XXXX..', '.XXXXXX.', 'XXXXXXXX']
+
+	const PX = 4
+	const ALIEN_W = 8 * PX
+	const ALIEN_H = 5 * PX
+	const SHIP_W = 8 * PX
+	const SHIP_H = 4 * PX
+	const COLS = 8
+	const ROWS = 4
+	const GAP_X = 22
+	const GAP_Y = 18
+	const STEP_X = ALIEN_W + GAP_X
+	const STEP_Y = ALIEN_H + GAP_Y
+	const FLEET_W = COLS * ALIEN_W + (COLS - 1) * GAP_X
+
+	const SHIP_Y = H - 56
+	const GROUND = SHIP_Y + SHIP_H + 10
+	// Rows are worth more the further back they sit.
+	const POINTS = [40, 30, 20, 10]
+
+	let score = 0
+	let wave = 1
+	let lives = 3
+	let best = 0
+	try {
+		best = Number(localStorage.getItem(BEST_KEY)) || 0
+	} catch (e) {
+		/* storage unavailable; best stays session-only */
+	}
+
+	let running = false
+	let paused = false
+	let loopId = 0
+	let last = 0
+
+	let shipX = W / 2
+	let aliens = []
+	let bullets = []
+	let bombs = []
+	let fleetX = 0
+	let fleetY = 0
+	let dir = 1
+	let wobble = 0
+	let wobbleFrame = 0
+	let bombClock = 0
+	let fireClock = 0
+	let invuln = 0
+	let breakClock = 0
+
+	const held = { left: false, right: false, fire: false }
+
+	const clampNum = (v, lo, hi) => Math.min(hi, Math.max(lo, v))
+
+	const blit = (rows, x, y, colour) => {
+		ctx.fillStyle = colour
+		for (let r = 0; r < rows.length; r++) {
+			for (let c = 0; c < rows[r].length; c++) {
+				if (rows[r][c] === 'X') ctx.fillRect(x + c * PX, y + r * PX, PX, PX)
+			}
+		}
+	}
+
+	const alienX = a => fleetX + a.col * STEP_X
+	const alienY = a => fleetY + a.row * STEP_Y
+
+	const buildFleet = () => {
+		aliens = []
+		for (let row = 0; row < ROWS; row++) {
+			for (let col = 0; col < COLS; col++) aliens.push({ row, col, alive: true })
+		}
+		fleetX = (W - FLEET_W) / 2
+		fleetY = 70
+		dir = 1
+		bullets = []
+		bombs = []
+	}
+
+	const setStats = () => {
+		scoreEl.textContent = String(score)
+		waveEl.textContent = String(wave)
+		livesEl.textContent = String(lives)
+		bestEl.textContent = String(best)
+	}
+
+	function haltLoop() {
+		cancelAnimationFrame(loopId)
+		loopId = 0
+	}
+
+	const gameOver = () => {
+		running = false
+		haltLoop()
+
+		if (score > best) {
+			best = score
+			try {
+				localStorage.setItem(BEST_KEY, String(best))
+			} catch (e) {
+				/* nothing to persist to */
+			}
+		}
+		setStats()
+
+		hint.hidden = false
+		hint.innerHTML =
+			'<strong>' + score + ' point' + (score === 1 ? '' : 's') + '</strong>' +
+			'<span>' + (score >= best && score > 0 ? 'New best.' : 'Best: ' + best + '.') +
+			' Reached wave ' + wave + '. Go again?</span>'
+
+		startBtn.textContent = 'Play again'
+		startBtn.disabled = false
+		draw()
+	}
+
+	const loseLife = () => {
+		lives--
+		setStats()
+		bombs = []
+		invuln = 1.4
+		shipX = W / 2
+		if (lives <= 0) gameOver()
+	}
+
+	const fire = () => {
+		if (fireClock > 0 || bullets.length >= 3) return
+		bullets.push({ x: shipX, y: SHIP_Y - 4 })
+		fireClock = 0.26
+	}
+
+	const update = dt => {
+		if (breakClock > 0) {
+			breakClock -= dt
+			if (breakClock <= 0) buildFleet()
+			return
+		}
+
+		fireClock = Math.max(0, fireClock - dt)
+		invuln = Math.max(0, invuln - dt)
+
+		// --- ship
+		const move = (held.right ? 1 : 0) - (held.left ? 1 : 0)
+		shipX = clampNum(shipX + move * 400 * dt, SHIP_W / 2, W - SHIP_W / 2)
+		if (held.fire) fire()
+
+		// --- fleet: the fewer left alive, the faster it comes
+		const alive = aliens.filter(a => a.alive)
+		if (!alive.length) {
+			wave++
+			setStats()
+			breakClock = 0.9
+			return
+		}
+
+		const pressure = 1 + ((aliens.length - alive.length) / aliens.length) * 2.4
+		const speed = (26 + wave * 9) * pressure
+		fleetX += dir * speed * dt
+
+		const minCol = Math.min.apply(null, alive.map(a => a.col))
+		const maxCol = Math.max.apply(null, alive.map(a => a.col))
+		const leftEdge = fleetX + minCol * STEP_X
+		const rightEdge = fleetX + maxCol * STEP_X + ALIEN_W
+
+		if (leftEdge < 16 || rightEdge > W - 16) {
+			dir *= -1
+			fleetX = clampNum(fleetX, 16 - minCol * STEP_X, W - 16 - maxCol * STEP_X - ALIEN_W)
+			fleetY += 18
+		}
+
+		wobble += dt
+		if (wobble > 0.45) {
+			wobble = 0
+			wobbleFrame ^= 1
+		}
+
+		// Reaching the player's line ends it outright.
+		if (alive.some(a => alienY(a) + ALIEN_H >= SHIP_Y)) {
+			lives = 0
+			gameOver()
+			return
+		}
+
+		// --- bombs
+		bombClock -= dt
+		if (bombClock <= 0) {
+			bombClock = Math.max(0.32, 1.5 - wave * 0.13) * (0.6 + Math.random() * 0.8)
+			// Only the lowest alien in a column can drop one.
+			const shooters = alive.filter(a => !alive.some(b => b.col === a.col && b.row > a.row))
+			const pick = shooters[Math.floor(Math.random() * shooters.length)]
+			if (pick) bombs.push({ x: alienX(pick) + ALIEN_W / 2, y: alienY(pick) + ALIEN_H })
+		}
+
+		bombs = bombs.filter(b => {
+			b.y += (170 + wave * 12) * dt
+			if (b.y > GROUND) return false
+
+			if (
+				!invuln &&
+				b.x > shipX - SHIP_W / 2 &&
+				b.x < shipX + SHIP_W / 2 &&
+				b.y > SHIP_Y &&
+				b.y < SHIP_Y + SHIP_H
+			) {
+				loseLife()
+				return false
+			}
+			return true
+		})
+
+		// --- bullets
+		bullets = bullets.filter(bullet => {
+			bullet.y -= 640 * dt
+			if (bullet.y < -12) return false
+
+			for (const a of alive) {
+				// `alive` is a snapshot; two bullets in the same frame must not
+				// both score the alien one of them already killed.
+				if (!a.alive) continue
+				const ax = alienX(a)
+				const ay = alienY(a)
+				if (bullet.x > ax && bullet.x < ax + ALIEN_W && bullet.y < ay + ALIEN_H && bullet.y > ay) {
+					a.alive = false
+					score += POINTS[a.row]
+					setStats()
+					return false
+				}
+			}
+			return true
+		})
+	}
+
+	function draw() {
+		ctx.clearRect(0, 0, W, H)
+
+		ctx.globalAlpha = 0.35
+		ctx.fillStyle = MUTED
+		ctx.fillRect(0, GROUND, W, 1)
+		ctx.globalAlpha = 1
+
+		aliens.forEach(a => {
+			if (!a.alive) return
+			const colour = a.row === 0 ? ACCENT : a.row === ROWS - 1 ? MUTED : FG
+			blit(ALIEN[wobbleFrame], alienX(a), alienY(a), colour)
+		})
+
+		// Blink the ship while it is briefly invulnerable.
+		if (!invuln || Math.floor(invuln * 12) % 2) {
+			blit(SHIP, shipX - SHIP_W / 2, SHIP_Y, FG)
+		}
+
+		ctx.fillStyle = ACCENT
+		bullets.forEach(b => ctx.fillRect(b.x - 1.5, b.y - 10, 3, 10))
+
+		ctx.fillStyle = MUTED
+		bombs.forEach(b => ctx.fillRect(b.x - 1.5, b.y, 3, 9))
+	}
+
+	const tick = now => {
+		loopId = requestAnimationFrame(tick)
+		// Clamp dt so a backgrounded tab cannot teleport the fleet.
+		const dt = Math.min(0.05, (now - last) / 1000)
+		last = now
+		update(dt)
+		draw()
+	}
+
+	const runLoop = () => {
+		if (loopId) return
+		last = performance.now()
+		loopId = requestAnimationFrame(tick)
+	}
+
+	const start = () => {
+		score = 0
+		wave = 1
+		lives = 3
+		shipX = W / 2
+		invuln = 0
+		bombClock = 1
+		fireClock = 0
+		breakClock = 0
+		held.left = held.right = held.fire = false
+		buildFleet()
+		setStats()
+
+		hint.hidden = true
+		startBtn.disabled = true
+		startBtn.textContent = 'Playing…'
+		running = true
+		paused = false
+		runLoop()
+	}
+
+	startBtn.addEventListener('click', start)
+
+	/* Keyboard only claims keys while a round is live, so space still
+	   scrolls the page for everyone who is not playing. */
+	const KEYS = {
+		ArrowLeft: 'left',
+		ArrowRight: 'right',
+		a: 'left',
+		A: 'left',
+		d: 'right',
+		D: 'right',
+		' ': 'fire',
+	}
+
+	document.addEventListener('keydown', e => {
+		if (!running) return
+		const action = KEYS[e.key]
+		if (!action) return
+		e.preventDefault()
+		held[action] = true
+	})
+
+	document.addEventListener('keyup', e => {
+		const action = KEYS[e.key]
+		if (action) held[action] = false
+	})
+
+	/* Touch pad */
+	if (pad) {
+		pad.addEventListener('pointerdown', e => {
+			const btn = e.target.closest('[data-si]')
+			if (!btn) return
+			e.preventDefault()
+			held[btn.dataset.si] = true
+		})
+
+		const release = e => {
+			const btn = e.target.closest('[data-si]')
+			if (btn) held[btn.dataset.si] = false
+		}
+
+		pad.addEventListener('pointerup', release)
+		pad.addEventListener('pointercancel', release)
+		pad.addEventListener('pointerleave', release)
+	}
+
+	/* Drag anywhere on the playfield to steer, tap to fire. */
+	let steering = false
+
+	const steer = e => {
+		const r = siCanvas.getBoundingClientRect()
+		shipX = clampNum(((e.clientX - r.left) * W) / r.width, SHIP_W / 2, W - SHIP_W / 2)
+	}
+
+	siCanvas.addEventListener('pointerdown', e => {
+		if (!running) return
+		steering = true
+		siCanvas.setPointerCapture(e.pointerId)
+		steer(e)
+		fire()
+	})
+
+	siCanvas.addEventListener('pointermove', e => {
+		if (steering && running) steer(e)
+	})
+
+	const stopSteering = () => {
+		steering = false
+	}
+
+	siCanvas.addEventListener('pointerup', stopSteering)
+	siCanvas.addEventListener('pointercancel', stopSteering)
+
+	/* Never burn frames on a game nobody is looking at. */
+	const setPaused = value => {
+		paused = value
+		if (!running) return
+		if (paused) haltLoop()
+		else runLoop()
+	}
+
+	document.addEventListener('visibilitychange', () => setPaused(document.hidden))
+
+	if ('IntersectionObserver' in window) {
+		new IntersectionObserver(
+			entries => entries.forEach(entry => setPaused(!entry.isIntersecting || document.hidden)),
+			{ threshold: 0.15 }
+		).observe(siCanvas)
+	}
+
+	setStats()
+	buildFleet()
+	draw()
+}
