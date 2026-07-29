@@ -536,38 +536,81 @@ h3 {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
+  gap: 12px;
 }
 
-/* 1px gaps over a border-coloured background: hairline dividers
-   with no double borders and no shadow stacking. */
 .card {
-  background: var(--bg);
-  padding: clamp(1.5rem, 3vw, 2rem);
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 3vw, 1.9rem);
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
-  min-height: 190px;
-  transition: background-color 0.25s var(--ease);
+  min-height: 200px;
+  color: inherit;
+  transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease),
+    transform 0.3s var(--ease);
+}
+
+/* Same hairline-draw gesture as the skill cards and section headings. */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.45s var(--ease);
 }
 
 .card:hover {
   background: var(--surface-2);
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
+}
+
+.card:hover::before {
+  width: 100%;
 }
 
 .card .num {
+  display: flex;
+  align-items: center;
   font-size: var(--step--1);
   color: var(--fg-muted);
   font-variant-numeric: tabular-nums;
+  transition: color 0.3s var(--ease);
+}
+
+.card:hover .num {
+  color: var(--accent);
+}
+
+/* The arrow only exists on hover — it signals "there's more to read" without
+   adding permanent chrome to six cards at once. */
+.card__go {
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.card:hover .card__go,
+.card:focus-visible .card__go {
+  opacity: 1;
+  transform: none;
 }
 
 .card h3 {
   font-size: var(--step-1);
   font-weight: 500;
+  transition: color 0.3s var(--ease);
 }
 
 .card p {
@@ -592,6 +635,11 @@ h3 {
   border: 1px solid var(--border);
   border-radius: 100px;
   padding: 0.25em 0.7em;
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.card:hover .tag {
+  border-color: var(--border-strong);
 }
 
 /*-------------------------- portfolio --------------------------*/
@@ -1403,7 +1451,9 @@ h3 {
 
   .skill-group li,
   .skill-group:hover,
-  .skill-group:hover .skill-icon {
+  .skill-group:hover .skill-icon,
+  .card:hover,
+  .card__go {
     opacity: 1;
     transform: none;
   }
