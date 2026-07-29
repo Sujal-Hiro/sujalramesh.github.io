@@ -1718,7 +1718,8 @@ h3 {
 
 .pad-btn {
   flex: 1;
-  min-height: 48px;
+  /* Held down for whole rounds, so bigger than the 44px minimum. */
+  min-height: 60px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--surface-2);
@@ -1736,13 +1737,6 @@ h3 {
 .pad-btn:active {
   border-color: var(--accent);
   background: var(--accent-soft);
-}
-
-.pad-btn--fire {
-  flex: 1.4;
-  font-size: var(--step--1);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .game__hint {

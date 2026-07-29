@@ -682,7 +682,7 @@ if (siCanvas && siCanvas.getContext) {
 	let invuln = 0
 	let breakClock = 0
 
-	const held = { left: false, right: false, fire: false }
+	const held = { left: false, right: false }
 
 	const clampNum = (v, lo, hi) => Math.min(hi, Math.max(lo, v))
 
@@ -756,10 +756,12 @@ if (siCanvas && siCanvas.getContext) {
 		if (lives <= 0) gameOver()
 	}
 
+	// The gun runs itself — steering is the whole game. The cooldown is the
+	// only thing rationing shots, so it doubles as the difficulty dial.
 	const fire = () => {
-		if (fireClock > 0 || bullets.length >= 3) return
+		if (fireClock > 0 || bullets.length >= 4) return
 		bullets.push({ x: shipX, y: SHIP_Y - 4 })
-		fireClock = 0.26
+		fireClock = 0.22
 	}
 
 	const update = dt => {
@@ -775,7 +777,7 @@ if (siCanvas && siCanvas.getContext) {
 		// --- ship
 		const move = (held.right ? 1 : 0) - (held.left ? 1 : 0)
 		shipX = clampNum(shipX + move * 400 * dt, SHIP_W / 2, W - SHIP_W / 2)
-		if (held.fire) fire()
+		fire()
 
 		// --- fleet: the fewer left alive, the faster it comes
 		const alive = aliens.filter(a => a.alive)
@@ -913,7 +915,7 @@ if (siCanvas && siCanvas.getContext) {
 		bombClock = 1
 		fireClock = 0
 		breakClock = 0
-		held.left = held.right = held.fire = false
+		held.left = held.right = false
 		buildFleet()
 		setStats()
 
@@ -927,48 +929,72 @@ if (siCanvas && siCanvas.getContext) {
 
 	startBtn.addEventListener('click', start)
 
-	/* Keyboard only claims keys while a round is live, so space still
-	   scrolls the page for everyone who is not playing. */
-	const KEYS = {
+	/* Keyboard only claims keys while a round is live, so the arrows still
+	   scroll the page for everyone who is not playing. */
+	const MOVE = {
 		ArrowLeft: 'left',
 		ArrowRight: 'right',
 		a: 'left',
 		A: 'left',
 		d: 'right',
 		D: 'right',
-		' ': 'fire',
 	}
 
 	document.addEventListener('keydown', e => {
 		if (!running) return
-		const action = KEYS[e.key]
+
+		// Space does nothing now the gun is automatic, but it is still
+		// swallowed mid-round so the page does not jump out from under you.
+		if (e.key === ' ') {
+			e.preventDefault()
+			return
+		}
+
+		const action = MOVE[e.key]
 		if (!action) return
 		e.preventDefault()
 		held[action] = true
 	})
 
 	document.addEventListener('keyup', e => {
-		const action = KEYS[e.key]
+		const action = MOVE[e.key]
 		if (action) held[action] = false
 	})
 
-	/* Touch pad */
+	/* Hold-to-move pad. Only two buttons — the gun is automatic. */
 	if (pad) {
+		let padPointer = null
+
+		const apply = el => {
+			const btn = el && el.closest ? el.closest('[data-si]') : null
+			held.left = !!btn && btn.dataset.si === 'left'
+			held.right = !!btn && btn.dataset.si === 'right'
+		}
+
 		pad.addEventListener('pointerdown', e => {
-			const btn = e.target.closest('[data-si]')
-			if (!btn) return
+			if (!e.target.closest('[data-si]')) return
 			e.preventDefault()
-			held[btn.dataset.si] = true
+			padPointer = e.pointerId
+			pad.setPointerCapture(e.pointerId)
+			apply(e.target)
+		})
+
+		pad.addEventListener('pointermove', e => {
+			if (e.pointerId !== padPointer) return
+			// The pointer is captured, so e.target is always the pad. Resolve
+			// what is really under the thumb, or sliding from one button to
+			// the other would leave the first one stuck down.
+			apply(document.elementFromPoint(e.clientX, e.clientY))
 		})
 
 		const release = e => {
-			const btn = e.target.closest('[data-si]')
-			if (btn) held[btn.dataset.si] = false
+			if (e.pointerId !== padPointer) return
+			padPointer = null
+			held.left = held.right = false
 		}
 
 		pad.addEventListener('pointerup', release)
 		pad.addEventListener('pointercancel', release)
-		pad.addEventListener('pointerleave', release)
 	}
 
 	/* Drag anywhere on the playfield to steer, tap to fire. */
@@ -984,7 +1010,6 @@ if (siCanvas && siCanvas.getContext) {
 		steering = true
 		siCanvas.setPointerCapture(e.pointerId)
 		steer(e)
-		fire()
 	})
 
 	siCanvas.addEventListener('pointermove', e => {
