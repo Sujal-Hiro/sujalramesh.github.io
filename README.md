@@ -79,12 +79,22 @@ node scripts/find-unused-assets.mjs  # list anything in Images/ nothing referenc
 Keep the originals somewhere outside the repo — the pipeline replaces files in
 place.
 
-## Gallery tiles
+## Gallery tiles and the viewer
 
-Each clickable tile is a `<button>` carrying `data-src` and `data-type`
-(`image` or `video`); `script.js` opens the lightbox from a single delegated
-listener. Buttons may only contain phrasing content, so overlay markup uses
-`<span>`, not `<div>`/`<h3>`/`<p>`.
+Every clickable piece of media — a `.tile` in the masonry grids, a `.shot`
+beside a project write-up — is a `<button>` carrying `data-src` and
+`data-type` (`image` or `video`); `script.js` opens the viewer from a single
+delegated listener. Buttons may only contain phrasing content, so overlay
+markup uses `<span>`, never `<div>`/`<h3>`/`<p>`/`<figcaption>`.
+
+`data-src` points at the **full** asset while the inline element shows the
+cheap one — a tile showing `preview_video_7.mp4` opens `video_7.mp4`.
+
+Images in the viewer zoom (1×–6×) via wheel, pinch, double-click, the
+`+ / − / 0` keys, or the control bar. Videos deliberately do not: they keep
+their native controls, and transforming the element would move the scrub bar
+out from under the pointer. `openBox` hides `#zoomBar` for video and resets
+the transform on every open and close.
 
 ## License
 

@@ -164,58 +164,58 @@
           <button type="button" class="tile reveal" data-src="Images/image_35.webp" data-type="image"
             aria-label="View Portals — Photoshop">
             <img src="Images/image_35.webp" alt="" loading="lazy" decoding="async">
-            <figcaption>Portals <span>Photoshop</span></figcaption>
+            <span class="tile__cap">Portals <span>Photoshop</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/video_1.mp4" data-type="video"
             aria-label="View Treasure Hunt — Gameplay">
             <video src="Images/preview_video_1.mp4" poster="Images/poster_video_1.jpg" muted loop
             playsinline preload="none" aria-hidden="true"></video>
-            <figcaption>Treasure Hunt <span>Gameplay</span></figcaption>
+            <span class="tile__cap">Treasure Hunt <span>Gameplay</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_28.webp" data-type="image"
             aria-label="View Mars Survivor — Screenshot">
             <img src="Images/image_28.webp" alt="" loading="lazy" decoding="async">
-            <figcaption>Mars Survivor <span>Screenshot</span></figcaption>
+            <span class="tile__cap">Mars Survivor <span>Screenshot</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_69.webp" data-type="image"
             aria-label="View Car Manipulation — Photoshop">
             <img src="Images/image_69.webp" alt="" loading="lazy" decoding="async">
-            <figcaption>Car Manipulation <span>Photoshop</span></figcaption>
+            <span class="tile__cap">Car Manipulation <span>Photoshop</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/video_2.mp4" data-type="video"
             aria-label="View Saloon Shooter — Gameplay">
             <video src="Images/preview_video_2.mp4" poster="Images/poster_video_2.jpg" muted loop
             playsinline preload="none" aria-hidden="true"></video>
-            <figcaption>Saloon Shooter <span>Gameplay</span></figcaption>
+            <span class="tile__cap">Saloon Shooter <span>Gameplay</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_21.webp" data-type="image"
             aria-label="View Portal 2.0 — Photoshop">
             <img src="Images/image_21.webp" alt="" loading="lazy" decoding="async">
-            <figcaption>Portal 2.0 <span>Photoshop</span></figcaption>
+            <span class="tile__cap">Portal 2.0 <span>Photoshop</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_36.webp" data-type="image"
             aria-label="View TopG Car Madness — Screenshot">
             <img src="Images/image_36.webp" alt="" loading="lazy" decoding="async">
-            <figcaption>TopG Car Madness <span>Screenshot</span></figcaption>
+            <span class="tile__cap">TopG Car Madness <span>Screenshot</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/video_10.mp4" data-type="video"
             aria-label="View Isometric Game — Gameplay">
             <video src="Images/preview_video_10.mp4" poster="Images/poster_video_10.jpg" muted loop
             playsinline preload="none" aria-hidden="true"></video>
-            <figcaption>Isometric Game <span>Gameplay</span></figcaption>
+            <span class="tile__cap">Isometric Game <span>Gameplay</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_54.webp" data-type="image"
             aria-label="View Shang Chi — Photoshop">
             <img src="Images/image_54.webp" alt="" loading="lazy" decoding="async">
-            <figcaption>Shang Chi <span>Photoshop</span></figcaption>
+            <span class="tile__cap">Shang Chi <span>Photoshop</span></span>
           </button>
         </div>
       </div>
@@ -409,6 +409,12 @@
     <button type="button" class="close" id="lightboxClose" aria-label="Close viewer">&times;</button>
     <img id="lightboxImg" alt="" hidden>
     <video id="lightboxVideo" controls playsinline hidden></video>
+
+    <div class="zoombar" id="zoomBar" hidden>
+      <button type="button" class="zoombar__btn" id="zoomOut" aria-label="Zoom out">&minus;</button>
+      <button type="button" class="zoombar__btn zoombar__level" id="zoomReset" aria-label="Reset zoom">100%</button>
+      <button type="button" class="zoombar__btn" id="zoomIn" aria-label="Zoom in">+</button>
+    </div>
   </div>
 
   <script src="./script.js"></script>

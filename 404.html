@@ -59,6 +59,12 @@
     <button type="button" class="close" id="lightboxClose" aria-label="Close viewer">&times;</button>
     <img id="lightboxImg" alt="" hidden>
     <video id="lightboxVideo" controls playsinline hidden></video>
+
+    <div class="zoombar" id="zoomBar" hidden>
+      <button type="button" class="zoombar__btn" id="zoomOut" aria-label="Zoom out">&minus;</button>
+      <button type="button" class="zoombar__btn zoombar__level" id="zoomReset" aria-label="Reset zoom">100%</button>
+      <button type="button" class="zoombar__btn" id="zoomIn" aria-label="Zoom in">+</button>
+    </div>
   </div>
 
   <script src="./script.js"></script>
