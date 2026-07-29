@@ -640,18 +640,16 @@ if (siCanvas && siCanvas.getContext) {
 	const ALIEN_H = 5 * PX
 	const SHIP_W = 8 * PX
 	const SHIP_H = 4 * PX
-	const COLS = 8
-	const ROWS = 4
 	const GAP_X = 22
 	const GAP_Y = 18
 	const STEP_X = ALIEN_W + GAP_X
 	const STEP_Y = ALIEN_H + GAP_Y
-	const FLEET_W = COLS * ALIEN_W + (COLS - 1) * GAP_X
 
 	const SHIP_Y = H - 56
 	const GROUND = SHIP_Y + SHIP_H + 10
 	// Rows are worth more the further back they sit.
 	const POINTS = [40, 30, 20, 10]
+	const pointsFor = row => POINTS[Math.min(row, POINTS.length - 1)]
 
 	let score = 0
 	let wave = 1
@@ -681,6 +679,8 @@ if (siCanvas && siCanvas.getContext) {
 	let fireClock = 0
 	let invuln = 0
 	let breakClock = 0
+	let fleetRows = 4
+	let fleetCols = 8
 
 	const held = { left: false, right: false }
 
@@ -698,14 +698,32 @@ if (siCanvas && siCanvas.getContext) {
 	const alienX = a => fleetX + a.col * STEP_X
 	const alienY = a => fleetY + a.row * STEP_Y
 
+	/* Waves differ in shape, not just pace. Speed alone is invisible — you
+	   feel it but the board looks identical. So each wave is also wider,
+	   deeper, starts lower and opens in the other direction.
+
+	   Width and depth cap out at 10x5 or the fleet would not fit and would
+	   open on top of the player. Armour is what keeps escalating past that:
+	   one more rank takes two hits every third wave, so there is always
+	   something new happening. */
 	const buildFleet = () => {
+		fleetCols = Math.min(10, 7 + Math.ceil(wave / 2))
+		fleetRows = Math.min(5, 3 + Math.ceil(wave / 3))
+		const armoured = Math.floor((wave - 1) / 3)
+
 		aliens = []
-		for (let row = 0; row < ROWS; row++) {
-			for (let col = 0; col < COLS; col++) aliens.push({ row, col, alive: true })
+		for (let row = 0; row < fleetRows; row++) {
+			for (let col = 0; col < fleetCols; col++) {
+				const hp = row < armoured ? 2 : 1
+				aliens.push({ row, col, alive: true, hp, maxHp: hp })
+			}
 		}
-		fleetX = (W - FLEET_W) / 2
-		fleetY = 70
-		dir = 1
+
+		const width = fleetCols * ALIEN_W + (fleetCols - 1) * GAP_X
+		fleetX = (W - width) / 2
+		// Cap the head start, or wave 8 would open on top of the player.
+		fleetY = 70 + Math.min(5, wave - 1) * 12
+		dir = wave % 2 ? 1 : -1
 		bullets = []
 		bombs = []
 	}
@@ -784,6 +802,11 @@ if (siCanvas && siCanvas.getContext) {
 		if (!alive.length) {
 			wave++
 			setStats()
+			// Clear leftovers now, not when the next fleet builds — update()
+			// returns early during the break, so anything still in flight
+			// would hang frozen on screen for the whole beat.
+			bullets = []
+			bombs = []
 			breakClock = 0.9
 			return
 		}
@@ -855,9 +878,12 @@ if (siCanvas && siCanvas.getContext) {
 				const ax = alienX(a)
 				const ay = alienY(a)
 				if (bullet.x > ax && bullet.x < ax + ALIEN_W && bullet.y < ay + ALIEN_H && bullet.y > ay) {
-					a.alive = false
-					score += POINTS[a.row]
-					setStats()
+					a.hp--
+					if (a.hp <= 0) {
+						a.alive = false
+						score += pointsFor(a.row)
+						setStats()
+					}
 					return false
 				}
 			}
@@ -875,9 +901,13 @@ if (siCanvas && siCanvas.getContext) {
 
 		aliens.forEach(a => {
 			if (!a.alive) return
-			const colour = a.row === 0 ? ACCENT : a.row === ROWS - 1 ? MUTED : FG
+			const colour = a.row === 0 ? ACCENT : a.row === fleetRows - 1 ? MUTED : FG
+			// A chipped alien fades rather than changing hue, so the row
+			// colours keep meaning what they meant.
+			ctx.globalAlpha = a.hp < a.maxHp ? 0.45 : 1
 			blit(ALIEN[wobbleFrame], alienX(a), alienY(a), colour)
 		})
+		ctx.globalAlpha = 1
 
 		// Blink the ship while it is briefly invulnerable.
 		if (!invuln || Math.floor(invuln * 12) % 2) {
