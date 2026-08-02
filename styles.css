@@ -1,5 +1,5 @@
 /*==============================================================
-  Minimal theme — preview
+  Minimal theme
   --------------------------------------------------------------
   Design rules this file follows, in order of importance:
 
@@ -196,7 +196,7 @@ h3 {
   color: var(--fg);
 }
 
-/* Underline grows from the centre — 1px, not a 0.2em slab. */
+/* Underline grows from the centre. 1px, not a 0.2em slab. */
 .nav a::after {
   content: '';
   position: absolute;
@@ -279,7 +279,7 @@ h3 {
   animation: livePulse 2.4s var(--ease) infinite;
 }
 
-/* One ring, expanding and fading — a status light, not a beacon. */
+/* One ring, expanding and fading. A status light, not a beacon. */
 @keyframes livePulse {
   0% {
     box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 60%, transparent);
@@ -590,7 +590,7 @@ h3 {
   color: var(--accent);
 }
 
-/* The arrow only exists on hover — it signals "there's more to read" without
+/* The arrow only exists on hover, where it signals "there's more to read" without
    adding permanent chrome to six cards at once. */
 .card__go {
   width: 16px;
@@ -692,7 +692,7 @@ h3 {
 }
 
 /* A <figcaption> is only valid inside a <figure>, and a tile is a <button>
-   — which takes phrasing content only. So the caption is a <span>. */
+   and a button takes phrasing content only. So the caption is a <span>. */
 .tile__cap {
   display: flex;
   align-items: center;
@@ -797,7 +797,7 @@ h3 {
   background: #000;
 }
 
-/* Zoom lives on the image only — a video's own controls need the clicks. */
+/* Zoom lives on the image only, since a video's own controls need the clicks. */
 .lightbox img {
   /* Own every gesture, or the browser pinch-zooms the page instead. */
   touch-action: none;
@@ -1098,13 +1098,13 @@ h3 {
   background: var(--surface);
 }
 
-/* First item spans the full row — it is the hero shot for the project. */
+/* First item spans the full row, being the hero shot for the project. */
 .project__media>*:first-child {
   grid-column: 1 / -1;
   aspect-ratio: 16 / 9;
 }
 
-/* Every shot opens in the viewer, so it is a real button — reset the UA
+/* Every shot opens in the viewer, so it is a real button. Reset the UA
    chrome and let the media inside fill the box. */
 .shot {
   display: block;
@@ -1455,8 +1455,8 @@ h3 {
 /*------------------- grouped skills -------------------*/
 
 /* Flex, not grid. Eight cards over a three-wide track leaves one dead cell
-   in the last row, and the pointer spotlight — which paints behind the
-   cards — glows straight through the hole. Wrapped flex items grow to fill
+   in the last row, and the pointer spotlight, which paints behind the
+   cards, glows straight through the hole. Wrapped flex items grow to fill
    whatever row they land on, so the row closes itself at any column count
    and there is nothing left for the glow to leak through. */
 .skill-groups {
@@ -1480,7 +1480,7 @@ h3 {
     transform 0.3s var(--ease);
 }
 
-/* A hairline draws across the top edge on hover — the same "draw in"
+/* A hairline draws across the top edge on hover, the same "draw in"
    gesture the section headings use, so the page has one vocabulary. */
 .skill-group::before {
   content: '';
@@ -1630,7 +1630,7 @@ h3 {
   }
 }
 
-/* A wrapper whose lines are masked must not fade or shift itself — the mask
+/* A wrapper whose lines are masked must not fade or shift itself. The mask
    IS the animation, and fading the parent hides it. */
 .reveal:has(.line-mask) {
   opacity: 1;
@@ -1714,7 +1714,7 @@ h3 {
   image-rendering: pixelated;
 }
 
-/* The pad is for coarse pointers only — with a keyboard it is dead weight. */
+/* The pad is for coarse pointers only. With a keyboard it is dead weight. */
 .game__pad {
   display: none;
   gap: 8px;

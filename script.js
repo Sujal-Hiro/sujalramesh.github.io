@@ -86,7 +86,7 @@ if (roleWrap && !reduceMotion) {
 }
 
 /*-----------------------------------------------
-  Scroll reveal — fires once per element
+  Scroll reveal, fires once per element
 -----------------------------------------------*/
 
 const reveals = document.querySelectorAll('.reveal')
@@ -469,7 +469,7 @@ const year = document.getElementById('year')
 if (year) year.textContent = new Date().getFullYear()
 
 /*-----------------------------------------------
-  Mini game — 20s target rush
+  Mini game: 20s target rush
   Targets are real <button>s so the game is
   playable with Tab + Enter, not just a mouse.
 -----------------------------------------------*/
@@ -600,7 +600,7 @@ if (board) {
   Drawn in a fixed 960x540 space and scaled by CSS,
   so there is one coordinate system regardless of
   how wide the section renders. Sprites are pixel
-  matrices rather than images — no extra requests,
+  matrices rather than images, so no extra requests,
   and the palette is read from the stylesheet so
   the game follows --accent.
 -----------------------------------------------*/
@@ -629,7 +629,7 @@ if (siCanvas && siCanvas.getContext) {
 	const FG = read('--fg', '#ededf0')
 	const MUTED = read('--fg-muted', '#9a9aa2')
 
-	// Two frames of the same 8x5 invader — the classic marching wobble.
+	// Two frames of the same 8x5 invader, giving the classic marching wobble.
 	const ALIEN = [
 		['..X..X..', '.XXXXXX.', 'XX.XX.XX', 'XXXXXXXX', 'X.X..X.X'],
 		['..X..X..', '.XXXXXX.', 'XX.XX.XX', 'XXXXXXXX', '.X.XX.X.'],
@@ -699,7 +699,7 @@ if (siCanvas && siCanvas.getContext) {
 	const alienX = a => fleetX + a.col * STEP_X
 	const alienY = a => fleetY + a.row * STEP_Y
 
-	/* Waves differ in shape, not just pace. Speed alone is invisible — you
+	/* Waves differ in shape, not just pace. Speed alone is invisible: you
 	   feel it but the board looks identical. So each wave is also wider,
 	   deeper, starts lower and opens in the other direction.
 
@@ -776,7 +776,7 @@ if (siCanvas && siCanvas.getContext) {
 		if (lives <= 0) gameOver()
 	}
 
-	// The gun runs itself — steering is the whole game. The cooldown is the
+	// The gun runs itself, so steering is the whole game. The cooldown is the
 	// only thing rationing shots, so it doubles as the difficulty dial.
 	const fire = () => {
 		if (fireClock > 0 || bullets.length >= 4) return
@@ -804,7 +804,7 @@ if (siCanvas && siCanvas.getContext) {
 		if (!alive.length) {
 			wave++
 			setStats()
-			// Clear leftovers now, not when the next fleet builds — update()
+			// Clear leftovers now, not when the next fleet builds. update()
 			// returns early during the break, so anything still in flight
 			// would hang frozen on screen for the whole beat.
 			bullets = []
@@ -979,7 +979,7 @@ if (siCanvas && siCanvas.getContext) {
 
 		// Space does nothing now the gun is automatic, but it is still
 		// swallowed mid-round so the page does not jump out from under you
-		// — and so it cannot re-trigger a focused Pause button.
+		// and so it cannot re-trigger a focused Pause button.
 		if (e.key === ' ') {
 			e.preventDefault()
 			return
@@ -1004,7 +1004,7 @@ if (siCanvas && siCanvas.getContext) {
 		if (action) held[action] = false
 	})
 
-	/* Hold-to-move pad. Only two buttons — the gun is automatic. */
+	/* Hold-to-move pad. Only two buttons, since the gun is automatic. */
 	if (pad) {
 		let padPointer = null
 
@@ -1066,7 +1066,7 @@ if (siCanvas && siCanvas.getContext) {
 	siCanvas.addEventListener('pointerup', stopSteering)
 	siCanvas.addEventListener('pointercancel', stopSteering)
 
-	/* Never burn frames on a game nobody is looking at — and say so, or a
+	/* Never burn frames on a game nobody is looking at, and say so, or a
 	   round that silently froze reads as a bug. */
 	const setPaused = (value, reason) => {
 		if (!running || paused === value) return

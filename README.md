@@ -1,6 +1,6 @@
 # sujalramesh.github.io
 
-Personal portfolio of **Sujal Ramesh** — game developer and designer.
+Personal portfolio of **Sujal Ramesh**, game developer and designer.
 Live at <https://sujalramesh.github.io>.
 
 Static site, no build step. Open `index.html` directly, or serve the folder:
@@ -13,13 +13,13 @@ python -m http.server 8000
 
 | File | Purpose |
 |---|---|
-| `index.html` | Home — intro, selected work, gallery, skills, contact |
+| `index.html` | Home: intro, selected work, gallery, skills, contact |
 | `projects.html` | Long-form write-ups for the eight main projects |
 | `portfolio.html` | Full gallery of screenshots, gameplay clips and artwork |
 | `404.html` | Not-found page (GitHub Pages serves this automatically) |
 
 `styles.css` and `script.js` are shared by all four pages, so every DOM lookup
-in the script is guarded — each page carries different markup and any block
+in the script is guarded. Each page carries different markup and any block
 whose elements are absent simply does not run.
 
 ## Design system
@@ -27,7 +27,7 @@ whose elements are absent simply does not run.
 All tokens live in `:root` at the top of `styles.css`. Four rules the design
 holds to:
 
-1. **One accent colour.** It appears a handful of times per screen — the
+1. **One accent colour.** It appears a handful of times per screen: the
    primary button, the dot in the eyebrow pill, the nav underline, the period
    in the logo. Neutrals carry everything else.
 2. **Hairlines, not shadows.** Surfaces separate with a 1px border. The card
@@ -37,8 +37,8 @@ holds to:
    marquee, which pauses on hover. Scroll reveals fire once and then unobserve.
 4. **One fluid type scale** (`--step--1` … `--step-3`), no magic pixel sizes.
 
-The site is **dark-only**. There is one palette on `:root` — no theme class,
-no `prefers-color-scheme` branch, and no toggle — so first paint is always
+The site is **dark-only**. There is one palette on `:root`, with no theme class,
+no `prefers-color-scheme` branch, and no toggle, so first paint is always
 correct and there is no flash to guard against.
 
 ### Breakpoints
@@ -76,19 +76,19 @@ node scripts/rewrite-media-refs.mjs  # point HTML at .webp, verify every ref res
 node scripts/find-unused-assets.mjs  # list anything in Images/ nothing references
 ```
 
-Keep the originals somewhere outside the repo — the pipeline replaces files in
+Keep the originals somewhere outside the repo, because the pipeline replaces files in
 place.
 
 ## Gallery tiles and the viewer
 
-Every clickable piece of media — a `.tile` in the masonry grids, a `.shot`
-beside a project write-up — is a `<button>` carrying `data-src` and
+Every clickable piece of media, whether a `.tile` in the masonry grids or a
+`.shot` beside a project write-up, is a `<button>` carrying `data-src` and
 `data-type` (`image` or `video`); `script.js` opens the viewer from a single
 delegated listener. Buttons may only contain phrasing content, so overlay
 markup uses `<span>`, never `<div>`/`<h3>`/`<p>`/`<figcaption>`.
 
 `data-src` points at the **full** asset while the inline element shows the
-cheap one — a tile showing `preview_video_7.mp4` opens `video_7.mp4`.
+cheap one: a tile showing `preview_video_7.mp4` opens `video_7.mp4`.
 
 Images in the viewer zoom (1×–6×) via wheel, pinch, double-click, the
 `+ / − / 0` keys, or the control bar. Videos deliberately do not: they keep

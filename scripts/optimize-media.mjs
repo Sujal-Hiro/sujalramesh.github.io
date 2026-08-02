@@ -112,7 +112,7 @@ for (const name of videos) {
 		join(tmpDir, previewName),
 	])
 
-	// Poster frame — 1s in, since frame 0 is often black on captured footage.
+	// Poster frame, 1s in, since frame 0 is often black on captured footage.
 	run([
 		'-ss', '1', '-i', src,
 		'-frames:v', '1',
