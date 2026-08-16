@@ -150,6 +150,12 @@ h3 {
   max-width: var(--max);
   margin-inline: auto;
   padding-inline: var(--gutter);
+  /* .wrap is a flex item inside .hero, .site-header and .site-footer.
+     Flex items floor at min-content, so without this one wide
+     descendant widens the whole wrap past the viewport - which
+     clips body copy and pushes right-aligned chrome (the mobile
+     nav toggle) off-screen. */
+  min-width: 0;
 }
 
 .skip-link {

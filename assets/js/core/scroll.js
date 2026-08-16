@@ -64,10 +64,25 @@ export function initReveal() {
 				obs.unobserve(entry.target)
 			})
 		},
+		/* The -10% holds a reveal back until the element is
+		   meaningfully into view, which reads better while
+		   scrolling. It also creates a dead band along the bottom
+		   edge - see the pass below. */
 		{ rootMargin: '0px 0px -10% 0px' }
 	)
 
-	reveals.forEach(el => io.observe(el))
+	/* Anything already on screen at load reveals immediately.
+
+	   Without this, an element sitting in that bottom 10% band at
+	   first paint never intersects and stays at opacity 0 forever:
+	   above-the-fold content that is simply invisible, and the
+	   shorter the viewport the more of it. One batched read, once. */
+	const vh = innerHeight
+	reveals.forEach(el => {
+		const r = el.getBoundingClientRect()
+		if (r.top < vh && r.bottom > 0) el.classList.add('is-visible')
+		else io.observe(el)
+	})
 }
 
 /*------------------------ parallax ------------------------*/

@@ -157,8 +157,11 @@
 .hero {
   position: relative;
   isolation: isolate;
-  padding-block: clamp(4rem, 12vh, 8rem) var(--section-gap);
-  min-height: min(94svh, 900px);
+  /* Height-aware, not width-aware. --section-gap keys off vw, which
+     on a 1366x768 laptop still spends 128px of a short viewport on
+     padding and pushes the CTAs below the fold. */
+  padding-block: clamp(3rem, 9svh, 7rem) clamp(3rem, 8svh, 7rem);
+  min-height: min(92svh, 880px);
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -417,6 +420,35 @@
   background: var(--ok);
   box-shadow: 0 0 10px var(--ok);
   animation: livePulse 2.4s var(--out) infinite;
+}
+
+/* Short viewports - a 1366x768 laptop is still extremely common.
+   The display type is sized off viewport WIDTH, so on a wide-but-short
+   screen an 88px headline plus a six-line bio pushes the CTAs and the
+   status line below the fold. Tighten the hero's own rhythm rather
+   than shrinking the type scale everywhere. */
+@media (max-height: 820px) {
+  .hero h1 {
+    font-size: clamp(2.5rem, 6.5svh, 4rem);
+    margin-bottom: 1rem;
+  }
+
+  .hero .eyebrow {
+    margin-bottom: 1.25rem;
+  }
+
+  .role {
+    min-height: 0;
+    margin-bottom: 1rem;
+  }
+
+  .hero__bio {
+    margin-bottom: 1.5rem;
+  }
+
+  .hero .status {
+    margin-top: 1.5rem;
+  }
 }
 
 @media (max-width: 560px) {
