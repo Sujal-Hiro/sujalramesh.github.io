@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" class="is-booting" data-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
@@ -8,7 +8,7 @@
   <meta name="description" content="Detailed write-ups of Sujal Ramesh's game projects, with build notes and tech stacks." />
   <meta name="author" content="Sujal Ramesh" />
   <link rel="canonical" href="https://sujalramesh.github.io/projects.html" />
-  <meta name="theme-color" content="#0b0b0c" />
+  <meta name="theme-color" content="#08080c" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sujalramesh.github.io/projects.html" />
   <meta property="og:title" content="Projects | Sujal Ramesh" />
@@ -22,13 +22,24 @@
   <meta name="twitter:image" content="https://sujalramesh.github.io/Images/og-cover.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/tokens.css" />
+  <link rel="stylesheet" href="./assets/css/base.css" />
+  <link rel="stylesheet" href="./assets/css/layout.css" />
+  <link rel="stylesheet" href="./assets/css/components.css" />
+  <link rel="stylesheet" href="./assets/css/effects.css" />
+  <link rel="stylesheet" href="./assets/css/games.css" />
+  <link rel="stylesheet" href="./assets/css/pages.css" />
+  <!-- motion.css last: every preference query lives there and must win -->
+  <link rel="stylesheet" href="./assets/css/motion.css" />
   <link rel="shortcut icon" type="image/png" href="Images/Icon-Website.png">
 </head>
 
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="backdrop" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
 
   <header class="site-header" id="siteHeader">
     <div class="wrap">
@@ -224,7 +235,7 @@
     </div>
   </div>
 
-  <script src="./script.js"></script>
+  <script type="module" src="./assets/js/main.js"></script>
 </body>
 
 </html>

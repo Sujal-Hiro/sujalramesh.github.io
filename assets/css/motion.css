@@ -1,0 +1,261 @@
+/*==============================================================
+  Motion + user preferences
+  --------------------------------------------------------------
+  This file is loaded LAST so its rules always win. Every
+  preference query on the site lives here and nowhere else.
+==============================================================*/
+
+/*---------------------- reduced motion ----------------------*/
+
+/* The contract: reduced motion means things genuinely STOP, not
+   that they run faster. Where an effect is purely a colour or
+   opacity change it is kept, because neither is vestibular and
+   removing them makes the page feel broken rather than calm. */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Pin the hue instead of letting it animate. Without this pin a
+     blanket animation-duration override would make the cycle SNAP
+     to its end value rather than hold still. JS also never starts
+     its clock under this query, so this is belt and braces. */
+  :root {
+    --hue-base: 265;
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Reveals fade, they do not travel. A fade is not vestibular and
+     it preserves the sense of arrival. */
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition-duration: 200ms !important;
+  }
+
+  .line-mask>span {
+    transform: none;
+  }
+
+  /* Anything whose resting state is "hidden until animated" must
+     be forced visible, or reduced-motion users see empty boxes. */
+  .section-head::after {
+    width: 100%;
+  }
+
+  .timeline::before {
+    transform: scaleY(1);
+  }
+
+  .skill-group li {
+    opacity: 1;
+    transform: none;
+  }
+
+  .card__go {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Kill every looping decoration outright. */
+  .process li,
+  .process .pip,
+  .process ol::after,
+  .contact::before,
+  .btn-rgb::before,
+  .game__board::after,
+  .footer-rgb i,
+  .brand span,
+  .eyebrow::before,
+  .status .dot {
+    animation: none !important;
+  }
+
+  .process ol::after,
+  .game__board::after {
+    display: none;
+  }
+
+  /* Show the process rail as a completed pipeline rather than a
+     dead strip. */
+  .process li {
+    color: var(--fg-2);
+  }
+
+  .process .pip {
+    background: oklch(0.78 0.19 var(--hue) / 0.4);
+    border-color: oklch(0.78 0.19 var(--hue) / 0.6);
+  }
+
+  .footer-rgb i {
+    opacity: 1;
+  }
+
+  /* No pointer-driven 3D at all. */
+  .hero__stage,
+  .card,
+  .skill-group,
+  .tl-item,
+  .process {
+    transform: none !important;
+  }
+
+  .masonry__col {
+    transform: none !important;
+  }
+
+  .card::after,
+  .spotlight::before {
+    display: none;
+  }
+
+  /* The hero keeps its CSS deck; WebGL is never initialised, so
+     there is no GPU cost at all for users who ask for stillness. */
+  .hero__gl {
+    display: none;
+  }
+
+  .hero.is-gl::before {
+    opacity: 0.5;
+  }
+}
+
+/*---------------------- reduced transparency ----------------------*/
+
+@media (prefers-reduced-transparency: reduce) {
+
+  .site-header,
+  .lightbox,
+  .hud,
+  .zoombar,
+  .game__screen .game__hint {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .site-header {
+    background: var(--bg);
+  }
+
+  .backdrop::after {
+    display: none;
+  }
+
+  /* grain off */
+  .contact::before {
+    display: none;
+  }
+}
+
+/*------------------------- more contrast -------------------------*/
+
+/* Neon on black is genuinely hard for some people. This is the
+   honest answer rather than pretending the cycle suits everyone:
+   the glow budget goes to zero, edges get real opacity, and the
+   atmosphere layers are removed entirely. */
+
+@media (prefers-contrast: more) {
+  :root {
+    --glow: 0 !important;
+    --hue-base: 265;
+    --fg: oklch(1 0 0);
+    --fg-2: oklch(0.92 0.010 var(--hue));
+    --fg-muted: oklch(0.80 0.010 var(--hue));
+    --line: oklch(0.98 0.01 var(--hue) / 0.38);
+    --line-strong: oklch(0.98 0.01 var(--hue) / 0.62);
+    --neon: oklch(0.86 0.16 var(--hue));
+    --neon-hi: oklch(0.95 0.12 var(--hue));
+    animation: none !important;
+  }
+
+  * {
+    text-shadow: none !important;
+  }
+
+  .backdrop,
+  .vignette,
+  .contact::before,
+  .card::after,
+  .scanlines::after {
+    display: none;
+  }
+
+  body {
+    background: #000;
+  }
+
+  .tile img,
+  .tile video,
+  .shot img,
+  .shot video {
+    filter: none;
+  }
+}
+
+/*------------------------- forced colors -------------------------*/
+
+@media (forced-colors: active) {
+
+  .backdrop,
+  .vignette,
+  .hero__gl,
+  .hero::before,
+  .contact::before,
+  .card::after,
+  .hud::before,
+  .scanlines::after,
+  .game__screen::before,
+  .game__board::after {
+    display: none;
+  }
+
+  .card,
+  .tile,
+  .hud,
+  .btn,
+  .skill-group,
+  .shot {
+    border: 1px solid CanvasText;
+    box-shadow: none;
+  }
+
+  :focus-visible {
+    outline: 3px solid Highlight;
+    box-shadow: none;
+  }
+
+  .tile img,
+  .tile video,
+  .shot img,
+  .shot video {
+    filter: none;
+  }
+}
+
+/*--------------------------- save data ---------------------------*/
+
+/* Belt and braces alongside the JS gate: if the WebGL module does
+   somehow load on a metered connection, it stays invisible. */
+@media (prefers-reduced-data: reduce) {
+  .hero__gl {
+    display: none;
+  }
+
+  .hero.is-gl::before {
+    opacity: 0.5;
+  }
+
+  .backdrop::after {
+    display: none;
+  }
+}

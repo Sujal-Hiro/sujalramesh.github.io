@@ -1,0 +1,218 @@
+/*==============================================================
+  Base - reset, typography, layout primitives
+==============================================================*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 1.5rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* Must come after the rule above: an author `display` on img/video
+   beats the UA stylesheet's [hidden] rule, which silently breaks
+   the hidden attribute. */
+[hidden] {
+  display: none !important;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/*-------------------------- typography --------------------------*/
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-3);
+  line-height: 0.96;
+  letter-spacing: -0.032em;
+}
+
+h2 {
+  font-size: var(--step-2);
+  line-height: 1.06;
+  letter-spacing: -0.018em;
+}
+
+h3 {
+  font-size: var(--step-1);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.010em;
+}
+
+/* The HUD label. Used ~40 times across the site: indices, tags,
+   dates, captions, stat names. This one class carries most of the
+   "gaming" read, which is exactly why the display face is allowed
+   to stay restrained. */
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fg-muted);
+}
+
+/* Every live number on the site. Tabular is mandatory: without it
+   a score counter jitters its own layout on every hit. */
+.hud-num {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'zero' 1;
+  /* slashed zero */
+  letter-spacing: 0.02em;
+}
+
+::selection {
+  background: var(--neon);
+  /* Dark ink on neon, not white. Higher contrast AND more premium.
+     White on a 0.78-lightness fill is ~2.6:1 and fails WCAG. */
+  color: var(--neon-ink);
+}
+
+/*------------------------- focus ring -------------------------*/
+
+/* The hard problem in a neon system: a neon focus ring can vanish
+   against a neon element. Solution is a three-band ring.
+
+   The white inner band guarantees >=3:1 against ANY surface,
+   including the brightest neon fill. The dark spacer guarantees
+   the neon band stays visible against light surfaces. Together
+   they satisfy WCAG 2.2 SC 2.4.13 Focus Appearance. */
+:focus-visible {
+  outline: 2px solid oklch(0.99 0 0);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+  box-shadow:
+    0 0 0 4px oklch(0.10 0.02 var(--hue)),
+    0 0 0 6px oklch(0.80 0.19 var(--hue) / 0.90),
+    0 0 18px 0 oklch(0.80 0.19 var(--hue) / 0.45);
+  transition: box-shadow var(--t-2) var(--out);
+}
+
+/* SC 2.4.11 Focus Not Obscured: a focused element must never end
+   up underneath the sticky header. */
+:focus-visible {
+  scroll-margin-block: calc(var(--header-h) + 2rem);
+}
+
+/*------------------------- primitives -------------------------*/
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 300;
+  padding: 0.6em 1em;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  transform: translateY(-200%);
+  transition: transform var(--t-2) var(--out);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-gap);
+}
+
+.section-head {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  padding-bottom: 1.25rem;
+}
+
+.section-head p {
+  color: var(--fg-muted);
+  font-size: var(--step--1);
+  margin: 0;
+  max-width: var(--measure);
+}
+
+.link-more {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color var(--t-2) var(--out), gap var(--t-2) var(--out);
+}
+
+.link-more:hover {
+  color: var(--neon-hi);
+  gap: 0.7rem;
+}
+
+@media (max-width: 560px) {
+  .section-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

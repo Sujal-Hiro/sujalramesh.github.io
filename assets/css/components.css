@@ -1,0 +1,872 @@
+/*==============================================================
+  Components - buttons, cards, tags, tiles, timeline, skills,
+  lightbox
+==============================================================*/
+
+/*--------------------------- buttons ---------------------------*/
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85em 1.5em;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: transform var(--t-3) var(--out), --glow var(--t-3) var(--out),
+    border-color var(--t-2) var(--out), color var(--t-2) var(--out),
+    background-color var(--t-2) var(--out);
+}
+
+.btn-primary {
+  --glow: 0.55;
+  background: linear-gradient(180deg, oklch(0.74 0.19 var(--hue)), oklch(0.62 0.20 var(--hue)));
+  /* Dark ink on neon. Both higher-contrast and more premium than
+     white-on-neon, which fails WCAG at this lightness. */
+  color: var(--neon-ink);
+  /* The lit top edge - light enters from above. */
+  border-top-color: oklch(0.90 0.14 var(--hue) / 0.65);
+  box-shadow:
+    0 0 22px -6px oklch(0.72 0.20 var(--hue) / calc(var(--glow) * 0.60)),
+    0 8px 22px -12px oklch(0 0 0 / 0.9);
+}
+
+.btn-primary:hover {
+  --glow: 1;
+  transform: translateY(-2px);
+}
+
+/* Pressing a lit key dims it. A detail nobody names and everybody
+   feels. */
+.btn-primary:active {
+  --glow: 0.45;
+  transform: translateY(0) scale(0.985);
+}
+
+.btn-ghost {
+  border-color: var(--line-strong);
+  color: var(--fg-2);
+}
+
+.btn-ghost:hover {
+  --glow: 0.5;
+  border-color: var(--line-neon);
+  color: var(--fg);
+  transform: translateY(-2px);
+}
+
+.btn-ghost:active {
+  transform: translateY(0) scale(0.985);
+}
+
+/* The one running-light border on the site, reserved for the
+   contact CTA. */
+.btn-rgb {
+  position: relative;
+  isolation: isolate;
+  background: var(--surface);
+  color: var(--fg);
+  border-color: transparent;
+  background-clip: padding-box;
+}
+
+.btn-rgb::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: conic-gradient(from var(--spin),
+      transparent 0 62%,
+      var(--rgb-cyan) 76%,
+      var(--rgb-violet) 84%,
+      transparent 96%);
+  animation: spin 3s linear infinite;
+  filter: blur(0.5px) drop-shadow(0 0 8px oklch(0.78 0.19 var(--hue) / 0.5));
+}
+
+@keyframes spin {
+  to {
+    --spin: 360deg;
+  }
+}
+
+.btn-rgb:hover {
+  transform: translateY(-2px);
+  background: var(--surface-2);
+}
+
+/*---------------------------- cards ----------------------------*/
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 14px;
+}
+
+/* Six cards, six FIXED hues laid out as a designed sequence rather
+   than animated. The grid IS the spectrum, and because it is
+   static and ordered it reads as a palette instead of a rainbow. */
+.grid .card:nth-child(1) {
+  --hue: 205;
+}
+
+.grid .card:nth-child(2) {
+  --hue: 255;
+}
+
+.grid .card:nth-child(3) {
+  --hue: 290;
+}
+
+.grid .card:nth-child(4) {
+  --hue: 325;
+}
+
+.grid .card:nth-child(5) {
+  --hue: 150;
+}
+
+.grid .card:nth-child(6) {
+  --hue: 78;
+}
+
+.card {
+  --tx: 0;
+  --ty: 0;
+  --glow: 0.18;
+  position: relative;
+  transform-style: preserve-3d;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 3vw, 1.9rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  min-height: 210px;
+  color: inherit;
+  box-shadow: var(--edge);
+  transform:
+    perspective(900px) rotateX(calc(var(--ty) * -6deg)) rotateY(calc(var(--tx) * 8deg));
+  transition:
+    background-color var(--t-3) var(--out),
+    border-color var(--t-3) var(--out),
+    --glow var(--t-3) var(--out);
+}
+
+.card:hover {
+  --glow: 1;
+  background: var(--surface-2);
+  border-color: var(--line-neon);
+}
+
+/* The specular streak. Without this a tilting card is just a
+   rotating rectangle; with it, it is glass. This one rule does
+   most of the work. */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transform: translateZ(60px);
+  pointer-events: none;
+  background: linear-gradient(105deg,
+      transparent 40%,
+      oklch(0.97 0.05 var(--hue) / 0.10) 48%,
+      transparent 56%);
+  background-position: calc(50% + var(--tx) * 60%) 0;
+  opacity: calc(0.25 + var(--glow) * 0.75);
+  transition: opacity var(--t-3) var(--out);
+}
+
+.card__body {
+  transform: translateZ(20px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  flex: 1;
+}
+
+.card .num {
+  display: flex;
+  align-items: center;
+  transform: translateZ(40px);
+  font-family: var(--font-mono);
+  font-size: var(--step-1);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: oklch(0.78 0.19 var(--hue));
+  text-shadow:
+    0 0 1px oklch(0.97 0.06 var(--hue) / 0.5),
+    0 0 18px oklch(0.78 0.19 var(--hue) / calc(var(--glow) * 0.5));
+  transition: text-shadow var(--t-3) var(--out);
+}
+
+/* The arrow only exists on hover, where it signals "there is more
+   to read" without adding permanent chrome to six cards at once. */
+.card__go {
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity var(--t-3) var(--out), transform var(--t-3) var(--out);
+}
+
+.card:hover .card__go,
+.card:focus-visible .card__go {
+  opacity: 1;
+  transform: none;
+}
+
+.card h3 {
+  color: var(--fg);
+}
+
+.card p {
+  color: var(--fg-muted);
+  font-size: var(--step--1);
+  margin: 0;
+}
+
+/* Unscoped on purpose. The project page uses .tags too, and with
+   nowrap tags an unstyled block container lets them run past the
+   column instead of wrapping as whole chips. */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.card .tags {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+/* Mandatory: a focused card must not sit rotated, or the focus
+   ring skews and looks broken. */
+.card:focus-visible {
+  --tx: 0;
+  --ty: 0;
+}
+
+/*----------------------------- tags -----------------------------*/
+
+/* Tag TEXT stays achromatic at 11-12px. Only the border and
+   background carry hue - the contrast rule in force. */
+.tag {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-muted);
+  padding: 0.45em 0.8em;
+  /* A tag is one label. Without this "Playstore Project" breaks
+     across two chips and reads as two separate tags. */
+  white-space: nowrap;
+  border: 1px solid oklch(0.78 0.19 var(--hue) / 0.18);
+  border-radius: var(--radius-sm);
+  background: oklch(0.60 0.18 var(--hue) / 0.05);
+  transition: color var(--t-1) var(--out), border-color var(--t-2) var(--out),
+    background-color var(--t-2) var(--out);
+}
+
+.tag:hover,
+.card:hover .tag {
+  color: var(--fg);
+  border-color: oklch(0.78 0.19 var(--hue) / 0.5);
+}
+
+/*---------------------------- tiles ----------------------------*/
+
+/* Masonry restructured into JS-balanced flex columns so each
+   column can drift independently for the parallax. */
+.masonry {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.masonry__col {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transform: translate3d(0, calc(var(--sp, 0) * var(--drift, 0px)), 0);
+  will-change: transform;
+}
+
+.masonry__col:nth-child(1) {
+  --drift: 0px;
+}
+
+.masonry__col:nth-child(2) {
+  --drift: -50px;
+}
+
+.masonry__col:nth-child(3) {
+  --drift: -25px;
+}
+
+.tile {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  position: relative;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  transition: border-color var(--t-2) var(--out), transform var(--t-2) var(--out),
+    box-shadow var(--t-3) var(--out);
+}
+
+.tile:hover {
+  border-color: var(--line-neon);
+  transform: scale(1.02);
+  box-shadow: 0 0 24px -8px oklch(0.78 0.19 var(--hue) / 0.5);
+}
+
+/* Corner bracket, top-left only, fading in on hover. */
+.tile::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 14px;
+  height: 14px;
+  z-index: 2;
+  border-top: 1px solid var(--neon);
+  border-left: 1px solid var(--neon);
+  opacity: 0;
+  transition: opacity var(--t-2) var(--out);
+}
+
+.tile:hover::before {
+  opacity: 1;
+}
+
+/* Desaturate at rest. This is what makes a 44-tile wall look
+   art-directed instead of like a folder listing, and it enforces
+   the saturated-pixel budget on the densest page on the site. */
+.tile img,
+.tile video {
+  width: 100%;
+  height: auto;
+  /* Portrait phone captures are 9:16; uncapped they tower over the
+     200px stills beside them. */
+  max-height: 460px;
+  object-fit: cover;
+  filter: saturate(0.72) brightness(0.92);
+  transition: filter var(--t-2) var(--out), transform var(--t-4) var(--out);
+}
+
+.tile:hover img,
+.tile:hover video {
+  filter: none;
+  transform: scale(1.06);
+}
+
+/* A <figcaption> is only valid inside a <figure>, and a tile is a
+   <button>, which takes phrasing content only. So this is a span. */
+.tile__cap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  font-size: var(--step--1);
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+
+/* A neon bar grows from the caption's left edge on hover. */
+.tile__cap::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--neon);
+  box-shadow: 0 0 10px var(--neon);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform var(--t-3) var(--out);
+}
+
+.tile:hover .tile__cap::before {
+  transform: scaleY(1);
+}
+
+.tile__cap span {
+  font-family: var(--font-mono);
+  color: var(--fg-muted);
+  font-size: var(--step--2);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tile.is-hidden {
+  display: none;
+}
+
+/*--------------------------- timeline ---------------------------*/
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 2.75rem);
+  padding-left: 1.75rem;
+}
+
+/* Present to past, cool to warm: the timeline is a gradient of a
+   career. */
+.tl-item:nth-child(1) {
+  --hue: 290;
+}
+
+.tl-item:nth-child(2) {
+  --hue: 255;
+}
+
+.tl-item:nth-child(3) {
+  --hue: 205;
+}
+
+.tl-item:nth-child(4) {
+  --hue: 150;
+}
+
+.tl-item:nth-child(5) {
+  --hue: 78;
+}
+
+/* The rail is an energy conduit: a dim track with a lit fill that
+   grows downward as the section scrolls into view. */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--rgb-violet), var(--rgb-cyan), var(--rgb-amber));
+  box-shadow: 0 0 12px -2px var(--rgb-cyan);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 1s var(--out);
+}
+
+.timeline.is-visible::before {
+  transform: scaleY(1);
+}
+
+.tl-item {
+  position: relative;
+  /* Cards fanned along a spine. One property, distinctive, nearly
+     free. */
+  transform: rotateY(1.2deg);
+  transform-origin: left center;
+  transition: transform var(--t-4) var(--out);
+}
+
+.tl-item.is-active {
+  transform: rotateY(0);
+}
+
+/* Diamonds, hollow until the item crosses viewport centre. */
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -1.75rem;
+  top: 0.55em;
+  width: 11px;
+  height: 11px;
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  transform: rotate(45deg);
+  transition: border-color var(--t-3) var(--out), background-color var(--t-3) var(--out),
+    box-shadow var(--t-3) var(--out);
+}
+
+.tl-item.is-active::before,
+.tl-item:hover::before {
+  border-color: oklch(0.78 0.19 var(--hue));
+  background: oklch(0.78 0.19 var(--hue));
+  box-shadow: 0 0 14px oklch(0.78 0.19 var(--hue));
+}
+
+.tl-when {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 0.35rem;
+  padding-left: 0.6rem;
+  border-left: 1px solid oklch(0.78 0.19 var(--hue) / 0.4);
+}
+
+.tl-item h3 {
+  margin-bottom: 0.15rem;
+  color: var(--fg);
+}
+
+.tl-where {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: oklch(0.86 0.16 var(--hue));
+  margin-bottom: 0.5rem;
+}
+
+.tl-item p {
+  color: var(--fg-muted);
+  font-size: var(--step--1);
+  max-width: var(--measure);
+  margin: 0;
+}
+
+/*---------------------------- skills ----------------------------*/
+
+/* Flex, not grid. Eight cards over a three-wide track leaves a
+   dead cell in the last row, and the pointer spotlight paints
+   behind the cards and glows straight through the hole. Wrapped
+   flex items grow to fill their row, so the row closes itself at
+   any column count. */
+.skill-groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Eight groups, eight fixed hues off a clean wheel. Seen whole,
+   the section IS the full spectrum - but organised into eight
+   legible families, which is the difference between designed and
+   rainbow. */
+.skill-group:nth-child(1) {
+  --hue: 0;
+}
+
+.skill-group:nth-child(2) {
+  --hue: 45;
+}
+
+.skill-group:nth-child(3) {
+  --hue: 90;
+}
+
+.skill-group:nth-child(4) {
+  --hue: 145;
+}
+
+.skill-group:nth-child(5) {
+  --hue: 190;
+}
+
+.skill-group:nth-child(6) {
+  --hue: 240;
+}
+
+.skill-group:nth-child(7) {
+  --hue: 285;
+}
+
+.skill-group:nth-child(8) {
+  --hue: 330;
+}
+
+.skill-group {
+  --tx: 0;
+  --ty: 0;
+  --glow: 0.15;
+  flex: 1 1 250px;
+  /* Flex items floor at min-content; a long pill would push the
+     card wider than its share without this. */
+  min-width: 0;
+  position: relative;
+  transform-style: preserve-3d;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(1.35rem, 3vw, 1.75rem);
+  box-shadow: var(--edge);
+  /* Half amplitude - eight cards, and they are secondary content. */
+  transform:
+    perspective(900px) rotateX(calc(var(--ty) * -3deg)) rotateY(calc(var(--tx) * 4deg));
+  transition: background-color var(--t-3) var(--out), border-color var(--t-3) var(--out),
+    --glow var(--t-3) var(--out);
+}
+
+.skill-group:hover {
+  --glow: 0.9;
+  background: var(--surface-2);
+  border-color: var(--line-neon);
+}
+
+.skill-group:focus-within {
+  --tx: 0;
+  --ty: 0;
+}
+
+.skill-group__head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.15rem;
+  transform: translateZ(18px);
+}
+
+/* The socket: the icon sits in a well with an inset neon rim, as
+   if it were a lit component mounted in a panel. */
+.skill-socket {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  background: oklch(0.12 0.02 var(--hue));
+  box-shadow:
+    inset 0 0 0 1px oklch(0.78 0.19 var(--hue) / calc(0.18 + var(--glow) * 0.42)),
+    inset 0 0 18px -8px oklch(0.86 0.16 var(--hue) / calc(var(--glow) * 0.9));
+  transition: box-shadow var(--t-3) var(--out);
+}
+
+.skill-icon {
+  width: 18px;
+  height: 18px;
+  color: oklch(0.86 0.16 var(--hue));
+  filter: drop-shadow(0 0 6px oklch(0.82 0.18 var(--hue) / calc(var(--glow) * 0.7)));
+  transition: filter var(--t-3) var(--out), transform var(--t-3) var(--out);
+}
+
+.skill-group:hover .skill-icon {
+  transform: scale(1.1);
+}
+
+.skill-group h3 {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  margin: 0;
+  transition: color var(--t-3) var(--out);
+}
+
+.skill-group:hover h3 {
+  color: var(--fg);
+}
+
+.skill-group__n {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  color: oklch(0.78 0.19 var(--hue) / 0.55);
+  transition: color var(--t-3) var(--out);
+}
+
+.skill-group:hover .skill-group__n {
+  color: oklch(0.86 0.16 var(--hue));
+}
+
+.skill-group ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 0.45rem;
+  transform: translateZ(10px);
+}
+
+/* Pills fade up in sequence once the group is revealed. */
+.skill-group li {
+  font-size: var(--step--1);
+  color: var(--fg-muted);
+  background: oklch(0.60 0.18 var(--hue) / 0.06);
+  border: 1px solid oklch(0.78 0.19 var(--hue) / 0.14);
+  border-radius: var(--radius-sm);
+  padding: 0.4em 0.9em;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--t-4) var(--out), transform var(--t-2) var(--out),
+    border-color var(--t-2) var(--out), color var(--t-2) var(--out),
+    background-color var(--t-2) var(--out);
+  transition-delay: calc(min(var(--i, 0), 8) * 28ms);
+}
+
+.skill-group.is-visible li {
+  opacity: 1;
+  transform: none;
+}
+
+/* No delay on the way back out, or hover feels laggy. */
+.skill-group li:hover {
+  color: var(--fg);
+  border-color: oklch(0.78 0.19 var(--hue) / 0.5);
+  background: oklch(0.60 0.18 var(--hue) / 0.14);
+  transform: translateY(-2px);
+  transition-delay: 0s;
+}
+
+/*--------------------------- lightbox ---------------------------*/
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  place-items: center;
+  padding: var(--gutter);
+  /* A zoomed image is transformed past its box; clip it rather
+     than let it hand the page a scrollbar. */
+  overflow: hidden;
+  background: oklch(0.06 0.01 var(--hue) / 0.88);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+}
+
+.lightbox[open],
+.lightbox.is-open {
+  display: grid;
+}
+
+.lightbox img,
+.lightbox video {
+  width: auto;
+  height: auto;
+  max-width: min(100%, 1100px);
+  max-height: min(78vh, 720px);
+  object-fit: contain;
+  border-radius: var(--radius-hud);
+  background: #000;
+  box-shadow:
+    0 0 0 1px oklch(0.78 0.19 var(--hue) / 0.35),
+    0 0 60px -14px oklch(0.72 0.20 var(--hue) / 0.5),
+    0 30px 70px -30px oklch(0 0 0 / 0.95);
+}
+
+/* Zoom lives on the image only, since a video's own controls need
+   the clicks. */
+.lightbox img {
+  /* Own every gesture, or the browser pinch-zooms the page. */
+  touch-action: none;
+  cursor: zoom-in;
+  will-change: transform;
+}
+
+.lightbox img.is-zoomed {
+  cursor: grab;
+}
+
+.lightbox img.is-dragging {
+  cursor: grabbing;
+}
+
+@media (max-height: 620px) {
+
+  .lightbox img,
+  .lightbox video {
+    max-height: 64vh;
+  }
+}
+
+.lightbox .close {
+  position: absolute;
+  top: max(var(--gutter), 1rem);
+  right: max(var(--gutter), 1rem);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  border: 1px solid oklch(0.78 0.19 var(--hue) / 0.3);
+  background: oklch(0.10 0.02 var(--hue) / 0.6);
+  color: var(--fg);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--t-2) var(--out), border-color var(--t-2) var(--out);
+}
+
+.lightbox .close:hover {
+  background: oklch(0.20 0.04 var(--hue) / 0.8);
+  border-color: var(--neon);
+}
+
+/*------------------------ zoom controls ------------------------*/
+
+.zoombar {
+  position: absolute;
+  bottom: max(var(--gutter), 1rem);
+  left: 50%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  transform: translateX(-50%);
+  border: 1px solid oklch(0.78 0.19 var(--hue) / 0.25);
+  border-radius: var(--radius-sm);
+  background: oklch(0.10 0.02 var(--hue) / 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.zoombar__btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 0.5rem;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--t-2) var(--out), color var(--t-2) var(--out);
+}
+
+.zoombar__btn:hover:not(:disabled) {
+  background: oklch(0.78 0.19 var(--hue) / 0.18);
+  color: var(--neon-hi);
+}
+
+.zoombar__btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.zoombar__level {
+  min-width: 62px;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-muted);
+}
+
+.zoombar__level:hover:not(:disabled) {
+  color: var(--fg);
+}
