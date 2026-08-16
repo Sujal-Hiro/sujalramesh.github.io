@@ -1,581 +1,511 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="is-booting" data-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portfolio" />
+  <title>Sujal Ramesh | Game Developer &amp; Designer</title>
+  <meta name="description" content="Indian game developer and programmer building immersive gaming experiences. Shipped games, prototypes and design work." />
+  <meta name="author" content="Sujal Ramesh" />
+  <link rel="canonical" href="https://sujal-hiro.github.io/sujalramesh.github.io/" />
+  <meta name="theme-color" content="#08080c" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sujal-hiro.github.io/sujalramesh.github.io/" />
+  <meta property="og:title" content="Sujal Ramesh | Game Developer &amp; Designer" />
+  <meta property="og:description" content="Indian game developer and programmer building immersive gaming experiences. Shipped games, prototypes and design work." />
+  <meta property="og:image" content="https://sujal-hiro.github.io/sujalramesh.github.io/Images/og-cover.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sujal Ramesh | Game Developer &amp; Designer" />
+  <meta name="twitter:description" content="Indian game developer and programmer building immersive gaming experiences. Shipped games, prototypes and design work." />
+  <meta name="twitter:image" content="https://sujal-hiro.github.io/sujalramesh.github.io/Images/og-cover.jpg" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <script src="https://kit.fontawesome.com/fa62c117c7.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="styles.css" />
-  <title>Sujal Ramesh</title>
-  <link rel="shortcut icon" type="image" href="Images/Icon-Website.png">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./assets/css/tokens.css" />
+  <link rel="stylesheet" href="./assets/css/base.css" />
+  <link rel="stylesheet" href="./assets/css/layout.css" />
+  <link rel="stylesheet" href="./assets/css/components.css" />
+  <link rel="stylesheet" href="./assets/css/effects.css" />
+  <link rel="stylesheet" href="./assets/css/games.css" />
+  <link rel="stylesheet" href="./assets/css/pages.css" />
+  <!-- motion.css last: every preference query lives there and must win -->
+  <link rel="stylesheet" href="./assets/css/motion.css" />
+
+  <link rel="shortcut icon" type="image/png" href="Images/Icon-Website.png">
+
+  <!-- Only index.html carries the 3D, so only index.html pays for it. -->
+  <link rel="modulepreload" href="./assets/lib/three/three.module.min.js" />
+  <link rel="modulepreload" href="./assets/lib/three/three.core.min.js" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./assets/lib/three/three.module.min.js"
+      }
+    }
+  </script>
 </head>
 
-<body class="light" id="top">
-  <canvas id="particleCanvas"></canvas>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="header center">
-    <h3><a href="#" class="link">SR.</a></h3>
-    <nav class="nav center">
-      <ul class="nav__list center">
-        <li class="nav__list-item"><a class="link link--nav" href="#projects">Projects</a></li>
-        <li class="nav__list-item"><a class="link link--nav" href="#portfolio">Portfolio</a></li>
-        <li class="nav__list-item"><a class="link link--nav" href="#skills">Skills</a></li>
-        <li class="nav__list-item"><a class="link link--nav" href="#contact">Contact</a></li>
-      </ul>
-      <button type="button" aria-label="toggle theme" class="btn btn--icon">
-        <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
-      </button>
-      <button type="button" aria-label="toggle navigation" class="btn btn--icon nav__hamburger">
-        <i aria-hidden="true" class="fas fa-bars"></i>
-      </button>
-    </nav>
+  <!-- Two fixed atmosphere layers. Composited once, never repainted
+       on scroll. The grain is a dither, not a texture: it is what
+       stops the dark gradients banding. -->
+  <div class="backdrop" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="wrap">
+      <a href="#top" class="brand">SR<span>.</span></a>
+
+      <nav class="nav" id="nav">
+        <a href="#work">Work</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#play">Play</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="icon-btn nav-toggle" id="navBtn" aria-label="Toggle menu"
+          aria-expanded="false" aria-controls="nav">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" />
+          </svg>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <div class="content">
-      <div class="about center">
-        <h1>Hi, I am <span class="about__name">Sujal Ramesh.</span></h1>
-        <div class="about-container">
-          <span class="text first-text"></span>
-          <span class="text second-text"></span>
-        </div>
-        <script>
-          const text = document.querySelector(".second-text");
-          const textLoad = () => {
-            setTimeout(() => { text.textContent = "Game Developer"; }, 0);
-            setTimeout(() => { text.textContent = "Game Designer"; }, 4000);
-            setTimeout(() => { text.textContent = "Sports Enthusiast"; }, 8000);
-            setTimeout(() => { text.textContent = "Gamer"; }, 12000);
-          }
-          textLoad();
-          setInterval(textLoad, 16000);
-        </script>
-        <h3 class="about__role__more">Enthusiastic, Innovative & Passionate about Games</h3>
-        <p class="about__desc">
-          I'm an Indian game developer and programmer who transformed a childhood passion for gaming into a professional
-          career.
-          After completing my B.Sc. in Game Development, I now work in the industry creating immersive gaming
-          experiences.
-          My journey from playing games extensively in my youth to developing them professionally reflects my dedication
-          to turning creative visions into playable realities.
-          Having navigated the challenges of pursuing game development in India, where such specialized careers are
-          still emerging, I'm committed to pushing the boundaries of interactive entertainment and bringing innovative
-          gameplay to life.
+  <main id="main">
 
-        </p>
-        <h3 class="about_line" id="dailyTagline"></h3>
-        <script>
-          // Rotating taglines with dramatic animations
-          const taglines = [
-            "Turning the 'what if' moments into games you can actually play.",
-            "Making games that I'd lose sleep playing.",
-            "Creating the experiences I dreamed about as a kid.",
-            "Crafting digital chaos and calling it entertainment.",
-            "From playing games all night to making them all day."
-          ];
+    <section class="hero">
+      <!-- THE DECK. Sits at z-index -1 inside the hero's own stacking
+           context. Removed entirely by main.js when the capability
+           gates fail, leaving the CSS fallback deck on screen. -->
+      <canvas class="hero__gl" id="heroGl" aria-hidden="true"></canvas>
 
-          let currentTaglineIndex = 0;
-          const taglineElement = document.getElementById('dailyTagline');
+      <div class="wrap">
+        <div class="hero__stage">
+          <p class="eyebrow reveal">Open to collabs &amp; new roles</p>
+          <h1 class="reveal">
+            <span class="line-mask"><span style="--l:0">Hi, I'm</span></span>
+            <span class="line-mask"><span style="--l:1"><em>Sujal Ramesh</em></span></span>
+          </h1>
+          <p class="role reveal"><span class="word" id="role">Unity Developer</span></p>
+          <p class="hero__bio reveal">
+            I've been playing games since before I realised someone had to build them. Now I'm the one building
+            them: turning ideas into mechanics, mechanics into prototypes, and prototypes into games people
+            actually play. B.Sc. in Game Development, now shipping in the industry. Doing this from India, where
+            the path is still being carved out, only makes me want to push interactive entertainment further.
+          </p>
+          <div class="actions reveal">
+            <a class="btn btn-primary" href="https://drive.google.com/file/d/1MkevrUhK9BrIV1J8NdFftmxfhc38uF57/view?usp=sharing" target="_blank" rel="noopener noreferrer">R&eacute;sum&eacute; <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+            <a class="btn btn-ghost" href="https://www.linkedin.com/in/sujalramesh/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="btn btn-ghost" href="mailto:iam.sujalramesh@gmail.com">Email</a>
+          </div>
 
-          const rotateTagline = () => {
-            // Add dramatic exit animation - text flies up
-            taglineElement.classList.add('tagline-fly-out');
-
-            setTimeout(() => {
-              // Change text while invisible
-              currentTaglineIndex = (currentTaglineIndex + 1) % taglines.length;
-              taglineElement.textContent = taglines[currentTaglineIndex];
-
-              // Remove exit, add dramatic drop-in animation
-              taglineElement.classList.remove('tagline-fly-out');
-              taglineElement.classList.add('tagline-drop-in');
-
-              // Remove animation class after completion
-              setTimeout(() => {
-                taglineElement.classList.remove('tagline-drop-in');
-              }, 1000);
-            }, 500);
-          };
-
-          // Set initial tagline with drop animation
-          taglineElement.textContent = taglines[0];
-          taglineElement.classList.add('tagline-drop-in');
-          setTimeout(() => taglineElement.classList.remove('tagline-drop-in'), 1000);
-
-          // Rotate every 10 seconds (change to 5000 for 5 seconds)
-          setInterval(rotateTagline, 10000);
-        </script>
-        <div class="about__contact center">
-          <a href="https://drive.google.com/file/d/1MkevrUhK9BrIV1J8NdFftmxfhc38uF57/view?usp=sharing">
-            <span class="btn btn--outline">Resume</span>
-          </a>
-          <!-- <a href="https://github.com/Sujal-Hiro" aria-label="github" class="link link--icon">
-              <i aria-hidden="true" class="fab fa-github"></i>
-            </a> -->
-          <a href="https://www.linkedin.com/in/sujalramesh/" aria-label="linkedin" class="link link--icon">
-            <i aria-hidden="true" class="fab fa-linkedin"></i>
-          </a>
+          <p class="status reveal">
+            <span class="dot" aria-hidden="true"></span>
+            <span>Currently building games at <b>The Alter Office</b>, Bengaluru</span>
+          </p>
         </div>
       </div>
+    </section>
+
+    <div class="process">
+      <ol class="wrap">
+        <li style="--s:0"><span class="pip" aria-hidden="true"></span>Idea</li>
+        <li style="--s:1"><span class="pip" aria-hidden="true"></span>Design</li>
+        <li style="--s:2"><span class="pip" aria-hidden="true"></span>Develop</li>
+        <li style="--s:3"><span class="pip" aria-hidden="true"></span>Test</li>
+        <li style="--s:4"><span class="pip" aria-hidden="true"></span>Play</li>
+      </ol>
     </div>
 
-    <section>
-      <div class="bar-container">
-        <text class="text-bar">IDEA | DESIGN | DEVELOP | TEST | PLAY</text>
-      </div>
-    </section>
-
-    <section id="projects" class="section projects">
-      <h2 class="section__title">Projects</h2>
-      <div class="projects_background">
-        <div class="project-carousel">
-          <div class="carousel-item">
-            <h3>Spin - Android Game</h3>
-            <p class="project__description">
-              2D Hyper Casual game with simple player mechanics, dodgeable enemies and collectable assets. Published on
-              PlayStore under Steadfaststudios.
-            </p>
-          </div>
-          <div class="carousel-item">
-            <h3>Square Madness</h3>
-            <p class="project__description">
-              Straightforward gameplay avoiding enemy bombs and spikes while collecting points. Released on Play Store
-              with focus on UI Design and sprites.
-            </p>
-          </div>
-          <div class="carousel-item">
-            <h3>Its All About Us!</h3>
-            <p class="project__description">
-              Cooperative local multiplayer game with duality theme. Chennai Global Game Jam Winners - 2022. Team
-              leadership experience.
-            </p>
-          </div>
-          <div class="carousel-item">
-            <h3>Try Dodging</h3>
-            <p class="project__description">
-              Hyper-casual endless runner created using BuildBox engine. Fast-paced gameplay with point collection
-              mechanics.
-            </p>
-          </div>
-          <div class="carousel-item">
-            <h3>AR Applications</h3>
-            <p class="project__description">
-              AR-based projects using Unity and Vuforia SDK. Includes piano, solar system, and multiple image target
-              implementations.
-            </p>
-          </div>
-          <div class="carousel-item">
-            <h3>Saloon Shooter</h3>
-            <p class="project__description">
-              FPS game where players compete as gunslingers to shoot bottles within time limits at saloons.
-              Western-themed shooter.
-            </p>
-          </div>
-          <div class="carousel-item">
-            <h3>Treasure Hunt</h3>
-            <p class="project__description">
-              First-person open-world game where players explore maps to discover hidden treasures scattered throughout
-              the environment.
-            </p>
-          </div>
-          <div class="carousel-item">
-            <h3>Mars Survivor</h3>
-            <p class="project__description">
-              Sci-fi adventure set in 2050. Survive on Mars by managing oxygen, finding water, and mining resources in
-              dangerous underground caves.
-            </p>
+    <section class="section" id="invaders" data-index="01">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Hold the line</h2>
+            <p>Hold the arrows or A / D to move. The gun fires itself. P pauses.</p>
           </div>
         </div>
-      </div>
-      <div class="more_BTN_projects">
-        <a href="projects.html">
-          <button class="btn btn--outline">more</button>
-        </a>
-      </div>
-    </section>
 
-    <!-- BENTO BOX -->
-
-    <!-- <section class="bento-box">
-        <div class="bento-container">
-          <div class="bento-item large">
-            <h2 class="projects-completed-title">10+ Projects Completed</h2>
-            
-          </div>
-          <div class="bento-item">
-            <h2 class="projects-completed-title">15+</h2>
-          </div>
-          <div class="bento-item">
-            <h3 class="resume-cv-title">Resume/CV</h3>
-           
-            
-          </div>
-          <div class="bento-item wide">
-            <h2 class="projects-completed-title">10+ Skills</h2>
-            <div class="skills-icons">
-              <img src="Images/Adobe_Photoshop.png" alt="Photoshop Icon">
-          
-              <svg width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M35.5 28V9.3325L19.525 0V7.1675L25.7825 10.8325C26.03 11 26.03 11.3325 25.7825 11.4175L18.37 15.75C18.1225 15.9175 17.8775 15.8325 17.7125 15.75L10.3 11.4175C10.0525 11.3325 10.0525 10.9175 10.3 10.8325L16.56 7.1675V0L0.5 9.3325V28L6.595 24.4175V17.0825C6.595 16.8325 6.9225 16.6675 7.0875 16.75L14.5 21.0825C14.7475 21.25 14.83 21.4175 14.83 21.6675V30.3325C14.83 30.5825 14.5 30.75 14.335 30.6675L8.0775 27L1.9825 30.5825L17.9575 40L33.935 30.6675L27.84 27.0825L21.585 30.75C21.3375 30.9175 21.09 30.75 21.09 30.4175V21.75C21.09 21.5 21.255 21.25 21.42 21.1675L28.8325 16.8325C29.08 16.6675 29.325 16.8325 29.325 17.1675V24.5L35.5 28Z" fill="#008CDB"></path>
-              </svg>
-              <img src="Images/figma-icon.svg" alt="Figma Icon">
-              <svg
-  width="40"
-  height="40"
-  viewBox="0 0 40 40"
-  fill="transparent"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <g clip-path="url(#clip0_1282_49)">
-    <path
-      d="M4.49688 8.21712C4.34459 8.23528 4.19556 8.27451 4.05406 8.33368L1.02469 9.58368C0.722527 9.70965 0.464187 9.92186 0.281943 10.1938C0.0996997 10.4658 0.00163443 10.7854 0 11.1127L0 28.8877C0.00166026 29.2151 0.0997717 29.5348 0.282073 29.8067C0.464375 30.0787 0.722781 30.2909 1.025 30.4168L4.05406 31.6874C4.33848 31.8065 4.65037 31.8442 4.95499 31.7965C5.2596 31.7488 5.54499 31.6175 5.77937 31.4171L6.45813 30.8337C6.32039 30.9326 6.15801 30.9916 5.9889 31.0041C5.81978 31.0166 5.6505 30.9822 5.4997 30.9046C5.3489 30.827 5.22245 30.7093 5.13427 30.5645C5.0461 30.4196 4.99964 30.2533 5 30.0837V9.91681C4.99964 9.74723 5.0461 9.58085 5.13427 9.43599C5.22245 9.29114 5.3489 9.17345 5.4997 9.09588C5.6505 9.01832 5.81978 8.9839 5.9889 8.99641C6.15801 9.00893 6.32039 9.06789 6.45813 9.16681L5.77937 8.60462C5.60411 8.4548 5.39966 8.343 5.17895 8.2763C4.95824 8.2096 4.72578 8.18945 4.49688 8.21712Z"
-      fill="#52218A"
-    ></path>
-    <path
-      d="M29.6094 0.129533C29.2273 0.0761364 28.8381 0.111882 28.4721 0.233972C28.1062 0.356062 27.7735 0.561184 27.5 0.833283L1.66688 29.3958C1.53576 29.5366 1.36544 29.6349 1.17791 29.678C0.990373 29.721 0.794236 29.7069 0.614809 29.6374C0.435383 29.5679 0.280904 29.4462 0.171314 29.2881C0.0617231 29.1299 0.00205109 28.9426 0 28.7502L0 28.8877C0.00172154 29.215 0.0998615 29.5346 0.282159 29.8065C0.464457 30.0784 0.72283 30.2905 1.025 30.4164L4.05406 31.687C4.33848 31.8061 4.65037 31.8438 4.95499 31.7961C5.2596 31.7484 5.54499 31.6171 5.77937 31.4167L6.45813 30.8333L37.4206 5.44578C37.6519 5.25646 37.9321 5.13665 38.2287 5.10027C38.5254 5.06389 38.8262 5.11244 39.0964 5.24028C39.3665 5.36811 39.5948 5.56999 39.7548 5.82244C39.9147 6.07489 39.9998 6.36755 40 6.66641V6.57047C40.0002 6.09947 39.8673 5.63799 39.6167 5.2392C39.3661 4.84041 39.0079 4.52053 38.5834 4.31641L30.3419 0.349846C30.1105 0.239269 29.8634 0.164962 29.6094 0.129533Z"
-      fill="#6C33AF"
-    ></path>
-    <path
-      d="M4.64719 8.20023C4.44288 8.20803 4.24178 8.25359 4.05406 8.3346L1.02469 9.5846C0.722527 9.71057 0.464187 9.92279 0.281943 10.1947C0.0996997 10.4667 0.00163443 10.7863 0 11.1137L0 11.2515C0.00205109 11.0591 0.0617231 10.8717 0.171314 10.7135C0.280904 10.5554 0.435383 10.4337 0.614809 10.3642C0.794236 10.2947 0.990373 10.2806 1.17791 10.3237C1.36544 10.3667 1.53576 10.465 1.66688 10.6059L27.5 39.1677C27.8658 39.5318 28.3354 39.7737 28.8442 39.8603C29.3531 39.9469 29.8762 39.8738 30.3419 39.6512L38.5834 35.6843C39.0079 35.4802 39.366 35.1604 39.6166 34.7616C39.8672 34.3629 40.0001 33.9015 40 33.4305V33.3346C39.9998 33.6335 39.9147 33.9261 39.7548 34.1786C39.5948 34.431 39.3665 34.6329 39.0964 34.7607C38.8262 34.8886 38.5254 34.9371 38.2287 34.9007C37.9321 34.8644 37.6519 34.7446 37.4206 34.5552L6.45813 9.16773L5.77937 8.58492C5.46256 8.32108 5.05915 8.18381 4.64719 8.20023Z"
-      fill="#854CC7"
-    ></path>
-    <path
-      d="M29.6094 0.129829C28.9815 0.0530359 28.3479 0.217076 27.8362 0.588892C28.0597 0.468161 28.3106 0.407519 28.5645 0.412905C28.8184 0.418291 29.0666 0.48952 29.2847 0.619617C29.5028 0.749715 29.6834 0.934221 29.8088 1.15507C29.9342 1.37593 30.0001 1.62555 30 1.87952V38.1295C29.9993 38.4189 29.9131 38.7015 29.7521 38.942C29.5912 39.1824 29.3627 39.3699 29.0954 39.4807C28.8282 39.5916 28.5341 39.621 28.2502 39.5651C27.9663 39.5092 27.7053 39.3706 27.5 39.1667C27.8658 39.5308 28.3354 39.7727 28.8442 39.8593C29.3531 39.9458 29.8762 39.8728 30.3419 39.6501L38.5834 35.6876C39.0079 35.4835 39.3661 35.1636 39.6167 34.7649C39.8673 34.3661 40.0002 33.9046 40 33.4336V6.56733C40.0003 6.09622 39.8675 5.63461 39.6169 5.2357C39.3662 4.83679 39.008 4.51681 38.5834 4.31264L30.3419 0.349829C30.1104 0.23936 29.8634 0.165159 29.6094 0.129829ZM27.8362 0.588892C27.7131 0.654094 27.5999 0.736482 27.5 0.833579C27.6051 0.74282 27.7176 0.660975 27.8362 0.588892Z"
-      fill="#B179F1"
-    ></path>
-  </g>
-  <defs>
-    <clipPath id="clip0_1282_49">
-      <rect width="80" height="40" ></rect>
-    </clipPath>
-  </defs>
-</svg>
+        <div class="game hud chamfer reveal">
+          <div class="game__bar">
+            <p class="game__stat">Score <b id="siScore">0</b></p>
+            <p class="game__stat">Wave <b id="siWave">1</b></p>
+            <p class="game__stat">Lives <b id="siLives">3</b></p>
+            <p class="game__stat">Best <b id="siBest">0</b></p>
+            <div class="game__actions">
+              <button type="button" class="btn btn-ghost" id="siPause" hidden>Pause</button>
+              <button type="button" class="btn btn-primary" id="siStart">Start</button>
             </div>
           </div>
-          <div class="bento-item">
-            <h3>Software Skills</h3>
-          </div>
-          <div class="bento-item">
-            <h3>Skills</h3>
-          </div>
-          
-          <div class="bento-item">
-            <h3>About ME</h3>
-          </div>
-          <div class="bento-item">
-            <h2>500+</h2>
-          </div>
-        </div>
-      </section> -->
 
+          <div class="game__screen scanlines">
+            <canvas id="siCanvas" width="960" height="540" role="img"
+              aria-label="Space Invaders playfield"></canvas>
+            <div class="game__hint" id="siHint">
+              <strong>Space Invaders</strong>
+              <span>Just steer. Clear the fleet before it reaches you.</span>
+            </div>
+          </div>
 
-
-
-
-    <!--Portfolio-->
-    <!-- Add Slick Carousel CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="stylesheet" type="text/css"
-      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-
-    <!-- Add jQuery and Slick Carousel JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
-    <!-- Initialize Slick Carousel -->
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('.image-carousel').slick({
-          infinite: true,
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 2000,
-          centerMode: true,
-          centerPadding: '0',
-          responsive: [
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                infinite: true,
-                dots: true
-              }
-            },
-            {
-              breakpoint: 600,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
-            }
-          ]
-        });
-
-        $('.project-carousel').slick({
-          infinite: true,
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 2000,
-          centerMode: true,
-          centerPadding: '0',
-          responsive: [
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                infinite: true,
-                dots: true
-              }
-            },
-            {
-              breakpoint: 600,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
-            }
-          ]
-        });
-      });
-
-      const image = document.getElementById('zoom-image');
-
-      image.addEventListener('click', () => {
-        image.classList.toggle('zoomed');
-      });
-    </script>
-
-    <section id="portfolio" class="section__portfolio reveal">
-      <h2 class="section__title Portfolio">Portfolio</h2>
-      <div class="portfolio_background">
-        <div class="image-carousel">
-          <div class="carousel-item" onclick="openModal('Images/image_35.png', 'image')">
-            <img src="Images/image_35.png" alt="Artwork: Portals created in Photoshop" loading="lazy">
-            <h3 class="image-title">Portals (Ps)</h3>
-          </div>
-          <div class="carousel-item" onclick="openModal('Images/video_9.mp4', 'video')">
-            <video src="Images/video_9.mp4" autoplay muted loop preload="metadata"></video>
-            <h3 class="image-title">Spin</h3>
-          </div>
-          <div class="carousel-item" onclick="openModal('Images/image_28.png', 'image')">
-            <img src="Images/image_28.png" alt="Game screenshot: Mars Survivor" loading="lazy">
-            <h3 class="image-title">Mars Survivor</h3>
-          </div>
-          <div class="carousel-item" onclick="openModal('Images/video_1.mp4','video')">
-            <video src="Images/video_1.mp4" autoplay muted loop></video>
-            <h3 class="image-title">TreasureHunt</h3>
-          </div>
-          <div class="carousel-item" onclick="openModal('Images/image_21.png', 'image')">
-            <img src="Images/image_21.png" alt="Artwork: Portal 2.0 created in Photoshop" loading="lazy">
-            <h3 class="image-title">Portal 2.0 (Ps)</h3>
-          </div>
-          <div class="carousel-item" onclick="openModal('Images/image_7.png', 'image')">
-            <img src="Images/image_7.png" alt="Artwork: YouTube Banner created in Photoshop" loading="lazy">
-            <h3 class="image-title">YT Banner (Ps)</h3>
-          </div>
-          <div class="carousel-item" onclick="openModal('Images/image_69.png', 'image')">
-            <img src="Images/image_69.png" alt="Artwork: Car Manipulation created in Photoshop" loading="lazy">
-            <h3 class="image-title">Car Manipulation (Ps)</h3>
-          </div>
-          <div class="carousel-item" onclick="openModal('Images/video_2.mp4','video')">
-            <video src="Images/video_2.mp4" autoplay muted loop></video>
-            <h3 class="image-title">Saloon Shooter</h3>
-          </div>
-          <div class="carousel-item" onclick="openModal('Images/image_36.jpg', 'image')">
-            <img src="Images/image_36.jpg" alt="Game screenshot: TopG Car Madness" loading="lazy">
-            <h3 class="image-title">TopG Car Madness</h3>
-          </div>
-          <div class="carousel-item" onclick="openModal('Images/image_22.png', 'image')">
-            <img src="Images/image_22.png" alt="Game screenshot: Infinite Runner" loading="lazy">
-            <h3 class="image-title">InfiniteRunner</h3>
-          </div>
-          <div class="carousel-item" onclick="openModal('Images/image_17.png', 'image')">
-            <img src="Images/image_17.png" alt="Game screenshot: Its All About Us" loading="lazy">
-            <h3 class="image-title">Its all about us</h3>
-          </div>
-          <div class="carousel-item" onclick="openModal('Images/image_54.png', 'image')">
-            <img src="Images/image_54.png" alt="Artwork: Shang Chi created in Photoshop" loading="lazy">
-            <h3 class="image-title">Shang Chi (Ps)</h3>
-          </div>
-          <div class="carousel-item" onclick="openModal('Images/video_10.mp4','video')">
-            <video src="Images/video_10.mp4" autoplay muted loop></video>
-            <h3 class="image-title">Isometric Game</h3>
+          <div class="game__pad" id="siPad">
+            <button type="button" class="pad-btn" data-si="left" aria-label="Move left">&lsaquo;</button>
+            <button type="button" class="pad-btn" data-si="right" aria-label="Move right">&rsaquo;</button>
           </div>
         </div>
       </div>
-      <div class="more_BTN_portfolio">
-        <a href="portfolio.html">
-          <button class="btn btn--outline">more</button>
-        </a>
+    </section>
+
+    <section class="section" id="work" data-index="02">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Selected work</h2>
+            <p>Eight shipped games and prototypes</p>
+          </div>
+          <a class="link-more" href="projects.html">All projects <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <div class="grid spotlight">
+          <a class="card reveal" href="projects.html#project-1" style="--i:0">
+            <p class="num">01<svg class="card__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p>
+            <div class="card__body">
+              <h3>Spin</h3>
+              <p>2D hyper-casual evasion game. Co-designed and programmed the player mechanics and an experimental enemy AI, with post-processing (anti-aliasing, distortion) for polish. Published on Google Play.</p>
+              <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span><span class="tag">Play Store</span></div>
+            </div>
+          </a>
+
+          <a class="card reveal" href="projects.html#project-2" style="--i:1">
+            <p class="num">02<svg class="card__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p>
+            <div class="card__body">
+              <h3>Square Madness</h3>
+              <p>2D arcade game taken end to end: UI design, sprite management, scene transitions, PlayerPrefs integration and Unity Ads monetisation.</p>
+              <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span><span class="tag">Monetisation</span></div>
+            </div>
+          </a>
+
+          <a class="card reveal" href="projects.html#project-3" style="--i:2">
+            <p class="num">03<svg class="card__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p>
+            <div class="card__body">
+              <h3>It&#x27;s All About Us!</h3>
+              <p>Co-operative local multiplayer built around a duality theme. Winner, Chennai Global Game Jam 2022, where I led the team.</p>
+              <div class="tags"><span class="tag">Game Jam</span><span class="tag">Winner</span><span class="tag">Team Lead</span></div>
+            </div>
+          </a>
+
+          <a class="card reveal" href="projects.html#project-7" style="--i:3">
+            <p class="num">04<svg class="card__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p>
+            <div class="card__body">
+              <h3>Treasure Hunt</h3>
+              <p>Open-world exploration title. Built the interactive game logic, audio integration and the full user interface.</p>
+              <div class="tags"><span class="tag">Unity</span><span class="tag">PC</span><span class="tag">Open World</span></div>
+            </div>
+          </a>
+
+          <a class="card reveal" href="projects.html#project-5" style="--i:4">
+            <p class="num">05<svg class="card__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p>
+            <div class="card__body">
+              <h3>AR Applications</h3>
+              <p>Interactive AR built on Unity and the Vuforia SDK: a Balloon Shooter and a playable AR Piano, using multi-image targets and virtual buttons.</p>
+              <div class="tags"><span class="tag">Vuforia</span><span class="tag">AR</span><span class="tag">Unity</span></div>
+            </div>
+          </a>
+
+          <a class="card reveal" href="projects.html#project-8" style="--i:5">
+            <p class="num">06<svg class="card__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p>
+            <div class="card__body">
+              <h3>Mars Survivor</h3>
+              <p>Resource-management survival game. Built the object collection systems, dynamic crystal spawners and core gameplay loop, and designed the UI and narrative.</p>
+              <div class="tags"><span class="tag">Unity</span><span class="tag">PC</span><span class="tag">Systems</span></div>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
 
-    <div id="myModal" class="modal">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <div class="modal-content">
-        <img id="modalImage" style="display: none;">
-        <video id="modalVideo" controls style="display: none;"></video>
+    <section class="section" id="gallery" data-index="03">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Gallery</h2>
+            <p>Screenshots, gameplay clips and Photoshop work</p>
+          </div>
+          <a class="link-more" href="portfolio.html">Full gallery <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <div class="masonry">
+          <button type="button" class="tile reveal" data-src="Images/image_35.webp" data-type="image"
+            aria-label="View Portals, Photoshop">
+            <img src="Images/image_35.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Portals <span>Photoshop</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_1.mp4" data-type="video"
+            aria-label="View Treasure Hunt, Gameplay">
+            <video src="Images/preview_video_1.mp4" poster="Images/poster_video_1.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <span class="tile__cap">Treasure Hunt <span>Gameplay</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_28.webp" data-type="image"
+            aria-label="View Mars Survivor, Screenshot">
+            <img src="Images/image_28.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Mars Survivor <span>Screenshot</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_69.webp" data-type="image"
+            aria-label="View Car Manipulation, Photoshop">
+            <img src="Images/image_69.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Car Manipulation <span>Photoshop</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_2.mp4" data-type="video"
+            aria-label="View Saloon Shooter, Gameplay">
+            <video src="Images/preview_video_2.mp4" poster="Images/poster_video_2.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <span class="tile__cap">Saloon Shooter <span>Gameplay</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_21.webp" data-type="image"
+            aria-label="View Portal 2.0, Photoshop">
+            <img src="Images/image_21.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Portal 2.0 <span>Photoshop</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_36.webp" data-type="image"
+            aria-label="View TopG Car Madness, Screenshot">
+            <img src="Images/image_36.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">TopG Car Madness <span>Screenshot</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_10.mp4" data-type="video"
+            aria-label="View Isometric Game, Gameplay">
+            <video src="Images/preview_video_10.mp4" poster="Images/poster_video_10.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <span class="tile__cap">Isometric Game <span>Gameplay</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_54.webp" data-type="image"
+            aria-label="View Shang Chi, Photoshop">
+            <img src="Images/image_54.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Shang Chi <span>Photoshop</span></span>
+          </button>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- -----------------------------
-             PORTFOLIO
-        ----------------------------- -->
-    <!-- <section id="portfolio" class="section portfolio reveal">
-              <h2 class="section__title">Portfolio</h2>
-               
-                    <div class="portfolio_background">
-                      <div class="image-grid">
-                        <img class="image-grid-col1 image-grid-row1"src="Images/portals.png"   alt="">                 
-                        <video src="Images/Our First Game, “Spin”_ A Fun and Addictive Game.mp4" autoplay muted loop></video>
-                        <img src="Images/Mars Survivor 2.png" alt="">
-                        <video src="Images/TreasureHunt.mp4" autoplay muted loop></video>
-                        
-                        <img class="portfolio_img"src="Images/Portal.png"   alt="">
-                        <video src="Images/It`s  all about Us! _ 2D Platformer _ Chennai 2022 -Global Game Jam.mp4 " autoplay muted loop></video>
-                        
-                        <img class="portfolio_img"src="Images/TUT2.png"   alt="">
-                        
-                        <video src="Images/Saloon Shooter.mp4" autoplay muted loop></video>
-                        <img src="Images/TopG car.jpg" alt="">
-                      </div>
-                    </div>
-                   
-                      </a>
-                     -->
-    <!-- <a href="portfolio.html" class="more_BTN_portfolio">
-                        <button class="btn btn--outline">more</button>
-                      </a> -->
+    <section class="section" id="experience" data-index="04">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Experience</h2>
+            <p>Roles, studios and what I shipped</p>
+          </div>
+        </div>
 
-    <!-- <section class="more_BTN_portfolio">
-                        <a href="portfolio.html">
-                          <span class="btn btn--outline">check more</span>
-                        </a>
-                      </section> -->
+        <div class="timeline reveal">
+          <article class="tl-item">
+            <p class="tl-when">Dec 2024 to Present</p>
+            <h3>Unity Developer</h3>
+            <p class="tl-where">The Alter Office &middot; Bengaluru &middot; Full-time</p>
+            <p>Hold a strict 60&nbsp;FPS target on mobile through profiling, core stabilisation and efficient
+              rendering. Built the drag-and-drop interactions and "game feel" for card-based systems, authored
+              custom shaders and VFX alongside the 3D art team, and designed a modular architecture for in-game UI
+              carousels. Also wrote custom Unity Editor tools for the asset pipeline and integrated Unity MCP
+              testing agents to catch edge cases in QA.</p>
+          </article>
 
+          <article class="tl-item">
+            <p class="tl-when">Sep 2023 to Jan 2024</p>
+            <h3>Unity Developer</h3>
+            <p class="tl-where">SuperBolter &middot; Bengaluru &middot; Full-time</p>
+            <p>Engineered a GLB export pipeline that dynamically resized 3D assets for high-performance AR
+              rendering. Contributed to HDRP projects and built editor tooling, including a vertex-snapping
+              feature, for precise environment building. Designed a dynamic theme generation system, ran UI
+              overhauls, and kept quality steady across distributed teams on Plastic SCM.</p>
+          </article>
 
+          <article class="tl-item">
+            <p class="tl-when">Jun 2023 to Sep 2023</p>
+            <h3>Unity Developer, Intern</h3>
+            <p class="tl-where">SuperBolter &middot; Bengaluru</p>
+            <p>Worked with 3D technical artists to evaluate and optimise models for accurate rendering and
+              conversion into GLTF and USDZ. Configured Unity Asset Bundles to streamline the pipeline and improve
+              runtime memory allocation, with a steady focus on reproducing and resolving core defects.</p>
+          </article>
 
-    <div id="myModal" class="modal">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <div class="modal-content">
-        <img id="modalImage" style="display: none;">
-        <video id="modalVideo" controls style="display: none;"></video>
+          <article class="tl-item">
+            <p class="tl-when">2022</p>
+            <h3>Lead Programmer, Global Game Jam</h3>
+            <p class="tl-where">Chennai &middot; 1st Place</p>
+            <p>Led a six-person team to build <em>It's All About Us!</em>, a duality-themed 2D co-op platformer, in
+              48 hours, taking first place at the Chennai site of Global Game Jam 2022.</p>
+          </article>
+
+          <article class="tl-item">
+            <p class="tl-when">2020 to 2023</p>
+            <h3>B.Sc. Game Development</h3>
+            <p class="tl-where">Jain (Deemed-to-be University) &middot; Bengaluru &middot; CGPA 8.2</p>
+            <p>Engines, gameplay programming and design: the grounding behind everything above.</p>
+          </article>
+        </div>
       </div>
-    </div>
-
     </section>
 
+    <section class="section" id="skills" data-index="05">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Skills</h2>
+            <p>What I actually reach for, day to day</p>
+          </div>
+        </div>
+        <div class="skill-groups spotlight">
+          <div class="skill-group reveal">
+            <div class="skill-group__head">
+              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 3 12l6 6M15 6l6 6-6 6"/></svg></span>
+              <h3>Languages</h3>
+              <span class="skill-group__n" aria-hidden="true">01</span>
+            </div>
+            <ul><li>C#</li><li>C++</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          </div>
 
-    <!-- Skills -->
-    <section class="section_skills reveal" id="skills">
-      <h2 class="section__title">Skills</h2>
-      <ul class="skills__list">
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-code skill-icon" aria-hidden="true"></i> C#
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-gamepad skill-icon"></i> Unity Engine
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-cogs skill-icon"></i> C++
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fab fa-html5 skill-icon"></i> HTML5
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fab fa-css3-alt skill-icon"></i> CSS3
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-paint-brush skill-icon"></i> Photoshop
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-video skill-icon"></i> Video Editing
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-pencil-ruler skill-icon"></i> UI/UX
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-microchip skill-icon"></i> Shader Programming
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-bug skill-icon"></i> Debugging
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-globe skill-icon"></i> Web Development
-        </li>
-        <li class="skills__list-item btn btn--plain">
-          <i class="fas fa-plug skill-icon"></i> API
-        </li>
-      </ul>
+          <div class="skill-group reveal">
+            <div class="skill-group__head">
+              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 20 7.5v9L12 21l-8-4.5v-9L12 3ZM12 12l8-4.5M12 12v9M12 12 4 7.5"/></svg></span>
+              <h3>Engine &amp; Graphics</h3>
+              <span class="skill-group__n" aria-hidden="true">02</span>
+            </div>
+            <ul><li>Unity Engine</li><li>HDRP</li><li>Shaders</li><li>VFX</li><li>Lighting &amp; Rendering</li><li>3D Math</li></ul>
+          </div>
+
+          <div class="skill-group reveal">
+            <div class="skill-group__head">
+              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19a8 8 0 1 1 16 0M12 14l3.5-3.5"/></svg></span>
+              <h3>Performance</h3>
+              <span class="skill-group__n" aria-hidden="true">03</span>
+            </div>
+            <ul><li>Profiling</li><li>60 FPS Optimisation</li><li>Object Pooling</li><li>Asset Bundles</li><li>Memory Optimisation</li></ul>
+          </div>
+
+          <div class="skill-group reveal">
+            <div class="skill-group__head">
+              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h7M15 7h5M4 17h5M13 17h7M13 4v6M9 14v6"/></svg></span>
+              <h3>Tooling &amp; Pipeline</h3>
+              <span class="skill-group__n" aria-hidden="true">04</span>
+            </div>
+            <ul><li>Custom Editor Tools</li><li>Asset Pipeline</li><li>Design Patterns</li><li>Blender</li><li>GLB / GLTF / USDZ</li></ul>
+          </div>
+
+          <div class="skill-group reveal">
+            <div class="skill-group__head">
+              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12h4M9 10v4M15 11h.01M17.5 13h.01M6.5 7h11a4 4 0 0 1 3.9 3l.9 6a2.6 2.6 0 0 1-4.6 2L15 16H9l-2.7 2A2.6 2.6 0 0 1 1.7 16l.9-6A4 4 0 0 1 6.5 7Z"/></svg></span>
+              <h3>Gameplay &amp; Design</h3>
+              <span class="skill-group__n" aria-hidden="true">05</span>
+            </div>
+            <ul><li>Gameplay Systems</li><li>Game Feel</li><li>Level Design</li><li>UI Design</li><li>Prototyping</li></ul>
+          </div>
+
+          <div class="skill-group reveal">
+            <div class="skill-group__head">
+              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1ZM11 18h2"/></svg></span>
+              <h3>Platforms</h3>
+              <span class="skill-group__n" aria-hidden="true">06</span>
+            </div>
+            <ul><li>Android</li><li>PC</li><li>AR (Vuforia)</li><li>Google Play Release</li><li>Unity Ads</li></ul>
+          </div>
+
+          <div class="skill-group reveal">
+            <div class="skill-group__head">
+              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v10M6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM6 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 10v2a4 4 0 0 1-4 4H6"/></svg></span>
+              <h3>Workflow</h3>
+              <span class="skill-group__n" aria-hidden="true">07</span>
+            </div>
+            <ul><li>Plastic SCM</li><li>Git</li><li>GitHub</li><li>Jira</li><li>Sentry</li></ul>
+          </div>
+
+          <div class="skill-group reveal">
+            <div class="skill-group__head">
+              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM2 20a6 6 0 0 1 12 0M17 11a3 3 0 1 0 0-6M16.5 14.5A6 6 0 0 1 22 20"/></svg></span>
+              <h3>Team</h3>
+              <span class="skill-group__n" aria-hidden="true">08</span>
+            </div>
+            <ul><li>Team Leadership</li><li>Collaboration</li><li>Technical Docs</li><li>QA &amp; Debugging</li></ul>
+          </div>
+        </div>
+      </div>
     </section>
 
+    <section class="section" id="play" data-index="06">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2>Take a shot</h2>
+            <p>Twenty seconds. Small green ones are worth three.</p>
+          </div>
+        </div>
 
-
-
-
-    <!-- Contact -->
-    <!-- <section class="section_contact center reveal" id="contact">
-        <h2 class="section__title_Contact">Contact</h2>
-        <a href="mailto:sujalkrish007@gmail.com" class="contactBTN">
-          <span class="btn btn--outline">Email me</span>
-        </a>
-      </section> -->
-    <section class="section_contact center reveal" id="contact">
-      <h2 class="section__title_Contact">Contact</h2>
-      <a href="mailto:iam.sujalramesh@gmail.com" class="contactBTN">
-        <span class="btn btn--outline">Email me</span>
-      </a>
+        <div class="game hud chamfer reveal">
+          <div class="game__bar">
+            <p class="game__stat">Score <b id="gameScore">0</b></p>
+            <p class="game__stat">Time <b id="gameTime">20</b></p>
+            <p class="game__stat">Best <b id="gameBest">0</b></p>
+            <div class="game__actions">
+              <button type="button" class="btn btn-primary" id="gameStart">Start</button>
+            </div>
+          </div>
+          <div class="game__board scanlines" id="gameBoard">
+            <div class="game__hint" id="gameHint">
+              <strong>Hit the targets</strong>
+              <span>Click them, or Tab and hit Enter.</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
+    <section class="contact" id="contact">
+      <div class="wrap reveal">
+        <h2>Let's build something playable</h2>
+        <p>Open to game development roles, collaborations and jam teams.</p>
+        <a class="btn btn-rgb" href="mailto:iam.sujalramesh@gmail.com">iam.sujalramesh@gmail.com</a>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer">
-    <a class="link footer__link">
-      Created By Sujal Ramesh
-    </a>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; <span id="year">2026</span> Sujal Ramesh</span>
+      <span class="footer-rgb" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span>Bengaluru, India</span>
+    </div>
   </footer>
 
-  <div class="scroll-container">
-    <div class="scroll-top">
-      <a aria-label="Scroll up" href="#top">
-        <i aria-hidden="true" class="fas fa-arrow-up"></i>
-      </a>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Media viewer">
+    <button type="button" class="close" id="lightboxClose" aria-label="Close viewer">&times;</button>
+    <img id="lightboxImg" alt="" hidden>
+    <video id="lightboxVideo" controls playsinline hidden></video>
+
+    <div class="zoombar" id="zoomBar" hidden>
+      <button type="button" class="zoombar__btn" id="zoomOut" aria-label="Zoom out">&minus;</button>
+      <button type="button" class="zoombar__btn zoombar__level" id="zoomReset" aria-label="Reset zoom">100%</button>
+      <button type="button" class="zoombar__btn" id="zoomIn" aria-label="Zoom in">+</button>
     </div>
   </div>
 
-  <script src="./particles.js"></script>
-  <script src="./script.js"></script>
-
-  <script type="text/javascript">
-    window.addEventListener('scroll', reveal);
-
-    function reveal() {
-      var reveals = document.querySelectorAll('.reveal');
-
-      for (var i = 0; i < reveals.length; i++) {
-        var windowheight = window.innerHeight;
-        var revealtop = reveals[i].getBoundingClientRect().top;
-        var revealpoint = 150;
-
-        if (revealtop < windowheight - revealpoint) {
-          reveals[i].classList.add('active');
-        }
-        else {
-          reveals[i].classList.remove('active');
-        }
-      }
-
-    }
-  </script>
+  <script type="module" src="./assets/js/main.js"></script>
 </body>
 
 </html>

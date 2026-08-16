@@ -1,0 +1,317 @@
+/*==============================================================
+  Mini games
+  Two playable breaks. Targets are real <button>s, so the click
+  game works with Tab + Enter as well as a mouse.
+==============================================================*/
+
+.game {
+  --glow: 0.35;
+  position: relative;
+  overflow: hidden;
+}
+
+.game__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  padding: 0.9rem 1.15rem;
+  border-bottom: 1px solid oklch(0.78 0.19 var(--hue) / 0.16);
+  background: oklch(0.12 0.02 var(--hue) / 0.6);
+}
+
+.game__stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fg-muted);
+}
+
+.game__stat b {
+  font-size: var(--step-1);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'zero' 1;
+  letter-spacing: 0.02em;
+  color: var(--neon-hi);
+  text-shadow: 0 0 14px oklch(0.78 0.19 var(--hue) / 0.55);
+}
+
+/* Two buttons: the GROUP takes the auto margin, not each button,
+   or the pair would be pushed to opposite ends of the bar. */
+.game__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.game__bar .btn {
+  padding: 0.6em 1.2em;
+}
+
+/*----------------------- invaders screen -----------------------*/
+
+/* The canvas has a fixed 960x540 backing store and is scaled by
+   CSS, so the game logic never has to care about layout width. */
+.game__screen {
+  position: relative;
+  background:
+    radial-gradient(circle at 1px 1px, oklch(0.78 0.19 var(--hue) / 0.10) 1px, transparent 0) 0 0 / 26px 26px,
+    radial-gradient(80% 60% at 50% 100%, oklch(0.50 0.16 var(--hue) / 0.18), transparent 70%),
+    var(--bg-deep);
+}
+
+.game__screen canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  /* Own the gestures: without this a drag to steer scrolls the page. */
+  touch-action: none;
+  /* Sprites are pixel matrices; smoothing would blur their edges.
+     NOTE: this canvas is deliberately NOT DPR-scaled - unlike the
+     hero canvas, which is. Do not copy one to the other. */
+  image-rendering: pixelated;
+}
+
+/* Barrel vignette over the playfield. */
+.game__screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(120% 100% at 50% 50%, transparent 55%, oklch(0.04 0.01 var(--hue) / 0.6) 100%);
+}
+
+/*-------------------------- target rush --------------------------*/
+
+.game__board {
+  position: relative;
+  height: clamp(260px, 42vw, 360px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 1px 1px, oklch(0.78 0.19 var(--hue) / 0.10) 1px, transparent 0) 0 0 / 26px 26px,
+    linear-gradient(oklch(0.78 0.19 var(--hue) / 0.05) 1px, transparent 1px) 0 0 / 100% 25%,
+    linear-gradient(90deg, oklch(0.78 0.19 var(--hue) / 0.05) 1px, transparent 1px) 0 0 / 16.6% 100%,
+    var(--bg-deep);
+  touch-action: manipulation;
+}
+
+/* Radar sweep. The one looping decoration allowed outside the
+   hero, because it is slow (4s) and very low contrast. */
+.game__board::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon), transparent);
+  opacity: 0.4;
+  animation: radar 4s linear infinite;
+}
+
+@keyframes radar {
+  from {
+    top: 0;
+  }
+
+  to {
+    top: 100%;
+  }
+}
+
+/* Targets are reticles, not discs. */
+.target {
+  position: absolute;
+  width: var(--size, 44px);
+  height: var(--size, 44px);
+  margin: calc(var(--size, 44px) / -2) 0 0 calc(var(--size, 44px) / -2);
+  border: 2px solid var(--rgb-magenta);
+  border-radius: 50%;
+  background: oklch(0.72 0.24 340 / 0.35);
+  box-shadow: 0 0 18px -2px var(--rgb-magenta), inset 0 0 12px -4px var(--rgb-magenta);
+  cursor: pointer;
+  padding: 0;
+  animation: pop 0.18s var(--snap);
+  transition: transform 0.1s var(--out);
+}
+
+/* Two tick marks, so it reads as a reticle rather than a ring. */
+.target::before,
+.target::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+  color: var(--rgb-magenta);
+}
+
+.target::before {
+  left: 50%;
+  top: -4px;
+  width: 1px;
+  height: 7px;
+  transform: translateX(-50%);
+}
+
+.target::after {
+  left: 50%;
+  bottom: -4px;
+  width: 1px;
+  height: 7px;
+  transform: translateX(-50%);
+}
+
+.target:hover {
+  transform: scale(1.08);
+}
+
+.target.is-bonus {
+  border-color: var(--rgb-lime);
+  background: oklch(0.86 0.21 140 / 0.3);
+  box-shadow: 0 0 18px -2px var(--rgb-lime), inset 0 0 12px -4px var(--rgb-lime);
+}
+
+.target.is-bonus::before,
+.target.is-bonus::after {
+  color: var(--rgb-lime);
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+}
+
+/* Hit burst - the game-feel detail a Unity dev notices. */
+.burst {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  border: 2px solid var(--rgb-magenta);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: burst 0.32s var(--out) forwards;
+}
+
+.burst.is-bonus {
+  border-color: var(--rgb-lime);
+}
+
+@keyframes burst {
+  from {
+    transform: scale(0.4);
+    opacity: 0.9;
+  }
+
+  to {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* Score bump on a hit, drawn where the target was. */
+.floater {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--rgb-magenta);
+  text-shadow: 0 0 12px var(--rgb-magenta);
+  pointer-events: none;
+  animation: floatUp 0.6s var(--out) forwards;
+}
+
+.floater.is-bonus {
+  color: var(--rgb-lime);
+  text-shadow: 0 0 12px var(--rgb-lime);
+}
+
+@keyframes floatUp {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -160%);
+  }
+}
+
+/*---------------------------- shared ----------------------------*/
+
+/* The pad is for coarse pointers only. With a keyboard it is dead
+   weight. */
+.game__pad {
+  display: none;
+  gap: 8px;
+  padding: 0.75rem;
+  border-top: 1px solid oklch(0.78 0.19 var(--hue) / 0.16);
+}
+
+@media (hover: none),
+(pointer: coarse) {
+  .game__pad {
+    display: flex;
+  }
+}
+
+.pad-btn {
+  flex: 1;
+  /* Held down for whole rounds, so bigger than the 44px minimum. */
+  min-height: 60px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: var(--step-1);
+  line-height: 1;
+  cursor: pointer;
+  /* Stop the double-tap-to-zoom delay from eating rapid input. */
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.pad-btn:active {
+  border-color: var(--neon);
+  background: oklch(0.60 0.18 var(--hue) / 0.2);
+  box-shadow: inset 0 0 20px -6px var(--neon);
+}
+
+.game__hint {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  gap: 0.4rem;
+  text-align: center;
+  padding: 1rem;
+  color: var(--fg-muted);
+  font-size: var(--step--1);
+}
+
+/* The invaders board paints a resting fleet behind the hint, so
+   this one needs a scrim the click game's empty board does not. */
+.game__screen .game__hint {
+  background: oklch(0.10 0.02 var(--hue) / 0.78);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.game__hint strong {
+  font-family: var(--font-display);
+  color: var(--fg);
+  font-size: var(--step-2);
+  font-weight: 700;
+  letter-spacing: -0.018em;
+  text-shadow:
+    0 0 1px oklch(0.97 0.06 var(--hue) / 0.55),
+    0 0 24px oklch(0.78 0.19 var(--hue) / 0.4);
+}

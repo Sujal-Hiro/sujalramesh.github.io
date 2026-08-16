@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sujal-hiro.github.io/sujalramesh.github.io/sitemap.xml

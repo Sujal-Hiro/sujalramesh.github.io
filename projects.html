@@ -1,361 +1,241 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="is-booting" data-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portfolio" />
+  <title>Projects | Sujal Ramesh</title>
+  <meta name="description" content="Detailed write-ups of Sujal Ramesh's game projects, with build notes and tech stacks." />
+  <meta name="author" content="Sujal Ramesh" />
+  <link rel="canonical" href="https://sujal-hiro.github.io/sujalramesh.github.io/projects.html" />
+  <meta name="theme-color" content="#08080c" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sujal-hiro.github.io/sujalramesh.github.io/projects.html" />
+  <meta property="og:title" content="Projects | Sujal Ramesh" />
+  <meta property="og:description" content="Detailed write-ups of Sujal Ramesh's game projects, with build notes and tech stacks." />
+  <meta property="og:image" content="https://sujal-hiro.github.io/sujalramesh.github.io/Images/og-cover.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Projects | Sujal Ramesh" />
+  <meta name="twitter:description" content="Detailed write-ups of Sujal Ramesh's game projects, with build notes and tech stacks." />
+  <meta name="twitter:image" content="https://sujal-hiro.github.io/sujalramesh.github.io/Images/og-cover.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/fa62c117c7.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="styles.css" />
-  <title>SR-Projects</title>
-  <link rel="shortcut icon" type="image" href="Images/Icon-Website.png">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/tokens.css" />
+  <link rel="stylesheet" href="./assets/css/base.css" />
+  <link rel="stylesheet" href="./assets/css/layout.css" />
+  <link rel="stylesheet" href="./assets/css/components.css" />
+  <link rel="stylesheet" href="./assets/css/effects.css" />
+  <link rel="stylesheet" href="./assets/css/games.css" />
+  <link rel="stylesheet" href="./assets/css/pages.css" />
+  <!-- motion.css last: every preference query lives there and must win -->
+  <link rel="stylesheet" href="./assets/css/motion.css" />
+  <link rel="shortcut icon" type="image/png" href="Images/Icon-Website.png">
 </head>
 
-<body class="light" id="top">
-  <!-- Move canvas OUTSIDE background-animation, directly in body -->
-  <canvas id="particleCanvas"></canvas>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="header center">
-    <h3>
-      <a href="index.html" class="link">SR.</a>
-    </h3>
+  <div class="backdrop" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
 
-    <nav class="nav center">
-      <ul class="nav__list center">
-        <li class="nav__list-item">
-          <a class="link link--nav" href="index.html">Home</a>
-        </li>
+  <header class="site-header" id="siteHeader">
+    <div class="wrap">
+      <a href="index.html" class="brand">SR<span>.</span></a>
 
-        <!-- <li class="nav__list-item">
-            <a class="link link--nav" href="index.html">Home</a>
-          </li> -->
+      <nav class="nav" id="nav">
+        <a href="index.html">Home</a>
+        <a href="portfolio.html">Gallery</a>
+      </nav>
 
-
-      </ul>
-
-      <button type="button" aria-label="toggle theme" class="btn btn--icon">
-        <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
-      </button>
-
-      <!-- <button
-          type="button"
-          aria-label="toggle navigation"
-          class="btn btn--icon nav__hamburger"
-        >
-          <i aria-hidden="true" class="fas fa-bars"></i> -->
-      </button>
-    </nav>
+      <div class="header-actions">
+        <button type="button" class="icon-btn nav-toggle" id="navBtn" aria-label="Toggle menu"
+          aria-expanded="false" aria-controls="nav">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" />
+          </svg>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <!--Projects-->
+  <main id="main">
+    <div class="wrap">
+      <div class="page-head">
+        <h1>Works &amp; Projects</h1>
+        <p>Eight games and prototypes, from Play Store releases to game-jam winners: what they are, what I
+          built, and what I learned.</p>
+      </div>
 
-
-
-  <section id="Projects" class="projects_section">
-    <div class="projects__heading">
-      <span>
-        <h1>Works/Projects</h1>
-      </span>
-      <div class="projects_list">
-        <div class="p1">
-          <h2 id="project1">Spin-Android game</h2>
-          <p class="description">
-            <b style="color: var(--clr-fg-alt);">2D Hyper Casual</b> game where it includes simple player mechanics,
-            dodgeable enemies and collectable assets. We tried implementing AI enemy to our game but unfortunately it
-            didn't turn out well.
-          </p>
-          <ul class="description">
-            <li>Utilised a variety of plugins, including <b style="color: var(--clr-fg-alt);">LeanTween and Camera
-                shake</b> effects.</li>
-            <li>Particle effects were employed to enhance the game's clarity and appearance.</li>
-            <li>There are basic gameplay elements, animations, post-processing effects, and sound effects in this game.
-            </li>
-            <li>My friend and I under the name <b style="color: var(--clr-fg-alt);">Steadfaststudios</b> published the
-              game on the PlayStore.</li>
+      <article class="project reveal" id="project-1">
+        <div class="project__meta">
+          <p class="project__index">01</p>
+          <h2>Spin Android game</h2>
+          <p>2D Hyper Casual game where it includes simple player mechanics, dodgeable enemies and collectable assets. We tried implementing AI enemy to our game but unfortunately it didn&#x27;t turn out well.</p>
+          <ul class="project__points">
+            <li>Utilised a variety of plugins, including LeanTween and Camera shake effects.</li>
+            <li>Particle effects were employed to enhance the game&#x27;s clarity and appearance.</li>
+            <li>There are basic gameplay elements, animations, post-processing effects, and sound effects in this game.</li>
+            <li>My friend and I under the name Steadfaststudios published the game on the PlayStore.</li>
           </ul>
-          <a href="https://play.google.com/store/apps/details?id=com.Steadfaststudios.Spin" aria-label="live preview"
-            class="link link--icon">
-            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-          </a>
-          <div class="projects_img">
-            <div class="img-grid">
-              <img src="Images/image_50.png" alt="">
-              <video src="Images/video_9.mp4" autoplay muted loop preload="metadata"></video>
-              <img src="Images/image_52.png" alt="">
-            </div>
-            <div class="project_use_items">
-              <span>Hyper Casual</span>
-              <span>Playstore Project</span>
-              <span>Android</span>
-              <span>Collabration</span>
-            </div>
-          </div>
+          <div class="tags"><span class="tag">Hyper Casual</span><span class="tag">Playstore Project</span><span class="tag">Android</span><span class="tag">Collaboration</span></div>
+          <a class="link-more" href="https://play.google.com/store/apps/details?id=com.Steadfaststudios.Spin" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
-        <div class="p2">
-          <h2 id="project1">Square Madness</h2>
-          <p class="description">
-            The game's mechanics are straightforward; the player must avoid enemy bombs and spikes while collecting
-            points
-            like gold, gems, and other valuable items. I primarily worked on the UI Design, sprites, and animations for
-            it.
-            The first game created in Unity and released on the PlayStore was this one. I gained a better understanding
-            of
-            UI and asset creation thanks to this game.
-          </p>
-          <ul class="description">
-            <li>Starting with this game and uploading it to the play store was done completely without any prior game
-              development knowledge.</li>
-            <li>As a <b style="color: var(--clr-fg-alt);">UI and game designer</b>, I gained a lot of experience and
-              knowledge about tools that are utilised in Unity.</li>
-            <li>While developing this game, I learnt how to use prefabs effectively and learned about different sprites,
-              sprite sheets, the UI canvas, scene management, build settings, and player preferences. In-game Unity
-              advertisements.</li>
+        <div class="project__media">
+            <button type="button" class="shot" data-src="Images/image_50.webp" data-type="image" aria-label="View Spin Android game screenshot"><img src="Images/image_50.webp" alt="Spin Android game screenshot" loading="lazy" decoding="async"></button>
+            <button type="button" class="shot shot--video" data-src="Images/video_9.mp4" data-type="video" aria-label="Play Spin Android game clip"><video src="Images/preview_video_9.mp4" poster="Images/poster_video_9.jpg" muted loop
+            playsinline preload="none"></video></button>
+            <button type="button" class="shot" data-src="Images/image_52.webp" data-type="image" aria-label="View Spin Android game screenshot"><img src="Images/image_52.webp" alt="Spin Android game screenshot" loading="lazy" decoding="async"></button>
+        </div>
+      </article>
+      <article class="project reveal" id="project-2">
+        <div class="project__meta">
+          <p class="project__index">02</p>
+          <h2>Square Madness</h2>
+          <p>The game&#x27;s mechanics are straightforward; the player must avoid enemy bombs and spikes while collecting points like gold, gems, and other valuable items. I primarily worked on the UI Design, sprites, and animations for it. The first game created in Unity and released on the PlayStore was this one. I gained a better understanding of UI and asset creation thanks to this game.</p>
+          <ul class="project__points">
+            <li>Starting with this game and uploading it to the play store was done completely without any prior game development knowledge.</li>
+            <li>As a UI and game designer, I gained a lot of experience and knowledge about tools that are utilised in Unity.</li>
+            <li>While developing this game, I learnt how to use prefabs effectively and learned about different sprites, sprite sheets, the UI canvas, scene management, build settings, and player preferences. In-game Unity advertisements.</li>
           </ul>
-          <a href="https://play.google.com/store/apps/details?id=com.IdeekayStudios.SqaureMadness"
-            aria-label="live preview" class="link link--icon">
-            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-          </a>
-          <div class="projects_img">
-            <div class="img-grid">
-              <img src="Images/image_9.png" alt="">
-              <video src="Images/video_4.mp4" autoplay muted loop></video>
-              <img src="Images/image_56.png" alt="">
-            </div>
-            <div class="project_use_items">
-              <span>First Game</span>
-              <span>Collabration</span>
-              <span>2D Casual Game</span>
-              <span>Android</span>
-            </div>
-          </div>
+          <div class="tags"><span class="tag">First Game</span><span class="tag">Collaboration</span><span class="tag">2D Casual Game</span><span class="tag">Android</span></div>
+          <a class="link-more" href="https://play.google.com/store/apps/details?id=com.IdeekayStudios.SqaureMadness" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
-        <div class="p3">
-          <h2 id="project1">Its All About Us!</h2>
-          <p class="description">
-            It's a cooperative <b style="color: var(--clr-fg-alt);">local multiplayer</b> game with a dualistic premise.
-            As
-            a <b style="color: var(--clr-fg-alt);">programmer and team leader</b>, I gained a lot of knowledge via this
-            project. It aided in my learning more about team leadership and finishing a game within a set amount of
-            time.
-          </p>
-          <ul class="description">
-            <li>Supervised a group of six people who worked on a duality-based game for the Chennai Global Game Jam.
-            </li>
+        <div class="project__media">
+            <button type="button" class="shot" data-src="Images/image_9.webp" data-type="image" aria-label="View Square Madness screenshot"><img src="Images/image_9.webp" alt="Square Madness screenshot" loading="lazy" decoding="async"></button>
+            <button type="button" class="shot shot--video" data-src="Images/video_4.mp4" data-type="video" aria-label="Play Square Madness clip"><video src="Images/preview_video_4.mp4" poster="Images/poster_video_4.jpg" muted loop
+            playsinline preload="none"></video></button>
+            <button type="button" class="shot" data-src="Images/image_56.webp" data-type="image" aria-label="View Square Madness screenshot"><img src="Images/image_56.webp" alt="Square Madness screenshot" loading="lazy" decoding="async"></button>
+        </div>
+      </article>
+      <article class="project reveal" id="project-3">
+        <div class="project__meta">
+          <p class="project__index">03</p>
+          <h2>It&#x27;s All About Us!</h2>
+          <p>It&#x27;s a cooperative local multiplayer game with a dualistic premise. As a programmer and team leader, I gained a lot of knowledge via this project. It aided in my learning more about team leadership and finishing a game within a set amount of time.</p>
+          <ul class="project__points">
+            <li>Supervised a group of six people who worked on a duality-based game for the Chennai Global Game Jam.</li>
             <li>Successfully created the game in the allotted 48 hours and uploaded it on their website.</li>
-            <li>The amount of duties I had as the team leader was excessive, yet our group was strong enough to solve
-              many
-              issues. We all closely collaborated on this game, faced numerous challenges, and found solutions.</li>
-            <li>With our dedication and enthusiasm for game development, we were recognised as winners at the Chennai
-              Global
-              Game Jam.</li>
+            <li>The amount of duties I had as the team leader was excessive, yet our group was strong enough to solve many issues. We all closely collaborated on this game, faced numerous challenges, and found solutions.</li>
+            <li>With our dedication and enthusiasm for game development, we were recognised as winners at the Chennai Global Game Jam.</li>
             <li>For desktop platforms like Windows 10/10.1/11, Mac OS, etc.</li>
           </ul>
-          <a href="https://youtu.be/8jC3e6yOQYM" aria-label="live preview" class="link link--icon">
-            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-          </a>
-          <div class="projects_img">
-            <div class="img-grid">
-              <img src="Images/image_5.png" alt="">
-              <video class="video-landscape" src="Images/video_8.mp4" autoplay muted loop></video>
-              <img src="Images/image_19.png" alt="">
-            </div>
-            <div class="project_use_items">
-              <span>Chennai Global Game Jam Winners - 2022</span>
-              <span>Local Multiplayer</span>
-              <span>Duality Theme</span>
-              <span>Team Lead</span>
-              <span>PC</span>
-            </div>
-          </div>
+          <div class="tags"><span class="tag">Chennai Global Game Jam Winners - 2022</span><span class="tag">Local Multiplayer</span><span class="tag">Duality Theme</span><span class="tag">Team Lead</span><span class="tag">PC</span></div>
+          <a class="link-more" href="https://youtu.be/8jC3e6yOQYM" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
-        <div class="p4">
-          <h2 id="project1">Try Dodging</h2>
-          <p class="description">
-            A <b style="color: var(--clr-fg-alt);">hyper-casual</b> game with an endless run that was created using the
-            <b style="color: var(--clr-fg-alt);">Build Box</b> game engine. It requires the player to gather points.
-            While
-            creating this game, I gained a lot of knowledge and experiences with how nodes can be implemented in games.
-          </p>
-          <a href="https://youtu.be/I-VNEEGx-AY" aria-label="live preview" class="link link--icon">
-            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-          </a>
-          <div class="projects_img">
-            <div class="img-grid">
-              <img src="Images/image_44.jpg" alt="">
-              <video src="Images/video_3.mp4" autoplay muted loop></video>
-              <img src="Images/image_67.png" alt="">
-            </div>
-            <div class="project_use_items">
-              <span>BuildBox Engine</span>
-              <span>3D Hyper Casual</span>
-              <span>Solo Project</span>
-              <span>Fast Paced</span>
-            </div>
-          </div>
+        <div class="project__media">
+            <button type="button" class="shot" data-src="Images/image_5.webp" data-type="image" aria-label="View It&#x27;s All About Us! screenshot"><img src="Images/image_5.webp" alt="It&#x27;s All About Us! screenshot" loading="lazy" decoding="async"></button>
+            <button type="button" class="shot shot--video" data-src="Images/video_8.mp4" data-type="video" aria-label="Play It&#x27;s All About Us! clip"><video src="Images/preview_video_8.mp4" poster="Images/poster_video_8.jpg" muted loop
+            playsinline preload="none"></video></button>
+            <button type="button" class="shot" data-src="Images/image_19.webp" data-type="image" aria-label="View It&#x27;s All About Us! screenshot"><img src="Images/image_19.webp" alt="It&#x27;s All About Us! screenshot" loading="lazy" decoding="async"></button>
         </div>
-        <div class="p5">
-          <h2 id="project1">AR Applications</h2>
-          <p class="description">
-            The first AR project was completed utilising the Unity Engine and its AR, XR, and <b
-              style="color: var(--clr-fg-alt);">Vuforia SDK</b> plugins. It's an AR-based game that makes use of the
-            camera on gadgets like mobile phones and webcams. This game is designed for Android smartphones. To play,
-            simply position the camera on the device and press the start button. Balloons will then keep dropping from
-            the top,
-          </p>
-          <ul class="description">
-            <li>Vuforia SDKs were mostly used with Image targets, and work was done with single-level, multiple-level,
-              and
-              other ITs.</li>
+      </article>
+      <article class="project reveal" id="project-4">
+        <div class="project__meta">
+          <p class="project__index">04</p>
+          <h2>Try Dodging</h2>
+          <p>A hyper-casual game with an endless run that was created using the Build Box game engine. It requires the player to gather points. While creating this game, I gained a lot of knowledge and experiences with how nodes can be implemented in games.</p>
+          <div class="tags"><span class="tag">BuildBox Engine</span><span class="tag">3D Hyper Casual</span><span class="tag">Solo Project</span><span class="tag">Fast Paced</span></div>
+          <a class="link-more" href="https://youtu.be/I-VNEEGx-AY" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        </div>
+        <div class="project__media">
+            <button type="button" class="shot" data-src="Images/image_44.webp" data-type="image" aria-label="View Try Dodging screenshot"><img src="Images/image_44.webp" alt="Try Dodging screenshot" loading="lazy" decoding="async"></button>
+            <button type="button" class="shot shot--video" data-src="Images/video_3.mp4" data-type="video" aria-label="Play Try Dodging clip"><video src="Images/preview_video_3.mp4" poster="Images/poster_video_3.jpg" muted loop
+            playsinline preload="none"></video></button>
+            <button type="button" class="shot" data-src="Images/image_67.png" data-type="image" aria-label="View Try Dodging screenshot"><img src="Images/image_67.png" alt="Try Dodging screenshot" loading="lazy" decoding="async"></button>
+        </div>
+      </article>
+      <article class="project reveal" id="project-5">
+        <div class="project__meta">
+          <p class="project__index">05</p>
+          <h2>AR Applications</h2>
+          <p>The first AR project was completed utilising the Unity Engine and its AR, XR, and Vuforia SDK plugins. It&#x27;s an AR-based game that makes use of the camera on gadgets like mobile phones and webcams. This game is designed for Android smartphones. To play, simply position the camera on the device and press the start button. Balloons will then keep dropping from the top,</p>
+          <ul class="project__points">
+            <li>Vuforia SDKs were mostly used with Image targets, and work was done with single-level, multiple-level, and other ITs.</li>
             <li>In Unity, I worked on AR buttons, and I utilised this to make a piano project.</li>
-            <li>Vuforia was used in numerous projects, including the solar system project, the piano, single image
-              target,
-              and multiple image target.</li>
+            <li>Vuforia was used in numerous projects, including the solar system project, the piano, single image target, and multiple image target.</li>
           </ul>
-          <a href="https://youtu.be/H-EhHDOIrtw" aria-label="live preview" class="link link--icon">
-            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-          </a>
-          <div class="projects_img">
-            <div class="img-grid">
-              <img src="Images/image_10.png" alt="">
-              <video class="video-landscape" src="Images/video_5.mp4" autoplay muted loop></video>
-              <img src="Images/image_2.png" alt="">
-            </div>
-            <div class="project_use_items">
-              <span>AR</span>
-              <span>Vuforia SDK</span>
-              <span>College Project</span>
-              <span>AR Applications & Games</span>
-            </div>
-          </div>
+          <div class="tags"><span class="tag">AR</span><span class="tag">Vuforia SDK</span><span class="tag">College Project</span><span class="tag">AR Applications &amp; Games</span></div>
+          <a class="link-more" href="https://youtu.be/H-EhHDOIrtw" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
-        <div class="p6">
-          <h2 id="project1">Saloon-Shooter</h2>
-          <p class="description">
-            A <b style="color: var(--clr-fg-alt);">FPS</b> game where the player is a gunslinger who is on a quest to
-            prove
-            his talents and challenge people. These challenges take place at bars where all the gunslingers participated
-            to
-            win, and the player has to beat the other gunslingers' top score. The task is straightforward: within the
-            allotted time, the player must fire at the bottles they have set.
-          </p>
-          <a href="https://youtu.be/8Zizvq3a8FE" aria-label="live preview" class="link link--icon">
-            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-          </a>
-          <div class="projects_img">
-            <div class="img-grid">
-              <img src="Images/image_41.png" alt="">
-              <video class="video-landscape" src="Images/video_2.mp4" autoplay muted loop></video>
-              <img src="Images/image_45.png" alt="">
-            </div>
-            <div class="project_use_items">
-              <span>3D Shooter</span>
-              <span>Game Designer</span>
-              <span>Collabration</span>
-              <span>PC</span>
-            </div>
-          </div>
+        <div class="project__media">
+            <button type="button" class="shot" data-src="Images/image_10.webp" data-type="image" aria-label="View AR Applications screenshot"><img src="Images/image_10.webp" alt="AR Applications screenshot" loading="lazy" decoding="async"></button>
+            <button type="button" class="shot shot--video" data-src="Images/video_5.mp4" data-type="video" aria-label="Play AR Applications clip"><video src="Images/preview_video_5.mp4" poster="Images/poster_video_5.jpg" muted loop
+            playsinline preload="none"></video></button>
+            <button type="button" class="shot" data-src="Images/image_2.webp" data-type="image" aria-label="View AR Applications screenshot"><img src="Images/image_2.webp" alt="AR Applications screenshot" loading="lazy" decoding="async"></button>
         </div>
-        <div class="p7">
-          <h2 id="project1">Treasure Hunt</h2>
-          <p class="description">
-            In this <b style="color: var(--clr-fg-alt);">first-person open-world game</b>, the player
-            takes on the role of a treasure hunter who must search the map for all of the treasures
-            scattered throughout it. The game is completed once the player has discovered all of
-            the treasures hidden throughout the map.
-          </p>
-
-          <a href="https://youtu.be/BYWT3ecsvRQ" aria-label="live preview" class="link link--icon">
-            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-          </a>
-
-          <div class="projects_img">
-            <div class="img-grid">
-              <img src="Images/image_59.png" alt="">
-              <video class="video-landscape" src="Images/video_1.mp4" autoplay muted loop></video>
-
-              <img src="Images/image_61.png" alt="">
-
-            </div>
-            <div class="project_use_items">
-              <span>Adventure</span>
-              <span>Gameplay Programmer</span>
-              <span>Collabration</span>
-              <span>PC</span>
-            </div>
-
-          </div>
+      </article>
+      <article class="project reveal" id="project-6">
+        <div class="project__meta">
+          <p class="project__index">06</p>
+          <h2>Saloon Shooter</h2>
+          <p>A FPS game where the player is a gunslinger who is on a quest to prove his talents and challenge people. These challenges take place at bars where all the gunslingers participated to win, and the player has to beat the other gunslingers&#x27; top score. The task is straightforward: within the allotted time, the player must fire at the bottles they have set.</p>
+          <div class="tags"><span class="tag">3D Shooter</span><span class="tag">Game Designer</span><span class="tag">Collaboration</span><span class="tag">PC</span></div>
+          <a class="link-more" href="https://youtu.be/8Zizvq3a8FE" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
-
-        <div class="p8">
-          <h2 id="project1">Mars Survivor</h2>
-          <p class="description">
-            <b style="color: var(--clr-fg-alt);">First-person open-world game</b>,
-            this game set in 2050, the player character is an astronaut on a mission to
-            mine valuable resources on Mars. After a crash landing, they must survive the
-            harsh environment by managing oxygen, finding water, and scavenging for
-            resources. The player character must mine for resources to craft tools
-            and equipment while exploring dangerous underground caves.
-            The goal is to survive and complete the mission to collect enough
-            resources to make the effort worthwhile.
-          </p>
-
-          <a href="https://youtu.be/c-n0HC73Js4" aria-label="live preview" class="link link--icon">
-            <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-          </a>
-
-          <div class="projects_img">
-            <div class="img-grid">
-              <img src="Images/image_26.png" alt="">
-              <video class="video-landscape" src="Images/video_7.mp4" autoplay muted loop></video>
-
-              <img src="Images/image_29.png" alt="">
-
-            </div>
-            <div class="project_use_items">
-              <span>Sci-fi Adventure</span>
-              <span>Game Design & Programmer</span>
-              <span>Collabration</span>
-              <span>PC</span>
-            </div>
-
-          </div>
+        <div class="project__media">
+            <button type="button" class="shot" data-src="Images/image_41.webp" data-type="image" aria-label="View Saloon Shooter screenshot"><img src="Images/image_41.webp" alt="Saloon Shooter screenshot" loading="lazy" decoding="async"></button>
+            <button type="button" class="shot shot--video" data-src="Images/video_2.mp4" data-type="video" aria-label="Play Saloon Shooter clip"><video src="Images/preview_video_2.mp4" poster="Images/poster_video_2.jpg" muted loop
+            playsinline preload="none"></video></button>
+            <button type="button" class="shot" data-src="Images/image_45.webp" data-type="image" aria-label="View Saloon Shooter screenshot"><img src="Images/image_45.webp" alt="Saloon Shooter screenshot" loading="lazy" decoding="async"></button>
         </div>
-      </div>
-      </span>
+      </article>
+      <article class="project reveal" id="project-7">
+        <div class="project__meta">
+          <p class="project__index">07</p>
+          <h2>Treasure Hunt</h2>
+          <p>In this first-person open-world game, the player takes on the role of a treasure hunter who must search the map for all of the treasures scattered throughout it. The game is completed once the player has discovered all of the treasures hidden throughout the map.</p>
+          <div class="tags"><span class="tag">Adventure</span><span class="tag">Gameplay Programmer</span><span class="tag">Collaboration</span><span class="tag">PC</span></div>
+          <a class="link-more" href="https://youtu.be/BYWT3ecsvRQ" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        </div>
+        <div class="project__media">
+            <button type="button" class="shot" data-src="Images/image_59.webp" data-type="image" aria-label="View Treasure Hunt screenshot"><img src="Images/image_59.webp" alt="Treasure Hunt screenshot" loading="lazy" decoding="async"></button>
+            <button type="button" class="shot shot--video" data-src="Images/video_1.mp4" data-type="video" aria-label="Play Treasure Hunt clip"><video src="Images/preview_video_1.mp4" poster="Images/poster_video_1.jpg" muted loop
+            playsinline preload="none"></video></button>
+            <button type="button" class="shot" data-src="Images/image_61.webp" data-type="image" aria-label="View Treasure Hunt screenshot"><img src="Images/image_61.webp" alt="Treasure Hunt screenshot" loading="lazy" decoding="async"></button>
+        </div>
+      </article>
+      <article class="project reveal" id="project-8">
+        <div class="project__meta">
+          <p class="project__index">08</p>
+          <h2>Mars Survivor</h2>
+          <p>First-person open-world game, this game set in 2050, the player character is an astronaut on a mission to mine valuable resources on Mars. After a crash landing, they must survive the harsh environment by managing oxygen, finding water, and scavenging for resources. The player character must mine for resources to craft tools and equipment while exploring dangerous underground caves. The goal is to survive and complete the mission to collect enough resources to make the effort worthwhile.</p>
+          <div class="tags"><span class="tag">Sci-fi Adventure</span><span class="tag">Game Design &amp; Programmer</span><span class="tag">Collaboration</span><span class="tag">PC</span></div>
+          <a class="link-more" href="https://youtu.be/c-n0HC73Js4" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        </div>
+        <div class="project__media">
+            <button type="button" class="shot" data-src="Images/image_26.png" data-type="image" aria-label="View Mars Survivor screenshot"><img src="Images/image_26.png" alt="Mars Survivor screenshot" loading="lazy" decoding="async"></button>
+            <button type="button" class="shot shot--video" data-src="Images/video_7.mp4" data-type="video" aria-label="Play Mars Survivor clip"><video src="Images/preview_video_7.mp4" poster="Images/poster_video_7.jpg" muted loop
+            playsinline preload="none"></video></button>
+            <button type="button" class="shot" data-src="Images/image_29.webp" data-type="image" aria-label="View Mars Survivor screenshot"><img src="Images/image_29.webp" alt="Mars Survivor screenshot" loading="lazy" decoding="async"></button>
+        </div>
+      </article>
     </div>
-  </section>
+  </main>
 
-
-
-  </div>
-
-
-
-
-
-
-
-
-  <footer class="footer">
-    <a class="link footer__link">
-      Created By Sujal Ramesh
-    </a>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; <span id="year">2026</span> Sujal Ramesh</span>
+      <span>Bengaluru, India</span>
+    </div>
   </footer>
 
-  <div class="scroll-container">
-    <div class="scroll-top">
-      <a aria-label="Scroll up" href="#top">
-        <i aria-hidden="true" class="fas fa-arrow-up"></i>
-      </a>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Media viewer">
+    <button type="button" class="close" id="lightboxClose" aria-label="Close viewer">&times;</button>
+    <img id="lightboxImg" alt="" hidden>
+    <video id="lightboxVideo" controls playsinline hidden></video>
+
+    <div class="zoombar" id="zoomBar" hidden>
+      <button type="button" class="zoombar__btn" id="zoomOut" aria-label="Zoom out">&minus;</button>
+      <button type="button" class="zoombar__btn zoombar__level" id="zoomReset" aria-label="Reset zoom">100%</button>
+      <button type="button" class="zoombar__btn" id="zoomIn" aria-label="Zoom in">+</button>
     </div>
   </div>
 
-  <script src="./particles.js"></script>
-  <script src="./script.js"></script>
-
+  <script type="module" src="./assets/js/main.js"></script>
 </body>
 
 </html>

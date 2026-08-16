@@ -1,0 +1,330 @@
+/*==============================================================
+  UNDERGLOW - design tokens
+  --------------------------------------------------------------
+  The thesis: black equipment on a dark desk, lit from behind.
+  Structure is monochrome. Light is chromatic. They never swap.
+
+  Five rules this file exists to enforce:
+
+  1. ONE hue is live at a time. It drifts slowly (24s) and every
+     section offsets from it, so the page has chromatic structure
+     without ever showing a rainbow.
+  2. Lightness is LOCKED, hue moves. In OKLCH a hue sweep at fixed
+     L holds perceived brightness constant. The same sweep in HSL
+     swings contrast from 3:1 to 16:1 and visibly pulses - that
+     pulsing IS what "tacky RGB" looks like.
+  3. Colour is light, never paint. No more than ~15% of any
+     viewport may be saturated pixels.
+  4. Text never cycles. Body copy is achromatic, full stop.
+  5. Some colours MUST hold still: a red error is red at every
+     scroll position, and a 40-point alien is magenta forever.
+==============================================================*/
+
+/*---------------------- registered props ----------------------*/
+
+/* Registered so calc() type-checks and so both have a real
+   initial value if JS never runs. --hue-base is written by
+   assets/js/core/hue.js; --glow is the single intensity knob
+   that ramps an entire multi-layer glow stack from one line. */
+
+@property --hue-base {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 265;
+}
+
+@property --glow {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --spin {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+:root {
+  /*---------------------- the hue engine ----------------------*/
+
+  /* --hue-base cycles. --hue is what everything downstream reads,
+     and every section shadows it with its own offset.
+
+     The two names are NOT redundant: writing
+       #work { --hue: calc(var(--hue) + 40) }
+     is a self-reference cycle and is invalid at computed-value
+     time. The value would silently fall back to the guaranteed
+     invalid value and every accent on the page would go grey. */
+  --hue-base: 265;
+  --hue: var(--hue-base);
+  --hue-alt: calc(var(--hue) + 55);
+
+  --glow: 0;
+
+  /*------------------------- ground -------------------------*/
+
+  /* Chroma 0.014-0.028 is a whisper. You will not consciously see
+     the hue in the black. You WILL notice its absence - that is
+     the whole difference between a designed dark page and a
+     default one. */
+  --bg-deep: oklch(0.105 0.016 var(--hue));
+  --bg: oklch(0.145 0.018 var(--hue));
+  --surface: oklch(0.185 0.020 var(--hue));
+  --surface-2: oklch(0.225 0.024 var(--hue));
+  --surface-3: oklch(0.265 0.028 var(--hue));
+
+  /*-------------------------- ink --------------------------*/
+
+  /* Chroma capped at 0.014. At that level luminance varies under
+     1% across the whole hue wheel, so these ratios are stable at
+     every point in the cycle:
+       --fg on --bg        ~16:1
+       --fg-2 on --bg       ~9:1
+       --fg-muted on --bg ~5.4:1  */
+  --fg: oklch(0.955 0.008 var(--hue));
+  --fg-2: oklch(0.780 0.012 var(--hue));
+  --fg-muted: oklch(0.640 0.014 var(--hue));
+  --fg-faint: oklch(0.480 0.014 var(--hue));
+
+  /*------------------------- edges -------------------------*/
+
+  --line: oklch(0.98 0.01 var(--hue) / 0.085);
+  --line-strong: oklch(0.98 0.01 var(--hue) / 0.17);
+  --line-neon: oklch(0.78 0.19 var(--hue) / calc(0.14 + var(--glow) * 0.46));
+
+  /*--------------------- the neon ramp ---------------------*/
+
+  /* Chroma is deliberately written past the sRGB gamut. CSS Color 4
+     maps out-of-gamut colours by reducing CHROMA while preserving L
+     and H, so this returns the most saturated colour sRGB can give
+     at this exact lightness, for every hue, with no hand-tuning.
+     Blue comes back less saturated than green, which is physically
+     correct, and both land at the same perceived lightness. */
+  --neon-hi: oklch(0.90 0.16 var(--hue));
+  /* any text size, ~13:1 */
+  --neon: oklch(0.78 0.19 var(--hue));
+  /* THE accent, ~8.4-9.6:1  */
+  --neon-mid: oklch(0.66 0.20 var(--hue));
+  /* large type / fills only  */
+  --neon-lo: oklch(0.52 0.17 var(--hue));
+  /* fills only, NEVER text   */
+  --neon-wash: oklch(0.60 0.18 var(--hue) / 0.10);
+  --neon-ink: oklch(0.13 0.03 var(--hue));
+  /* dark ink ON neon fills   */
+
+  /* Back-compat aliases. The old stylesheet referenced these names
+     in ~30 places; keeping them means markup and JS that reach for
+     --accent keep working. */
+  --accent: var(--neon);
+  --accent-soft: oklch(0.60 0.18 var(--hue) / 0.12);
+  --border: var(--line);
+  --border-strong: var(--line-strong);
+
+  /*----------------- fixed semantic neons -----------------*/
+
+  /* These NEVER cycle. They carry meaning, and meaning must not
+     drift: a player learns "magenta = 40 points" and that has to
+     stay true at every scroll position. Same for a red error. */
+  --rgb-cyan: oklch(0.80 0.17 205);
+  --rgb-blue: oklch(0.70 0.18 255);
+  --rgb-violet: oklch(0.72 0.21 290);
+  --rgb-magenta: oklch(0.72 0.24 340);
+  --rgb-lime: oklch(0.86 0.21 140);
+  --rgb-amber: oklch(0.83 0.17 78);
+  --rgb-red: oklch(0.66 0.22 25);
+
+  /* "Live / available" status. Green means available; it is exempt
+     from the cycle on purpose, not by oversight. */
+  --ok: var(--rgb-lime);
+  --ok-soft: oklch(0.86 0.21 140 / 0.12);
+
+  /*-------------------------- glow --------------------------*/
+
+  /* Real emitted light has a hot desaturated core and a wide,
+     saturated, very faint falloff. ONE box-shadow gives you one
+     uniform blur, which is neither - that is the smear.
+
+     Four rules: always >=2 layers; spread is always 0 or NEGATIVE
+     (a positive spread makes a solid halo ring); alpha stays under
+     0.45; and include an inset layer, because real light spills
+     onto the surface it is mounted on. The inset is the layer
+     that actually sells it.
+
+     The three glow layers at -3px / -10px / -28px spread are the
+     trick: each is wider AND pulled further inside the box, so the
+     falloff is exponential rather than a slab. */
+  --edge:
+    inset 0 1px 0 oklch(0.98 0.02 var(--hue) / 0.06),
+    inset 0 0 28px -18px oklch(0.90 0.16 var(--hue) / calc(var(--glow) * 0.85)),
+    0 0 0 1px oklch(0.78 0.19 var(--hue) / calc(0.12 + var(--glow) * 0.40)),
+    0 0 14px -3px oklch(0.78 0.19 var(--hue) / calc(var(--glow) * 0.42)),
+    0 0 46px -10px oklch(0.72 0.20 var(--hue) / calc(var(--glow) * 0.28)),
+    0 20px 44px -28px oklch(0 0 0 / 0.95);
+
+  /*------------------------- radii -------------------------*/
+
+  /* Mixed, with rules. 14px everywhere reads as friendly SaaS;
+     0px everywhere reads as brutalist. Equipment, not app. */
+  --radius: 6px;
+  --radius-sm: 3px;
+  --radius-hud: 2px;
+  --radius-pill: 100px;
+  --cut: 12px;
+  /* the chamfer depth */
+
+  /*-------------------------- type --------------------------*/
+
+  --font-display: 'Chakra Petch', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+
+  /* Ratio widens from ~1.33 at text sizes to ~1.6 at display sizes:
+     small type stays a readable continuum, large type gets drama. */
+  --step--2: clamp(0.690rem, 0.670rem + 0.10vw, 0.750rem);
+  --step--1: clamp(0.800rem, 0.770rem + 0.16vw, 0.875rem);
+  --step-0: clamp(0.950rem, 0.910rem + 0.22vw, 1.0625rem);
+  --step-1: clamp(1.200rem, 1.100rem + 0.50vw, 1.500rem);
+  --step-2: clamp(1.750rem, 1.450rem + 1.50vw, 2.750rem);
+  /* cycling-colour floor */
+  --step-3: clamp(2.750rem, 1.900rem + 4.20vw, 5.500rem);
+  --step-4: clamp(4.000rem, 2.000rem + 10.0vw, 9.000rem);
+
+  /*------------------------ spacing ------------------------*/
+
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --section-gap: clamp(4rem, 10vw, 8rem);
+  --measure: 62ch;
+  --max: 1140px;
+  --header-h: 64px;
+
+  /*------------------------- motion -------------------------*/
+
+  /* Five easings, no others. */
+  --out: cubic-bezier(0.16, 1.00, 0.30, 1.00);
+  /* entrances, hover-in   */
+  --inout: cubic-bezier(0.65, 0.00, 0.35, 1.00);
+  /* state + colour swaps  */
+  --snap: cubic-bezier(0.34, 1.56, 0.64, 1.00);
+  /* pips, badges          */
+  --glide: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* parallax, long follow */
+  --exit: cubic-bezier(0.55, 0.00, 1.00, 0.45);
+  /* leaving               */
+  --ease: var(--out);
+  /* back-compat alias     */
+
+  /* Six durations, nothing ad hoc. Exit runs at ~0.7x enter:
+     leaving should always be faster than arriving. */
+  --t-1: 90ms;
+  /* colour-only micro       */
+  --t-2: 160ms;
+  /* small controls, focus   */
+  --t-3: 240ms;
+  /* card hover, --glow ramp */
+  --t-4: 420ms;
+  /* section reveal          */
+  --t-5: 700ms;
+  /* line-mask, rail draw    */
+  --t-6: 1200ms;
+  /* the hero name. once.    */
+}
+
+/*---------------------- section hue anchors ----------------------*/
+
+/* Each section offsets from the drifting base, so the page keeps
+   chromatic STRUCTURE while still cycling as a whole. Scrolling
+   walks a deliberate path through the spectrum instead of smearing
+   one hue across everything.
+
+   Offsets are chosen so no two adjacent sections are closer than
+   20 or further than 120 apart. */
+
+.hero {
+  --hue: calc(var(--hue-base) + 0);
+}
+
+.process {
+  --hue: calc(var(--hue-base) + 20);
+}
+
+#invaders {
+  --hue: calc(var(--hue-base) + 60);
+}
+
+#work {
+  --hue: calc(var(--hue-base) + 120);
+}
+
+#gallery {
+  --hue: calc(var(--hue-base) + 165);
+}
+
+#experience {
+  --hue: calc(var(--hue-base) + 220);
+}
+
+#skills {
+  --hue: calc(var(--hue-base) + 265);
+}
+
+#play {
+  --hue: calc(var(--hue-base) + 310);
+}
+
+.contact {
+  --hue: calc(var(--hue-base) + 350);
+}
+
+.page-head {
+  --hue: calc(var(--hue-base) + 0);
+}
+
+.notfound {
+  --hue: calc(var(--hue-base) + 340);
+}
+
+/*-------------------------- wide gamut --------------------------*/
+
+/* On P3 displays the neon becomes genuinely brighter than sRGB can
+   express. Costs one media query. */
+@media (color-gamut: p3) {
+  :root {
+    --neon: oklch(0.78 0.26 var(--hue));
+    --neon-hi: oklch(0.90 0.20 var(--hue));
+  }
+}
+
+/*------------------------- fallbacks -------------------------*/
+
+/* oklch() is Baseline since May 2023 (Chrome 111+, Safari 15.4+,
+   Firefox 113+), but a browser without it would render EVERY
+   colour token invalid, so the fallback is not optional. */
+@supports not (color: oklch(0% 0 0)) {
+  :root {
+    --bg-deep: #08080c;
+    --bg: #0e0e13;
+    --surface: #16161d;
+    --surface-2: #1e1e26;
+    --surface-3: #262630;
+    --fg: #eeeef4;
+    --fg-2: #b8b8c4;
+    --fg-muted: #8f8f9d;
+    --fg-faint: #63636f;
+    --line: rgba(255, 255, 255, 0.085);
+    --line-strong: rgba(255, 255, 255, 0.17);
+    --line-neon: rgba(150, 130, 255, 0.4);
+    --neon-hi: #c9b8ff;
+    --neon: #9d84ff;
+    --neon-mid: #7f63f0;
+    --neon-lo: #5b45ad;
+    --neon-ink: #12101c;
+    --rgb-cyan: #3ad9f0;
+    --rgb-blue: #6f9bff;
+    --rgb-violet: #a68cff;
+    --rgb-magenta: #ff67b0;
+    --rgb-lime: #4ef2a0;
+    --rgb-amber: #ffbe4d;
+    --rgb-red: #ff5a5a;
+  }
+}

@@ -1,530 +1,377 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="is-booting" data-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portfolio" />
+  <title>Gallery | Sujal Ramesh</title>
+  <meta name="description" content="Full gallery of game screenshots, gameplay footage, AR applications and Photoshop artwork." />
+  <meta name="author" content="Sujal Ramesh" />
+  <link rel="canonical" href="https://sujal-hiro.github.io/sujalramesh.github.io/portfolio.html" />
+  <meta name="theme-color" content="#08080c" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sujal-hiro.github.io/sujalramesh.github.io/portfolio.html" />
+  <meta property="og:title" content="Gallery | Sujal Ramesh" />
+  <meta property="og:description" content="Full gallery of game screenshots, gameplay footage, AR applications and Photoshop artwork." />
+  <meta property="og:image" content="https://sujal-hiro.github.io/sujalramesh.github.io/Images/og-cover.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Gallery | Sujal Ramesh" />
+  <meta name="twitter:description" content="Full gallery of game screenshots, gameplay footage, AR applications and Photoshop artwork." />
+  <meta name="twitter:image" content="https://sujal-hiro.github.io/sujalramesh.github.io/Images/og-cover.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/fa62c117c7.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="styles.css" />
-  <title>SR-Portfolio</title>
-  <link rel="shortcut icon" type="image" href="Images/Icon-Website.png">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/tokens.css" />
+  <link rel="stylesheet" href="./assets/css/base.css" />
+  <link rel="stylesheet" href="./assets/css/layout.css" />
+  <link rel="stylesheet" href="./assets/css/components.css" />
+  <link rel="stylesheet" href="./assets/css/effects.css" />
+  <link rel="stylesheet" href="./assets/css/games.css" />
+  <link rel="stylesheet" href="./assets/css/pages.css" />
+  <!-- motion.css last: every preference query lives there and must win -->
+  <link rel="stylesheet" href="./assets/css/motion.css" />
+  <link rel="shortcut icon" type="image/png" href="Images/Icon-Website.png">
 </head>
 
-<body class="light" id="top">
-  <canvas id="particleCanvas"></canvas>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="header center">
-    <h3>
-      <a href="index.html" class="link">SR.</a>
-    </h3>
+  <div class="backdrop" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
 
-    <nav class="nav center">
-      <ul class="nav__list center">
+  <header class="site-header" id="siteHeader">
+    <div class="wrap">
+      <a href="index.html" class="brand">SR<span>.</span></a>
 
-        <li class="nav__list-item">
-          <a class="link link--nav" href="index.html">Home</a>
-        </li>
+      <nav class="nav" id="nav">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+      </nav>
 
-
-      </ul>
-
-      <button type="button" aria-label="toggle theme" class="btn btn--icon">
-        <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
-      </button>
-
-      <!-- <button
-            type="button"
-            aria-label="toggle navigation"
-            class="btn btn--icon nav__hamburger"
-          >
-            <i aria-hidden="true" class="fas fa-bars"></i> -->
-      </button>
-    </nav>
+      <div class="header-actions">
+        <button type="button" class="icon-btn nav-toggle" id="navBtn" aria-label="Toggle menu"
+          aria-expanded="false" aria-controls="nav">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" />
+          </svg>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <!-- Portfolio -->
+  <main id="main">
+    <div class="wrap">
+      <div class="page-head">
+        <h1>Gallery</h1>
+        <p>Games, artwork and AR applications. Click any tile to open it full size.</p>
+      </div>
 
-  <div class="container">
-    <div class="Portfolio_heading">
-      <h1>Portfolio</h1>
-      <h6>Games, Artworks & AR Applications</h6>
+      <section class="section">
+        <div class="gallery-filters reveal">
+          <button type="button" class="filter" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="filter" data-filter="image" aria-pressed="false">Stills</button>
+          <button type="button" class="filter" data-filter="video" aria-pressed="false">Footage</button>
+        </div>
+
+        <div class="masonry">
+          <button type="button" class="tile reveal" data-src="Images/video_7.mp4" data-type="video"
+            aria-label="View Mars Survivor, Dynamic gameplay video showcasing mechanics">
+            <video src="Images/preview_video_7.mp4" poster="Images/poster_video_7.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <span class="tile__cap">Mars Survivor <span>Dynamic gameplay video showcasing mechanics</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_39.webp" data-type="image"
+            aria-label="View Mars Survivor, Shooting scene">
+            <img src="Images/image_39.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Mars Survivor <span>Shooting scene</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_43.webp" data-type="image"
+            aria-label="View Mars Survivor, Screenshot">
+            <img src="Images/image_43.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Mars Survivor <span>Screenshot</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_46.webp" data-type="image"
+            aria-label="View Mars Survivor, Game development project">
+            <img src="Images/image_46.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Mars Survivor <span>Game development project</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_69.webp" data-type="image"
+            aria-label="View Artwork, Digital art creation">
+            <img src="Images/image_69.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Artwork <span>Digital art creation</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_67.png" data-type="image"
+            aria-label="View Concept, Game concept and design">
+            <img src="Images/image_67.png" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Concept <span>Game concept and design</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_1.mp4" data-type="video"
+            aria-label="View Game Demo, Interactive game demonstration">
+            <video src="Images/preview_video_1.mp4" poster="Images/poster_video_1.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <span class="tile__cap">Game Demo <span>Interactive game demonstration</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_17.webp" data-type="image"
+            aria-label="View Game Scene, In-game character and environment">
+            <img src="Images/image_17.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Game Scene <span>In-game character and environment</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_62.webp" data-type="image"
+            aria-label="View UI Design, User interface and UX">
+            <img src="Images/image_62.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">UI Design <span>User interface and UX</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_47.webp" data-type="image"
+            aria-label="View Environment, Game environment design">
+            <img src="Images/image_47.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Environment <span>Game environment design</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_22.webp" data-type="image"
+            aria-label="View Gameplay, Core gameplay mechanics">
+            <img src="Images/image_22.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Gameplay <span>Core gameplay mechanics</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_38.webp" data-type="image"
+            aria-label="View Screenshot, Game screenshot">
+            <img src="Images/image_38.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Screenshot <span>Game screenshot</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_12.webp" data-type="image"
+            aria-label="View Art, Character and asset artwork">
+            <img src="Images/image_12.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Art <span>Character and asset artwork</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_53.webp" data-type="image"
+            aria-label="View Design, Visual design composition">
+            <img src="Images/image_53.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Design <span>Visual design composition</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_28.webp" data-type="image"
+            aria-label="View Level Design, Game level and layout">
+            <img src="Images/image_28.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Level Design <span>Game level and layout</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_63.webp" data-type="image"
+            aria-label="View Treasure Hunt, Game">
+            <img src="Images/image_63.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Treasure Hunt <span>Game</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_10.mp4" data-type="video"
+            aria-label="View Gameplay, Game demonstration">
+            <video src="Images/preview_video_10.mp4" poster="Images/poster_video_10.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <span class="tile__cap">Gameplay <span>Game demonstration</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_28.webp" data-type="image"
+            aria-label="View Environment, Game world design">
+            <img src="Images/image_28.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Environment <span>Game world design</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_27.webp" data-type="image"
+            aria-label="View Concept Art, Initial concept design">
+            <img src="Images/image_27.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Concept Art <span>Initial concept design</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_25.webp" data-type="image"
+            aria-label="View Artwork, Digital creation">
+            <img src="Images/image_25.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Artwork <span>Digital creation</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_8.mp4" data-type="video"
+            aria-label="View Game Trailer, Game preview footage">
+            <video src="Images/preview_video_8.mp4" poster="Images/poster_video_8.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <span class="tile__cap">Game Trailer <span>Game preview footage</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_17.webp" data-type="image"
+            aria-label="View Scene, In-game scene">
+            <img src="Images/image_17.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Scene <span>In-game scene</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_16.webp" data-type="image"
+            aria-label="View Asset, Game asset artwork">
+            <img src="Images/image_16.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Asset <span>Game asset artwork</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_15.webp" data-type="image"
+            aria-label="View 2d Game, Game Screenshot">
+            <img src="Images/image_15.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">2d Game <span>Game Screenshot</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_35.webp" data-type="image"
+            aria-label="View Artwork, Creative visual">
+            <img src="Images/image_35.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Artwork <span>Creative visual</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_50.webp" data-type="image"
+            aria-label="View Game Art, Game artwork">
+            <img src="Images/image_50.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Game Art <span>Game artwork</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_5.mp4" data-type="video"
+            aria-label="View AR App Demo, Augmented reality demonstration">
+            <video src="Images/preview_video_5.mp4" poster="Images/poster_video_5.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <span class="tile__cap">AR App Demo <span>Augmented reality demonstration</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_9.mp4" data-type="video"
+            aria-label="View Game Footage, Gameplay video">
+            <video src="Images/preview_video_9.mp4" poster="Images/poster_video_9.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <span class="tile__cap">Game Footage <span>Gameplay video</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_58.webp" data-type="image"
+            aria-label="View Design, Visual composition">
+            <img src="Images/image_58.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Design <span>Visual composition</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_65.webp" data-type="image"
+            aria-label="View Character, Character design">
+            <img src="Images/image_65.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Character <span>Character design</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_6.webp" data-type="image"
+            aria-label="View Artwork, Creative piece">
+            <img src="Images/image_6.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Artwork <span>Creative piece</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_6.mp4" data-type="video"
+            aria-label="View Game Demo, Interactive demo">
+            <video src="Images/preview_video_6.mp4" poster="Images/poster_video_6.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video>
+            <span class="tile__cap">Game Demo <span>Interactive demo</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_38.webp" data-type="image"
+            aria-label="View Screenshot, Game screenshot">
+            <img src="Images/image_38.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Screenshot <span>Game screenshot</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_32.webp" data-type="image"
+            aria-label="View Design, UI Design">
+            <img src="Images/image_32.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Design <span>UI Design</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_22.webp" data-type="image"
+            aria-label="View Game Asset, Asset design">
+            <img src="Images/image_22.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Game Asset <span>Asset design</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_30.webp" data-type="image"
+            aria-label="View Pencil Art, Naruto - Dattebayo">
+            <img src="Images/image_30.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Pencil Art <span>Naruto - Dattebayo</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_21.webp" data-type="image"
+            aria-label="View Art, Artwork creation">
+            <img src="Images/image_21.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Art <span>Artwork creation</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_24.webp" data-type="image"
+            aria-label="View Design, Graphic design">
+            <img src="Images/image_24.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Design <span>Graphic design</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_10.webp" data-type="image"
+            aria-label="View AR Experience, Augmented reality app">
+            <img src="Images/image_10.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">AR Experience <span>Augmented reality app</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_7.webp" data-type="image"
+            aria-label="View Banner, Web banner design">
+            <img src="Images/image_7.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Banner <span>Web banner design</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_8.webp" data-type="image"
+            aria-label="View Artwork, Digital art">
+            <img src="Images/image_8.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Artwork <span>Digital art</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_54.webp" data-type="image"
+            aria-label="View Poster, Game poster">
+            <img src="Images/image_54.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Poster <span>Game poster</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_60.webp" data-type="image"
+            aria-label="View Design, Creative design">
+            <img src="Images/image_60.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Design <span>Creative design</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_70.webp" data-type="image"
+            aria-label="View Final, Project showcase">
+            <img src="Images/image_70.webp" alt="" loading="lazy" decoding="async">
+            <span class="tile__cap">Final <span>Project showcase</span></span>
+          </button>
+        </div>
+      </section>
     </div>
-    <div class="image-container">
+  </main>
 
-
-      <div class="portfolio-item" data-title="Game Footage" data-summary="Dynamic gameplay video showcasing mechanics">
-        <video src="Images/video_7.mp4" autoplay muted loop onclick="openModal('Images/video_7.mp4', 'video')"></video>
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Mars Survivor</h3>
-            <p class="overlay-summary">Dynamic gameplay video showcasing mechanics</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Game" data-summary="Screenshot of game scene">
-        <img src="Images/image_39.png" onclick="openModal('Images/image_39.png', 'image')" alt="Portfolio artwork"
-          loading="lazy">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Mars Survivor</h3>
-            <p class="overlay-summary">Shooting scene</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Game" data-summary="Screenshot of game scene">
-        <img src="Images/image_43.png" onclick="openModal('Images/image_43.png', 'image')" alt="Portfolio artwork"
-          loading="lazy">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Mars Survivor</h3>
-            <p class="overlay-summary">Screenshot</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Project" data-summary="Game development project">
-        <img src="Images/image_46.png" onclick="openModal('Images/image_46.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Mars Survivor</h3>
-            <p class="overlay-summary">Game development project</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Artwork" data-summary="Digital art creation">
-        <img src="Images/image_69.png" alt="" onclick="openModal('Images/image_69.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Artwork</h3>
-            <p class="overlay-summary">Digital art creation</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Concept" data-summary="Game concept and design">
-        <img src="Images/image_67.png" alt="" onclick="openModal('Images/image_67.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Concept</h3>
-            <p class="overlay-summary">Game concept and design</p>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="portfolio-item" data-title="Game Demo" data-summary="Interactive game demonstration">
-        <video src="Images/video_1.mp4" autoplay muted loop onclick="openModal('Images/video_1.mp4', 'video')"></video>
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Game Demo</h3>
-            <p class="overlay-summary">Interactive game demonstration</p>
-          </div>
-        </div>
-      </div>
-      <div class="portfolio-item" data-title="Game Scene" data-summary="In-game character and environment">
-        <img src="Images/image_17.png" alt="" onclick="openModal('Images/image_17.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Game Scene</h3>
-            <p class="overlay-summary">In-game character and environment</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="UI Design" data-summary="User interface and UX">
-        <img src="Images/image_62.png" alt="" onclick="openModal('Images/image_62.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">UI Design</h3>
-            <p class="overlay-summary">User interface and UX</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Environment" data-summary="Game environment design">
-        <img src="Images/image_47.png" alt="" onclick="openModal('Images/image_47.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Environment</h3>
-            <p class="overlay-summary">Game environment design</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Gameplay" data-summary="Core gameplay mechanics">
-        <img src="Images/image_22.png" alt="" onclick="openModal('Images/image_22.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Gameplay</h3>
-            <p class="overlay-summary">Core gameplay mechanics</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Screenshot" data-summary="Game screenshot">
-        <img src="Images/image_38.jpg" alt="" onclick="openModal('Images/image_38.jpg', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Screenshot</h3>
-            <p class="overlay-summary">Game screenshot</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Art" data-summary="Character and asset artwork">
-        <img src="Images/image_12.png" alt="" onclick="openModal('Images/image_12.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Art</h3>
-            <p class="overlay-summary">Character and asset artwork</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Design" data-summary="Visual design composition">
-        <img src="Images/image_53.png" alt="" onclick="openModal('Images/image_53.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Design</h3>
-            <p class="overlay-summary">Visual design composition</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Level Design" data-summary="Game level and layout">
-        <img src="Images/image_28.png" alt="" onclick="openModal('Images/image_28.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Level Design</h3>
-            <p class="overlay-summary">Game level and layout</p>
-          </div>
-        </div>
-      </div>
-
-
-
-
-      <div class="portfolio-item" data-title="Game" data-summary="Character portrait">
-        <img src="Images/image_63.png" alt="" onclick="openModal('Images/image_63.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Treasure Hunt</h3>
-            <p class="overlay-summary">Game</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Gameplay" data-summary="Game demonstration">
-        <video src="Images/video_10.mp4" autoplay muted loop
-          onclick="openModal('Images/video_10.mp4', 'video')"></video>
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Gameplay</h3>
-            <p class="overlay-summary">Game demonstration</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Environment" data-summary="Game world design">
-        <img src="Images/image_28.png" alt="" onclick="openModal('Images/image_28.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Environment</h3>
-            <p class="overlay-summary">Game world design</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Concept Art" data-summary="Initial concept design">
-        <img src="Images/image_27.png" alt="" onclick="openModal('Images/image_27.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Concept Art</h3>
-            <p class="overlay-summary">Initial concept design</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Artwork" data-summary="Digital creation">
-        <img src="Images/image_25.png" alt="" onclick="openModal('Images/image_25.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Artwork</h3>
-            <p class="overlay-summary">Digital creation</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Game Trailer" data-summary="Game preview footage">
-        <video src="Images/video_8.mp4" autoplay muted loop onclick="openModal('Images/video_8.mp4', 'video')"></video>
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Game Trailer</h3>
-            <p class="overlay-summary">Game preview footage</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Scene" data-summary="In-game scene">
-        <img src="Images/image_17.png" alt="" onclick="openModal('Images/image_17.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Scene</h3>
-            <p class="overlay-summary">In-game scene</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Asset" data-summary="Game asset artwork">
-        <img src="Images/image_16.png" alt="" onclick="openModal('Images/image_16.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Asset</h3>
-            <p class="overlay-summary">Game asset artwork</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Game" data-summary="Screenshot of game scene">
-        <img src="Images/image_15.png" alt="" onclick="openModal('Images/image_15.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">2d Game</h3>
-            <p class="overlay-summary">Game Screenshot</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Artwork" data-summary="Creative visual">
-        <img src="Images/image_35.png" alt="" onclick="openModal('Images/image_35.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Artwork</h3>
-            <p class="overlay-summary">Creative visual</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Game Art" data-summary="Game artwork">
-        <img src="Images/image_50.png" alt="" onclick="openModal('Images/image_50.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Game Art</h3>
-            <p class="overlay-summary">Game artwork</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="AR App Demo" data-summary="Augmented reality demonstration">
-        <video src="Images/video_5.mp4" autoplay muted loop onclick="openModal('Images/video_5.mp4', 'video')"></video>
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">AR App Demo</h3>
-            <p class="overlay-summary">Augmented reality demonstration</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Game Footage" data-summary="Gameplay video">
-        <video src="Images/video_9.mp4" autoplay muted loop onclick="openModal('Images/video_9.mp4', 'video')"></video>
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Game Footage</h3>
-            <p class="overlay-summary">Gameplay video</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Design" data-summary="Visual composition">
-        <img src="Images/image_58.png" alt="" onclick="openModal('Images/image_58.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Design</h3>
-            <p class="overlay-summary">Visual composition</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Character" data-summary="Character design">
-        <img src="Images/image_65.png" alt="" onclick="openModal('Images/image_65.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Character</h3>
-            <p class="overlay-summary">Character design</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Artwork" data-summary="Creative piece">
-        <img src="Images/image_6.jpg" alt="" onclick="openModal('Images/image_6.jpg', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Artwork</h3>
-            <p class="overlay-summary">Creative piece</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Game Demo" data-summary="Interactive demo">
-        <video src="Images/video_6.mp4" autoplay muted loop onclick="openModal('Images/video_6.mp4', 'video')"></video>
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Game Demo</h3>
-            <p class="overlay-summary">Interactive demo</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Screenshot" data-summary="Game screenshot">
-        <img src="Images/image_38.jpg" alt="" onclick="openModal('Images/image_38.jpg', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Screenshot</h3>
-            <p class="overlay-summary">Game screenshot</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Design" data-summary="UI Design">
-        <img src="Images/image_32.png" alt="" onclick="openModal('Images/image_32.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Design</h3>
-            <p class="overlay-summary">UI Design</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Game Asset" data-summary="Asset design">
-        <img src="Images/image_22.png" alt="" onclick="openModal('Images/image_22.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Game Asset</h3>
-            <p class="overlay-summary">Asset design</p>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="portfolio-item" data-title="Concept" data-summary="Game concept">
-        <img src="Images/image_30.jpg" alt="" onclick="openModal('Images/image_30.jpg', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Pencil Art</h3>
-            <p class="overlay-summary">Naruto - Dattebayo</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Art" data-summary="Artwork creation">
-        <img src="Images/image_21.png" alt="" onclick="openModal('Images/image_21.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Art</h3>
-            <p class="overlay-summary">Artwork creation</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Design" data-summary="Graphic design">
-        <img src="Images/image_24.png" alt="" onclick="openModal('Images/image_24.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Design</h3>
-            <p class="overlay-summary">Graphic design</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="AR Experience" data-summary="Augmented reality app">
-        <img src="Images/image_10.png" alt="" onclick="openModal('Images/image_10.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">AR Experience</h3>
-            <p class="overlay-summary">Augmented reality app</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Banner" data-summary="Web banner design">
-        <img src="Images/image_7.png" alt="" onclick="openModal('Images/image_7.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Banner</h3>
-            <p class="overlay-summary">Web banner design</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Artwork" data-summary="Digital art">
-        <img src="Images/image_8.png" alt="" onclick="openModal('Images/image_8.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Artwork</h3>
-            <p class="overlay-summary">Digital art</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Poster" data-summary="Game poster">
-        <img src="Images/image_54.png" alt="" onclick="openModal('Images/image_54.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Poster</h3>
-            <p class="overlay-summary">Game poster</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Design" data-summary="Creative design">
-        <img src="Images/image_60.png" alt="" onclick="openModal('Images/image_60.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Design</h3>
-            <p class="overlay-summary">Creative design</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-title="Final" data-summary="Project showcase">
-        <img src="Images/image_70.png" alt="" onclick="openModal('Images/image_70.png', 'image')">
-        <div class="portfolio-overlay">
-          <div class="overlay-content">
-            <h3 class="overlay-title">Final</h3>
-            <p class="overlay-summary">Project showcase</p>
-          </div>
-        </div>
-      </div>
-
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; <span id="year">2026</span> Sujal Ramesh</span>
+      <span>Bengaluru, India</span>
     </div>
-    <!-- <div class="vid-container">
-            <video src="Images/It`s  all about Us! _ 2D Platformer _ Chennai 2022 -Global Game Jam.mp4"></video>
-          </div> -->
-  </div>
+  </footer>
 
-  <div id="myModal" class="portfolio_popup">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <div class="modal-content">
-      <img id="modalImage" style="display: none;">
-      <video id="modalVideo" width="100%" height="auto" controls preload="auto">
-        <source src="" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Media viewer">
+    <button type="button" class="close" id="lightboxClose" aria-label="Close viewer">&times;</button>
+    <img id="lightboxImg" alt="" hidden>
+    <video id="lightboxVideo" controls playsinline hidden></video>
+
+    <div class="zoombar" id="zoomBar" hidden>
+      <button type="button" class="zoombar__btn" id="zoomOut" aria-label="Zoom out">&minus;</button>
+      <button type="button" class="zoombar__btn zoombar__level" id="zoomReset" aria-label="Reset zoom">100%</button>
+      <button type="button" class="zoombar__btn" id="zoomIn" aria-label="Zoom in">+</button>
     </div>
   </div>
 
-
-
-  <script src="./particles.js"></script>
-  <script src="./script.js"></script>
-
+  <script type="module" src="./assets/js/main.js"></script>
 </body>
 
 </html>

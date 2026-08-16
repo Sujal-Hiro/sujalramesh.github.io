@@ -1,0 +1,708 @@
+/*==============================================================
+  Layout - header, nav, hero, process, contact, footer
+==============================================================*/
+
+/*--------------------------- header ---------------------------*/
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  background: oklch(0.145 0.018 var(--hue) / 0.62);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+}
+
+/* A gradient hairline, never a flat rule - a flat rule reads as a
+   table border. It only appears once scrolled, so the header is
+   invisible at rest and defined when it overlaps content. */
+.site-header::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  opacity: 0;
+  background: linear-gradient(90deg,
+      transparent,
+      oklch(0.78 0.19 var(--hue) / 0.5) 50%,
+      transparent);
+  transition: opacity var(--t-3) var(--out);
+}
+
+.site-header.is-stuck::before {
+  opacity: 1;
+}
+
+/* Scroll-progress meter. One of only two full-rainbow moments on
+   the site, and it earns it: multi-hue on a METER means "distance
+   travelled", which is information rather than decoration. */
+.site-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: var(--progress, 0%);
+  background: linear-gradient(90deg, var(--rgb-violet), var(--rgb-cyan), var(--rgb-lime));
+  box-shadow: 0 0 10px -1px var(--rgb-cyan);
+  transition: width 0.1s linear;
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-1);
+  letter-spacing: -0.03em;
+}
+
+/* The brand dot is one of the four elements allowed to cycle the
+   FULL wheel, independent of its section. */
+.brand span {
+  color: var(--neon-hi);
+  animation: brandCycle 12s linear infinite;
+}
+
+@keyframes brandCycle {
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+.nav a {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-muted);
+  padding-block: 0.35rem;
+  transition: color var(--t-2) var(--out);
+}
+
+.nav a:hover {
+  color: var(--fg);
+}
+
+/* Draws from the left with a bloom. 1px, not a 0.2em slab. */
+.nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--neon);
+  box-shadow: 0 0 8px var(--neon);
+  transition: width var(--t-3) var(--out);
+}
+
+.nav a:hover::after,
+.nav a[aria-current='true']::after {
+  width: 100%;
+}
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: color var(--t-2) var(--out), border-color var(--t-2) var(--out),
+    background-color var(--t-2) var(--out);
+}
+
+.icon-btn:hover {
+  color: var(--fg);
+  border-color: var(--line-neon);
+  background: var(--surface-2);
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/*---------------------------- hero ----------------------------*/
+
+/* isolation:isolate creates the stacking context that keeps the
+   z-index:-1 canvas INSIDE the hero. Remove it and the canvas
+   slides behind body and disappears with no error. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(4rem, 12vh, 8rem) var(--section-gap);
+  min-height: min(94svh, 900px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* THE DECK. The WebGL canvas occupies the lower ~55% of the frame;
+   the top 45% is empty black where the type lives. This
+   composition rule is what keeps the hero premium - the 3D never
+   sits behind the h1. */
+.hero__gl {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 900ms var(--out);
+  /* Belt and braces on the composition rule. Even if the camera
+     framing drifts, the upper half of the canvas is masked away so
+     the deck can never end up behind the h1. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 44%, #000 74%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, transparent 44%, #000 74%, #000 100%);
+}
+
+/* The deck is atmosphere, not the subject. Held under full
+   strength so the type stays the loudest thing on screen. */
+.hero__gl.is-live {
+  opacity: 0.72;
+}
+
+/* Scrim between the deck and the copy. Paints after the canvas in
+   tree order at the same stacking level, so it sits on top of the
+   3D and under the text. */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom,
+      oklch(0.09 0.014 var(--hue) / 0.55) 0%,
+      oklch(0.09 0.014 var(--hue) / 0.80) 40%,
+      oklch(0.09 0.014 var(--hue) / 0.45) 66%,
+      transparent 90%);
+}
+
+/* CSS fallback deck. This is the DEFAULT state - the canvas fades
+   in over it. So there is no failure mode where the hero looks
+   broken: not with JS off, not without WebGL2, not on reduced
+   motion, not if three.js fails to load. */
+.hero::before {
+  content: '';
+  position: absolute;
+  left: -50%;
+  right: -50%;
+  bottom: 0;
+  height: 55%;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.5;
+  transform: perspective(620px) rotateX(70deg);
+  transform-origin: 50% 100%;
+  background:
+    linear-gradient(oklch(0.78 0.19 var(--hue) / 0.22) 1px, transparent 1px) 0 0 / 100% 46px,
+    linear-gradient(90deg, oklch(0.78 0.19 var(--hue) / 0.16) 1px, transparent 1px) 0 0 / 46px 100%;
+  -webkit-mask-image: linear-gradient(#000 0%, #000 24%, transparent 78%);
+  mask-image: linear-gradient(#000 0%, #000 24%, transparent 78%);
+  transition: opacity var(--t-5) var(--out);
+}
+
+.hero.is-gl::before {
+  opacity: 0;
+}
+
+/* Text depth stage. All blocks live in one preserve-3d container
+   at different translateZ, so a single small rotation separates
+   them at different rates.
+
+   Hard caps: rotation <=3deg, translateZ <=60px, perspective
+   >=1200px. That holds the scale change under ~5%, below where
+   perspective resampling visibly softens glyphs. No filter on any
+   text layer - it forces a separate rasterisation that WILL go
+   soft. */
+.hero__stage {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  transform:
+    rotateY(calc(var(--px, 0) * 3deg)) rotateX(calc(var(--py, 0) * -2deg));
+}
+
+.hero__stage>* {
+  backface-visibility: hidden;
+}
+
+.hero .eyebrow {
+  transform: translateZ(60px);
+}
+
+.hero .role {
+  transform: translateZ(45px);
+}
+
+.hero .actions {
+  transform: translateZ(50px);
+}
+
+.hero h1 {
+  transform: translateZ(30px);
+}
+
+.hero__bio {
+  transform: translateZ(10px);
+}
+
+.hero .status {
+  transform: translateZ(40px);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fg);
+  padding: 0.45rem 0.9rem;
+  border: 1px solid oklch(0.86 0.21 140 / 0.35);
+  border-radius: var(--radius-pill);
+  background: var(--ok-soft);
+  margin-bottom: 1.75rem;
+  width: fit-content;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 0 var(--ok);
+  animation: livePulse 2.4s var(--out) infinite;
+}
+
+/* One ring, expanding and fading. A status light, not a beacon.
+   2.4s period = 0.42 flashes/sec, far inside the WCAG 2.3.1
+   limit of 3 per second. */
+@keyframes livePulse {
+  0% {
+    box-shadow: 0 0 0 0 oklch(0.86 0.21 140 / 0.6);
+  }
+
+  70% {
+    box-shadow: 0 0 0 7px transparent;
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.hero h1 {
+  max-width: 16ch;
+  margin-bottom: 1.25rem;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--neon-hi);
+  text-shadow:
+    0 0 1px oklch(0.97 0.06 var(--hue) / 0.55),
+    0 0 24px oklch(0.78 0.19 var(--hue) / 0.38),
+    0 0 70px oklch(0.70 0.20 var(--hue) / 0.18);
+}
+
+/* The role line reserves its own height so swapping the word never
+   nudges the paragraph below it. */
+.role {
+  font-family: var(--font-mono);
+  font-size: var(--step-1);
+  font-weight: 500;
+  color: var(--fg-2);
+  min-height: calc(var(--step-1) * 1.6);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Bracket frame around the rotating word - a HUD readout, not a
+   sentence. */
+.role::before {
+  content: '[';
+  color: var(--neon);
+}
+
+.role::after {
+  content: ']';
+  color: var(--neon);
+}
+
+.role .word {
+  display: inline-block;
+  animation: rise var(--t-4) var(--out) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.4em);
+  }
+}
+
+.hero__bio {
+  max-width: var(--measure);
+  color: var(--fg-muted);
+  margin-bottom: 2.25rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: clamp(2.25rem, 5vw, 3rem);
+  padding: 0.85rem 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  width: fit-content;
+  max-width: 100%;
+  font-size: var(--step--1);
+  color: var(--fg-muted);
+  background: oklch(0.185 0.020 var(--hue) / 0.5);
+}
+
+.status b {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.status .dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 10px var(--ok);
+  animation: livePulse 2.4s var(--out) infinite;
+}
+
+@media (max-width: 560px) {
+  .status {
+    border-radius: var(--radius);
+    align-items: flex-start;
+  }
+
+  .status .dot {
+    margin-top: 0.45em;
+  }
+}
+
+/*--------------------------- process ---------------------------*/
+
+/* Idea -> Design -> Develop -> Test -> Play is a pipeline, so it
+   reads as one instead of scrolling past. A highlight walks the
+   steps on a 10s cycle and a short neon segment travels the rail
+   in sync. Nothing loops by translating a duplicate, so there is
+   no seam to stutter on. */
+
+.process {
+  position: relative;
+  border-block: 1px solid var(--line);
+  padding-block: clamp(1.75rem, 4vw, 2.5rem);
+  overflow: hidden;
+  /* Reads as a floor strip receding from the viewer. Six degrees,
+     one line, large payoff. */
+  transform: perspective(900px) rotateX(6deg);
+}
+
+.process ol {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  list-style: none;
+  position: relative;
+}
+
+.process ol::before {
+  content: '';
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 5px;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.process ol::after {
+  content: '';
+  position: absolute;
+  left: 6%;
+  top: 5px;
+  width: 14%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--rgb-violet), var(--rgb-cyan), transparent);
+  box-shadow: 0 0 12px var(--rgb-cyan);
+  animation: railSweep 10s linear infinite;
+}
+
+@keyframes railSweep {
+  to {
+    transform: translateX(600%);
+  }
+}
+
+.process li {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  white-space: nowrap;
+  animation: stepText 10s linear infinite;
+  animation-delay: calc(var(--s) * 2s - 10s);
+}
+
+/* Diamonds, not circles. Diamonds read as HUD; circles read as
+   generic UI. */
+.process .pip {
+  width: 10px;
+  height: 10px;
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  transform: rotate(45deg);
+  animation: stepPip 10s linear infinite;
+  animation-delay: calc(var(--s) * 2s - 10s);
+}
+
+@keyframes stepText {
+
+  0%,
+  16% {
+    color: var(--neon-hi);
+  }
+
+  22%,
+  100% {
+    color: var(--fg-muted);
+  }
+}
+
+@keyframes stepPip {
+
+  0%,
+  16% {
+    background: var(--neon);
+    border-color: var(--neon);
+    box-shadow: 0 0 12px var(--neon);
+    transform: rotate(45deg) scale(1.35);
+  }
+
+  22%,
+  100% {
+    background: var(--bg);
+    border-color: var(--line-strong);
+    box-shadow: none;
+    transform: rotate(45deg) scale(1);
+  }
+}
+
+@media (max-width: 560px) {
+  .process li {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    gap: 0.7rem;
+  }
+}
+
+/*--------------------------- contact --------------------------*/
+
+.contact {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  text-align: center;
+  padding-block: var(--section-gap);
+  border-top: 1px solid var(--line);
+}
+
+/* The payoff. The only place the full spectrum appears as light.
+   At 70px blur it is pure atmosphere - no banding (the grain layer
+   handles what is left), no legible hue boundaries. */
+.contact::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  background: conic-gradient(from 180deg at 50% 118%,
+      oklch(0.62 0.20 290 / 0.35),
+      oklch(0.62 0.20 205 / 0.35),
+      oklch(0.62 0.20 150 / 0.30),
+      oklch(0.62 0.20 78 / 0.25),
+      oklch(0.62 0.20 340 / 0.30),
+      oklch(0.62 0.20 290 / 0.35));
+  filter: blur(70px);
+  opacity: 0.55;
+  animation: aurora 40s linear infinite;
+}
+
+@keyframes aurora {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.contact h2 {
+  margin-bottom: 0.75rem;
+  text-shadow:
+    0 0 1px oklch(0.97 0.06 var(--hue) / 0.55),
+    0 0 28px oklch(0.78 0.19 var(--hue) / 0.40),
+    0 0 80px oklch(0.70 0.20 var(--hue) / 0.20);
+}
+
+.contact p {
+  color: var(--fg-muted);
+  max-width: 45ch;
+  margin: 0 auto 2rem;
+}
+
+/*--------------------------- footer ---------------------------*/
+
+.site-footer {
+  position: relative;
+  border-top: 1px solid var(--line);
+  padding-block: 2rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-muted);
+}
+
+.site-footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* System-status indicator: three squares pulsing in sequence on a
+   2s cycle. 0.5 flashes/sec, well inside the WCAG limit. */
+.footer-rgb {
+  display: flex;
+  gap: 5px;
+}
+
+.footer-rgb i {
+  width: 4px;
+  height: 4px;
+  background: var(--c);
+  animation: rgbBlink 2s var(--inout) infinite;
+  animation-delay: var(--d);
+}
+
+.footer-rgb i:nth-child(1) {
+  --c: var(--rgb-cyan);
+  --d: 0s;
+}
+
+.footer-rgb i:nth-child(2) {
+  --c: var(--rgb-magenta);
+  --d: 0.25s;
+}
+
+.footer-rgb i:nth-child(3) {
+  --c: var(--rgb-lime);
+  --d: 0.5s;
+}
+
+@keyframes rgbBlink {
+
+  0%,
+  100% {
+    opacity: 0.25;
+    box-shadow: none;
+  }
+
+  20% {
+    opacity: 1;
+    box-shadow: 0 0 8px var(--c);
+  }
+}
+
+/*-------------------------- responsive --------------------------*/
+
+@media (max-width: 900px) {
+  .nav-toggle {
+    display: grid;
+  }
+
+  .nav {
+    position: fixed;
+    inset: var(--header-h) 0 auto 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.5rem var(--gutter) 1.25rem;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    transform: translateY(-101%);
+    visibility: hidden;
+    transition: transform var(--t-3) var(--out), visibility 0s linear var(--t-3);
+  }
+
+  .nav.is-open {
+    transform: none;
+    visibility: visible;
+    transition: transform var(--t-3) var(--out), visibility 0s linear 0s;
+  }
+
+  .nav a {
+    padding-block: 0.85rem;
+    font-size: var(--step--1);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav a::after {
+    display: none;
+  }
+}
