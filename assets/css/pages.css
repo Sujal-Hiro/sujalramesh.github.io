@@ -142,8 +142,8 @@
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: rgba(20, 19, 15, 0.62) center / 10px 10px no-repeat;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F5F3EE'%3E%3Cpath d='M7 4l13 8-13 8z'/%3E%3C/svg%3E");
+  background: oklch(0.08 0.015 148 / 0.72) center / 10px 10px no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d8ffe8'%3E%3Cpath d='M7 4l13 8-13 8z'/%3E%3C/svg%3E");
 }
 
 @media (max-width: 900px) {

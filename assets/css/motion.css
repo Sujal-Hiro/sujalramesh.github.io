@@ -84,14 +84,27 @@
 
 /*------------------------ more contrast ------------------------*/
 
+/* These were the light theme's values and would have rendered dark ink
+   on a dark page - i.e. the accessibility mode was the least readable
+   state on the site. */
 @media (prefers-contrast: more) {
   :root {
-    --ink-muted: #3d3931;
-    --ink-faint: #5a554b;
-    --ink-2: #26231c;
-    --rule: rgba(23, 21, 15, 0.34);
-    --rule-strong: rgba(23, 21, 15, 0.62);
-    --accent: #a5321c;
+    --fg: oklch(1 0 0);
+    --fg-2: oklch(0.94 0.02 148);
+    --fg-muted: oklch(0.86 0.03 148);
+    --fg-faint: oklch(0.78 0.03 148);
+    --rule: oklch(0.85 0.10 148 / 0.42);
+    --rule-strong: oklch(0.85 0.10 148 / 0.70);
+    --p: oklch(0.90 0.17 148);
+    --p-hi: oklch(0.96 0.12 148);
+  }
+
+  * {
+    text-shadow: none !important;
+  }
+
+  body {
+    background-image: none;
   }
 }
 

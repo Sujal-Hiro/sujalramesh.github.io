@@ -9,13 +9,13 @@
   parsed before this executes.
 ===============================================*/
 
-import { can3D } from './core/env.js?v=6'
-import { initHeader, initReveal } from './core/scroll.js?v=6'
-import { initNav, initRole, initYear, initVideo } from './ui/nav.js?v=6'
-import { initFilters, initStagger } from './ui/gallery.js?v=6'
-import { initLightbox } from './ui/lightbox.js?v=6'
-import { initInvaders } from './games/invaders.js?v=6'
-import { initTargetRush } from './games/target-rush.js?v=6'
+import { can3D } from './core/env.js?v=7'
+import { initHeader, initReveal } from './core/scroll.js?v=7'
+import { initNav, initRole, initYear, initVideo } from './ui/nav.js?v=7'
+import { initFilters, initStagger } from './ui/gallery.js?v=7'
+import { initLightbox } from './ui/lightbox.js?v=7'
+import { initInvaders } from './games/invaders.js?v=7'
+import { initTargetRush } from './games/target-rush.js?v=7'
 
 initHeader()
 initNav()
@@ -41,7 +41,7 @@ initTargetRush()
 const glCanvas = document.getElementById('heroGl')
 
 if (glCanvas && can3D()) {
-	import('./three/gamepad.js?v=6')
+	import('./three/gamepad.js?v=7')
 		.then(m => m.initGamepad(glCanvas))
 		.catch(() => glCanvas.remove())
 } else if (glCanvas) {

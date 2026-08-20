@@ -55,7 +55,11 @@
   --fg: oklch(0.94 0.03 148);
   --fg-2: oklch(0.80 0.035 148);
   --fg-muted: oklch(0.64 0.035 148);
-  --fg-faint: oklch(0.48 0.03 148);
+  /* 0.585, not 0.48. This carries tags, dates, index numbers and
+     the gallery filters - all mono at ~11px - and at 0.48 it
+     measured 3.18:1, which fails AA for small text. 0.585 is
+     4.95:1. Do not darken it again without re-measuring. */
+  --fg-faint: oklch(0.585 0.03 148);
 
   /*-------------------------- rules --------------------------*/
 
@@ -141,7 +145,7 @@
     --fg: #e6f6ec;
     --fg-2: #b9d6c4;
     --fg-muted: #85a892;
-    --fg-faint: #5c7a67;
+    --fg-faint: #74947f;
     --rule: rgba(78, 224, 138, 0.14);
     --rule-strong: rgba(78, 224, 138, 0.3);
     --warn: #e0b64e;

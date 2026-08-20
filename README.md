@@ -62,59 +62,93 @@ JS is one entry module (`assets/js/main.js`). Every block guards its own DOM
 lookups, so one entry serves all four pages and anything whose elements are
 absent simply does not run.
 
-## Design system: PAPER
+## Design system: MATRIX
 
-Warm paper, near-black ink, one accent, a lot of air. The thesis: almost every
-game-developer portfolio is a dark neon page, and the work here — screenshots,
-clips, two playable games — is loud enough on its own. The page around it stays
-quiet and lets the work be the colour.
+Phosphor green on near-black. A terminal, not a neon city.
+
+That distinction is the whole design. Cyberpunk RGB means many saturated hues
+competing; this is **one hue at six values**, the way a CRT has one colour, and
+everything on the page is a value of it. The constraint is what makes it read as
+designed rather than loud.
 
 Five rules the CSS holds to:
 
-1. **One accent**, spent sparingly — six or seven appearances per screen. A
-   single vermillion, `oklch(0.55 0.185 32)`, ~5.4:1 on paper so it works as
-   text as well as a mark. Everything else is ink on paper.
-2. **Rules, not boxes.** Structure comes from hairlines and alignment. No cards
-   inside cards, no drop shadows, no filled panels.
-3. **Type carries the design.** Instrument Serif for display, Inter for reading,
-   JetBrains Mono for every label, index, date and readout. The gap between the
-   display and body sizes *is* the design.
-4. **Space is a material.** Nothing is crowded to fit more in.
-5. **Motion is short, small, and confirms an action.** Nothing loops, floats or
-   cycles.
+1. **One hue**, 148°. No second accent, no hue cycling. Amber (`--warn`) exists
+   only as a warning state, so it means something if it ever appears.
+2. **Dots are the texture.** The page sits on a radial-gradient dot matrix at a
+   `--dot` pitch, and the hero object is literally made of dots. One idea, all
+   the way through.
+3. **Mono carries the interface** — labels, indices, dates, nav, buttons. The
+   serif appears once, on the name.
+4. **Glow is restraint.** Display type gets a 1px core plus one wide faint halo.
+   Never a 40px smear.
+5. **Nothing cycles, strobes or rains.** Falling code would be a costume; a
+   steady terminal is the real thing.
+
+The background is `#050706`, not `#000`. A CRT's black is lifted by its own
+glow, and on true black the green reads as floating in a void rather than
+sitting on a surface.
 
 The single biggest structural decision: **the work is a numbered index, not a
 grid of cards.** Rows on hairlines read as a considered list; six equal boxes
-read as a template. The same logic turns the skills section into aligned text
-rows rather than eight panels saying almost nothing.
+read as a template. The same logic makes the skills section aligned text rows
+rather than eight panels saying almost nothing.
 
-### What was removed
+### Contrast is measured, not eyeballed
 
-This replaced a dark RGB design. Gone, deliberately: the hue-cycling palette,
-the full-page WebGL deck, 150 drifting crystals, the atmosphere/vignette/grain
-layers, scanlines, HUD corner brackets, the cursor spotlight, card tilt, glow
-tokens, and the parallax masonry. `effects.css` is nearly empty now and that is
-the point.
+Every ink value was computed against `--bg`, not chosen by eye:
+
+| token | ratio | used for |
+|---|---|---|
+| `--fg` | 17.4:1 | body copy |
+| `--fg-2` | 11.1:1 | bio, list items |
+| `--fg-muted` | 6.2:1 | descriptions |
+| `--fg-faint` | 4.95:1 | tags, dates, indices, filters |
+| `--p-hi` | 16.7:1 | titles |
+| `--p` | 11.8:1 | accent, rules |
+
+`--fg-faint` was originally `L 0.48` and measured **3.18:1**, which fails AA for
+small text — and it carries every ~11px mono label on the site. It is `L 0.585`
+now. **Do not darken it again without re-measuring.**
+
+### Earlier designs, and why they went
+
+This is the third skin on the same structure. The first was dark RGB with a
+hue-cycling palette, a full-page WebGL deck and 150 drifting crystals; the
+second was a light editorial "paper" theme with a photoreal gamepad. The layout
+underneath — the work index, the aligned timeline and skill rows, the section
+mastheads — survived all three unchanged, which is the useful signal: structure
+was never the problem, surface was.
+
+If you dig through git history, note that CSS still reads some `--paper` /
+`--ink` names. Those are **aliases** mapped onto the phosphor tokens at the top
+of `tokens.css`, kept so the component sheets did not need rewriting. They are
+not leftovers.
 
 ## The 3D
 
-`assets/js/three/gamepad.js` renders exactly one object: a photoreal gamepad,
-lit like a product shot, turning once every ~35s and leaning slightly toward the
-cursor. That is all the 3D on the site.
+`assets/js/three/gamepad.js` renders one object: a gamepad as a **point cloud**.
+Its geometry is sampled into ~110,000 dots and drawn as phosphor points, so it
+reads as a 3D scan resolving out of the dark rather than as a product render. A
+scan band sweeps up through it every 6.5s.
 
 - **Model**: "Gamepad" by Josh Dean, **CC0**, from [Poly Haven](https://polyhaven.com/a/gamepad).
-  1k textures, ~1.3 MB across five files. No attribution required; the hero
-  credits it anyway.
-- **Lighting**: `RoomEnvironment` through `PMREMGenerator` for image-based
-  lighting, plus one key and one fill light. The IBL is what makes the plastic
-  read as plastic — point lights alone give flat highlights and no sense of a
-  surrounding space, and an HDR file would be another megabyte.
-- **Tone mapping**: ACES Filmic at 0.98 exposure. Without it the highlights clip
-  to flat white and it looks like a screenshot of a model.
-- **Shadow**: a single shader plane with a radial falloff. A real shadow map on
-  one floating object is not worth the depth pass.
-- The model is centred and scaled from its own bounding box, so framing does not
-  depend on how the asset was authored.
+  1k textures, ~1.3 MB. No attribution required; the hero credits it anyway.
+  Only the geometry is used — the PBR textures are never bound.
+- **Area-weighted sampling, not vertices.** A model's vertices bunch wherever it
+  was detailed and leave flat panels bare, so sampling them would describe the
+  buttons and none of the body. Points are drawn across triangle surfaces
+  weighted by area, via a cumulative-area table and a binary search.
+- **Flat typed arrays throughout.** The obvious version allocates a `Vector3`
+  per corner and a `THREE.Triangle` just to call `getArea()` — hundreds of
+  thousands of short-lived objects, and the GC pressure alone pushed the hero
+  load past fifteen seconds. It resolves in under three now.
+- **One hue, brightness does the work.** Each dot is lit by a single
+  normal·light term, giving the cloud a light and shadow side using nothing but
+  values of the same green.
+- **Dot size is calibrated to camera distance** (`9.0 / -mv.z`). A stock `300.0`
+  falloff produced 75px dots that merged into a solid blob. The cloud only reads
+  as a cloud while the dots stay separable.
 
 ### Gates and fallback
 
@@ -123,43 +157,41 @@ reduced-motion, ≥4 cores, no save-data, and WebGL2. Only then are three.js and
 the model fetched, so mobile and reduced-motion visitors download **none** of
 it.
 
-When the gates fail, `.hero__object::before` shows a quiet plotted contour
-instead — except below 900px, where the whole object column is hidden and the
-hero is type only. A large empty shape on a phone is worse than no shape.
+When the gates fail, `.hero__object::before` shows a quiet plotted contour —
+except below 900px, where the whole object column is hidden and the hero is type
+only. A large empty shape on a phone is worse than no shape.
 
-### Vendored three.js
+The placeholder is cleared by two selectors: the `is-loaded` class set in the
+load callback, **and** `:has(.hero__gl.is-live)`. Whichever lands first wins, so
+there is never a frame where the contour and the cloud are both painted.
 
-`assets/lib/three/` holds `three.module.min.js`, `three.core.min.js`, the MIT
-`LICENSE`, and `addons/` (GLTFLoader plus the two utils it imports).
-**Both build files are required** — the module build's first statement imports
-the core build, and they must stay in the same directory.
+### Failing loudly
 
-To bump the version:
+An inline non-module script catches `error` and `unhandledrejection`, prints the
+message in a fixed banner, and sets `html.js-failed`, which forces all `.reveal`
+content visible.
 
-```bash
-V=0.185.1
-B=https://unpkg.com/three@$V
-curl -L -o assets/lib/three/three.module.min.js $B/build/three.module.min.js
-curl -L -o assets/lib/three/three.core.min.js   $B/build/three.core.min.js
-curl -L -o assets/lib/three/LICENSE             $B/LICENSE
-curl -L -o assets/lib/three/addons/loaders/GLTFLoader.js        $B/examples/jsm/loaders/GLTFLoader.js
-curl -L -o assets/lib/three/addons/utils/BufferGeometryUtils.js $B/examples/jsm/utils/BufferGeometryUtils.js
-curl -L -o assets/lib/three/addons/utils/SkeletonUtils.js       $B/examples/jsm/utils/SkeletonUtils.js
-curl -L -o assets/lib/three/addons/environments/RoomEnvironment.js $B/examples/jsm/environments/RoomEnvironment.js
-```
-
-There is no `package.json`, so this README is the only record of the version.
-Currently **r185 (0.185.1)**.
+This exists because the failure mode is genuinely invisible: if the entry module
+throws, nothing ever adds `.is-visible`, every `.reveal` stays at opacity 0, and
+the page renders as blank space that looks like a design problem rather than a
+dead script. Content beats choreography — if the script is gone the page must
+still be readable.
 
 ## Games
 
 Both keep their full original logic.
 
 **Space Invaders** draws into a fixed 960×540 backing store scaled by CSS, with
-sprites as pixel matrices rather than images. Its palette is **literal, not
-taken from the CSS tokens** — the playfield is a dark screen inside a light
-page, so ink-on-paper values would be invisible. It is near-monochrome by
-design: paper-white fleet, one vermillion rank at the back worth the most.
+sprites as pixel matrices rather than images. Its palette is **literal, not read
+from the CSS tokens** — Canvas2D silently ignores an invalid `fillStyle` and
+keeps the previous value, which makes any colour bug there near-impossible to
+spot. It is the same phosphor ramp at four values, and brightness carries the
+scoring: the back rank is worth the most and is brightest, the front rank is
+worth least and is nearly submerged.
+
+Note the colour constant is `LIT`, not `SHIP` — `SHIP` is already the sprite
+pixel-matrix in the same scope, and a second `const SHIP` is a duplicate
+declaration that kills the whole module.
 
 The two canvases take **opposite** scaling: the Invaders canvas is deliberately
 not DPR-scaled and uses `image-rendering: pixelated`; the gamepad canvas is
@@ -207,14 +239,16 @@ transforming the element would move the scrub bar out from under the pointer.
 - `prefers-reduced-motion` genuinely stops things. The model is never fetched,
   reveals fade without travelling, and hover transforms are removed. It is read
   **live**, not snapshotted at load, so toggling it mid-session takes effect.
-- `prefers-contrast: more` darkens the muted inks and strengthens every rule.
+- `prefers-contrast: more` lifts every ink toward white, strengthens the rules
+  and drops the dot-matrix background. It previously carried the light theme's
+  values, which would have painted dark ink on a dark page — i.e. the
+  accessibility mode was the least readable state on the site.
   `forced-colors` and `prefers-reduced-data` are handled too.
 - Anything already on screen at first paint is revealed immediately rather than
   waiting on the observer. The observer's `-10%` bottom margin creates a dead
   band along the viewport edge, and an element sitting in it at load would
   otherwise stay invisible permanently.
-- Focus is a solid 2px ink outline with offset. On paper there is no need for
-  the multi-band ring a neon theme requires.
+- Focus is a solid 2px phosphor outline with offset.
 
 ## License
 

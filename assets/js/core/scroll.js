@@ -3,13 +3,13 @@
 
   The previous design drove a reading-progress bar,
   a --sp parallax value and a timeline observer from
-  here. None of that survives: on a paper page the
-  only thing scroll needs to do is bring the header
-  rule in and let content arrive once.
+  here. None of that survives: the only thing scroll
+  needs to do now is bring the header rule in and let
+  content arrive once.
 ===============================================*/
 
-import { reduceMotion } from './env.js?v=6'
-import { add } from './loop.js?v=6'
+import { reduceMotion } from './env.js?v=7'
+import { add } from './loop.js?v=7'
 
 /*------------------------- header -------------------------*/
 

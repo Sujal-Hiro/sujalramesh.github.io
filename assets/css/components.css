@@ -359,7 +359,7 @@
   place-items: center;
   padding: var(--gutter);
   overflow: hidden;
-  background: rgba(14, 13, 10, 0.94);
+  background: oklch(0.06 0.012 148 / 0.95);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
@@ -412,8 +412,8 @@
   width: 42px;
   height: 42px;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(245, 243, 238, 0.28);
-  color: var(--paper);
+  border: 1px solid oklch(0.80 0.19 148 / 0.30);
+  color: var(--fg);
   font-size: 1.3rem;
   line-height: 1;
   cursor: pointer;
@@ -421,12 +421,12 @@
 }
 
 .lightbox .close:hover {
-  background: rgba(245, 243, 238, 0.14);
-  border-color: var(--paper);
+  background: oklch(0.80 0.19 148 / 0.16);
+  border-color: var(--p);
 }
 
 .lightbox :focus-visible {
-  outline-color: var(--paper);
+  outline-color: var(--p-hi);
 }
 
 /*------------------------ zoom controls ------------------------*/
@@ -441,9 +441,9 @@
   gap: 2px;
   padding: 4px;
   transform: translateX(-50%);
-  border: 1px solid rgba(245, 243, 238, 0.22);
+  border: 1px solid oklch(0.80 0.19 148 / 0.24);
   border-radius: var(--radius-sm);
-  background: rgba(14, 13, 10, 0.7);
+  background: oklch(0.08 0.015 148 / 0.78);
 }
 
 .zoombar__btn {
@@ -451,7 +451,7 @@
   height: 34px;
   padding: 0 0.5rem;
   border-radius: var(--radius-sm);
-  color: var(--paper);
+  color: var(--fg);
   font-family: var(--font-mono);
   font-size: 0.95rem;
   line-height: 1;
@@ -460,7 +460,7 @@
 }
 
 .zoombar__btn:hover:not(:disabled) {
-  background: rgba(245, 243, 238, 0.16);
+  background: oklch(0.80 0.19 148 / 0.18);
 }
 
 .zoombar__btn:disabled {

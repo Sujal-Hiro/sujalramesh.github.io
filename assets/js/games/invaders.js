@@ -6,18 +6,18 @@
   how wide the section renders. Sprites are pixel
   matrices rather than images, so no extra requests.
 
-  The playfield is the one dark surface on a paper
-  site, so its palette is literal rather than taken
-  from the CSS tokens - those follow the light theme
-  and would be invisible here.
+  The palette is literal rather than read from the
+  CSS tokens: Canvas2D silently ignores an invalid
+  fillStyle and keeps the previous value, which makes
+  any colour bug here near-impossible to spot.
 
-  It is near-monochrome by design: paper-white fleet,
-  one vermillion rank at the back worth the most.
-  Colour still carries the scoring information, but
-  with one accent rather than five.
+  It is one hue at four values, matching the page.
+  Brightness carries the scoring: the back rank is
+  worth the most and is the brightest, the front rank
+  is worth the least and is nearly submerged.
 ===============================================*/
 
-import { reduceMotion } from '../core/env.js?v=6'
+import { reduceMotion } from '../core/env.js?v=7'
 
 export function initInvaders() {
 	const siCanvas = document.getElementById('siCanvas')
@@ -43,16 +43,16 @@ export function initInvaders() {
 	   tokens do not apply. Canvas2D also silently ignores an invalid
 	   fillStyle and keeps the previous value, which makes any colour
 	   bug here near-impossible to spot. */
-	const PAPER = '#f5f3ee'
-	const ACCENT = '#e06046'
-	const FLEET = '#cfcabd'
-	const DIM = '#6f6a5e'
+	const LIT = '#d8ffe8'
+	const HOT = '#7dffb0'
+	const FLEET = '#3fb571'
+	const DIM = '#1f7a48'
 
 	// Row 0 sits furthest back and is worth the most, so it is the
 	// only rank that gets the accent.
-	const ROW_COLOUR = [ACCENT, FLEET, FLEET, DIM, DIM]
-	const SHIP_COLOUR = PAPER
-	const BULLET_COLOUR = ACCENT
+	const ROW_COLOUR = [HOT, FLEET, FLEET, DIM, DIM]
+	const SHIP_COLOUR = LIT
+	const BULLET_COLOUR = HOT
 	const BOMB_COLOUR = FLEET
 	const MUTED = DIM
 

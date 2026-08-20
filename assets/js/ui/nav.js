@@ -6,7 +6,7 @@
   lines and would be silly as separate files.
 ===============================================*/
 
-import { reduceMotion } from '../core/env.js?v=6'
+import { reduceMotion } from '../core/env.js?v=7'
 
 export function initNav() {
 	const nav = document.getElementById('nav')

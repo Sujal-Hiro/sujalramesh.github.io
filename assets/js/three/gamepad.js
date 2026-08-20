@@ -28,8 +28,8 @@
 ===============================================*/
 
 import * as THREE from 'three'
-import { GLTFLoader } from '../../lib/three/addons/loaders/GLTFLoader.js?v=6'
-import { add } from '../core/loop.js?v=6'
+import { GLTFLoader } from '../../lib/three/addons/loaders/GLTFLoader.js?v=7'
+import { add } from '../core/loop.js?v=7'
 
 const MODEL = './assets/models/gamepad/gamepad_1k.gltf'
 const POINTS = 110000
