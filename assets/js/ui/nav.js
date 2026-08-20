@@ -80,10 +80,3 @@ export function initVideo() {
 
 	videos.forEach(v => io.observe(v))
 }
-
-/* Index children so CSS can stagger them. */
-export function initStagger() {
-	document.querySelectorAll('.skill-group ul').forEach(list => {
-		;[...list.children].forEach((li, i) => li.style.setProperty('--i', i))
-	})
-}

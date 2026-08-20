@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="is-booting" data-theme="dark">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
@@ -8,7 +8,7 @@
   <meta name="description" content="Detailed write-ups of Sujal Ramesh's game projects, with build notes and tech stacks." />
   <meta name="author" content="Sujal Ramesh" />
   <link rel="canonical" href="https://sujal-hiro.github.io/sujalramesh.github.io/projects.html" />
-  <meta name="theme-color" content="#08080c" />
+  <meta name="theme-color" content="#f5f3ee" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sujal-hiro.github.io/sujalramesh.github.io/projects.html" />
   <meta property="og:title" content="Projects | Sujal Ramesh" />
@@ -22,7 +22,7 @@
   <meta name="twitter:image" content="https://sujal-hiro.github.io/sujalramesh.github.io/Images/og-cover.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/css/tokens.css" />
   <link rel="stylesheet" href="./assets/css/base.css" />
   <link rel="stylesheet" href="./assets/css/layout.css" />
@@ -33,32 +33,29 @@
   <!-- motion.css last: every preference query lives there and must win -->
   <link rel="stylesheet" href="./assets/css/motion.css" />
   <link rel="shortcut icon" type="image/png" href="Images/Icon-Website.png">
+
 </head>
 
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="backdrop" aria-hidden="true"></div>
-  <div class="vignette" aria-hidden="true"></div>
 
   <header class="site-header" id="siteHeader">
     <div class="wrap">
-      <a href="index.html" class="brand">SR<span>.</span></a>
+      <a href="index.html" class="brand"><b>Sujal Ramesh</b> <span>Game Developer</span></a>
 
       <nav class="nav" id="nav">
         <a href="index.html">Home</a>
         <a href="portfolio.html">Gallery</a>
       </nav>
 
-      <div class="header-actions">
-        <button type="button" class="icon-btn nav-toggle" id="navBtn" aria-label="Toggle menu"
+              <button type="button" class="icon-btn nav-toggle" id="navBtn" aria-label="Toggle menu"
           aria-expanded="false" aria-controls="nav">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" aria-hidden="true">
             <path d="M3 6h18M3 12h18M3 18h18" />
           </svg>
         </button>
-      </div>
     </div>
   </header>
 
@@ -72,7 +69,7 @@
 
       <article class="project reveal" id="project-1">
         <div class="project__meta">
-          <p class="project__index">01</p>
+          <p class="project__index label">01</p>
           <h2>Spin Android game</h2>
           <p>2D Hyper Casual game where it includes simple player mechanics, dodgeable enemies and collectable assets. We tried implementing AI enemy to our game but unfortunately it didn&#x27;t turn out well.</p>
           <ul class="project__points">
@@ -82,7 +79,7 @@
             <li>My friend and I under the name Steadfaststudios published the game on the PlayStore.</li>
           </ul>
           <div class="tags"><span class="tag">Hyper Casual</span><span class="tag">Playstore Project</span><span class="tag">Android</span><span class="tag">Collaboration</span></div>
-          <a class="link-more" href="https://play.google.com/store/apps/details?id=com.Steadfaststudios.Spin" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="link" href="https://play.google.com/store/apps/details?id=com.Steadfaststudios.Spin" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
         <div class="project__media">
             <button type="button" class="shot" data-src="Images/image_50.webp" data-type="image" aria-label="View Spin Android game screenshot"><img src="Images/image_50.webp" alt="Spin Android game screenshot" loading="lazy" decoding="async"></button>
@@ -93,7 +90,7 @@
       </article>
       <article class="project reveal" id="project-2">
         <div class="project__meta">
-          <p class="project__index">02</p>
+          <p class="project__index label">02</p>
           <h2>Square Madness</h2>
           <p>The game&#x27;s mechanics are straightforward; the player must avoid enemy bombs and spikes while collecting points like gold, gems, and other valuable items. I primarily worked on the UI Design, sprites, and animations for it. The first game created in Unity and released on the PlayStore was this one. I gained a better understanding of UI and asset creation thanks to this game.</p>
           <ul class="project__points">
@@ -102,7 +99,7 @@
             <li>While developing this game, I learnt how to use prefabs effectively and learned about different sprites, sprite sheets, the UI canvas, scene management, build settings, and player preferences. In-game Unity advertisements.</li>
           </ul>
           <div class="tags"><span class="tag">First Game</span><span class="tag">Collaboration</span><span class="tag">2D Casual Game</span><span class="tag">Android</span></div>
-          <a class="link-more" href="https://play.google.com/store/apps/details?id=com.IdeekayStudios.SqaureMadness" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="link" href="https://play.google.com/store/apps/details?id=com.IdeekayStudios.SqaureMadness" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
         <div class="project__media">
             <button type="button" class="shot" data-src="Images/image_9.webp" data-type="image" aria-label="View Square Madness screenshot"><img src="Images/image_9.webp" alt="Square Madness screenshot" loading="lazy" decoding="async"></button>
@@ -113,7 +110,7 @@
       </article>
       <article class="project reveal" id="project-3">
         <div class="project__meta">
-          <p class="project__index">03</p>
+          <p class="project__index label">03</p>
           <h2>It&#x27;s All About Us!</h2>
           <p>It&#x27;s a cooperative local multiplayer game with a dualistic premise. As a programmer and team leader, I gained a lot of knowledge via this project. It aided in my learning more about team leadership and finishing a game within a set amount of time.</p>
           <ul class="project__points">
@@ -124,7 +121,7 @@
             <li>For desktop platforms like Windows 10/10.1/11, Mac OS, etc.</li>
           </ul>
           <div class="tags"><span class="tag">Chennai Global Game Jam Winners - 2022</span><span class="tag">Local Multiplayer</span><span class="tag">Duality Theme</span><span class="tag">Team Lead</span><span class="tag">PC</span></div>
-          <a class="link-more" href="https://youtu.be/8jC3e6yOQYM" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="link" href="https://youtu.be/8jC3e6yOQYM" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
         <div class="project__media">
             <button type="button" class="shot" data-src="Images/image_5.webp" data-type="image" aria-label="View It&#x27;s All About Us! screenshot"><img src="Images/image_5.webp" alt="It&#x27;s All About Us! screenshot" loading="lazy" decoding="async"></button>
@@ -135,11 +132,11 @@
       </article>
       <article class="project reveal" id="project-4">
         <div class="project__meta">
-          <p class="project__index">04</p>
+          <p class="project__index label">04</p>
           <h2>Try Dodging</h2>
           <p>A hyper-casual game with an endless run that was created using the Build Box game engine. It requires the player to gather points. While creating this game, I gained a lot of knowledge and experiences with how nodes can be implemented in games.</p>
           <div class="tags"><span class="tag">BuildBox Engine</span><span class="tag">3D Hyper Casual</span><span class="tag">Solo Project</span><span class="tag">Fast Paced</span></div>
-          <a class="link-more" href="https://youtu.be/I-VNEEGx-AY" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="link" href="https://youtu.be/I-VNEEGx-AY" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
         <div class="project__media">
             <button type="button" class="shot" data-src="Images/image_44.webp" data-type="image" aria-label="View Try Dodging screenshot"><img src="Images/image_44.webp" alt="Try Dodging screenshot" loading="lazy" decoding="async"></button>
@@ -150,7 +147,7 @@
       </article>
       <article class="project reveal" id="project-5">
         <div class="project__meta">
-          <p class="project__index">05</p>
+          <p class="project__index label">05</p>
           <h2>AR Applications</h2>
           <p>The first AR project was completed utilising the Unity Engine and its AR, XR, and Vuforia SDK plugins. It&#x27;s an AR-based game that makes use of the camera on gadgets like mobile phones and webcams. This game is designed for Android smartphones. To play, simply position the camera on the device and press the start button. Balloons will then keep dropping from the top,</p>
           <ul class="project__points">
@@ -159,7 +156,7 @@
             <li>Vuforia was used in numerous projects, including the solar system project, the piano, single image target, and multiple image target.</li>
           </ul>
           <div class="tags"><span class="tag">AR</span><span class="tag">Vuforia SDK</span><span class="tag">College Project</span><span class="tag">AR Applications &amp; Games</span></div>
-          <a class="link-more" href="https://youtu.be/H-EhHDOIrtw" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="link" href="https://youtu.be/H-EhHDOIrtw" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
         <div class="project__media">
             <button type="button" class="shot" data-src="Images/image_10.webp" data-type="image" aria-label="View AR Applications screenshot"><img src="Images/image_10.webp" alt="AR Applications screenshot" loading="lazy" decoding="async"></button>
@@ -170,11 +167,11 @@
       </article>
       <article class="project reveal" id="project-6">
         <div class="project__meta">
-          <p class="project__index">06</p>
+          <p class="project__index label">06</p>
           <h2>Saloon Shooter</h2>
           <p>A FPS game where the player is a gunslinger who is on a quest to prove his talents and challenge people. These challenges take place at bars where all the gunslingers participated to win, and the player has to beat the other gunslingers&#x27; top score. The task is straightforward: within the allotted time, the player must fire at the bottles they have set.</p>
           <div class="tags"><span class="tag">3D Shooter</span><span class="tag">Game Designer</span><span class="tag">Collaboration</span><span class="tag">PC</span></div>
-          <a class="link-more" href="https://youtu.be/8Zizvq3a8FE" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="link" href="https://youtu.be/8Zizvq3a8FE" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
         <div class="project__media">
             <button type="button" class="shot" data-src="Images/image_41.webp" data-type="image" aria-label="View Saloon Shooter screenshot"><img src="Images/image_41.webp" alt="Saloon Shooter screenshot" loading="lazy" decoding="async"></button>
@@ -185,11 +182,11 @@
       </article>
       <article class="project reveal" id="project-7">
         <div class="project__meta">
-          <p class="project__index">07</p>
+          <p class="project__index label">07</p>
           <h2>Treasure Hunt</h2>
           <p>In this first-person open-world game, the player takes on the role of a treasure hunter who must search the map for all of the treasures scattered throughout it. The game is completed once the player has discovered all of the treasures hidden throughout the map.</p>
           <div class="tags"><span class="tag">Adventure</span><span class="tag">Gameplay Programmer</span><span class="tag">Collaboration</span><span class="tag">PC</span></div>
-          <a class="link-more" href="https://youtu.be/BYWT3ecsvRQ" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="link" href="https://youtu.be/BYWT3ecsvRQ" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
         <div class="project__media">
             <button type="button" class="shot" data-src="Images/image_59.webp" data-type="image" aria-label="View Treasure Hunt screenshot"><img src="Images/image_59.webp" alt="Treasure Hunt screenshot" loading="lazy" decoding="async"></button>
@@ -200,11 +197,11 @@
       </article>
       <article class="project reveal" id="project-8">
         <div class="project__meta">
-          <p class="project__index">08</p>
+          <p class="project__index label">08</p>
           <h2>Mars Survivor</h2>
           <p>First-person open-world game, this game set in 2050, the player character is an astronaut on a mission to mine valuable resources on Mars. After a crash landing, they must survive the harsh environment by managing oxygen, finding water, and scavenging for resources. The player character must mine for resources to craft tools and equipment while exploring dangerous underground caves. The goal is to survive and complete the mission to collect enough resources to make the effort worthwhile.</p>
           <div class="tags"><span class="tag">Sci-fi Adventure</span><span class="tag">Game Design &amp; Programmer</span><span class="tag">Collaboration</span><span class="tag">PC</span></div>
-          <a class="link-more" href="https://youtu.be/c-n0HC73Js4" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="link" href="https://youtu.be/c-n0HC73Js4" target="_blank" rel="noopener noreferrer">View project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
         <div class="project__media">
             <button type="button" class="shot" data-src="Images/image_26.png" data-type="image" aria-label="View Mars Survivor screenshot"><img src="Images/image_26.png" alt="Mars Survivor screenshot" loading="lazy" decoding="async"></button>

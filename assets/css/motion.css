@@ -1,29 +1,20 @@
 /*==============================================================
   Motion + user preferences
-  --------------------------------------------------------------
-  This file is loaded LAST so its rules always win. Every
-  preference query on the site lives here and nowhere else.
+
+  Loaded LAST so its rules always win. Every preference query on
+  the site lives here and nowhere else.
 ==============================================================*/
 
 /*---------------------- reduced motion ----------------------*/
 
 /* The contract: reduced motion means things genuinely STOP, not
-   that they run faster. Where an effect is purely a colour or
-   opacity change it is kept, because neither is vestibular and
-   removing them makes the page feel broken rather than calm. */
+   that they run faster. Opacity-only effects are kept - a fade is
+   not vestibular, and removing it makes the page feel broken
+   rather than calm. */
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-
-  /* Pin the hue instead of letting it animate. Without this pin a
-     blanket animation-duration override would make the cycle SNAP
-     to its end value rather than hold still. JS also never starts
-     its clock under this query, so this is belt and braces. */
-  :root {
-    --hue-base: 265;
-    animation: none !important;
   }
 
   *,
@@ -35,227 +26,100 @@
     scroll-behavior: auto !important;
   }
 
-  /* Reveals fade, they do not travel. A fade is not vestibular and
-     it preserves the sense of arrival. */
+  /* Reveals fade, they do not travel. */
   .reveal {
     opacity: 1;
     transform: none;
     transition-duration: 200ms !important;
   }
 
-  .line-mask>span {
+  /* Anything whose resting state is "hidden until animated" has to
+     be forced visible, or reduced-motion users get empty boxes. */
+  .line-mask > span {
     transform: none;
   }
 
-  /* Anything whose resting state is "hidden until animated" must
-     be forced visible, or reduced-motion users see empty boxes. */
-  .section-head::after {
-    width: 100%;
+  .rule-draw {
+    transform: scaleX(1);
   }
 
-  .timeline::before {
-    transform: scaleY(1);
-  }
-
-  .skill-group li {
+  .index__arrow {
     opacity: 1;
     transform: none;
   }
 
-  .card__go {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* Kill every looping decoration outright. */
-  .process li,
-  .process .pip,
-  .process ol::after,
-  .contact::before,
-  .btn-rgb::before,
-  .game__board::after,
-  .footer-rgb i,
-  .brand span,
-  .eyebrow::before,
-  .status .dot {
-    animation: none !important;
-  }
-
-  .process ol::after,
-  .game__board::after {
-    display: none;
-  }
-
-  /* Show the process rail as a completed pipeline rather than a
-     dead strip. */
-  .process li {
-    color: var(--fg-2);
-  }
-
-  .process .pip {
-    background: oklch(0.78 0.19 var(--hue) / 0.4);
-    border-color: oklch(0.78 0.19 var(--hue) / 0.6);
-  }
-
-  .footer-rgb i {
-    opacity: 1;
-  }
-
-  /* No pointer-driven 3D at all. */
-  .hero__stage,
-  .card,
-  .skill-group,
-  .tl-item,
-  .process {
+  .tile img,
+  .tile video,
+  .shot img,
+  .shot video {
     transform: none !important;
   }
 
-  .masonry__col {
-    transform: none !important;
-  }
-
-  .card::after,
-  .spotlight::before {
-    display: none;
-  }
-
-  /* The hero keeps its CSS deck; WebGL is never initialised, so
-     there is no GPU cost at all for users who ask for stillness. */
+  /* WebGL is never initialised under this query, so there is no
+     GPU cost at all. The plotted contour stays instead. */
   .hero__gl {
     display: none;
   }
 
-  .hero.is-gl::before {
-    opacity: 0.5;
+  .hero__object.is-loaded::before {
+    opacity: 0.9;
   }
 }
 
-/*---------------------- reduced transparency ----------------------*/
+/*------------------- reduced transparency -------------------*/
 
 @media (prefers-reduced-transparency: reduce) {
 
   .site-header,
   .lightbox,
-  .hud,
-  .zoombar,
-  .game__screen .game__hint {
+  .zoombar {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
 
   .site-header {
-    background: var(--bg);
-  }
-
-  .backdrop::after {
-    display: none;
-  }
-
-  /* grain off */
-  .contact::before {
-    display: none;
+    background: var(--paper);
   }
 }
 
-/*------------------------- more contrast -------------------------*/
-
-/* Neon on black is genuinely hard for some people. This is the
-   honest answer rather than pretending the cycle suits everyone:
-   the glow budget goes to zero, edges get real opacity, and the
-   atmosphere layers are removed entirely. */
+/*------------------------ more contrast ------------------------*/
 
 @media (prefers-contrast: more) {
   :root {
-    --glow: 0 !important;
-    --hue-base: 265;
-    --fg: oklch(1 0 0);
-    --fg-2: oklch(0.92 0.010 var(--hue));
-    --fg-muted: oklch(0.80 0.010 var(--hue));
-    --line: oklch(0.98 0.01 var(--hue) / 0.38);
-    --line-strong: oklch(0.98 0.01 var(--hue) / 0.62);
-    --neon: oklch(0.86 0.16 var(--hue));
-    --neon-hi: oklch(0.95 0.12 var(--hue));
-    animation: none !important;
-  }
-
-  * {
-    text-shadow: none !important;
-  }
-
-  .backdrop,
-  .vignette,
-  .contact::before,
-  .card::after,
-  .scanlines::after {
-    display: none;
-  }
-
-  body {
-    background: #000;
-  }
-
-  .tile img,
-  .tile video,
-  .shot img,
-  .shot video {
-    filter: none;
+    --ink-muted: #3d3931;
+    --ink-faint: #5a554b;
+    --ink-2: #26231c;
+    --rule: rgba(23, 21, 15, 0.34);
+    --rule-strong: rgba(23, 21, 15, 0.62);
+    --accent: #a5321c;
   }
 }
 
-/*------------------------- forced colors -------------------------*/
+/*------------------------ forced colors ------------------------*/
 
 @media (forced-colors: active) {
-
-  .backdrop,
-  .vignette,
   .hero__gl,
-  .hero::before,
-  .contact::before,
-  .card::after,
-  .hud::before,
-  .scanlines::after,
-  .game__screen::before,
-  .game__board::after {
+  .hero__object::before {
     display: none;
   }
 
-  .card,
-  .tile,
-  .hud,
-  .btn,
-  .skill-group,
-  .shot {
+  .game,
+  .tile__frame,
+  .btn {
     border: 1px solid CanvasText;
-    box-shadow: none;
   }
 
   :focus-visible {
     outline: 3px solid Highlight;
-    box-shadow: none;
-  }
-
-  .tile img,
-  .tile video,
-  .shot img,
-  .shot video {
-    filter: none;
   }
 }
 
 /*--------------------------- save data ---------------------------*/
 
-/* Belt and braces alongside the JS gate: if the WebGL module does
-   somehow load on a metered connection, it stays invisible. */
+/* Belt and braces alongside the JS gate: if the model somehow
+   loads on a metered connection, it stays hidden. */
 @media (prefers-reduced-data: reduce) {
   .hero__gl {
-    display: none;
-  }
-
-  .hero.is-gl::before {
-    opacity: 0.5;
-  }
-
-  .backdrop::after {
     display: none;
   }
 }

@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" class="is-booting" data-theme="dark">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sujal Ramesh | Game Developer &amp; Designer</title>
-  <meta name="description" content="Indian game developer and programmer building immersive gaming experiences. Shipped games, prototypes and design work." />
+  <title>Sujal Ramesh | Game Developer</title>
+  <meta name="description" content="Unity developer in Bengaluru building games and interactive experiences. Shipped titles, prototypes, tools and design work." />
   <meta name="author" content="Sujal Ramesh" />
   <link rel="canonical" href="https://sujal-hiro.github.io/sujalramesh.github.io/" />
-  <meta name="theme-color" content="#08080c" />
+  <meta name="theme-color" content="#f5f3ee" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sujal-hiro.github.io/sujalramesh.github.io/" />
-  <meta property="og:title" content="Sujal Ramesh | Game Developer &amp; Designer" />
-  <meta property="og:description" content="Indian game developer and programmer building immersive gaming experiences. Shipped games, prototypes and design work." />
+  <meta property="og:title" content="Sujal Ramesh | Game Developer" />
+  <meta property="og:description" content="Unity developer in Bengaluru building games and interactive experiences." />
   <meta property="og:image" content="https://sujal-hiro.github.io/sujalramesh.github.io/Images/og-cover.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Sujal Ramesh | Game Developer &amp; Designer" />
-  <meta name="twitter:description" content="Indian game developer and programmer building immersive gaming experiences. Shipped games, prototypes and design work." />
+  <meta name="twitter:title" content="Sujal Ramesh | Game Developer" />
+  <meta name="twitter:description" content="Unity developer in Bengaluru building games and interactive experiences." />
   <meta name="twitter:image" content="https://sujal-hiro.github.io/sujalramesh.github.io/Images/og-cover.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="./assets/css/tokens.css" />
   <link rel="stylesheet" href="./assets/css/base.css" />
@@ -37,7 +37,7 @@
 
   <link rel="shortcut icon" type="image/png" href="Images/Icon-Website.png">
 
-  <!-- Only index.html carries the 3D, so only index.html pays for it. -->
+  <!-- Only index.html carries the 3D object, so only index.html pays. -->
   <link rel="modulepreload" href="./assets/lib/three/three.module.min.js" />
   <link rel="modulepreload" href="./assets/lib/three/three.core.min.js" />
   <script type="importmap">
@@ -52,15 +52,9 @@
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Two fixed atmosphere layers. Composited once, never repainted
-       on scroll. The grain is a dither, not a texture: it is what
-       stops the dark gradients banding. -->
-  <div class="backdrop" aria-hidden="true"></div>
-  <div class="vignette" aria-hidden="true"></div>
-
   <header class="site-header" id="siteHeader">
     <div class="wrap">
-      <a href="#top" class="brand">SR<span>.</span></a>
+      <a href="#top" class="brand"><b>Sujal Ramesh</b> <span>Game Developer</span></a>
 
       <nav class="nav" id="nav">
         <a href="#work">Work</a>
@@ -71,74 +65,346 @@
         <a href="#contact">Contact</a>
       </nav>
 
-      <div class="header-actions">
-        <button type="button" class="icon-btn nav-toggle" id="navBtn" aria-label="Toggle menu"
-          aria-expanded="false" aria-controls="nav">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" aria-hidden="true">
-            <path d="M3 6h18M3 12h18M3 18h18" />
-          </svg>
-        </button>
-      </div>
+      <button type="button" class="icon-btn nav-toggle" id="navBtn" aria-label="Toggle menu"
+        aria-expanded="false" aria-controls="nav">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" aria-hidden="true">
+          <path d="M3 7h18M3 17h18" />
+        </svg>
+      </button>
     </div>
   </header>
 
   <main id="main">
 
     <section class="hero">
-      <!-- THE DECK. Sits at z-index -1 inside the hero's own stacking
-           context. Removed entirely by main.js when the capability
-           gates fail, leaving the CSS fallback deck on screen. -->
-      <canvas class="hero__gl" id="heroGl" aria-hidden="true"></canvas>
-
       <div class="wrap">
-        <div class="hero__stage">
-          <p class="eyebrow reveal">Open to collabs &amp; new roles</p>
+        <div class="hero__text">
+          <p class="eyebrow reveal">Open to new roles &amp; collaborations</p>
+
           <h1 class="reveal">
-            <span class="line-mask"><span style="--l:0">Hi, I'm</span></span>
-            <span class="line-mask"><span style="--l:1"><em>Sujal Ramesh</em></span></span>
+            <span class="line-mask"><span style="--l:0">Sujal</span></span>
+            <span class="line-mask"><span style="--l:1"><em>Ramesh</em></span></span>
           </h1>
-          <p class="role reveal"><span class="word" id="role">Unity Developer</span></p>
+
+          <p class="hero__role reveal">
+            <span class="word" id="role">Unity Developer</span>
+            <span class="sep" aria-hidden="true">&mdash;</span>
+            <span>Bengaluru, India</span>
+          </p>
+
           <p class="hero__bio reveal">
             I've been playing games since before I realised someone had to build them. Now I'm the one building
             them: turning ideas into mechanics, mechanics into prototypes, and prototypes into games people
-            actually play. B.Sc. in Game Development, now shipping in the industry. Doing this from India, where
-            the path is still being carved out, only makes me want to push interactive entertainment further.
+            actually play. B.Sc. in Game Development, now shipping in the industry.
           </p>
-          <div class="actions reveal">
-            <a class="btn btn-primary" href="https://drive.google.com/file/d/1MkevrUhK9BrIV1J8NdFftmxfhc38uF57/view?usp=sharing" target="_blank" rel="noopener noreferrer">R&eacute;sum&eacute; <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-            <a class="btn btn-ghost" href="https://www.linkedin.com/in/sujalramesh/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a class="btn btn-ghost" href="mailto:iam.sujalramesh@gmail.com">Email</a>
-          </div>
 
-          <p class="status reveal">
-            <span class="dot" aria-hidden="true"></span>
-            <span>Currently building games at <b>The Alter Office</b>, Bengaluru</span>
-          </p>
+          <div class="actions reveal">
+            <a class="btn btn-primary" href="https://drive.google.com/file/d/1MkevrUhK9BrIV1J8NdFftmxfhc38uF57/view?usp=sharing" target="_blank" rel="noopener noreferrer">R&eacute;sum&eacute;</a>
+            <a class="link" href="https://www.linkedin.com/in/sujalramesh/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="link" href="mailto:iam.sujalramesh@gmail.com">Email</a>
+          </div>
+        </div>
+
+        <!-- One object, lit properly. Removed by main.js when the
+             capability gates fail, leaving the plotted contour. -->
+        <div class="hero__object">
+          <canvas class="hero__gl" id="heroGl" aria-hidden="true"></canvas>
+          <p class="hero__caption label">Gamepad &middot; CC0 &middot; Poly Haven</p>
         </div>
       </div>
     </section>
 
     <div class="process">
       <ol class="wrap">
-        <li style="--s:0"><span class="pip" aria-hidden="true"></span>Idea</li>
-        <li style="--s:1"><span class="pip" aria-hidden="true"></span>Design</li>
-        <li style="--s:2"><span class="pip" aria-hidden="true"></span>Develop</li>
-        <li style="--s:3"><span class="pip" aria-hidden="true"></span>Test</li>
-        <li style="--s:4"><span class="pip" aria-hidden="true"></span>Play</li>
+        <li><b>01</b> Idea</li>
+        <li><b>02</b> Design</li>
+        <li><b>03</b> Develop</li>
+        <li><b>04</b> Test</li>
+        <li><b>05</b> Play</li>
       </ol>
     </div>
 
-    <section class="section" id="invaders" data-index="01">
+    <section class="section" id="work">
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <h2>Hold the line</h2>
-            <p>Hold the arrows or A / D to move. The gun fires itself. P pauses.</p>
+            <span class="label section-head__index">01 &mdash; Work</span>
+            <h2>Selected work</h2>
           </div>
+          <p>Eight shipped games and prototypes, from Play Store releases to a game-jam win. Each one taught me
+            something I still use.</p>
         </div>
 
-        <div class="game hud chamfer reveal">
+        <div class="index reveal">
+          <a class="index__row" href="projects.html#project-1">
+            <span class="index__n">01</span>
+            <span class="index__title">Spin</span>
+            <span class="index__desc">2D hyper-casual evasion game. Co-designed and programmed the player
+              mechanics and an experimental enemy AI. Published on Google Play.
+              <span class="index__tags tags"><span class="tag">Unity</span><span class="tag">Android</span><span class="tag">Play Store</span></span>
+            </span>
+            <svg class="index__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+
+          <a class="index__row" href="projects.html#project-2">
+            <span class="index__n">02</span>
+            <span class="index__title">Square Madness</span>
+            <span class="index__desc">2D arcade game taken end to end: UI design, sprite management, scene
+              transitions, PlayerPrefs and Unity Ads monetisation.
+              <span class="index__tags tags"><span class="tag">Unity</span><span class="tag">Android</span><span class="tag">Monetisation</span></span>
+            </span>
+            <svg class="index__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+
+          <a class="index__row" href="projects.html#project-3">
+            <span class="index__n">03</span>
+            <span class="index__title">It&#x27;s All About Us!</span>
+            <span class="index__desc">Co-operative local multiplayer built around a duality theme. Winner at
+              Chennai Global Game Jam 2022, where I led a team of six.
+              <span class="index__tags tags"><span class="tag">Game Jam</span><span class="tag">Winner</span><span class="tag">Team Lead</span></span>
+            </span>
+            <svg class="index__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+
+          <a class="index__row" href="projects.html#project-7">
+            <span class="index__n">04</span>
+            <span class="index__title">Treasure Hunt</span>
+            <span class="index__desc">Open-world exploration title. Built the interactive game logic, audio
+              integration and the full user interface.
+              <span class="index__tags tags"><span class="tag">Unity</span><span class="tag">PC</span><span class="tag">Open World</span></span>
+            </span>
+            <svg class="index__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+
+          <a class="index__row" href="projects.html#project-5">
+            <span class="index__n">05</span>
+            <span class="index__title">AR Applications</span>
+            <span class="index__desc">Interactive AR built on Unity and the Vuforia SDK: a Balloon Shooter and a
+              playable AR Piano, using multi-image targets and virtual buttons.
+              <span class="index__tags tags"><span class="tag">Vuforia</span><span class="tag">AR</span><span class="tag">Unity</span></span>
+            </span>
+            <svg class="index__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+
+          <a class="index__row" href="projects.html#project-8">
+            <span class="index__n">06</span>
+            <span class="index__title">Mars Survivor</span>
+            <span class="index__desc">Resource-management survival game. Built the object collection systems,
+              dynamic crystal spawners and core gameplay loop, and designed the UI and narrative.
+              <span class="index__tags tags"><span class="tag">Unity</span><span class="tag">PC</span><span class="tag">Systems</span></span>
+            </span>
+            <svg class="index__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+
+        <p style="margin-top:2.5rem"><a class="link" href="projects.html">All eight projects
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="label section-head__index">02 &mdash; Gallery</span>
+            <h2>Screens &amp; frames</h2>
+          </div>
+          <p>Screenshots, gameplay clips and Photoshop work. Click any frame to open it full size.</p>
+        </div>
+
+        <div class="media-grid">
+          <button type="button" class="tile reveal" data-src="Images/image_35.webp" data-type="image"
+            aria-label="View Portals, Photoshop">
+            <span class="tile__frame"><img src="Images/image_35.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Portals <span class="label">Photoshop</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_1.mp4" data-type="video"
+            aria-label="View Treasure Hunt, Gameplay">
+            <span class="tile__frame"><video src="Images/preview_video_1.mp4" poster="Images/poster_video_1.jpg" muted loop
+              playsinline preload="none" aria-hidden="true"></video></span>
+            <span class="tile__cap">Treasure Hunt <span class="label">Gameplay</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_28.webp" data-type="image"
+            aria-label="View Mars Survivor, Screenshot">
+            <span class="tile__frame"><img src="Images/image_28.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Mars Survivor <span class="label">Screenshot</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_69.webp" data-type="image"
+            aria-label="View Car Manipulation, Photoshop">
+            <span class="tile__frame"><img src="Images/image_69.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Car Manipulation <span class="label">Photoshop</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_2.mp4" data-type="video"
+            aria-label="View Saloon Shooter, Gameplay">
+            <span class="tile__frame"><video src="Images/preview_video_2.mp4" poster="Images/poster_video_2.jpg" muted loop
+              playsinline preload="none" aria-hidden="true"></video></span>
+            <span class="tile__cap">Saloon Shooter <span class="label">Gameplay</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_21.webp" data-type="image"
+            aria-label="View Portal 2.0, Photoshop">
+            <span class="tile__frame"><img src="Images/image_21.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Portal 2.0 <span class="label">Photoshop</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_36.webp" data-type="image"
+            aria-label="View TopG Car Madness, Screenshot">
+            <span class="tile__frame"><img src="Images/image_36.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">TopG Car Madness <span class="label">Screenshot</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/video_10.mp4" data-type="video"
+            aria-label="View Isometric Game, Gameplay">
+            <span class="tile__frame"><video src="Images/preview_video_10.mp4" poster="Images/poster_video_10.jpg" muted loop
+              playsinline preload="none" aria-hidden="true"></video></span>
+            <span class="tile__cap">Isometric Game <span class="label">Gameplay</span></span>
+          </button>
+
+          <button type="button" class="tile reveal" data-src="Images/image_54.webp" data-type="image"
+            aria-label="View Shang Chi, Photoshop">
+            <span class="tile__frame"><img src="Images/image_54.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Shang Chi <span class="label">Photoshop</span></span>
+          </button>
+        </div>
+
+        <p style="margin-top:2.5rem"><a class="link" href="portfolio.html">Full gallery
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="label section-head__index">03 &mdash; Experience</span>
+            <h2>Where I&#x27;ve worked</h2>
+          </div>
+          <p>Studios, roles and what I actually shipped in each.</p>
+        </div>
+
+        <div class="timeline reveal">
+          <article class="tl-item">
+            <p class="tl-when">Dec 2024 &mdash; Present</p>
+            <div>
+              <h3>Unity Developer</h3>
+              <p class="tl-where">The Alter Office, Bengaluru</p>
+              <p>Hold a strict 60&nbsp;FPS target on mobile through profiling, core stabilisation and efficient
+                rendering. Built the drag-and-drop interactions and game feel for card-based systems, authored
+                custom shaders and VFX alongside the 3D art team, and designed a modular architecture for in-game
+                UI carousels. Also wrote custom Unity Editor tools for the asset pipeline and integrated Unity MCP
+                testing agents to catch edge cases in QA.</p>
+            </div>
+          </article>
+
+          <article class="tl-item">
+            <p class="tl-when">Sep 2023 &mdash; Jan 2024</p>
+            <div>
+              <h3>Unity Developer</h3>
+              <p class="tl-where">SuperBolter, Bengaluru</p>
+              <p>Engineered a GLB export pipeline that dynamically resized 3D assets for high-performance AR
+                rendering. Contributed to HDRP projects and built editor tooling, including a vertex-snapping
+                feature, for precise environment building. Designed a dynamic theme generation system, ran UI
+                overhauls, and kept quality steady across distributed teams on Plastic SCM.</p>
+            </div>
+          </article>
+
+          <article class="tl-item">
+            <p class="tl-when">Jun 2023 &mdash; Sep 2023</p>
+            <div>
+              <h3>Unity Developer, Intern</h3>
+              <p class="tl-where">SuperBolter, Bengaluru</p>
+              <p>Worked with 3D technical artists to evaluate and optimise models for accurate rendering and
+                conversion into GLTF and USDZ. Configured Unity Asset Bundles to streamline the pipeline and
+                improve runtime memory allocation, with a steady focus on reproducing and resolving core defects.</p>
+            </div>
+          </article>
+
+          <article class="tl-item">
+            <p class="tl-when">2022</p>
+            <div>
+              <h3>Lead Programmer, Global Game Jam</h3>
+              <p class="tl-where">Chennai, 1st Place</p>
+              <p>Led a six-person team to build <em>It's All About Us!</em>, a duality-themed 2D co-op platformer,
+                in 48 hours, taking first place at the Chennai site of Global Game Jam 2022.</p>
+            </div>
+          </article>
+
+          <article class="tl-item">
+            <p class="tl-when">2020 &mdash; 2023</p>
+            <div>
+              <h3>B.Sc. Game Development</h3>
+              <p class="tl-where">Jain (Deemed-to-be University), Bengaluru &middot; CGPA 8.2</p>
+              <p>Engines, gameplay programming and design: the grounding behind everything above.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="label section-head__index">04 &mdash; Skills</span>
+            <h2>What I reach for</h2>
+          </div>
+          <p>Day to day, in roughly the order I use them.</p>
+        </div>
+
+        <div class="skills reveal">
+          <div class="skill-row">
+            <p class="tl-when">Languages</p>
+            <ul><li>C#</li><li>C++</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          </div>
+          <div class="skill-row">
+            <p class="tl-when">Engine &amp; Graphics</p>
+            <ul><li>Unity Engine</li><li>HDRP</li><li>Shaders</li><li>VFX</li><li>Lighting &amp; Rendering</li><li>3D Math</li></ul>
+          </div>
+          <div class="skill-row">
+            <p class="tl-when">Performance</p>
+            <ul><li>Profiling</li><li>60 FPS Optimisation</li><li>Object Pooling</li><li>Asset Bundles</li><li>Memory Optimisation</li></ul>
+          </div>
+          <div class="skill-row">
+            <p class="tl-when">Tooling &amp; Pipeline</p>
+            <ul><li>Custom Editor Tools</li><li>Asset Pipeline</li><li>Design Patterns</li><li>Blender</li><li>GLB / GLTF / USDZ</li></ul>
+          </div>
+          <div class="skill-row">
+            <p class="tl-when">Gameplay &amp; Design</p>
+            <ul><li>Gameplay Systems</li><li>Game Feel</li><li>Level Design</li><li>UI Design</li><li>Prototyping</li></ul>
+          </div>
+          <div class="skill-row">
+            <p class="tl-when">Platforms</p>
+            <ul><li>Android</li><li>PC</li><li>AR (Vuforia)</li><li>Google Play Release</li><li>Unity Ads</li></ul>
+          </div>
+          <div class="skill-row">
+            <p class="tl-when">Workflow</p>
+            <ul><li>Plastic SCM</li><li>Git</li><li>GitHub</li><li>Jira</li><li>Sentry</li></ul>
+          </div>
+          <div class="skill-row">
+            <p class="tl-when">Team</p>
+            <ul><li>Team Leadership</li><li>Collaboration</li><li>Technical Docs</li><li>QA &amp; Debugging</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="play">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="label section-head__index">05 &mdash; Play</span>
+            <h2>Two things to play</h2>
+          </div>
+          <p>Both written from scratch for this page. Arrows or A / D to move in the first, P to pause. The gun
+            fires itself.</p>
+        </div>
+
+        <div class="game reveal">
           <div class="game__bar">
             <p class="game__stat">Score <b id="siScore">0</b></p>
             <p class="game__stat">Wave <b id="siWave">1</b></p>
@@ -150,7 +416,7 @@
             </div>
           </div>
 
-          <div class="game__screen scanlines">
+          <div class="game__screen">
             <canvas id="siCanvas" width="960" height="540" role="img"
               aria-label="Space Invaders playfield"></canvas>
             <div class="game__hint" id="siHint">
@@ -164,300 +430,8 @@
             <button type="button" class="pad-btn" data-si="right" aria-label="Move right">&rsaquo;</button>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section class="section" id="work" data-index="02">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <h2>Selected work</h2>
-            <p>Eight shipped games and prototypes</p>
-          </div>
-          <a class="link-more" href="projects.html">All projects <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </div>
-
-        <div class="grid spotlight">
-          <a class="card reveal" href="projects.html#project-1" style="--i:0">
-            <p class="num">01<svg class="card__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p>
-            <div class="card__body">
-              <h3>Spin</h3>
-              <p>2D hyper-casual evasion game. Co-designed and programmed the player mechanics and an experimental enemy AI, with post-processing (anti-aliasing, distortion) for polish. Published on Google Play.</p>
-              <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span><span class="tag">Play Store</span></div>
-            </div>
-          </a>
-
-          <a class="card reveal" href="projects.html#project-2" style="--i:1">
-            <p class="num">02<svg class="card__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p>
-            <div class="card__body">
-              <h3>Square Madness</h3>
-              <p>2D arcade game taken end to end: UI design, sprite management, scene transitions, PlayerPrefs integration and Unity Ads monetisation.</p>
-              <div class="tags"><span class="tag">Unity</span><span class="tag">Android</span><span class="tag">Monetisation</span></div>
-            </div>
-          </a>
-
-          <a class="card reveal" href="projects.html#project-3" style="--i:2">
-            <p class="num">03<svg class="card__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p>
-            <div class="card__body">
-              <h3>It&#x27;s All About Us!</h3>
-              <p>Co-operative local multiplayer built around a duality theme. Winner, Chennai Global Game Jam 2022, where I led the team.</p>
-              <div class="tags"><span class="tag">Game Jam</span><span class="tag">Winner</span><span class="tag">Team Lead</span></div>
-            </div>
-          </a>
-
-          <a class="card reveal" href="projects.html#project-7" style="--i:3">
-            <p class="num">04<svg class="card__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p>
-            <div class="card__body">
-              <h3>Treasure Hunt</h3>
-              <p>Open-world exploration title. Built the interactive game logic, audio integration and the full user interface.</p>
-              <div class="tags"><span class="tag">Unity</span><span class="tag">PC</span><span class="tag">Open World</span></div>
-            </div>
-          </a>
-
-          <a class="card reveal" href="projects.html#project-5" style="--i:4">
-            <p class="num">05<svg class="card__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p>
-            <div class="card__body">
-              <h3>AR Applications</h3>
-              <p>Interactive AR built on Unity and the Vuforia SDK: a Balloon Shooter and a playable AR Piano, using multi-image targets and virtual buttons.</p>
-              <div class="tags"><span class="tag">Vuforia</span><span class="tag">AR</span><span class="tag">Unity</span></div>
-            </div>
-          </a>
-
-          <a class="card reveal" href="projects.html#project-8" style="--i:5">
-            <p class="num">06<svg class="card__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p>
-            <div class="card__body">
-              <h3>Mars Survivor</h3>
-              <p>Resource-management survival game. Built the object collection systems, dynamic crystal spawners and core gameplay loop, and designed the UI and narrative.</p>
-              <div class="tags"><span class="tag">Unity</span><span class="tag">PC</span><span class="tag">Systems</span></div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="gallery" data-index="03">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <h2>Gallery</h2>
-            <p>Screenshots, gameplay clips and Photoshop work</p>
-          </div>
-          <a class="link-more" href="portfolio.html">Full gallery <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </div>
-
-        <div class="masonry">
-          <button type="button" class="tile reveal" data-src="Images/image_35.webp" data-type="image"
-            aria-label="View Portals, Photoshop">
-            <img src="Images/image_35.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Portals <span>Photoshop</span></span>
-          </button>
-
-          <button type="button" class="tile reveal" data-src="Images/video_1.mp4" data-type="video"
-            aria-label="View Treasure Hunt, Gameplay">
-            <video src="Images/preview_video_1.mp4" poster="Images/poster_video_1.jpg" muted loop
-            playsinline preload="none" aria-hidden="true"></video>
-            <span class="tile__cap">Treasure Hunt <span>Gameplay</span></span>
-          </button>
-
-          <button type="button" class="tile reveal" data-src="Images/image_28.webp" data-type="image"
-            aria-label="View Mars Survivor, Screenshot">
-            <img src="Images/image_28.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Mars Survivor <span>Screenshot</span></span>
-          </button>
-
-          <button type="button" class="tile reveal" data-src="Images/image_69.webp" data-type="image"
-            aria-label="View Car Manipulation, Photoshop">
-            <img src="Images/image_69.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Car Manipulation <span>Photoshop</span></span>
-          </button>
-
-          <button type="button" class="tile reveal" data-src="Images/video_2.mp4" data-type="video"
-            aria-label="View Saloon Shooter, Gameplay">
-            <video src="Images/preview_video_2.mp4" poster="Images/poster_video_2.jpg" muted loop
-            playsinline preload="none" aria-hidden="true"></video>
-            <span class="tile__cap">Saloon Shooter <span>Gameplay</span></span>
-          </button>
-
-          <button type="button" class="tile reveal" data-src="Images/image_21.webp" data-type="image"
-            aria-label="View Portal 2.0, Photoshop">
-            <img src="Images/image_21.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Portal 2.0 <span>Photoshop</span></span>
-          </button>
-
-          <button type="button" class="tile reveal" data-src="Images/image_36.webp" data-type="image"
-            aria-label="View TopG Car Madness, Screenshot">
-            <img src="Images/image_36.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">TopG Car Madness <span>Screenshot</span></span>
-          </button>
-
-          <button type="button" class="tile reveal" data-src="Images/video_10.mp4" data-type="video"
-            aria-label="View Isometric Game, Gameplay">
-            <video src="Images/preview_video_10.mp4" poster="Images/poster_video_10.jpg" muted loop
-            playsinline preload="none" aria-hidden="true"></video>
-            <span class="tile__cap">Isometric Game <span>Gameplay</span></span>
-          </button>
-
-          <button type="button" class="tile reveal" data-src="Images/image_54.webp" data-type="image"
-            aria-label="View Shang Chi, Photoshop">
-            <img src="Images/image_54.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Shang Chi <span>Photoshop</span></span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="experience" data-index="04">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <h2>Experience</h2>
-            <p>Roles, studios and what I shipped</p>
-          </div>
-        </div>
-
-        <div class="timeline reveal">
-          <article class="tl-item">
-            <p class="tl-when">Dec 2024 to Present</p>
-            <h3>Unity Developer</h3>
-            <p class="tl-where">The Alter Office &middot; Bengaluru &middot; Full-time</p>
-            <p>Hold a strict 60&nbsp;FPS target on mobile through profiling, core stabilisation and efficient
-              rendering. Built the drag-and-drop interactions and "game feel" for card-based systems, authored
-              custom shaders and VFX alongside the 3D art team, and designed a modular architecture for in-game UI
-              carousels. Also wrote custom Unity Editor tools for the asset pipeline and integrated Unity MCP
-              testing agents to catch edge cases in QA.</p>
-          </article>
-
-          <article class="tl-item">
-            <p class="tl-when">Sep 2023 to Jan 2024</p>
-            <h3>Unity Developer</h3>
-            <p class="tl-where">SuperBolter &middot; Bengaluru &middot; Full-time</p>
-            <p>Engineered a GLB export pipeline that dynamically resized 3D assets for high-performance AR
-              rendering. Contributed to HDRP projects and built editor tooling, including a vertex-snapping
-              feature, for precise environment building. Designed a dynamic theme generation system, ran UI
-              overhauls, and kept quality steady across distributed teams on Plastic SCM.</p>
-          </article>
-
-          <article class="tl-item">
-            <p class="tl-when">Jun 2023 to Sep 2023</p>
-            <h3>Unity Developer, Intern</h3>
-            <p class="tl-where">SuperBolter &middot; Bengaluru</p>
-            <p>Worked with 3D technical artists to evaluate and optimise models for accurate rendering and
-              conversion into GLTF and USDZ. Configured Unity Asset Bundles to streamline the pipeline and improve
-              runtime memory allocation, with a steady focus on reproducing and resolving core defects.</p>
-          </article>
-
-          <article class="tl-item">
-            <p class="tl-when">2022</p>
-            <h3>Lead Programmer, Global Game Jam</h3>
-            <p class="tl-where">Chennai &middot; 1st Place</p>
-            <p>Led a six-person team to build <em>It's All About Us!</em>, a duality-themed 2D co-op platformer, in
-              48 hours, taking first place at the Chennai site of Global Game Jam 2022.</p>
-          </article>
-
-          <article class="tl-item">
-            <p class="tl-when">2020 to 2023</p>
-            <h3>B.Sc. Game Development</h3>
-            <p class="tl-where">Jain (Deemed-to-be University) &middot; Bengaluru &middot; CGPA 8.2</p>
-            <p>Engines, gameplay programming and design: the grounding behind everything above.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="skills" data-index="05">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <h2>Skills</h2>
-            <p>What I actually reach for, day to day</p>
-          </div>
-        </div>
-        <div class="skill-groups spotlight">
-          <div class="skill-group reveal">
-            <div class="skill-group__head">
-              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 3 12l6 6M15 6l6 6-6 6"/></svg></span>
-              <h3>Languages</h3>
-              <span class="skill-group__n" aria-hidden="true">01</span>
-            </div>
-            <ul><li>C#</li><li>C++</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-          </div>
-
-          <div class="skill-group reveal">
-            <div class="skill-group__head">
-              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 20 7.5v9L12 21l-8-4.5v-9L12 3ZM12 12l8-4.5M12 12v9M12 12 4 7.5"/></svg></span>
-              <h3>Engine &amp; Graphics</h3>
-              <span class="skill-group__n" aria-hidden="true">02</span>
-            </div>
-            <ul><li>Unity Engine</li><li>HDRP</li><li>Shaders</li><li>VFX</li><li>Lighting &amp; Rendering</li><li>3D Math</li></ul>
-          </div>
-
-          <div class="skill-group reveal">
-            <div class="skill-group__head">
-              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19a8 8 0 1 1 16 0M12 14l3.5-3.5"/></svg></span>
-              <h3>Performance</h3>
-              <span class="skill-group__n" aria-hidden="true">03</span>
-            </div>
-            <ul><li>Profiling</li><li>60 FPS Optimisation</li><li>Object Pooling</li><li>Asset Bundles</li><li>Memory Optimisation</li></ul>
-          </div>
-
-          <div class="skill-group reveal">
-            <div class="skill-group__head">
-              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h7M15 7h5M4 17h5M13 17h7M13 4v6M9 14v6"/></svg></span>
-              <h3>Tooling &amp; Pipeline</h3>
-              <span class="skill-group__n" aria-hidden="true">04</span>
-            </div>
-            <ul><li>Custom Editor Tools</li><li>Asset Pipeline</li><li>Design Patterns</li><li>Blender</li><li>GLB / GLTF / USDZ</li></ul>
-          </div>
-
-          <div class="skill-group reveal">
-            <div class="skill-group__head">
-              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12h4M9 10v4M15 11h.01M17.5 13h.01M6.5 7h11a4 4 0 0 1 3.9 3l.9 6a2.6 2.6 0 0 1-4.6 2L15 16H9l-2.7 2A2.6 2.6 0 0 1 1.7 16l.9-6A4 4 0 0 1 6.5 7Z"/></svg></span>
-              <h3>Gameplay &amp; Design</h3>
-              <span class="skill-group__n" aria-hidden="true">05</span>
-            </div>
-            <ul><li>Gameplay Systems</li><li>Game Feel</li><li>Level Design</li><li>UI Design</li><li>Prototyping</li></ul>
-          </div>
-
-          <div class="skill-group reveal">
-            <div class="skill-group__head">
-              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1ZM11 18h2"/></svg></span>
-              <h3>Platforms</h3>
-              <span class="skill-group__n" aria-hidden="true">06</span>
-            </div>
-            <ul><li>Android</li><li>PC</li><li>AR (Vuforia)</li><li>Google Play Release</li><li>Unity Ads</li></ul>
-          </div>
-
-          <div class="skill-group reveal">
-            <div class="skill-group__head">
-              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v10M6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM6 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 10v2a4 4 0 0 1-4 4H6"/></svg></span>
-              <h3>Workflow</h3>
-              <span class="skill-group__n" aria-hidden="true">07</span>
-            </div>
-            <ul><li>Plastic SCM</li><li>Git</li><li>GitHub</li><li>Jira</li><li>Sentry</li></ul>
-          </div>
-
-          <div class="skill-group reveal">
-            <div class="skill-group__head">
-              <span class="skill-socket" aria-hidden="true"><svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM2 20a6 6 0 0 1 12 0M17 11a3 3 0 1 0 0-6M16.5 14.5A6 6 0 0 1 22 20"/></svg></span>
-              <h3>Team</h3>
-              <span class="skill-group__n" aria-hidden="true">08</span>
-            </div>
-            <ul><li>Team Leadership</li><li>Collaboration</li><li>Technical Docs</li><li>QA &amp; Debugging</li></ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="play" data-index="06">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <h2>Take a shot</h2>
-            <p>Twenty seconds. Small green ones are worth three.</p>
-          </div>
-        </div>
-
-        <div class="game hud chamfer reveal">
+        <div class="game reveal" style="margin-top:clamp(1.5rem,3vw,2.5rem)">
           <div class="game__bar">
             <p class="game__stat">Score <b id="gameScore">0</b></p>
             <p class="game__stat">Time <b id="gameTime">20</b></p>
@@ -466,10 +440,10 @@
               <button type="button" class="btn btn-primary" id="gameStart">Start</button>
             </div>
           </div>
-          <div class="game__board scanlines" id="gameBoard">
+          <div class="game__board" id="gameBoard">
             <div class="game__hint" id="gameHint">
-              <strong>Hit the targets</strong>
-              <span>Click them, or Tab and hit Enter.</span>
+              <strong>Target rush</strong>
+              <span>Twenty seconds. Click them, or Tab and hit Enter.</span>
             </div>
           </div>
         </div>
@@ -477,19 +451,24 @@
     </section>
 
     <section class="contact" id="contact">
-      <div class="wrap reveal">
-        <h2>Let's build something playable</h2>
-        <p>Open to game development roles, collaborations and jam teams.</p>
-        <a class="btn btn-rgb" href="mailto:iam.sujalramesh@gmail.com">iam.sujalramesh@gmail.com</a>
+      <div class="wrap">
+        <h2 class="reveal">Let&#x27;s build something playable.</h2>
+        <p class="reveal"><a class="contact__mail" href="mailto:iam.sujalramesh@gmail.com">iam.sujalramesh@gmail.com</a></p>
+
+        <div class="contact__meta reveal">
+          <p class="label">Bengaluru, India</p>
+          <p class="label"><a href="https://www.linkedin.com/in/sujalramesh/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+          <p class="label"><a href="https://github.com/Sujal-Hiro" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+          <p class="label">Open to new roles</p>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      <span>&copy; <span id="year">2026</span> Sujal Ramesh</span>
-      <span class="footer-rgb" aria-hidden="true"><i></i><i></i><i></i></span>
-      <span>Bengaluru, India</span>
+      <p class="label">&copy; <span id="year">2026</span> Sujal Ramesh</p>
+      <p class="label">Built from scratch &middot; No frameworks</p>
     </div>
   </footer>
 

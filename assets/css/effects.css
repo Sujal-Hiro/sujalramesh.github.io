@@ -1,181 +1,23 @@
 /*==============================================================
-  Effects - atmosphere, depth, reveal, HUD chrome
-  Everything here is decorative and opt-in via a class.
+  Effects
+
+  Deliberately almost empty. The previous design carried an
+  atmosphere layer, a vignette, grain, scanlines, HUD brackets,
+  corner glows and a cursor spotlight. None of that survives:
+  on paper, structure comes from rules and alignment, and every
+  effect removed is one less thing competing with the work.
+
+  What is left is entrance reveal and a masked line for the
+  hero name.
 ==============================================================*/
-
-/*------------------------- the backdrop -------------------------*/
-
-/* Two fixed layers behind everything. They are position:fixed and
-   NOT background-attachment:fixed - the latter is a documented
-   mobile scroll-jank source. Fixed layers composite once and never
-   repaint on scroll. */
-
-.backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: -3;
-  pointer-events: none;
-  background:
-    radial-gradient(60vw 50vh at 12% -8%, oklch(0.55 0.18 calc(var(--hue) - 30) / 0.16), transparent 62%),
-    radial-gradient(55vw 45vh at 92% 12%, oklch(0.55 0.18 calc(var(--hue) + 40) / 0.13), transparent 60%),
-    radial-gradient(90vw 60vh at 50% 108%, oklch(0.50 0.16 var(--hue) / 0.14), transparent 65%),
-    var(--bg-deep);
-}
-
-/* The grid. Masked so it never reaches an edge - an unmasked
-   full-bleed grid is the loudest cheap-cyberpunk tell there is. */
-.backdrop::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(oklch(0.85 0.10 var(--hue) / 0.055) 1px, transparent 1px) 0 0 / 100% 72px,
-    linear-gradient(90deg, oklch(0.85 0.10 var(--hue) / 0.055) 1px, transparent 1px) 0 0 / 72px 100%;
-  -webkit-mask-image: radial-gradient(120% 82% at 50% 0%, #000 0%, transparent 72%);
-  mask-image: radial-gradient(120% 82% at 50% 0%, #000 0%, transparent 72%);
-}
-
-/* Grain. This is not texture, it is a DITHER, and it is the only
-   thing standing between you and visible banding on every dark
-   gradient above. Non-negotiable. */
-.backdrop::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0.05;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 140px;
-}
-
-.vignette {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(130% 90% at 50% 35%, transparent 45%, oklch(0.04 0.01 var(--hue) / 0.78) 100%);
-}
-
-/*-------------------------- scanlines --------------------------*/
-
-/* Quarantined to game screens and the hero canvas. A 3px-pitch
-   scanline behind scrolling text moires violently and shreds
-   readability - it must never sit behind prose. */
-.scanlines::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-  background: repeating-linear-gradient(0deg, oklch(1 0 0 / 0.022) 0 1px, transparent 1px 3px);
-  opacity: 0.55;
-  mix-blend-mode: overlay;
-}
-
-/*------------------------ HUD brackets ------------------------*/
-
-/* Four corner brackets drawn with eight background gradients on a
-   single pseudo-element. No extra DOM, no SVG, one paint. This is
-   the strongest "game UI" signal that never looks cheap. */
-.hud {
-  --hud-c: var(--neon);
-  --hud-len: 18px;
-  --hud-w: 1px;
-  position: relative;
-  border-radius: var(--radius-hud);
-  border: 1px solid oklch(0.78 0.19 var(--hue) / calc(0.10 + var(--glow) * 0.35));
-  background:
-    linear-gradient(180deg,
-      oklch(0.20 0.02 var(--hue) / 0.72),
-      oklch(0.16 0.02 var(--hue) / 0.72));
-  box-shadow: var(--edge);
-  transition: border-color var(--t-3) var(--out), --glow var(--t-3) var(--out);
-}
-
-.hud::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  pointer-events: none;
-  z-index: 3;
-  background:
-    linear-gradient(var(--hud-c), var(--hud-c)) 0% 0% / var(--hud-len) var(--hud-w),
-    linear-gradient(var(--hud-c), var(--hud-c)) 0% 0% / var(--hud-w) var(--hud-len),
-    linear-gradient(var(--hud-c), var(--hud-c)) 100% 0% / var(--hud-len) var(--hud-w),
-    linear-gradient(var(--hud-c), var(--hud-c)) 100% 0% / var(--hud-w) var(--hud-len),
-    linear-gradient(var(--hud-c), var(--hud-c)) 0% 100% / var(--hud-len) var(--hud-w),
-    linear-gradient(var(--hud-c), var(--hud-c)) 0% 100% / var(--hud-w) var(--hud-len),
-    linear-gradient(var(--hud-c), var(--hud-c)) 100% 100% / var(--hud-len) var(--hud-w),
-    linear-gradient(var(--hud-c), var(--hud-c)) 100% 100% / var(--hud-w) var(--hud-len);
-  background-repeat: no-repeat;
-  opacity: calc(0.45 + var(--glow) * 0.55);
-  filter: drop-shadow(0 0 5px oklch(0.82 0.18 var(--hue) / calc(var(--glow) * 0.7)));
-  transition: opacity var(--t-3) var(--out), filter var(--t-3) var(--out);
-}
-
-/*-------------------------- chamfer --------------------------*/
-
-/* The single most recognisable premium-gaming shape. Applied to
-   the primary button, game HUD frames and the lightbox frame -
-   NOT to everything. */
-.chamfer {
-  clip-path: polygon(var(--cut) 0,
-      100% 0,
-      100% calc(100% - var(--cut)),
-      calc(100% - var(--cut)) 100%,
-      0 100%,
-      0 var(--cut));
-}
-
-/*----------------------- glow utilities -----------------------*/
-
-/* drop-shadow follows the alpha channel, so it is the only correct
-   choice for inline SVG and clip-path'd elements. It forces an
-   offscreen buffer per element though: budget is <=12 visible at
-   once, and NEVER on the 44-tile gallery. */
-.icon-lit {
-  filter:
-    drop-shadow(0 0 5px oklch(0.82 0.18 var(--hue) / calc(var(--glow) * 0.60))) drop-shadow(0 0 16px oklch(0.75 0.19 var(--hue) / calc(var(--glow) * 0.26)));
-}
-
-/* Display type only, >=28px. Layer 1 is a near-WHITE 1px core -
-   that is the hot filament. Skip it and the text looks like it is
-   behind frosted glass rather than emitting. */
-.type-lit {
-  text-shadow:
-    0 0 1px oklch(0.97 0.06 var(--hue) / 0.55),
-    0 0 20px oklch(0.78 0.19 var(--hue) / calc(var(--glow) * 0.34)),
-    0 0 64px oklch(0.70 0.20 var(--hue) / calc(var(--glow) * 0.16));
-}
-
-/*----------------------- ghost numerals -----------------------*/
-
-/* An outline numeral pinned to each section's right edge,
-   parallaxing at ~0.35x. One pseudo-element per section for a
-   large amount of depth and chapter structure. */
-.section[data-index]::before {
-  content: attr(data-index);
-  position: absolute;
-  right: -1vw;
-  top: 4%;
-  z-index: -1;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: var(--step-4);
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1px oklch(0.78 0.19 var(--hue) / 0.09);
-  pointer-events: none;
-  -webkit-user-select: none;
-  user-select: none;
-  transform: translate3d(0, calc(var(--sp, 0) * -70px), 0);
-}
 
 /*------------------------ scroll reveal ------------------------*/
 
+/* Short, small, once. 10px and 560ms - enough to feel considered,
+   not enough to make anyone wait. */
 .reveal {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(10px);
   transition: opacity var(--t-4) var(--out), transform var(--t-4) var(--out);
 }
 
@@ -184,13 +26,13 @@
   transform: none;
 }
 
-/* Children stagger by index, set inline from JS. The min() cap is
-   mandatory: without it, tile 40 on the gallery page waits 1.6s. */
+/* Children stagger by index, set inline from JS. Capped, or the
+   fortieth gallery tile waits well over a second. */
 .reveal[style*='--i'] {
-  transition-delay: calc(min(var(--i), 8) * 45ms);
+  transition-delay: calc(min(var(--i), 8) * 55ms);
 }
 
-/* A wrapper whose lines are masked must not fade or shift itself.
+/* A wrapper whose lines are masked must not fade or move itself.
    The mask IS the animation, and fading the parent hides it. */
 .reveal:has(.line-mask) {
   opacity: 1;
@@ -199,81 +41,36 @@
 
 /*--------------------- masked line reveal ---------------------*/
 
+/* The name rises from behind a hard edge rather than fading in.
+   Used once, on the h1. */
 .line-mask {
   display: block;
   overflow: hidden;
-  padding-bottom: 0.08em;
+  padding-bottom: 0.12em;
 }
 
-.line-mask>span {
+.line-mask > span {
   display: block;
   transform: translateY(105%);
-  transition: transform var(--t-6) var(--out);
+  transition: transform var(--t-5) var(--out);
   transition-delay: calc(var(--l, 0) * 110ms);
 }
 
-.is-visible .line-mask>span,
-.line-mask.is-visible>span {
+.is-visible .line-mask > span,
+.line-mask.is-visible > span {
   transform: none;
 }
 
-/*----------------------- section hairline -----------------------*/
+/*------------------------ rule draw-in ------------------------*/
 
-.section-head::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 1px;
-  width: 0;
-  background: linear-gradient(90deg,
-      var(--neon) 0%,
-      oklch(0.78 0.19 var(--hue) / 0.15) 40%,
-      transparent 100%);
-  transition: width var(--t-5) var(--out) 0.1s;
+/* Section rules draw across as the section arrives. The only
+   other motion on the page. */
+.rule-draw {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-5) var(--out);
 }
 
-.section-head.is-visible::after {
-  width: 100%;
-}
-
-/*---------------------- cursor spotlight ----------------------*/
-
-/* A soft glow tracking the pointer across the card grids. Pure CSS
-   paint; JS only writes --mx / --my.
-
-   isolation:isolate is LOAD-BEARING. It creates a stacking context
-   so the z-index:-1 pseudo stays inside this element instead of
-   sliding behind body and vanishing with no error. */
-.spotlight {
-  position: relative;
-  isolation: isolate;
-}
-
-.spotlight::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity var(--t-4) var(--out);
-  background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%),
-      oklch(0.60 0.18 var(--hue) / 0.16), transparent 70%);
-}
-
-.spotlight:hover::before {
-  opacity: 1;
-}
-
-/*------------------------- boot sequence -------------------------*/
-
-/* The signature load beat: one class removal brings the whole
-   page's neon up at once, like a rig powering on. */
-html.is-booting {
-  --glow: 0 !important;
-}
-
-html {
-  transition: --glow 800ms var(--out);
+.rule-draw.is-visible {
+  transform: scaleX(1);
 }

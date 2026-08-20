@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="is-booting" data-theme="dark">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
@@ -8,7 +8,7 @@
   <meta name="description" content="Full gallery of game screenshots, gameplay footage, AR applications and Photoshop artwork." />
   <meta name="author" content="Sujal Ramesh" />
   <link rel="canonical" href="https://sujal-hiro.github.io/sujalramesh.github.io/portfolio.html" />
-  <meta name="theme-color" content="#08080c" />
+  <meta name="theme-color" content="#f5f3ee" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sujal-hiro.github.io/sujalramesh.github.io/portfolio.html" />
   <meta property="og:title" content="Gallery | Sujal Ramesh" />
@@ -22,7 +22,7 @@
   <meta name="twitter:image" content="https://sujal-hiro.github.io/sujalramesh.github.io/Images/og-cover.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/css/tokens.css" />
   <link rel="stylesheet" href="./assets/css/base.css" />
   <link rel="stylesheet" href="./assets/css/layout.css" />
@@ -33,32 +33,29 @@
   <!-- motion.css last: every preference query lives there and must win -->
   <link rel="stylesheet" href="./assets/css/motion.css" />
   <link rel="shortcut icon" type="image/png" href="Images/Icon-Website.png">
+
 </head>
 
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="backdrop" aria-hidden="true"></div>
-  <div class="vignette" aria-hidden="true"></div>
 
   <header class="site-header" id="siteHeader">
     <div class="wrap">
-      <a href="index.html" class="brand">SR<span>.</span></a>
+      <a href="index.html" class="brand"><b>Sujal Ramesh</b> <span>Game Developer</span></a>
 
       <nav class="nav" id="nav">
         <a href="index.html">Home</a>
         <a href="projects.html">Projects</a>
       </nav>
 
-      <div class="header-actions">
-        <button type="button" class="icon-btn nav-toggle" id="navBtn" aria-label="Toggle menu"
+              <button type="button" class="icon-btn nav-toggle" id="navBtn" aria-label="Toggle menu"
           aria-expanded="false" aria-controls="nav">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" aria-hidden="true">
             <path d="M3 6h18M3 12h18M3 18h18" />
           </svg>
         </button>
-      </div>
     </div>
   </header>
 
@@ -70,282 +67,282 @@
       </div>
 
       <section class="section">
-        <div class="gallery-filters reveal">
+        <div class="filters reveal">
           <button type="button" class="filter" data-filter="all" aria-pressed="true">All</button>
           <button type="button" class="filter" data-filter="image" aria-pressed="false">Stills</button>
           <button type="button" class="filter" data-filter="video" aria-pressed="false">Footage</button>
         </div>
 
-        <div class="masonry">
+        <div class="media-grid">
           <button type="button" class="tile reveal" data-src="Images/video_7.mp4" data-type="video"
             aria-label="View Mars Survivor, Dynamic gameplay video showcasing mechanics">
-            <video src="Images/preview_video_7.mp4" poster="Images/poster_video_7.jpg" muted loop
-            playsinline preload="none" aria-hidden="true"></video>
-            <span class="tile__cap">Mars Survivor <span>Dynamic gameplay video showcasing mechanics</span></span>
+            <span class="tile__frame"><video src="Images/preview_video_7.mp4" poster="Images/poster_video_7.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video></span>
+            <span class="tile__cap">Mars Survivor <span class="label">Dynamic gameplay video showcasing mechanics</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_39.webp" data-type="image"
             aria-label="View Mars Survivor, Shooting scene">
-            <img src="Images/image_39.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Mars Survivor <span>Shooting scene</span></span>
+            <span class="tile__frame"><img src="Images/image_39.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Mars Survivor <span class="label">Shooting scene</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_43.webp" data-type="image"
             aria-label="View Mars Survivor, Screenshot">
-            <img src="Images/image_43.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Mars Survivor <span>Screenshot</span></span>
+            <span class="tile__frame"><img src="Images/image_43.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Mars Survivor <span class="label">Screenshot</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_46.webp" data-type="image"
             aria-label="View Mars Survivor, Game development project">
-            <img src="Images/image_46.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Mars Survivor <span>Game development project</span></span>
+            <span class="tile__frame"><img src="Images/image_46.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Mars Survivor <span class="label">Game development project</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_69.webp" data-type="image"
             aria-label="View Artwork, Digital art creation">
-            <img src="Images/image_69.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Artwork <span>Digital art creation</span></span>
+            <span class="tile__frame"><img src="Images/image_69.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Artwork <span class="label">Digital art creation</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_67.png" data-type="image"
             aria-label="View Concept, Game concept and design">
-            <img src="Images/image_67.png" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Concept <span>Game concept and design</span></span>
+            <span class="tile__frame"><img src="Images/image_67.png" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Concept <span class="label">Game concept and design</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/video_1.mp4" data-type="video"
             aria-label="View Game Demo, Interactive game demonstration">
-            <video src="Images/preview_video_1.mp4" poster="Images/poster_video_1.jpg" muted loop
-            playsinline preload="none" aria-hidden="true"></video>
-            <span class="tile__cap">Game Demo <span>Interactive game demonstration</span></span>
+            <span class="tile__frame"><video src="Images/preview_video_1.mp4" poster="Images/poster_video_1.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video></span>
+            <span class="tile__cap">Game Demo <span class="label">Interactive game demonstration</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_17.webp" data-type="image"
             aria-label="View Game Scene, In-game character and environment">
-            <img src="Images/image_17.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Game Scene <span>In-game character and environment</span></span>
+            <span class="tile__frame"><img src="Images/image_17.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Game Scene <span class="label">In-game character and environment</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_62.webp" data-type="image"
             aria-label="View UI Design, User interface and UX">
-            <img src="Images/image_62.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">UI Design <span>User interface and UX</span></span>
+            <span class="tile__frame"><img src="Images/image_62.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">UI Design <span class="label">User interface and UX</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_47.webp" data-type="image"
             aria-label="View Environment, Game environment design">
-            <img src="Images/image_47.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Environment <span>Game environment design</span></span>
+            <span class="tile__frame"><img src="Images/image_47.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Environment <span class="label">Game environment design</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_22.webp" data-type="image"
             aria-label="View Gameplay, Core gameplay mechanics">
-            <img src="Images/image_22.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Gameplay <span>Core gameplay mechanics</span></span>
+            <span class="tile__frame"><img src="Images/image_22.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Gameplay <span class="label">Core gameplay mechanics</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_38.webp" data-type="image"
             aria-label="View Screenshot, Game screenshot">
-            <img src="Images/image_38.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Screenshot <span>Game screenshot</span></span>
+            <span class="tile__frame"><img src="Images/image_38.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Screenshot <span class="label">Game screenshot</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_12.webp" data-type="image"
             aria-label="View Art, Character and asset artwork">
-            <img src="Images/image_12.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Art <span>Character and asset artwork</span></span>
+            <span class="tile__frame"><img src="Images/image_12.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Art <span class="label">Character and asset artwork</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_53.webp" data-type="image"
             aria-label="View Design, Visual design composition">
-            <img src="Images/image_53.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Design <span>Visual design composition</span></span>
+            <span class="tile__frame"><img src="Images/image_53.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Design <span class="label">Visual design composition</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_28.webp" data-type="image"
             aria-label="View Level Design, Game level and layout">
-            <img src="Images/image_28.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Level Design <span>Game level and layout</span></span>
+            <span class="tile__frame"><img src="Images/image_28.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Level Design <span class="label">Game level and layout</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_63.webp" data-type="image"
             aria-label="View Treasure Hunt, Game">
-            <img src="Images/image_63.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Treasure Hunt <span>Game</span></span>
+            <span class="tile__frame"><img src="Images/image_63.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Treasure Hunt <span class="label">Game</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/video_10.mp4" data-type="video"
             aria-label="View Gameplay, Game demonstration">
-            <video src="Images/preview_video_10.mp4" poster="Images/poster_video_10.jpg" muted loop
-            playsinline preload="none" aria-hidden="true"></video>
-            <span class="tile__cap">Gameplay <span>Game demonstration</span></span>
+            <span class="tile__frame"><video src="Images/preview_video_10.mp4" poster="Images/poster_video_10.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video></span>
+            <span class="tile__cap">Gameplay <span class="label">Game demonstration</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_28.webp" data-type="image"
             aria-label="View Environment, Game world design">
-            <img src="Images/image_28.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Environment <span>Game world design</span></span>
+            <span class="tile__frame"><img src="Images/image_28.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Environment <span class="label">Game world design</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_27.webp" data-type="image"
             aria-label="View Concept Art, Initial concept design">
-            <img src="Images/image_27.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Concept Art <span>Initial concept design</span></span>
+            <span class="tile__frame"><img src="Images/image_27.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Concept Art <span class="label">Initial concept design</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_25.webp" data-type="image"
             aria-label="View Artwork, Digital creation">
-            <img src="Images/image_25.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Artwork <span>Digital creation</span></span>
+            <span class="tile__frame"><img src="Images/image_25.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Artwork <span class="label">Digital creation</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/video_8.mp4" data-type="video"
             aria-label="View Game Trailer, Game preview footage">
-            <video src="Images/preview_video_8.mp4" poster="Images/poster_video_8.jpg" muted loop
-            playsinline preload="none" aria-hidden="true"></video>
-            <span class="tile__cap">Game Trailer <span>Game preview footage</span></span>
+            <span class="tile__frame"><video src="Images/preview_video_8.mp4" poster="Images/poster_video_8.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video></span>
+            <span class="tile__cap">Game Trailer <span class="label">Game preview footage</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_17.webp" data-type="image"
             aria-label="View Scene, In-game scene">
-            <img src="Images/image_17.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Scene <span>In-game scene</span></span>
+            <span class="tile__frame"><img src="Images/image_17.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Scene <span class="label">In-game scene</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_16.webp" data-type="image"
             aria-label="View Asset, Game asset artwork">
-            <img src="Images/image_16.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Asset <span>Game asset artwork</span></span>
+            <span class="tile__frame"><img src="Images/image_16.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Asset <span class="label">Game asset artwork</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_15.webp" data-type="image"
             aria-label="View 2d Game, Game Screenshot">
-            <img src="Images/image_15.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">2d Game <span>Game Screenshot</span></span>
+            <span class="tile__frame"><img src="Images/image_15.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">2d Game <span class="label">Game Screenshot</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_35.webp" data-type="image"
             aria-label="View Artwork, Creative visual">
-            <img src="Images/image_35.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Artwork <span>Creative visual</span></span>
+            <span class="tile__frame"><img src="Images/image_35.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Artwork <span class="label">Creative visual</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_50.webp" data-type="image"
             aria-label="View Game Art, Game artwork">
-            <img src="Images/image_50.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Game Art <span>Game artwork</span></span>
+            <span class="tile__frame"><img src="Images/image_50.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Game Art <span class="label">Game artwork</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/video_5.mp4" data-type="video"
             aria-label="View AR App Demo, Augmented reality demonstration">
-            <video src="Images/preview_video_5.mp4" poster="Images/poster_video_5.jpg" muted loop
-            playsinline preload="none" aria-hidden="true"></video>
-            <span class="tile__cap">AR App Demo <span>Augmented reality demonstration</span></span>
+            <span class="tile__frame"><video src="Images/preview_video_5.mp4" poster="Images/poster_video_5.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video></span>
+            <span class="tile__cap">AR App Demo <span class="label">Augmented reality demonstration</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/video_9.mp4" data-type="video"
             aria-label="View Game Footage, Gameplay video">
-            <video src="Images/preview_video_9.mp4" poster="Images/poster_video_9.jpg" muted loop
-            playsinline preload="none" aria-hidden="true"></video>
-            <span class="tile__cap">Game Footage <span>Gameplay video</span></span>
+            <span class="tile__frame"><video src="Images/preview_video_9.mp4" poster="Images/poster_video_9.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video></span>
+            <span class="tile__cap">Game Footage <span class="label">Gameplay video</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_58.webp" data-type="image"
             aria-label="View Design, Visual composition">
-            <img src="Images/image_58.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Design <span>Visual composition</span></span>
+            <span class="tile__frame"><img src="Images/image_58.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Design <span class="label">Visual composition</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_65.webp" data-type="image"
             aria-label="View Character, Character design">
-            <img src="Images/image_65.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Character <span>Character design</span></span>
+            <span class="tile__frame"><img src="Images/image_65.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Character <span class="label">Character design</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_6.webp" data-type="image"
             aria-label="View Artwork, Creative piece">
-            <img src="Images/image_6.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Artwork <span>Creative piece</span></span>
+            <span class="tile__frame"><img src="Images/image_6.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Artwork <span class="label">Creative piece</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/video_6.mp4" data-type="video"
             aria-label="View Game Demo, Interactive demo">
-            <video src="Images/preview_video_6.mp4" poster="Images/poster_video_6.jpg" muted loop
-            playsinline preload="none" aria-hidden="true"></video>
-            <span class="tile__cap">Game Demo <span>Interactive demo</span></span>
+            <span class="tile__frame"><video src="Images/preview_video_6.mp4" poster="Images/poster_video_6.jpg" muted loop
+            playsinline preload="none" aria-hidden="true"></video></span>
+            <span class="tile__cap">Game Demo <span class="label">Interactive demo</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_38.webp" data-type="image"
             aria-label="View Screenshot, Game screenshot">
-            <img src="Images/image_38.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Screenshot <span>Game screenshot</span></span>
+            <span class="tile__frame"><img src="Images/image_38.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Screenshot <span class="label">Game screenshot</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_32.webp" data-type="image"
             aria-label="View Design, UI Design">
-            <img src="Images/image_32.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Design <span>UI Design</span></span>
+            <span class="tile__frame"><img src="Images/image_32.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Design <span class="label">UI Design</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_22.webp" data-type="image"
             aria-label="View Game Asset, Asset design">
-            <img src="Images/image_22.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Game Asset <span>Asset design</span></span>
+            <span class="tile__frame"><img src="Images/image_22.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Game Asset <span class="label">Asset design</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_30.webp" data-type="image"
             aria-label="View Pencil Art, Naruto - Dattebayo">
-            <img src="Images/image_30.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Pencil Art <span>Naruto - Dattebayo</span></span>
+            <span class="tile__frame"><img src="Images/image_30.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Pencil Art <span class="label">Naruto - Dattebayo</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_21.webp" data-type="image"
             aria-label="View Art, Artwork creation">
-            <img src="Images/image_21.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Art <span>Artwork creation</span></span>
+            <span class="tile__frame"><img src="Images/image_21.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Art <span class="label">Artwork creation</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_24.webp" data-type="image"
             aria-label="View Design, Graphic design">
-            <img src="Images/image_24.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Design <span>Graphic design</span></span>
+            <span class="tile__frame"><img src="Images/image_24.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Design <span class="label">Graphic design</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_10.webp" data-type="image"
             aria-label="View AR Experience, Augmented reality app">
-            <img src="Images/image_10.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">AR Experience <span>Augmented reality app</span></span>
+            <span class="tile__frame"><img src="Images/image_10.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">AR Experience <span class="label">Augmented reality app</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_7.webp" data-type="image"
             aria-label="View Banner, Web banner design">
-            <img src="Images/image_7.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Banner <span>Web banner design</span></span>
+            <span class="tile__frame"><img src="Images/image_7.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Banner <span class="label">Web banner design</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_8.webp" data-type="image"
             aria-label="View Artwork, Digital art">
-            <img src="Images/image_8.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Artwork <span>Digital art</span></span>
+            <span class="tile__frame"><img src="Images/image_8.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Artwork <span class="label">Digital art</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_54.webp" data-type="image"
             aria-label="View Poster, Game poster">
-            <img src="Images/image_54.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Poster <span>Game poster</span></span>
+            <span class="tile__frame"><img src="Images/image_54.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Poster <span class="label">Game poster</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_60.webp" data-type="image"
             aria-label="View Design, Creative design">
-            <img src="Images/image_60.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Design <span>Creative design</span></span>
+            <span class="tile__frame"><img src="Images/image_60.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Design <span class="label">Creative design</span></span>
           </button>
 
           <button type="button" class="tile reveal" data-src="Images/image_70.webp" data-type="image"
             aria-label="View Final, Project showcase">
-            <img src="Images/image_70.webp" alt="" loading="lazy" decoding="async">
-            <span class="tile__cap">Final <span>Project showcase</span></span>
+            <span class="tile__frame"><img src="Images/image_70.webp" alt="" loading="lazy" decoding="async"></span>
+            <span class="tile__cap">Final <span class="label">Project showcase</span></span>
           </button>
         </div>
       </section>

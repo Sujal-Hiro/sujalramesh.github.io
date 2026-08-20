@@ -1,0 +1,159 @@
+{
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v3.6.27",
+    "version": "2.0"
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "gamepad"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "gamepad",
+      "normalTexture": {
+        "index": 0
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 1
+        },
+        "metallicRoughnessTexture": {
+          "index": 2
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "gamepad_01_mesh_case",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ],
+  "images": [
+    {
+      "mimeType": "image/jpeg",
+      "name": "gamepad_nor_gl",
+      "uri": "textures/gamepad_nor_gl_1k.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "gamepad_diff",
+      "uri": "textures/gamepad_diff_1k.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "gamepad_metal-gamepad_rough",
+      "uri": "textures/gamepad_arm_1k.jpg"
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 6235,
+      "max": [
+        0.1935473084449768,
+        0.018331991508603096,
+        0.22065633535385132
+      ],
+      "min": [
+        -0.2105044722557068,
+        -0.0005923302378505468,
+        -0.21430516242980957
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 6235,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 6235,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 28638,
+      "type": "SCALAR"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 74820,
+      "byteOffset": 0,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 74820,
+      "byteOffset": 74820,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 49880,
+      "byteOffset": 149640,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 57276,
+      "byteOffset": 199520,
+      "target": 34963
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 256796,
+      "uri": "gamepad.bin"
+    }
+  ]
+}

@@ -1,73 +1,41 @@
 /*==============================================================
-  Page-specific - project detail, gallery, 404
+  Page-specific - page head, project detail, 404
 ==============================================================*/
 
 /*------------------------- page head -------------------------*/
 
 .page-head {
-  position: relative;
-  padding-block: clamp(3.5rem, 10vh, 6rem) clamp(2rem, 5vw, 3.5rem);
-  border-bottom: 1px solid var(--line);
+  padding-block: clamp(3.5rem, 10svh, 6.5rem) clamp(2.5rem, 6vw, 4rem);
+  border-bottom: 1px solid var(--rule);
+}
+
+.page-head .label {
+  display: block;
+  margin-bottom: 1.25rem;
+  color: var(--accent);
 }
 
 .page-head h1 {
-  margin-bottom: 0.75rem;
-  text-shadow:
-    0 0 1px oklch(0.97 0.06 var(--hue) / 0.5),
-    0 0 28px oklch(0.78 0.19 var(--hue) / 0.32),
-    0 0 80px oklch(0.70 0.20 var(--hue) / 0.16);
+  max-width: 14ch;
+  margin-bottom: 1.5rem;
 }
 
 .page-head p {
-  color: var(--fg-muted);
+  color: var(--ink-2);
   max-width: var(--measure);
 }
 
 /*----------------------- project detail -----------------------*/
 
-/* Two columns on wide screens: sticky meta on the left, media on
-   the right. Collapses to a single column below 900px. */
+/* Sticky meta on the left, media on the right, hung off one rule.
+   Same masthead logic as the section heads, so the two pages read
+   as one publication. */
 .project {
-  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: clamp(1.5rem, 4vw, 3.5rem);
-  padding-block: clamp(3rem, 7vw, 5rem);
-  border-bottom: 1px solid var(--line);
-}
-
-/* Eight projects, eight fixed hues. Same logic as the work grid:
-   an ordered sequence reads as a palette, not a rainbow. */
-.project:nth-of-type(1) {
-  --hue: 205;
-}
-
-.project:nth-of-type(2) {
-  --hue: 240;
-}
-
-.project:nth-of-type(3) {
-  --hue: 275;
-}
-
-.project:nth-of-type(4) {
-  --hue: 310;
-}
-
-.project:nth-of-type(5) {
-  --hue: 340;
-}
-
-.project:nth-of-type(6) {
-  --hue: 25;
-}
-
-.project:nth-of-type(7) {
-  --hue: 90;
-}
-
-.project:nth-of-type(8) {
-  --hue: 150;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: clamp(1.75rem, 5vw, 4.5rem);
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+  border-bottom: 1px solid var(--rule);
 }
 
 .project:last-of-type {
@@ -75,93 +43,80 @@
 }
 
 .project__meta {
-  /* Grid items floor at min-content; without this a nowrap tag row
-     can push the column past its 5fr share. */
-  min-width: 0;
   position: sticky;
-  top: calc(var(--header-h) + 2rem);
+  top: calc(var(--header-h) + 2.5rem);
   align-self: start;
+  min-width: 0;
 }
 
 .project__index {
-  font-family: var(--font-mono);
-  font-size: var(--step-1);
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'zero' 1;
-  color: oklch(0.78 0.19 var(--hue));
-  text-shadow: 0 0 20px oklch(0.78 0.19 var(--hue) / 0.45);
-  margin-bottom: 0.5rem;
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--accent);
 }
 
 .project__meta h2 {
-  margin-bottom: 1rem;
+  font-size: var(--step-2);
+  margin-bottom: 1.25rem;
 }
 
-.project__meta>p {
-  color: var(--fg-muted);
-  margin-bottom: 1.5rem;
+.project__meta > p {
+  color: var(--ink-2);
+  margin-bottom: 1.75rem;
 }
 
 .project__points {
   display: grid;
-  gap: 0.75rem;
+  gap: 0.85rem;
   margin-bottom: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
 }
 
 .project__points li {
   position: relative;
-  padding-left: 1.4rem;
+  padding-left: 1.5rem;
   font-size: var(--step--1);
-  color: var(--fg-muted);
+  color: var(--ink-muted);
 }
 
-/* A small lit rule rather than a bullet glyph. */
+/* A printed rule, not a bullet glyph. */
 .project__points li::before {
   content: '';
   position: absolute;
   left: 0;
   top: 0.72em;
-  width: 8px;
+  width: 10px;
   height: 1px;
-  background: oklch(0.78 0.19 var(--hue));
-  box-shadow: 0 0 6px oklch(0.78 0.19 var(--hue));
+  background: var(--accent);
 }
 
 .project__media {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: clamp(0.75rem, 1.5vw, 1.15rem);
   align-content: start;
 }
 
-.project__media>* {
+.project__media > * {
   width: 100%;
   aspect-ratio: 16 / 10;
-  object-fit: cover;
-  border: 1px solid var(--line);
+  overflow: hidden;
   border-radius: var(--radius-sm);
-  background: var(--surface);
+  background: var(--paper-3);
 }
 
-/* First item spans the full row, being the hero shot. */
-.project__media>*:first-child {
+/* First item spans the row, being the hero shot. */
+.project__media > *:first-child {
   grid-column: 1 / -1;
   aspect-ratio: 16 / 9;
 }
 
-/* Every shot opens in the viewer, so it is a real button. Reset
-   the UA chrome and let the media inside fill the box. */
 .shot {
-  display: block;
   position: relative;
+  display: block;
   padding: 0;
-  overflow: hidden;
   cursor: zoom-in;
-  font: inherit;
-  color: inherit;
-  transition: border-color var(--t-2) var(--out), transform var(--t-2) var(--out),
-    box-shadow var(--t-3) var(--out);
 }
 
 .shot img,
@@ -169,57 +124,26 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.78) brightness(0.94);
-  transition: transform var(--t-4) var(--out), filter var(--t-2) var(--out);
-}
-
-.shot:hover,
-.shot:focus-visible {
-  border-color: var(--line-neon);
-  transform: translateY(-2px);
-  box-shadow: 0 0 24px -8px oklch(0.78 0.19 var(--hue) / 0.55);
+  transition: transform var(--t-4) var(--out);
 }
 
 .shot:hover img,
 .shot:hover video {
-  transform: scale(1.04);
-  filter: none;
+  transform: scale(1.03);
 }
 
-/* Corner glyph: a magnifier on stills, a play triangle on clips. */
-.shot::after {
+/* A play mark on clips only, so a still and a clip are never
+   confused. Stills need no badge - the cursor already says zoom. */
+.shot--video::after {
   content: '';
   position: absolute;
-  right: 8px;
-  bottom: 8px;
+  right: 10px;
+  bottom: 10px;
   width: 26px;
   height: 26px;
-  border-radius: var(--radius-sm);
-  border: 1px solid oklch(0.78 0.19 var(--hue) / 0.4);
-  background: oklch(0.08 0.02 var(--hue) / 0.7) center / 12px 12px no-repeat;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4M11 8v6M8 11h6'/%3E%3C/svg%3E");
-  opacity: 0;
-  transform: translateY(4px);
-  transition: opacity var(--t-2) var(--out), transform var(--t-2) var(--out);
-}
-
-.shot--video {
-  cursor: pointer;
-}
-
-.shot--video::after {
-  background-size: 11px 11px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M7 4l13 8-13 8z'/%3E%3C/svg%3E");
-  /* A clip always reads as playable, so its badge is not
-     hover-only. */
-  opacity: 0.85;
-  transform: none;
-}
-
-.shot:hover::after,
-.shot:focus-visible::after {
-  opacity: 1;
-  transform: none;
+  border-radius: 50%;
+  background: rgba(20, 19, 15, 0.62) center / 10px 10px no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F5F3EE'%3E%3Cpath d='M7 4l13 8-13 8z'/%3E%3C/svg%3E");
 }
 
 @media (max-width: 900px) {
@@ -232,64 +156,28 @@
   }
 }
 
-/*------------------------ gallery page ------------------------*/
-
-.gallery-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
-}
-
-.filter {
-  font-family: var(--font-mono);
-  font-size: var(--step--2);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--fg-muted);
-  background: transparent;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  padding: 0.6em 1.2em;
-  cursor: pointer;
-  transition: color var(--t-2) var(--out), border-color var(--t-2) var(--out),
-    background-color var(--t-2) var(--out), box-shadow var(--t-2) var(--out);
-}
-
-.filter:hover {
-  color: var(--fg);
-  border-color: var(--line-strong);
-}
-
-.filter[aria-pressed='true'] {
-  color: var(--neon-hi);
-  border-color: oklch(0.78 0.19 var(--hue) / 0.55);
-  background: oklch(0.60 0.18 var(--hue) / 0.12);
-  box-shadow: 0 0 18px -6px oklch(0.78 0.19 var(--hue) / 0.6);
-}
-
 /*---------------------------- 404 ----------------------------*/
 
 .notfound {
-  position: relative;
   min-height: calc(100svh - var(--header-h));
   display: grid;
-  place-content: center;
-  text-align: center;
-  gap: 1rem;
-  padding: var(--gutter);
+  align-content: center;
+  padding-block: var(--section-gap);
+}
+
+.notfound .label {
+  display: block;
+  margin-bottom: 1.25rem;
+  color: var(--accent);
 }
 
 .notfound h1 {
-  font-size: var(--step-4);
-  line-height: 1;
-  color: var(--neon-hi);
-  text-shadow:
-    0 0 2px oklch(0.97 0.06 var(--hue) / 0.6),
-    0 0 40px oklch(0.78 0.19 var(--hue) / 0.45),
-    0 0 120px oklch(0.70 0.20 var(--hue) / 0.25);
+  max-width: 16ch;
+  margin-bottom: 1.5rem;
 }
 
 .notfound p {
-  color: var(--fg-muted);
+  color: var(--ink-2);
+  max-width: var(--measure);
+  margin-bottom: 2.5rem;
 }

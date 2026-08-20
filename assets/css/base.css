@@ -12,19 +12,21 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--header-h) + 1.5rem);
+  scroll-padding-top: calc(var(--header-h) + 2rem);
   -webkit-text-size-adjust: 100%;
+  background: var(--paper);
 }
 
 body {
-  background: var(--bg-deep);
-  color: var(--fg);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--font-body);
   font-size: var(--step-0);
-  line-height: 1.6;
+  line-height: 1.62;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'kern' 1, 'liga' 1;
 }
 
 img,
@@ -34,9 +36,6 @@ canvas {
   max-width: 100%;
 }
 
-/* Must come after the rule above: an author `display` on img/video
-   beats the UA stylesheet's [hidden] rule, which silently breaks
-   the hidden attribute. */
 [hidden] {
   display: none !important;
 }
@@ -53,92 +52,83 @@ a {
 button {
   font: inherit;
   color: inherit;
+  background: none;
+  border: 0;
+}
+
+em {
+  font-style: italic;
 }
 
 /*-------------------------- typography --------------------------*/
 
+/* The serif appears at display sizes only. At 60px+ its high
+   stroke contrast is the whole point; at 16px it would just look
+   like a word processor. */
 h1,
-h2,
-h3 {
+h2 {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 400;
+  letter-spacing: -0.015em;
   text-wrap: balance;
 }
 
 h1 {
   font-size: var(--step-3);
-  line-height: 0.96;
-  letter-spacing: -0.032em;
+  line-height: 0.94;
 }
 
 h2 {
   font-size: var(--step-2);
-  line-height: 1.06;
-  letter-spacing: -0.018em;
+  line-height: 1.04;
 }
 
 h3 {
+  font-family: var(--font-body);
   font-size: var(--step-1);
-  font-weight: 600;
-  line-height: 1.18;
-  letter-spacing: -0.010em;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.011em;
+  text-wrap: balance;
 }
 
-/* The HUD label. Used ~40 times across the site: indices, tags,
-   dates, captions, stat names. This one class carries most of the
-   "gaming" read, which is exactly why the display face is allowed
-   to stay restrained. */
-.hud-label {
+p {
+  text-wrap: pretty;
+}
+
+/* Every label, index, date and readout on the site. Uppercase
+   mono at small sizes is what gives an otherwise quiet page its
+   technical edge - and it is the only "styling" the meta gets. */
+.label {
   font-family: var(--font-mono);
   font-size: var(--step--2);
   font-weight: 500;
   line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--fg-muted);
+  letter-spacing: 0.13em;
+  color: var(--ink-muted);
 }
 
-/* Every live number on the site. Tabular is mandatory: without it
-   a score counter jitters its own layout on every hit. */
-.hud-num {
+/* Live numbers. Tabular is mandatory or a score counter shifts
+   its own layout on every hit. */
+.num {
   font-family: var(--font-mono);
-  font-weight: 700;
-  line-height: 1;
   font-variant-numeric: tabular-nums;
   font-feature-settings: 'zero' 1;
-  /* slashed zero */
-  letter-spacing: 0.02em;
-}
-
-::selection {
-  background: var(--neon);
-  /* Dark ink on neon, not white. Higher contrast AND more premium.
-     White on a 0.78-lightness fill is ~2.6:1 and fails WCAG. */
-  color: var(--neon-ink);
+  letter-spacing: 0.01em;
 }
 
 /*------------------------- focus ring -------------------------*/
 
-/* The hard problem in a neon system: a neon focus ring can vanish
-   against a neon element. Solution is a three-band ring.
-
-   The white inner band guarantees >=3:1 against ANY surface,
-   including the brightest neon fill. The dark spacer guarantees
-   the neon band stays visible against light surfaces. Together
-   they satisfy WCAG 2.2 SC 2.4.13 Focus Appearance. */
+/* Solid ink, offset. On paper there is no need for the three-band
+   ring a neon theme requires - one high-contrast outline is
+   unambiguous against every surface here. */
 :focus-visible {
-  outline: 2px solid oklch(0.99 0 0);
-  outline-offset: 2px;
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
   border-radius: var(--radius-sm);
-  box-shadow:
-    0 0 0 4px oklch(0.10 0.02 var(--hue)),
-    0 0 0 6px oklch(0.80 0.19 var(--hue) / 0.90),
-    0 0 18px 0 oklch(0.80 0.19 var(--hue) / 0.45);
-  transition: box-shadow var(--t-2) var(--out);
 }
 
-/* SC 2.4.11 Focus Not Obscured: a focused element must never end
-   up underneath the sticky header. */
 :focus-visible {
   scroll-margin-block: calc(var(--header-h) + 2rem);
 }
@@ -150,11 +140,8 @@ h3 {
   max-width: var(--max);
   margin-inline: auto;
   padding-inline: var(--gutter);
-  /* .wrap is a flex item inside .hero, .site-header and .site-footer.
-     Flex items floor at min-content, so without this one wide
-     descendant widens the whole wrap past the viewport - which
-     clips body copy and pushes right-aligned chrome (the mobile
-     nav toggle) off-screen. */
+  /* .wrap is a flex item in the header and footer; flex items
+     floor at min-content without this. */
   min-width: 0;
 }
 
@@ -164,8 +151,8 @@ h3 {
   left: 0.5rem;
   z-index: 300;
   padding: 0.6em 1em;
-  background: var(--surface);
-  border: 1px solid var(--line-strong);
+  background: var(--ink);
+  color: var(--paper);
   border-radius: var(--radius-sm);
   transform: translateY(-200%);
   transition: transform var(--t-2) var(--out);
@@ -173,6 +160,7 @@ h3 {
 
 .skip-link:focus-visible {
   transform: translateY(0);
+  outline-color: var(--accent);
 }
 
 .section {
@@ -180,45 +168,64 @@ h3 {
   padding-block: var(--section-gap);
 }
 
+/* One hairline above each section. This, plus alignment, is the
+   entire structural vocabulary - no cards containing cards, no
+   shadows, no filled panels. */
+.section + .section,
+.section--ruled {
+  border-top: 1px solid var(--rule);
+}
+
+/* Section heads are a two-column masthead: a mono index and title
+   on the left, the description on the right, hung off one rule. */
 .section-head {
-  position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(1rem, 4vw, 3.5rem);
   align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: clamp(2rem, 5vw, 3.5rem);
-  padding-bottom: 1.25rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.section-head__index {
+  display: block;
+  margin-bottom: 1.1rem;
+  color: var(--accent);
 }
 
 .section-head p {
-  color: var(--fg-muted);
-  font-size: var(--step--1);
-  margin: 0;
+  color: var(--ink-muted);
   max-width: var(--measure);
 }
 
-.link-more {
+.section-head .label {
+  display: block;
+}
+
+@media (max-width: 760px) {
+  .section-head {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* A quiet text link with a rule that thickens on hover. */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   font-family: var(--font-mono);
   font-size: var(--step--2);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--fg-muted);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  transition: color var(--t-2) var(--out), gap var(--t-2) var(--out);
+  letter-spacing: 0.13em;
+  color: var(--ink);
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--rule-strong);
+  transition: border-color var(--t-2) var(--out), color var(--t-2) var(--out),
+    gap var(--t-2) var(--out);
 }
 
-.link-more:hover {
-  color: var(--neon-hi);
-  gap: 0.7rem;
-}
-
-@media (max-width: 560px) {
-  .section-head {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+.link:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  gap: 0.75rem;
 }
