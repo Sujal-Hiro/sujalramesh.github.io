@@ -1,136 +1,261 @@
 /*===============================================
-  The hero object.
+  The hero object, as a point cloud.
 
-  One photoreal gamepad, lit like a product shot,
-  turning slowly. That is the entire 3D on the site.
+  The gamepad is not rendered as a surface. Its
+  geometry is sampled into ~110,000 dots and drawn as
+  phosphor points, so the object reads as a 3D scan
+  resolving out of the dark rather than as a product
+  render.
 
-  The restraint is the point. The previous version
-  had a full-page neon deck and 150 drifting
-  crystals; this has one object, correctly lit, with
-  room around it - which reads as considered rather
-  than as a demo.
+  Two decisions carry it:
+
+  1. AREA-WEIGHTED SAMPLING, not vertices. A model's
+     vertices bunch wherever it was detailed - around
+     buttons and bevels - and leave flat panels almost
+     bare. Sampling points across triangle surfaces,
+     weighted by area, gives an even cloud that
+     describes the whole form.
+
+  2. ONE HUE, brightness does the work. Each dot is
+     lit by a fake normal-dot-light term, so the form
+     has a light side and a shadow side using nothing
+     but values of the same green.
+
+  One draw call. A scan band sweeps the object every
+  few seconds - the only motion besides the turn.
 
   Model: "Gamepad" by Josh Dean, CC0, polyhaven.com
-  1k textures, ~1.3 MB, loaded only after every gate
-  in can3D() passes.
 ===============================================*/
 
 import * as THREE from 'three'
 import { GLTFLoader } from '../../lib/three/addons/loaders/GLTFLoader.js'
-import { RoomEnvironment } from '../../lib/three/addons/environments/RoomEnvironment.js'
 import { add } from '../core/loop.js'
 
 const MODEL = './assets/models/gamepad/gamepad_1k.gltf'
+const POINTS = 110000
 
-/* A soft elliptical contact shadow. Without something under it the
-   object reads as pasted on rather than sitting in the scene, and a
-   real shadow map on a single floating object is not worth the
-   depth pass. */
-const SHADOW_FRAG = /* glsl */ `
-  precision mediump float;
-  varying vec2 vUv;
+const VERT = /* glsl */ `
+  precision highp float;
+
+  attribute float aRand;
+
+  uniform float uTime;
+  uniform float uScan;
+  uniform float uSize;
+
+  varying float vShade;
+  varying float vScan;
+  varying float vRand;
+
   void main() {
-    float d = length(vUv - 0.5) * 2.0;
-    float a = smoothstep(1.0, 0.15, d);
-    gl_FragColor = vec4(0.09, 0.08, 0.06, a * 0.40);
+    vRand = aRand;
+
+    // Fake key light. One dot product is enough to give the cloud a
+    // lit side and a shadow side, which is what stops a point cloud
+    // reading as flat noise.
+    vec3 L = normalize(vec3(0.55, 0.75, 0.5));
+    vShade = clamp(dot(normalize(normal), L) * 0.5 + 0.5, 0.0, 1.0);
+
+    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+
+    // The scan band: a horizontal sweep in object space that
+    // brightens dots as it crosses them.
+    vScan = smoothstep(0.16, 0.0, abs(position.y - uScan));
+
+    // Perspective-correct dot size, plus a small per-dot variance
+    // so the cloud has grain instead of looking machine-printed.
+    //
+    // The 9.0 is calibrated to this camera: the object sits ~6 units
+    // out, so this yields ~2px dots. A larger constant merges every
+    // dot into a solid blob - the cloud only reads as a cloud while
+    // the dots stay separable.
+    float size = uSize * (0.72 + aRand * 0.55) * (1.0 + vScan * 1.4);
+    gl_PointSize = size * (9.0 / -mv.z);
+
+    gl_Position = projectionMatrix * mv;
   }
 `
 
-const SHADOW_VERT = /* glsl */ `
-  varying vec2 vUv;
+const FRAG = /* glsl */ `
+  precision highp float;
+
+  uniform vec3 uColor;
+  uniform vec3 uHot;
+  uniform float uTime;
+
+  varying float vShade;
+  varying float vScan;
+  varying float vRand;
+
   void main() {
-    vUv = uv;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    // Round dots. Without this every point is a hard square and the
+    // cloud looks like a spreadsheet.
+    vec2 c = gl_PointCoord - 0.5;
+    float d = dot(c, c);
+    if (d > 0.25) discard;
+    float edge = smoothstep(0.25, 0.06, d);
+
+    // A slow, tiny per-dot flicker. Phosphor is never perfectly
+    // steady, and this is far below the rate anything could read as
+    // strobing.
+    float flick = 0.92 + 0.08 * sin(uTime * 1.6 + vRand * 40.0);
+
+    float lum = (0.14 + vShade * 1.05) * flick;
+    vec3 col = mix(uColor * lum, uHot, vScan * 0.75);
+
+    gl_FragColor = vec4(col, edge * (0.35 + vShade * 0.65));
   }
 `
+
+/* Area-weighted surface sampling.
+
+   Walks every triangle, builds a cumulative area table, then draws
+   points with a binary search into it - so a triangle ten times
+   larger receives ten times the dots. Uniform barycentric sampling
+   inside each triangle (the sqrt is what keeps points from
+   clustering at one corner). */
+function sampleSurface(root, count) {
+	const tris = []
+	let total = 0
+
+	const pA = new THREE.Vector3()
+	const pB = new THREE.Vector3()
+	const pC = new THREE.Vector3()
+
+	root.updateWorldMatrix(true, true)
+
+	root.traverse(node => {
+		if (!node.isMesh || !node.geometry) return
+		const geo = node.geometry.index ? node.geometry.toNonIndexed() : node.geometry
+		const pos = geo.getAttribute('position')
+		const nor = geo.getAttribute('normal')
+		if (!pos) return
+
+		for (let i = 0; i < pos.count; i += 3) {
+			pA.fromBufferAttribute(pos, i).applyMatrix4(node.matrixWorld)
+			pB.fromBufferAttribute(pos, i + 1).applyMatrix4(node.matrixWorld)
+			pC.fromBufferAttribute(pos, i + 2).applyMatrix4(node.matrixWorld)
+
+			const area = new THREE.Triangle(pA, pB, pC).getArea()
+			if (!(area > 0)) continue
+			total += area
+
+			tris.push({
+				a: pA.clone(),
+				b: pB.clone(),
+				c: pC.clone(),
+				n: nor
+					? new THREE.Vector3().fromBufferAttribute(nor, i).transformDirection(node.matrixWorld)
+					: new THREE.Vector3(0, 1, 0),
+				cum: total,
+			})
+		}
+	})
+
+	if (!tris.length) return null
+
+	const positions = new Float32Array(count * 3)
+	const normals = new Float32Array(count * 3)
+	const rands = new Float32Array(count)
+
+	for (let i = 0; i < count; i++) {
+		const target = Math.random() * total
+
+		let lo = 0
+		let hi = tris.length - 1
+		while (lo < hi) {
+			const mid = (lo + hi) >> 1
+			if (tris[mid].cum < target) lo = mid + 1
+			else hi = mid
+		}
+		const t = tris[lo]
+
+		let u = Math.random()
+		let v = Math.random()
+		if (u + v > 1) {
+			u = 1 - u
+			v = 1 - v
+		}
+
+		positions[i * 3] = t.a.x + u * (t.b.x - t.a.x) + v * (t.c.x - t.a.x)
+		positions[i * 3 + 1] = t.a.y + u * (t.b.y - t.a.y) + v * (t.c.y - t.a.y)
+		positions[i * 3 + 2] = t.a.z + u * (t.b.z - t.a.z) + v * (t.c.z - t.a.z)
+
+		normals[i * 3] = t.n.x
+		normals[i * 3 + 1] = t.n.y
+		normals[i * 3 + 2] = t.n.z
+
+		rands[i] = Math.random()
+	}
+
+	const geo = new THREE.BufferGeometry()
+	geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+	geo.setAttribute('normal', new THREE.BufferAttribute(normals, 3))
+	geo.setAttribute('aRand', new THREE.BufferAttribute(rands, 1))
+	return geo
+}
 
 export function initGamepad(canvas) {
 	const host = canvas.closest('.hero__object') || canvas.parentElement
 
-	const renderer = new THREE.WebGLRenderer({
-		canvas,
-		alpha: true,
-		antialias: true, // one small object on a light ground: silhouette
-		// quality is the whole job, so MSAA earns its cost here
-	})
+	const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false })
 	renderer.setClearColor(0x000000, 0)
-	renderer.outputColorSpace = THREE.SRGBColorSpace
-	// Without tone mapping the plastic highlights clip to flat white
-	// and the model looks like a screenshot of a model.
-	renderer.toneMapping = THREE.ACESFilmicToneMapping
-	renderer.toneMappingExposure = 0.98
 
 	const scene = new THREE.Scene()
 	const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100)
 	camera.position.set(0, 0, 6)
 
-	/* Image-based lighting from a generated room. This is what makes
-	   the plastic read as plastic - a couple of point lights would
-	   give flat highlights and no sense of a surrounding space, and
-	   an HDR file would be another megabyte on the wire. */
-	const pmrem = new THREE.PMREMGenerator(renderer)
-	scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture
+	const uTime = { value: 0 }
+	const uScan = { value: -10 }
+	const uSize = { value: 1.5 }
+	const uColor = { value: new THREE.Color(0x4ee08a) }
+	const uHot = { value: new THREE.Color(0xd8ffe8) }
 
-	// A single key light for direction, so the form has a clear
-	// light side and shadow side rather than sitting in flat ambient.
-	const key = new THREE.DirectionalLight(0xffffff, 2.6)
-	key.position.set(2.5, 3.5, 2)
-	scene.add(key)
-
-	const fill = new THREE.DirectionalLight(0xffffff, 0.45)
-	fill.position.set(-3, 0.5, -1.5)
-	scene.add(fill)
-
-	/*--------------------------- shadow ---------------------------*/
-
-	const shadow = new THREE.Mesh(
-		new THREE.PlaneGeometry(3.2, 3.2),
-		new THREE.ShaderMaterial({
-			vertexShader: SHADOW_VERT,
-			fragmentShader: SHADOW_FRAG,
-			transparent: true,
-			depthWrite: false,
-		})
-	)
-	shadow.rotation.x = -Math.PI / 2
-	shadow.position.y = -1.35
-	scene.add(shadow)
-
-	/*---------------------------- model ----------------------------*/
+	const material = new THREE.ShaderMaterial({
+		vertexShader: VERT,
+		fragmentShader: FRAG,
+		uniforms: { uTime, uScan, uSize, uColor, uHot },
+		transparent: true,
+		// Additive would blow out where the cloud is dense on the far
+		// side; normal blending keeps the silhouette readable.
+		depthWrite: false,
+	})
 
 	const pivot = new THREE.Group()
 	scene.add(pivot)
 
 	let loaded = false
+	let bounds = 1
 
 	new GLTFLoader().load(
 		MODEL,
 		gltf => {
-			const model = gltf.scene
-
-			// Centre on its own bounds and scale to a known height, so
-			// the framing does not depend on how the asset was authored.
-			const box = new THREE.Box3().setFromObject(model)
+			const box = new THREE.Box3().setFromObject(gltf.scene)
 			const size = box.getSize(new THREE.Vector3())
 			const centre = box.getCenter(new THREE.Vector3())
-			const scale = 3.6 / Math.max(size.x, size.y, size.z)
+			const scale = 4.3 / Math.max(size.x, size.y, size.z)
 
-			model.position.sub(centre)
-			model.scale.setScalar(scale)
+			gltf.scene.position.sub(centre)
+			gltf.scene.scale.setScalar(scale)
 
-			pivot.add(model)
-			pivot.rotation.x = 0.34 // tipped toward the viewer
+			const geo = sampleSurface(gltf.scene, POINTS)
+			if (!geo) {
+				canvas.remove()
+				return
+			}
+
+			geo.computeBoundingBox()
+			bounds = geo.boundingBox.max.y
+
+			pivot.add(new THREE.Points(geo, material))
+			pivot.rotation.x = 0.3
 			loaded = true
 
 			canvas.classList.add('is-live')
 			if (host) host.classList.add('is-loaded')
 		},
 		undefined,
-		() => {
-			// Missing or corrupt asset. The plotted contour stays and
-			// the column still reads as intentional.
-			canvas.remove()
-		}
+		() => canvas.remove()
 	)
 
 	/*---------------------------- resize ----------------------------*/
@@ -139,8 +264,12 @@ export function initGamepad(canvas) {
 		const w = host ? host.clientWidth : canvas.clientWidth
 		const h = host ? host.clientHeight : canvas.clientHeight
 		if (!w || !h) return
-		renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2))
+		const dpr = Math.min(devicePixelRatio || 1, 2)
+		renderer.setPixelRatio(dpr)
 		renderer.setSize(w, h, false)
+		// Dots are sized in device pixels, so without this they halve
+		// on a retina screen and the cloud goes thin.
+		uSize.value = 1.5 * dpr
 		camera.aspect = w / h
 		camera.updateProjectionMatrix()
 	}
@@ -155,18 +284,14 @@ export function initGamepad(canvas) {
 	let targetY = 0
 
 	const onMove = e => {
-		// Viewport-relative, so the object acknowledges the cursor
-		// anywhere on the page rather than only directly over it.
-		targetY = (e.clientX / innerWidth - 0.5) * 0.6
-		targetX = (e.clientY / innerHeight - 0.5) * 0.3
+		targetY = (e.clientX / innerWidth - 0.5) * 0.7
+		targetX = (e.clientY / innerHeight - 0.5) * 0.35
 	}
 
 	addEventListener('pointermove', onMove, { passive: true })
 
 	/*------------------------------ loop ------------------------------*/
 
-	/* Only render while the object is actually on screen. It lives in
-	   the hero, so this is idle for the whole rest of the page. */
 	let visible = true
 	if (host && 'IntersectionObserver' in window) {
 		new IntersectionObserver(
@@ -176,17 +301,25 @@ export function initGamepad(canvas) {
 	}
 
 	let spin = 0
+	let scanClock = 0
 
 	add(dt => {
 		if (!visible || !loaded) return
 
-		spin += dt * 0.18 // a full turn every ~35s
+		uTime.value += dt
+		spin += dt * 0.16
 
-		// Frame-rate independent damping. lerp(a, b, 0.05) is
-		// dt-dependent and stutters at 144Hz.
+		// Sweep up through the object, then wait. A continuous scan
+		// would be a barber pole; the pause is what makes it read as
+		// a scan.
+		scanClock += dt
+		const CYCLE = 6.5
+		const p = (scanClock % CYCLE) / CYCLE
+		uScan.value = p < 0.55 ? -bounds + (p / 0.55) * (bounds * 2.2) : -10
+
 		const k = 1 - Math.exp(-4 * dt)
 		pivot.rotation.y += (spin + targetY - pivot.rotation.y) * k
-		pivot.rotation.x += (0.34 + targetX - pivot.rotation.x) * k
+		pivot.rotation.x += (0.3 + targetX - pivot.rotation.x) * k
 
 		renderer.render(scene, camera)
 	})

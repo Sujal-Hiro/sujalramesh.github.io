@@ -1,87 +1,101 @@
 /*==============================================================
-  PAPER - design tokens
+  MATRIX - design tokens
   --------------------------------------------------------------
-  Warm paper, near-black ink, one accent, a lot of air.
+  Phosphor green on black. A terminal, not a neon city.
 
-  The thesis: almost every game-developer portfolio is a dark
-  neon page. This one is a printed object. The work is loud
-  enough on its own - screenshots, clips, two playable games -
-  so the page around it stays quiet and lets them be the colour.
+  The distinction matters: cyberpunk RGB means many saturated
+  hues fighting each other. This is ONE colour, the way a CRT
+  monitor has one colour, and everything is a value of it. That
+  constraint is what makes it look designed rather than loud.
 
   Five rules:
 
-  1. ONE accent, and it is spent sparingly. Six or seven
-     appearances per screen, no more. Everything else is ink on
-     paper.
-  2. Rules, not boxes. Structure comes from hairlines and
-     alignment, never from cards-on-cards or drop shadows.
-  3. Type carries the design. One serif for display, one grotesk
-     for reading, one mono for data. Nothing decorative.
-  4. Space is a material. Sections breathe; margins are wide;
-     nothing is crowded to fit more in.
-  5. Motion is short, small, and only ever confirms an action.
-     Nothing loops, nothing floats, nothing cycles.
+  1. ONE hue. 145deg, phosphor green. There is no second accent
+     and no hue cycling. Amber exists only as a warning state.
+  2. Dots are the texture. Grids, halftones, point clouds - the
+     whole page is built from a dot matrix, including the 3D.
+  3. Mono carries the interface. Labels, indices, dates, nav,
+     buttons. The serif appears once, on the name.
+  4. Glow is restraint, not decoration. Text gets a 1px phosphor
+     bloom, never a 40px smear.
+  5. Nothing cycles, strobes or rains. Falling code would be a
+     costume; a steady terminal is the real thing.
 ==============================================================*/
 
 :root {
-  /*-------------------------- paper --------------------------*/
+  /*-------------------------- ground --------------------------*/
 
-  /* Warm, not white. A pure #FFF page reads as an unstyled
-     document; the slight warmth is what makes it feel chosen. */
-  --paper: #f5f3ee;
-  --paper-2: #efece5;
-  --paper-3: #e6e2d8;
-  --paper-ink: #17150f;
+  /* Not pure black. A CRT's black is lifted slightly by its own
+     glow, and a true #000 page makes the green look like it is
+     floating in a void rather than sitting on a surface. */
+  --bg: #050706;
+  --bg-2: #090d0b;
+  --bg-3: #0e1411;
+  --bg-lift: #131b16;
+
+  /*------------------------ phosphor ------------------------*/
+
+  /* One hue, six values. --p-hi is the only one bright enough for
+     small text; --p-dim and below are structure and texture. */
+  --p-hi: oklch(0.92 0.16 148);
+  --p: oklch(0.80 0.19 148);
+  --p-mid: oklch(0.66 0.17 148);
+  --p-dim: oklch(0.50 0.12 148);
+  --p-faint: oklch(0.38 0.08 148);
+  --p-ghost: oklch(0.30 0.05 148);
+
+  --p-soft: oklch(0.80 0.19 148 / 0.10);
+  --p-line: oklch(0.80 0.19 148 / 0.24);
+  --p-glow: oklch(0.85 0.18 148 / 0.45);
 
   /*--------------------------- ink ---------------------------*/
 
-  /* Warm near-black rather than pure black - it sits on warm
-     paper without looking like a hole punched in it.
-     --ink on --paper is ~15.8:1, --ink-muted ~5.3:1. */
-  --ink: #17150f;
-  --ink-2: #45413a;
-  --ink-muted: #6f6a5e;
-  --ink-faint: #9a9488;
+  /* Body copy is a desaturated phosphor, not white. Pure white
+     next to green reads as two colours; this keeps one. */
+  --fg: oklch(0.94 0.03 148);
+  --fg-2: oklch(0.80 0.035 148);
+  --fg-muted: oklch(0.64 0.035 148);
+  --fg-faint: oklch(0.48 0.03 148);
 
   /*-------------------------- rules --------------------------*/
 
-  --rule: rgba(23, 21, 15, 0.13);
-  --rule-strong: rgba(23, 21, 15, 0.26);
-  --rule-ink: rgba(23, 21, 15, 0.55);
+  --rule: oklch(0.80 0.19 148 / 0.14);
+  --rule-strong: oklch(0.80 0.19 148 / 0.30);
 
-  /*------------------------- accent -------------------------*/
+  /* Warning only. The one non-green on the site, so it actually
+     means something when it appears. */
+  --warn: oklch(0.80 0.16 75);
 
-  /* One vermillion. Warm enough to belong on the paper, saturated
-     enough to mean something. ~5.4:1 on --paper, so it is legible
-     as text as well as usable as a mark. */
-  --accent: oklch(0.55 0.185 32);
-  --accent-hi: oklch(0.62 0.19 32);
-  --accent-soft: oklch(0.55 0.185 32 / 0.10);
-  --accent-line: oklch(0.55 0.185 32 / 0.42);
-
-  /* Kept literal: "available" has to read as available, and it is
-     the only other colour on the page. */
-  --ok: oklch(0.52 0.13 152);
+  /* Back-compat aliases so component CSS keeps reading. */
+  --accent: var(--p);
+  --accent-hi: var(--p-hi);
+  --accent-soft: var(--p-soft);
+  --accent-line: var(--p-line);
+  --ok: var(--p);
+  --paper: var(--bg);
+  --paper-2: var(--bg-2);
+  --paper-3: var(--bg-3);
+  --ink: var(--fg);
+  --ink-2: var(--fg-2);
+  --ink-muted: var(--fg-muted);
+  --ink-faint: var(--fg-faint);
 
   /*-------------------------- radii --------------------------*/
 
-  /* Near-square. Printed things do not have 14px corners. */
-  --radius: 3px;
-  --radius-sm: 2px;
-  --radius-pill: 100px;
+  /* Square. A terminal has no rounded corners. */
+  --radius: 0px;
+  --radius-sm: 0px;
+  --radius-pill: 0px;
 
   /*--------------------------- type ---------------------------*/
 
-  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
 
-  /* A wide scale: small text stays genuinely small and quiet, the
-     display sizes get room to be dramatic. The gap between them
-     IS the design. */
   --step--2: clamp(0.700rem, 0.680rem + 0.10vw, 0.760rem);
   --step--1: clamp(0.815rem, 0.790rem + 0.13vw, 0.885rem);
-  --step-0: clamp(0.975rem, 0.940rem + 0.20vw, 1.075rem);
+  --step-0: clamp(0.955rem, 0.925rem + 0.18vw, 1.045rem);
   --step-1: clamp(1.150rem, 1.070rem + 0.40vw, 1.400rem);
   --step-2: clamp(1.600rem, 1.300rem + 1.50vw, 2.600rem);
   --step-3: clamp(2.600rem, 1.700rem + 4.40vw, 5.800rem);
@@ -95,9 +109,11 @@
   --max: 1180px;
   --header-h: 68px;
 
+  /* The dot matrix pitch. Everything textural derives from it. */
+  --dot: 22px;
+
   /*-------------------------- motion --------------------------*/
 
-  /* Three easings. Nothing needs more. */
   --out: cubic-bezier(0.16, 1, 0.3, 1);
   --inout: cubic-bezier(0.65, 0, 0.35, 1);
   --ease: var(--out);
@@ -111,21 +127,30 @@
 
 /*------------------------- fallbacks -------------------------*/
 
-/* oklch() is Baseline since May 2023, but a browser without it
-   would render the accent invalid and the mark would vanish. */
 @supports not (color: oklch(0% 0 0)) {
   :root {
-    --accent: #bf4429;
-    --accent-hi: #d4573a;
-    --accent-soft: rgba(191, 68, 41, 0.1);
-    --accent-line: rgba(191, 68, 41, 0.42);
-    --ok: #2f7d4f;
+    --p-hi: #b8ffcf;
+    --p: #4ee08a;
+    --p-mid: #37b56c;
+    --p-dim: #1f7a48;
+    --p-faint: #145433;
+    --p-ghost: #0e3b24;
+    --p-soft: rgba(78, 224, 138, 0.1);
+    --p-line: rgba(78, 224, 138, 0.24);
+    --p-glow: rgba(78, 224, 138, 0.45);
+    --fg: #e6f6ec;
+    --fg-2: #b9d6c4;
+    --fg-muted: #85a892;
+    --fg-faint: #5c7a67;
+    --rule: rgba(78, 224, 138, 0.14);
+    --rule-strong: rgba(78, 224, 138, 0.3);
+    --warn: #e0b64e;
   }
 }
 
-/*--------------------------- selection ---------------------------*/
+/*-------------------------- selection --------------------------*/
 
 ::selection {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--p);
+  color: var(--bg);
 }

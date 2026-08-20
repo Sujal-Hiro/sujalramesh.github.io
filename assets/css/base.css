@@ -14,12 +14,18 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + 2rem);
   -webkit-text-size-adjust: 100%;
-  background: var(--paper);
+  background: var(--bg);
 }
 
+/* The dot matrix. One radial-gradient tile at --dot pitch, masked
+   so it fades out down the page rather than tiling forever. This
+   is the site's only texture and everything else derives from it. */
 body {
-  background: var(--paper);
-  color: var(--ink);
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--p-ghost) 1px, transparent 1px);
+  background-size: var(--dot) var(--dot);
+  background-position: 0 0;
+  color: var(--fg);
   font-family: var(--font-body);
   font-size: var(--step-0);
   line-height: 1.62;
@@ -76,6 +82,12 @@ h2 {
 h1 {
   font-size: var(--step-3);
   line-height: 0.94;
+  color: var(--p-hi);
+  /* A 1px core plus one wide, faint halo. Phosphor bleeds a little;
+     it does not smear 40px across the screen. */
+  text-shadow:
+    0 0 1px oklch(0.96 0.10 148 / 0.6),
+    0 0 22px var(--p-glow);
 }
 
 h2 {
@@ -124,7 +136,7 @@ p {
    ring a neon theme requires - one high-contrast outline is
    unambiguous against every surface here. */
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--p);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
@@ -189,7 +201,7 @@ p {
 .section-head__index {
   display: block;
   margin-bottom: 1.1rem;
-  color: var(--accent);
+  color: var(--p);
 }
 
 .section-head p {

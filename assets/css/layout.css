@@ -11,7 +11,7 @@
   height: var(--header-h);
   display: flex;
   align-items: center;
-  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
@@ -141,7 +141,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--ok);
+  background: var(--p);
+  box-shadow: 0 0 8px var(--p);
 }
 
 .hero h1 {
@@ -314,7 +315,8 @@
   font-family: var(--font-display);
   font-size: var(--step-2);
   line-height: 1.1;
-  color: var(--accent);
+  color: var(--p-hi);
+  text-shadow: 0 0 20px var(--p-glow);
   border-bottom: 1px solid var(--accent-line);
   transition: border-color var(--t-2) var(--out);
 }

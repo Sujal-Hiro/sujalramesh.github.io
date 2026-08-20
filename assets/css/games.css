@@ -61,7 +61,7 @@
    never has to care about layout width. */
 .game__screen {
   position: relative;
-  background: #14130f;
+  background: var(--bg-2);
 }
 
 .game__screen canvas {
@@ -83,7 +83,7 @@
   position: relative;
   height: clamp(260px, 40vw, 340px);
   overflow: hidden;
-  background: #14130f;
+  background: var(--bg-2);
   touch-action: manipulation;
 }
 
@@ -93,7 +93,8 @@
   height: var(--size, 44px);
   margin: calc(var(--size, 44px) / -2) 0 0 calc(var(--size, 44px) / -2);
   border-radius: 50%;
-  background: var(--paper);
+  background: var(--p);
+  box-shadow: 0 0 14px -2px var(--p-glow);
   cursor: pointer;
   padding: 0;
   animation: pop 0.16s var(--out);
@@ -105,7 +106,7 @@
 }
 
 .target.is-bonus {
-  background: var(--accent-hi);
+  background: var(--p-hi);
 }
 
 @keyframes pop {
@@ -121,13 +122,13 @@
   font-family: var(--font-mono);
   font-size: var(--step--1);
   font-variant-numeric: tabular-nums;
-  color: var(--paper);
+  color: var(--p);
   pointer-events: none;
   animation: floatUp 0.6s var(--out) forwards;
 }
 
 .floater.is-bonus {
-  color: var(--accent-hi);
+  color: var(--p-hi);
 }
 
 @keyframes floatUp {
@@ -172,8 +173,8 @@
 }
 
 .pad-btn:active {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--p);
+  color: var(--bg);
 }
 
 .game__hint {
@@ -185,15 +186,15 @@
   gap: 0.45rem;
   text-align: center;
   padding: 1rem;
-  color: rgba(245, 243, 238, 0.62);
+  color: var(--fg-muted);
   font-size: var(--step--1);
-  background: rgba(20, 19, 15, 0.82);
+  background: oklch(0.09 0.02 148 / 0.86);
 }
 
 .game__hint strong {
   font-family: var(--font-display);
   font-weight: 400;
-  color: var(--paper);
+  color: var(--p-hi);
   font-size: var(--step-2);
   line-height: 1.1;
 }

@@ -15,23 +15,26 @@
   text-transform: uppercase;
   letter-spacing: 0.13em;
   line-height: 1;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--rule-strong);
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: background-color var(--t-2) var(--out), color var(--t-2) var(--out),
     border-color var(--t-2) var(--out);
 }
 
-/* Ink fill, paper text. On a light page a solid black button is
-   the strongest mark available, which is why there is only one. */
+/* Phosphor fill, black text. The one solid block of colour on the
+   page, so there is exactly one primary button per screen. */
 .btn-primary {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--p);
+  border-color: var(--p);
+  color: var(--bg);
+  box-shadow: 0 0 18px -4px var(--p-glow);
 }
 
 .btn-primary:hover {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--p-hi);
+  border-color: var(--p-hi);
+  box-shadow: 0 0 26px -4px var(--p-glow);
 }
 
 .btn-ghost {
@@ -66,7 +69,7 @@
 }
 
 .index__row:hover {
-  background: var(--paper-2);
+  background: var(--p-soft);
 }
 
 .index__n {
@@ -83,6 +86,7 @@
 }
 
 .index__title {
+  color: var(--p-hi);
   font-family: var(--font-display);
   font-size: var(--step-1);
   font-weight: 400;
@@ -178,7 +182,8 @@
   position: relative;
   display: block;
   overflow: hidden;
-  background: var(--paper-3);
+  border: 1px solid var(--rule);
+  background: var(--bg-2);
   border-radius: var(--radius-sm);
   aspect-ratio: 4 / 3;
 }
