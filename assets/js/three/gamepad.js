@@ -115,44 +115,76 @@ const FRAG = /* glsl */ `
    inside each triangle (the sqrt is what keeps points from
    clustering at one corner). */
 function sampleSurface(root, count) {
-	const tris = []
-	let total = 0
+	/* Everything lives in flat typed arrays.
 
-	const pA = new THREE.Vector3()
-	const pB = new THREE.Vector3()
-	const pC = new THREE.Vector3()
+	   The obvious version allocates a Vector3 per corner, a Triangle
+	   to call getArea(), and an object per triangle. On a model with
+	   tens of thousands of triangles that is hundreds of thousands of
+	   short-lived objects, and the GC pressure alone pushed the hero
+	   load into seconds. Flat arrays and inline maths make it
+	   effectively instant. */
+	const meshes = []
+	let triCount = 0
 
 	root.updateWorldMatrix(true, true)
-
 	root.traverse(node => {
 		if (!node.isMesh || !node.geometry) return
 		const geo = node.geometry.index ? node.geometry.toNonIndexed() : node.geometry
-		const pos = geo.getAttribute('position')
-		const nor = geo.getAttribute('normal')
-		if (!pos) return
-
-		for (let i = 0; i < pos.count; i += 3) {
-			pA.fromBufferAttribute(pos, i).applyMatrix4(node.matrixWorld)
-			pB.fromBufferAttribute(pos, i + 1).applyMatrix4(node.matrixWorld)
-			pC.fromBufferAttribute(pos, i + 2).applyMatrix4(node.matrixWorld)
-
-			const area = new THREE.Triangle(pA, pB, pC).getArea()
-			if (!(area > 0)) continue
-			total += area
-
-			tris.push({
-				a: pA.clone(),
-				b: pB.clone(),
-				c: pC.clone(),
-				n: nor
-					? new THREE.Vector3().fromBufferAttribute(nor, i).transformDirection(node.matrixWorld)
-					: new THREE.Vector3(0, 1, 0),
-				cum: total,
-			})
-		}
+		if (!geo.getAttribute('position')) return
+		meshes.push({ geo, m: node.matrixWorld })
+		triCount += Math.floor(geo.getAttribute('position').count / 3)
 	})
 
-	if (!tris.length) return null
+	if (!triCount) return null
+
+	const tri = new Float32Array(triCount * 9) // 3 corners xyz
+	const triN = new Float32Array(triCount * 3) // one normal per tri
+	const cum = new Float64Array(triCount)
+
+	const v = new THREE.Vector3()
+	const n = new THREE.Vector3()
+	let t = 0
+	let total = 0
+
+	for (const { geo, m } of meshes) {
+		const pos = geo.getAttribute('position')
+		const nor = geo.getAttribute('normal')
+
+		for (let i = 0; i + 2 < pos.count; i += 3) {
+			const o = t * 9
+			for (let k = 0; k < 3; k++) {
+				v.fromBufferAttribute(pos, i + k).applyMatrix4(m)
+				tri[o + k * 3] = v.x
+				tri[o + k * 3 + 1] = v.y
+				tri[o + k * 3 + 2] = v.z
+			}
+
+			// Cross product of two edges; half its length is the area.
+			const ax = tri[o + 3] - tri[o]
+			const ay = tri[o + 4] - tri[o + 1]
+			const az = tri[o + 5] - tri[o + 2]
+			const bx = tri[o + 6] - tri[o]
+			const by = tri[o + 7] - tri[o + 1]
+			const bz = tri[o + 8] - tri[o + 2]
+			const cx = ay * bz - az * by
+			const cy = az * bx - ax * bz
+			const cz = ax * by - ay * bx
+			total += 0.5 * Math.sqrt(cx * cx + cy * cy + cz * cz)
+			cum[t] = total
+
+			if (nor) {
+				n.fromBufferAttribute(nor, i).transformDirection(m)
+				triN[t * 3] = n.x
+				triN[t * 3 + 1] = n.y
+				triN[t * 3 + 2] = n.z
+			} else {
+				triN[t * 3 + 1] = 1
+			}
+			t++
+		}
+	}
+
+	if (!(total > 0)) return null
 
 	const positions = new Float32Array(count * 3)
 	const normals = new Float32Array(count * 3)
@@ -161,29 +193,35 @@ function sampleSurface(root, count) {
 	for (let i = 0; i < count; i++) {
 		const target = Math.random() * total
 
+		// Binary search the cumulative-area table: a triangle ten
+		// times larger takes ten times the dots.
 		let lo = 0
-		let hi = tris.length - 1
+		let hi = t - 1
 		while (lo < hi) {
 			const mid = (lo + hi) >> 1
-			if (tris[mid].cum < target) lo = mid + 1
+			if (cum[mid] < target) lo = mid + 1
 			else hi = mid
 		}
-		const t = tris[lo]
 
+		const o = lo * 9
+
+		// Uniform barycentric sampling. The fold is what keeps points
+		// from piling into one corner of the triangle.
 		let u = Math.random()
-		let v = Math.random()
-		if (u + v > 1) {
+		let w = Math.random()
+		if (u + w > 1) {
 			u = 1 - u
-			v = 1 - v
+			w = 1 - w
 		}
 
-		positions[i * 3] = t.a.x + u * (t.b.x - t.a.x) + v * (t.c.x - t.a.x)
-		positions[i * 3 + 1] = t.a.y + u * (t.b.y - t.a.y) + v * (t.c.y - t.a.y)
-		positions[i * 3 + 2] = t.a.z + u * (t.b.z - t.a.z) + v * (t.c.z - t.a.z)
+		const p = i * 3
+		positions[p] = tri[o] + u * (tri[o + 3] - tri[o]) + w * (tri[o + 6] - tri[o])
+		positions[p + 1] = tri[o + 1] + u * (tri[o + 4] - tri[o + 1]) + w * (tri[o + 7] - tri[o + 1])
+		positions[p + 2] = tri[o + 2] + u * (tri[o + 5] - tri[o + 2]) + w * (tri[o + 8] - tri[o + 2])
 
-		normals[i * 3] = t.n.x
-		normals[i * 3 + 1] = t.n.y
-		normals[i * 3 + 2] = t.n.z
+		normals[p] = triN[lo * 3]
+		normals[p + 1] = triN[lo * 3 + 1]
+		normals[p + 2] = triN[lo * 3 + 2]
 
 		rands[i] = Math.random()
 	}

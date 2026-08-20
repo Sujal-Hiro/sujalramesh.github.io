@@ -8,10 +8,19 @@ is the deploy.
 ## Running it locally
 
 ```bash
-python -m http.server 8000
+python scripts/dev-server.py
 ```
 
 Then open <http://localhost:8000>.
+
+**Use this, not `python -m http.server`.** The site is plain ES modules
+with no bundler, so filenames never change between builds. `http.server`
+sends no `Cache-Control`, browsers cache heuristically, and a *cached
+module* is far worse than a cached image: if `main.js` is fresh but the
+`scroll.js` it imports is stale, the import fails on a missing export,
+the entire module graph dies, and the page renders as unstyled,
+half-invisible text with no obvious cause. `dev-server.py` sends
+`no-store` on everything, so a plain reload is always a true reload.
 
 **Opening `index.html` by double-clicking will not work.** The site uses ES
 modules and an import map, and browsers block both over `file://`.

@@ -221,13 +221,15 @@
   transition: opacity var(--t-4) var(--out);
 }
 
-/* visibility as well as opacity: opacity alone leaves a painted
-   layer behind mid-transition, and this sits directly under the
-   object. */
-.hero__object.is-loaded::before {
+/* Two selectors on purpose. The host class is set in the load
+   callback, but :has() keys off the canvas going live - so whichever
+   lands first clears the placeholder, and there is never a window
+   where the contour and the point cloud are both painted. */
+.hero__object.is-loaded::before,
+.hero__object:has(.hero__gl.is-live)::before {
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--t-4) var(--out), visibility 0s linear var(--t-4);
+  transition: opacity var(--t-3) var(--out), visibility 0s linear var(--t-3);
 }
 
 /* A caption, as on a plate in a catalogue. */
