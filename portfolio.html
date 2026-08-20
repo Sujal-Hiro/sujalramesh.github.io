@@ -23,15 +23,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./assets/css/tokens.css?v=5" />
-  <link rel="stylesheet" href="./assets/css/base.css?v=5" />
-  <link rel="stylesheet" href="./assets/css/layout.css?v=5" />
-  <link rel="stylesheet" href="./assets/css/components.css?v=5" />
-  <link rel="stylesheet" href="./assets/css/effects.css?v=5" />
-  <link rel="stylesheet" href="./assets/css/games.css?v=5" />
-  <link rel="stylesheet" href="./assets/css/pages.css?v=5" />
+  <link rel="stylesheet" href="./assets/css/tokens.css?v=6" />
+  <link rel="stylesheet" href="./assets/css/base.css?v=6" />
+  <link rel="stylesheet" href="./assets/css/layout.css?v=6" />
+  <link rel="stylesheet" href="./assets/css/components.css?v=6" />
+  <link rel="stylesheet" href="./assets/css/effects.css?v=6" />
+  <link rel="stylesheet" href="./assets/css/games.css?v=6" />
+  <link rel="stylesheet" href="./assets/css/pages.css?v=6" />
   <!-- motion.css last: every preference query lives there and must win -->
-  <link rel="stylesheet" href="./assets/css/motion.css?v=5" />
+  <link rel="stylesheet" href="./assets/css/motion.css?v=6" />
   <link rel="shortcut icon" type="image/png" href="Images/Icon-Website.png">
 
 </head>
@@ -368,7 +368,39 @@
     </div>
   </div>
 
-  <script type="module" src="./assets/js/main.js?v=5"></script>
+  <!-- Fails loudly. A module that throws on import takes the whole
+       graph down silently: reveals never fire, so the page renders as
+       invisible text with no console open to explain it. This makes
+       that state self-reporting, and reveals the content anyway so the
+       page is still readable when JS dies. -->
+  <script>
+    (function () {
+      var shown = false
+      function report(msg) {
+        if (shown) return
+        shown = true
+        document.documentElement.classList.add('js-failed')
+        var b = document.createElement('div')
+        b.setAttribute('role', 'alert')
+        b.style.cssText =
+          'position:fixed;left:0;right:0;bottom:0;z-index:9999;padding:10px 14px;' +
+          'font:12px/1.5 ui-monospace,Consolas,monospace;background:#3a0d0d;color:#ffd9d4;' +
+          'border-top:1px solid #ff6b5a;white-space:pre-wrap;word-break:break-word'
+        b.textContent = 'Script failed — ' + msg + '
+
+Hard-reload (Ctrl+Shift+R). If it persists, this is the real error.'
+        document.body.appendChild(b)
+      }
+      addEventListener('error', function (e) {
+        if (e.message) report(e.message + (e.filename ? '  @ ' + e.filename.split('/').pop() : ''))
+      }, true)
+      addEventListener('unhandledrejection', function (e) {
+        report(String((e.reason && e.reason.message) || e.reason))
+      })
+    })()
+  </script>
+
+  <script type="module" src="./assets/js/main.js?v=6"></script>
 </body>
 
 </html>

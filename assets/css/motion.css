@@ -123,3 +123,19 @@
     display: none;
   }
 }
+
+/*----------------------- script failure -----------------------*/
+
+/* If the entry module throws, nothing ever adds .is-visible and every
+   .reveal stays at opacity 0 - a blank page that looks like a design
+   problem rather than a broken script. The inline reporter sets this
+   flag, which forces the content back. Content beats choreography. */
+html.js-failed .reveal,
+html.js-failed .rule-draw {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+html.js-failed .line-mask > span {
+  transform: none !important;
+}

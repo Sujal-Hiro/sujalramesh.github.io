@@ -12,7 +12,7 @@
   under the pointer.
 ===============================================*/
 
-import { reduceMotion } from '../core/env.js'
+import { reduceMotion } from '../core/env.js?v=6'
 
 export function initLightbox() {
 	const box = document.getElementById('lightbox')

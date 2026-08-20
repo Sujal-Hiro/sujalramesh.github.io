@@ -9,13 +9,13 @@
   parsed before this executes.
 ===============================================*/
 
-import { can3D } from './core/env.js'
-import { initHeader, initReveal } from './core/scroll.js'
-import { initNav, initRole, initYear, initVideo } from './ui/nav.js'
-import { initFilters, initStagger } from './ui/gallery.js'
-import { initLightbox } from './ui/lightbox.js'
-import { initInvaders } from './games/invaders.js'
-import { initTargetRush } from './games/target-rush.js'
+import { can3D } from './core/env.js?v=6'
+import { initHeader, initReveal } from './core/scroll.js?v=6'
+import { initNav, initRole, initYear, initVideo } from './ui/nav.js?v=6'
+import { initFilters, initStagger } from './ui/gallery.js?v=6'
+import { initLightbox } from './ui/lightbox.js?v=6'
+import { initInvaders } from './games/invaders.js?v=6'
+import { initTargetRush } from './games/target-rush.js?v=6'
 
 initHeader()
 initNav()
@@ -41,7 +41,7 @@ initTargetRush()
 const glCanvas = document.getElementById('heroGl')
 
 if (glCanvas && can3D()) {
-	import('./three/gamepad.js')
+	import('./three/gamepad.js?v=6')
 		.then(m => m.initGamepad(glCanvas))
 		.catch(() => glCanvas.remove())
 } else if (glCanvas) {

@@ -17,7 +17,7 @@
   with one accent rather than five.
 ===============================================*/
 
-import { reduceMotion } from '../core/env.js'
+import { reduceMotion } from '../core/env.js?v=6'
 
 export function initInvaders() {
 	const siCanvas = document.getElementById('siCanvas')

@@ -8,8 +8,8 @@
   rule in and let content arrive once.
 ===============================================*/
 
-import { reduceMotion } from './env.js'
-import { add } from './loop.js'
+import { reduceMotion } from './env.js?v=6'
+import { add } from './loop.js?v=6'
 
 /*------------------------- header -------------------------*/
 
